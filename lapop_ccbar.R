@@ -11,18 +11,18 @@ lapop_cc <- function(data, outcome_var = data$prop, lower_bound = data$lb, pais 
                      ymax = 100,
                      lang = "en",
                      highlight = "", 
-                     main.title = "",
-                     source.info = "",
+                     main_title = "",
+                     source_info = "",
                      subtitle = "",
                      sort = "",
-                     bar.color = "#512B71"){
+                     color_scheme = "#512B71"){
   if(highlight != ""){
     data$hl_var = factor(ifelse(pais == highlight, 0, 1), labels = c("hl", "other"))
-    fill_values = c(paste0(bar.color, "47"), paste0(bar.color, "20"))
+    fill_values = c(paste0(color_scheme, "47"), paste0(color_scheme, "20"))
   }
   else{
     data$hl_var = factor("other")
-    fill_values = paste0(bar.color, "47")
+    fill_values = paste0(color_scheme, "47")
   }
   if(sort == "hi-lo"){
     data = data[order(-data$prop),]
@@ -45,22 +45,22 @@ lapop_cc <- function(data, outcome_var = data$prop, lower_bound = data$lb, pais 
                           "<span style='color:#545454; font-size:13pt'>95% confidence </span>",
                           "<span style='color:#545454'> interval</span>"))
   ggplot(data=data, aes(x=factor(pais, levels = pais), y=prop, fill = hl_var)) +
-    geom_bar(stat="identity", color = bar.color, width = 0.6) +
-    geom_text(aes(label=label_var), vjust=-1.5, size=5, fontface = "bold", color = bar.color) +
-    geom_errorbar(aes(ymin=lower_bound, ymax=upper_bound), width = 0.15, color = bar.color, linetype = "solid") +
+    geom_bar(stat="identity", color = color_scheme, width = 0.6) +
+    geom_text(aes(label=label_var), vjust=-1.5, size=5, fontface = "bold", color = color_scheme) +
+    geom_errorbar(aes(ymin=lower_bound, ymax=upper_bound), width = 0.15, color = color_scheme, linetype = "solid") +
     scale_fill_manual(breaks = "other",
                       values = fill_values,
                       labels = paste0(" <span style='color:#545454; font-size:13pt'> ",
                                       subtitle,
                                       "<span style='color:#FFFFFF00'>-----------</span>",
                                       ci_text),
-                      na.value = paste0(bar.color, "90")) +
+                      na.value = paste0(color_scheme, "90")) +
     scale_y_continuous(limits = c(ymin, ymax)) +
-    labs(title=main.title,
+    labs(title=main_title,
          y = "",
          x = "",
          caption = paste0(ifelse(lang == "es", "Fuente: Barómetro de las Américas", "Source: AmericasBarometer"),
-                          source.info)) +
+                          source_info)) +
     # {if(horizontal)coord_flip()} + 
     theme(text = element_text(size = 14, family = "roboto"),
           plot.title = element_text(size = 18, family = "nunito", face = "bold"),

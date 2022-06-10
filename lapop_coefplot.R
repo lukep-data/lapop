@@ -11,12 +11,12 @@ lapop_coef <- function(data, coef_var = data$coef, label_var = data$proplabel,
                        lang = "en",
                        main_title = "",
                        subtitle = "",
-                       source.info = "",
+                       source_info = "",
                        ymin = NULL,
                        ymax = NULL,
                        pred_prob = FALSE,
                        color_scheme = "#512B71",
-                       subtitle.h.just = 0){
+                       subtitle_h_just = 0){
   varlabel_var = factor(varlabel_var, levels = rev(unique(varlabel_var)))
   sig = ifelse(pval_var < 0.05, FALSE, TRUE)
   ci_text = ifelse(lang == "es",
@@ -45,7 +45,7 @@ lapop_coef <- function(data, coef_var = data$coef, label_var = data$proplabel,
          y = " ",
          x = " ",
          caption = paste0(ifelse(lang == "es", "Fuente: Barómetro de las Américas", "Source: AmericasBarometer"),
-                          source.info)) +
+                          source_info)) +
     theme(text = element_text(size = 14, family = "roboto"),
           plot.title = element_text(size = 18, family = "nunito", face = "bold"),
           plot.caption = element_text(size = 10.5, hjust = 0.02, vjust = 2, family = "roboto-light", color="#545454"),
@@ -63,7 +63,7 @@ lapop_coef <- function(data, coef_var = data$coef, label_var = data$proplabel,
           # legend.margin = margin(t=0, b=0),
           legend.text = element_markdown(family = "nunito-light"),
           legend.key=element_blank(),
-          legend.margin=margin(0, 0, 0, -30-subtitle.h.just))
+          legend.margin=margin(0, 0, 0, -30-subtitle_h_just))
   }
   
 

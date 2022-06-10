@@ -12,9 +12,10 @@ lapop_sb <- function(data, outcome_var = data$prop, prop_labels = data$proplabel
                        source_info = "",
                      rev_values = FALSE,
                      rev_variables = FALSE,
-                     bar_colors = c("#2D708E", "#1F9689", "#00ADA9", "#21A356", "#568424", "#ACB014")){
-  # bar_colors = c("#2D708E", "#1F9689", "#00ADA9", "#21A356", "#568424", "#ACB014")
-  mycolors = rev(bar_colors[1:length(unique(value_labels))])
+                     subtitle_h_just = 0, 
+                     color_scheme = c("#2D708E", "#1F9689", "#00ADA9", "#21A356", "#568424", "#ACB014")){
+  # color_scheme = c("#2D708E", "#1F9689", "#00ADA9", "#21A356", "#568424", "#ACB014")
+  mycolors = rev(color_scheme[1:length(unique(value_labels))])
   if(rev_values == TRUE){
     value_labels = factor(value_labels, levels = unique(value_labels))
   } else{
@@ -51,6 +52,6 @@ lapop_sb <- function(data, outcome_var = data$prop, prop_labels = data$proplabel
           legend.title = element_blank(),
           legend.justification='left',
           legend.key.size = unit(1, "line"),
-          legend.margin = margin(t=5,b=5, 0, 0))
+          legend.margin = margin(t=5,b=5, 0, subtitle_h_just))
 }
 

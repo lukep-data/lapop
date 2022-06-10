@@ -6,7 +6,7 @@
 
 
 
-####### 1) Set directories
+####### Set directories
 
 # set directory for current project (where data files are stored & where images will be saved)
 project_dir <- (r"(C:\Users\plutowl\Desktop\Insights Example)") # path with csv files
@@ -19,7 +19,7 @@ template_dir <- (r"(C:\Users\plutowl\Box\LAPOP Visualizations\lapop-viz\)")
 # logo_dir <- (r"(C:\Users\plutowl\Box\LAPOP Shared\4_Resources\5_Code\R Visualizations\lapop-full-color-00ada9.svg)")  # logo location and file name
 
 
-####### 2) load packages, fonts, templates (No modifications necessary, just run)
+####### load packages, fonts, templates (No modifications necessary, just run)
 
 # must run install.packages on first time 
 # install.packages(c("ggplot2", "showtext", "magick", "plyr", "ggtext", "pracma"))
@@ -48,7 +48,7 @@ source(paste0(template_dir, "lapop_stacked.R"))
 source(paste0(template_dir, "lapop_hist.R"))
 
 
-####### 3) Figure types and examples
+####### Figure types and examples
 
 ## Cross-country bar graph
 cc_ex <- read.csv("gr1.csv")
@@ -56,16 +56,16 @@ cc_ex <- read.csv("gr1.csv")
 lapop_cc(cc_ex)
 
 cc1 <- lapop_cc(cc_ex,
-                main.title = "Normalization of Initimate Partner Violence in Seven LAC Countries",
+                main_title = "Normalization of Initimate Partner Violence in Seven LAC Countries",
                 subtitle = "% who say domestic violence is private matter",
-                source.info = ", 2021",
+                source_info = ", 2021",
                 highlight = "SV",
                 # outcome_var = data$prop, lower_bound = data$lb, pais = data$pais, upper_bound = data$ub, label_var = data$proplabel,
                 # ymin = 0,
                 # ymax = 100,
                 # lang = "en", #options: en, es
                 # sort = "", #options: hi-lo, lo-hi, alpha
-                # bar.color = "#512B71"
+                # color_scheme = "#512B71"
                 )
 
 cc1
@@ -85,9 +85,9 @@ lapop_coef(gr2)
 # gr2 <- gr2[order(nrow(gr2):1),]
 
 reg1 <- lapop_coef(gr2,
-                   main.title = "Demographic and Socioeconomic Predictors of Normalizing IPV",
-                   pred.prob = TRUE, # doesn't change data calculation, just subtitle text
-                   source.info = ", 2021",
+                   main_title = "Demographic and Socioeconomic Predictors of Normalizing IPV",
+                   pred_prob = TRUE, # doesn't change data calculation, just subtitle text
+                   source_info = ", 2021",
                    ymin = -0.3,
                    ymax = 0.2,
                    # coef_var = data$coef, label_var = data$proplabel,
@@ -96,7 +96,7 @@ reg1 <- lapop_coef(gr2,
                    # lang = "en",
                    # subtitle = "",
                    # color_scheme = "#512B71",
-                   # subtitle.h.just = 0, # moves subtitle to left or right (-90 to 90)
+                   # subtitle_h_just = 0, # moves subtitle to left or right (-90 to 90)
                    )
 
 reg1
@@ -145,7 +145,8 @@ fig2 <- lapop_sb(df_sb,
                    # lang = "en",
                    # rev.values = FALSE,
                    # rev.variables = FALSE,
-                   # bar_colors = c("#2D708E", "#1F9689", "#00ADA9", "#21A356", "#568424", "#ACB014")
+                   # subtitle_h_just = 0, 
+                   # color_scheme = c("#2D708E", "#1F9689", "#00ADA9", "#21A356", "#568424", "#ACB014")
 )
 
 fig2
