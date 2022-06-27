@@ -29,7 +29,7 @@ library(magick) # for adding logo to plot
 library(plyr) # for data manipulation (round_any() function)
 library(ggtext) # for adding markdown in labels
 library(pracma) # for interpolation of missing data
-
+library(dplyr)
 
 logo <- image_read(paste0(template_dir, "lapop-full-color-00ada9.svg"))
 
@@ -46,6 +46,7 @@ source(paste0(template_dir, "lapop_ccbar.R"))
 source(paste0(template_dir, "lapop_ts.R"))
 source(paste0(template_dir, "lapop_stacked.R"))
 source(paste0(template_dir, "lapop_hist.R"))
+source(paste0(template_dir, "lapop_db.R"))
 
 
 ####### Figure types and examples
