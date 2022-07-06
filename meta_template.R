@@ -29,7 +29,8 @@ library(magick) # for adding logo to plot
 library(plyr) # for data manipulation (round_any() function)
 library(ggtext) # for adding markdown in labels
 library(pracma) # for interpolation of missing data
-library(dplyr)
+library(ggplotify) # for as.ggplot function
+# library(dplyr)
 
 logo <- image_read(paste0(template_dir, "lapop-full-color-00ada9.svg"))
 
@@ -47,6 +48,7 @@ source(paste0(template_dir, "lapop_ts.R"))
 source(paste0(template_dir, "lapop_stacked.R"))
 source(paste0(template_dir, "lapop_hist.R"))
 source(paste0(template_dir, "lapop_db.R"))
+source(paste0(template_dir, "lapop_demog.R"))
 
 
 ####### Figure types and examples
@@ -193,4 +195,17 @@ myplot <- lapop_hist(df_hist,
                      )
 
 
-## Still to come: barbell plot, demographic breakdown
+## Demographic breakdown
+df_demog <- read.csv("demog_example_data.csv")
+# names(df)[1] <- "varlabel"
+
+demog_plot <- lapop_demog(df_demog,
+                    main_title = "More educated, men, and younger individuals in the LAC region are the\nmost likely to be crime victims",
+                    subtitle = "% victim of a crime",
+                    ymin = 0, 
+                    ymax = 40)
+
+
+## Barbell Plot
+
+

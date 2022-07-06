@@ -6,14 +6,14 @@
 
 
 
-lapop_demog <- function(data, 
+lapop_demog <- function(data,
                         lang = "en",
                         main_title = "",
                         subtitle = "",
                         source_info = "",
                         rev_values = FALSE,
                         rev_variables = FALSE,
-                        subtitle_h_just = 0, 
+                        subtitle_h_just = 0,
                         ymin = 0,
                         ymax = 100,
                         color_scheme = c("#7030A0", "#00ADA9", "#3CBC70", "#7EA03E", "#568424", "#ACB014")){
@@ -26,10 +26,10 @@ lapop_demog <- function(data,
                    paste0(" <span style='color:#545454; font-size:18pt'> \u0131\u2014 \u0131</span> ",
                           "<span style='color:#545454; font-size:13pt'>95% confidence </span>",
                           "<span style='color:#545454'>interval</span>"))
-  p = ggplot(data, aes(x = vallabel, y = prop, color = factor(varlabel), label = proplabel)) + 
-    geom_point(alpha=0.47, key_glyph = "point") + 
-    facet_grid(cols = vars(varlabel), scales = "free", space = "free") + 
-    geom_errorbar(aes(ymin=lb, ymax=ub), width = 0.2, show.legend = FALSE) + 
+  p = ggplot(data, aes(x = vallabel, y = prop, color = factor(varlabel), label = proplabel)) +
+    geom_point(alpha=0.47, key_glyph = "point") +
+    facet_grid(cols = vars(varlabel), scales = "free", space = "free") +
+    geom_errorbar(aes(ymin=lb, ymax=ub), width = 0.2, show.legend = FALSE) +
     geom_text(aes(y = ub), fontface = "bold", size = 5, vjust = -0.8, show.legend = FALSE) +
     scale_color_manual(values = mycolors,
                        labels = paste0("<span style='color:#545454; font-size:13pt'> ",
@@ -39,14 +39,14 @@ lapop_demog <- function(data,
                        guide = guide_legend(override.aes = list(shape = 16,
                                                                 color = c("black", "white", "white", "white"),
                                                                 fill = c("gray", "white", "white", "white")))) +
-    scale_y_continuous(limits = c(ymin, ymax), 
-                       breaks = seq(ymin, ymax, ifelse(ymax - ymin <= 50, 5, 10)), 
+    scale_y_continuous(limits = c(ymin, ymax),
+                       breaks = seq(ymin, ymax, ifelse(ymax - ymin <= 50, 5, 10)),
                        expand = c(0,0)) +
-    geom_vline(xintercept = seq(0.5, length(data$vallabel), by = 1), color="#D1D3D4", size = 0.25) + 
+    geom_vline(xintercept = seq(0.5, length(data$vallabel), by = 1), color="#D1D3D4", size = 0.25) +
     labs(title = main_title,
          y = "",
          x = " ",
-         caption = paste0(ifelse(lang == "es", "Fuente: Barómetro de las Américas ", "Source: AmericasBarometer "),
+         caption = paste0(ifelse(lang == "es", "Fuente: BarÃ³metro de las AmÃ©ricas ", "Source: AmericasBarometer "),
                           source_info)) +
     theme(text = element_text(size = 14, family = "roboto"),
           plot.title = element_text(size = 17, family = "nunito", face = "bold"),
