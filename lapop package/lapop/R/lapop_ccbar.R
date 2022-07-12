@@ -4,53 +4,64 @@
 
 #######################################
 
-
-
 #' LAPOP Cross-Country Bar Graphs
 #'
 #' This function creates bar graphs for comparing values across countries using LAPOP formatting.
 #'
-#' The input data must have a specific format to produce a graph.  It must include columns for
-#' the survey wave (wave), the outcome variable (prop), the lower bound of the estimate (lb),
-#' the upper bound of the estimate (ub), and a string for the outcome variable label (proplabel).
-#'
 #' @param data Data Frame. Dataset to be used for analysis.  The data frame should have columns
-#' titled wave (survey wave/year; character vector), prop (outcome variable; numeric),
-#' proplabel (text of outcome variable; character); lb (lower bound of estimate; numeric),
+#' titled pais (country name/abbreviation; character vector), prop (outcome variable; numeric),
+#' proplabel (text of outcome variable; character), lb (lower bound of estimate; numeric),
 #' and ub (upper bound of estimate; numeric). Default: None (must be supplied).
-#' @param wave_var,outcome_var,label_var,lower_bound,upper_bound Character, numeric, character,
-#' numeric, numeric. Each component of the data to be plotted can be manually specified in case
+#' @param pais,outcome_var,label_var,lower_bound,upper_bound Character, numeric, character,
+#' numeric, numeric. Each component of the plot data can be manually specified in case
 #' the default columns in the data frame should not be used (if, for example, the values for a given
 #' variable were altered and stored in a new column).
-#' @param ymin,ymax Numeric.  Minimum and maximum values for y-axis. Default: Nearest integer.
-#' that is divisible by 5 above the maximum and below the minimum y value.
+#' @param ymin,ymax Numeric.  Minimum and maximum values for y-axis. Default: 0 to 100.
+#' @param highlight Character.  Country of interest.  Will highlight (make darker) that country's bar.
+#' Input must match entry in "pais" exactly. Default: None.
+#' @param sort Character. Method of sorting bars.  Options: "hi-lo" (highest to lowest y value), "lo-hi" (lowest to highest),
+#' "alpha" (alphabetical by pais/x-axis label). Default: Order of data frame.
 #' @param main_title Character.  Title of graph.  Default: None.
 #' @param source_info Character.  Information on dataset used (country, years, version, etc.),
 #' which is added to the end of "Source: AmericasBarometer" in the bottom-left corner of the graph.
 #' Default: None (only "Source: AmericasBarometer" will be printed).
-#' @param subtitle Character.  Describes the values/data shown in the graph, e.g., as "% of Mexicans who say...".
+#' @param subtitle Character.  Describes the values/data shown in the graph, e.g., "percentage of Mexicans who say...)".
 #' Default: None.
 #' @param lang Character.  Changes default subtitle text and source info to either Spanish or English.
-#' Will not translate input text, such as main title or variable labels.  #' Takes either "en" (English)
+#' Will not translate input text, such as main title or variable labels.  Takes either "en" (English)
 #' or "es" (Spanish).  Default: "en".
-#' @param color_scheme Character.  Color of lines and dots.  Takes hex number, beginning with "#".
-#' Default: "#3CBC70" (green).
-#' @return A ggplot graph.
+#' @param color_scheme Character.  Color of bars.  Takes hex number, beginning with "#".
+#' Default: "#512B71" (purple).
+#'
+#' @return Returns a ggplot graph.
+#'
 #' @examples
-#' df <- data.frame(wave = c("2008", "2010", "2016/17", "2018/19", "2021"),
-#' prop = c(23.2, 14.4, 35.8, 36.6, 40),
-#' proplabel = c("23.2%", "14.4%", "35.8%", "36.6%", "40.0%"),
-#' lb = c(20.2, 11.9, 33.3, 33.1, 38),
-#' ub = c(26.2, 16.9, 38.3, 40.1, 42)
+#' df <- data.frame(
+#' pais = c("PE", "CO", "BR", "PN", "GT", "DO", "MX", "BO", "EC", "PY", "CL", "HN", "CR", "SV", "JA", "AR", "UY", "NI"),
+#' prop = c(36.1, 19.3, 16.6, 13.3, 13, 11.1, 9.5, 9, 8.1, 8, 6.6, 5.7, 5.1, 3.4, 2.6, 1.9, 0.8, 0.2),
+#' proplabel = c("36%" ,"19%" ,"17%" ,"13%" ,"13%" ,"11%" ,"10%", "9%", "8%", "8%", "7%", "6%", "5%", "3%", "3%", "2%", "1%", "0%"),
+#' lb = c(34.9, 18.1, 15.4, 12.1, 11.8, 9.9, 8.3, 7.8, 6.9, 6.8, 5.4, 4.5, 3.9, 2.2, 1.4, 0.7, -0.4, -1),
+#' ub = c(37.3, 20.5, 17.8, 14.5, 14.2, 12.3, 10.7, 10.2, 9.3, 9.2, 7.8, 6.9, 6.3, 4.6, 3.8, 3.1, 2, 1.4)
 #' )
 #'
-#' lapop_ts(df,
-#'  main_title = "Ecuadorians are becoming more interested in politics",
-#'  subtitle = "% politically interested",
-#'  source_info = "Ecuador 2006-2021",
-#'  ymin = 0,
-#'  ymax = 55
-#'  )
+#' lapop_cc(df,
+#'          main_title = "Normalization of Initimate Partner Violence in Seven LAC Countries",
+#'          subtitle = "% who say domestic violence is private matter",
+#'          source_info = ", 2021",
+#'          highlight = "BR",
+#'          ymax = 50)
+#'
+#'@export
+#'@import ggplot2
+#'@importFrom plyr round_any
+#'@importFrom magick image_read
+#'@importFrom ggplotify as.ggplot
+#'@importFrom ggtext element_markdown
+#'@import showtext sysfonts
+#'
+
+
+
 
 lapop_cc <- function(data, outcome_var = data$prop, lower_bound = data$lb, pais = data$pais,
                      upper_bound = data$ub, label_var = data$proplabel,
@@ -106,9 +117,8 @@ lapop_cc <- function(data, outcome_var = data$prop, lower_bound = data$lb, pais 
     labs(title=main_title,
          y = "",
          x = "",
-         caption = paste0(ifelse(lang == "es", "Fuente: Barómetro de las Américas", "Source: AmericasBarometer"),
+         caption = paste0(ifelse(lang == "es", "Fuente: Barómetro de las Américas ", "Source: AmericasBarometer "),
                           source_info)) +
-    # {if(horizontal)coord_flip()} +
     theme(text = element_text(size = 14, family = "roboto"),
           plot.title = element_text(size = 18, family = "nunito", face = "bold"),
           plot.caption = element_text(size = 10.5, vjust = 2, hjust = 0.02, family = "roboto-light", color="#545454"),

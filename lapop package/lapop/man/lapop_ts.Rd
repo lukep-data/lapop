@@ -32,8 +32,7 @@ numeric, numeric. Each component of the data to be plotted can be manually speci
 the default columns in the data frame should not be used (if, for example, the values for a given
 variable were altered and stored in a new column).}
 
-\item{ymin, ymax}{Numeric.  Minimum and maximum values for y-axis. Default: Nearest integer.
-that is divisible by 5 above the maximum and below the minimum y value.}
+\item{ymin, ymax}{Numeric.  Minimum and maximum values for y-axis. Default: dynamic.}
 
 \item{main_title}{Character.  Title of graph.  Default: None.}
 
@@ -41,7 +40,7 @@ that is divisible by 5 above the maximum and below the minimum y value.}
 which is added to the end of "Source: AmericasBarometer" in the bottom-left corner of the graph.
 Default: None (only "Source: AmericasBarometer" will be printed).}
 
-\item{subtitle}{Character.  Describes the values/data shown in the graph, e.g., as "% of Mexicans who say...".
+\item{subtitle}{Character.  Describes the values/data shown in the graph, e.g., as "Percent of Mexicans who agree...".
 Default: None.}
 
 \item{lang}{Character.  Changes default subtitle text and source info to either Spanish or English.
@@ -81,4 +80,5 @@ lapop_ts(df,
  ymin = 0,
  ymax = 55
  )
+
 }

@@ -1,9 +1,59 @@
 #######################################
 
-# LAPOP Histograms Graphs #
+# LAPOP Bar Graphs #
 
 #######################################
 
+#' LAPOP Bar Graphs
+#'
+#' This function shows a bar graph for categorical variables using LAPOP formatting.
+#'
+#' @param data Data Frame. Dataset to be used for analysis.  The data frame should have columns
+#' titled cat (labels of each category in variable; character),
+#' prop (outcome variable value; numeric), and proplabel (text of outcome variable value; character).
+#' Default: None (must be provided).
+#' @param cat_var,outcome_var,label_var Character, numeric, character.
+#' Each component of the data to be plotted can be manually specified in case
+#' the default columns in the data frame should not be used (if, for example, the values for a given
+#' variable were altered and stored in a new column).
+#' @param ymin,ymax Numeric.  Minimum and maximum values for y-axis. Defaults: 0, dynamic.
+#' @param main_title Character.  Title of graph.  Default: None.
+#' @param source_info Character.  Information on dataset used (country, years, version, etc.),
+#' which is added to the end of "Source: AmericasBarometer" in the bottom-left corner of the graph.
+#' Default: None (only "Source: AmericasBarometer" will be printed).
+#' @param subtitle Character.  Describes the values/data shown in the graph, e.g., "Percent who agree that...".
+#' Default: None.
+#' @param lang Character.  Changes default subtitle text and source info to either Spanish or English.
+#' Will not translate input text, such as main title or variable labels.  Takes either "en" (English)
+#' or "es" (Spanish).  Default: "en".
+#' @param color_scheme Character.  Color of bars.
+#' Takes hex numbers, beginning with "#". Default: "#1F968B" (teal).
+#' @param order Logical.  Should bars be ordered from most frequent response to least?  Default: FALSE.
+#' @return Returns a ggplot graph.
+#' @examples
+#'
+#'df <- data.frame(
+#'cat = c("Far Left", 1, 2, 3, 4, "Center", 6, 7, 8, 9, "Far Right"),
+#'prop = c(4, 3, 5, 12, 17, 23, 15, 11, 5, 4, 1),
+#'proplabel = c("4%", "3%", "5%", "12%", "17%", "23%", "15%", "11%", "5%", "4%", "1%")
+#')
+#'lapop_hist(df,
+#'           main_title = "Centrists are a plurality among Peruvians",
+#'           subtitle = "Distribution of ideological preferences",
+#'           source_info = "Peru, 2019",
+#'           ymax = 27
+#')
+#'
+#'
+#'@export
+#'@importFrom ggplot2 ggplot
+#'@importFrom plyr round_any
+#'@importFrom magick image_read
+#'@importFrom ggplotify as.ggplot
+#'@importFrom ggtext element_markdown
+#'@importFrom pracma interp1
+#'@import showtext
+#'
 
 lapop_hist <- function(data, outcome_var = data$prop, label_var = data$proplabel,
                        cat_var = data$cat,

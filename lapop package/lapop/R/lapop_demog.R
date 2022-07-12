@@ -4,7 +4,60 @@
 
 #######################################
 
-
+#' LAPOP Demographic Breakdown Graphs
+#'
+#' This function shows the values of an outcome variable for subgroups of a secondary variable, using LAPOP formatting.
+#'
+#' @param data Data Frame. Dataset to be used for analysis.  The data frame should have columns
+#' titled varlabel (name(s)/label(s) of secondary variable(s); character), vallabel (names/labels of values for secondary variable; character),
+#' prop (outcome variable value; numeric), proplabel (text of outcome variable value; character),
+#' lb (lower bound of estimate; numeric), and ub (upper bound of estimate; numeric).
+#' Default: None (must be provided).
+#' @param ymin,ymax Numeric.  Minimum and maximum values for y-axis. Defaults: 0 and 100.
+#' @param main_title Character.  Title of graph.  Default: None.
+#' @param source_info Character.  Information on dataset used (country, years, version, etc.),
+#' which is added to the end of "Source: AmericasBarometer" in the bottom-left corner of the graph.
+#' Default: None (only "Source: AmericasBarometer" will be printed).
+#' @param subtitle Character.  Describes the values/data shown in the graph, e.g., "Percent who agree that...".
+#' Default: None.
+#' @param lang Character.  Changes default subtitle text and source info to either Spanish or English.
+#' Will not translate input text, such as main title or variable labels.  Takes either "en" (English)
+#' or "es" (Spanish).  Default: "en".
+#' @param color_scheme Character.  Color of data points and text for each secondary variable.  Allows up to 6 values.
+#' Takes hex numbers, beginning with "#".
+#' Default: c("#7030A0", "#00ADA9", "#3CBC70", "#7EA03E", "#568424", "#ACB014")
+#' (purple, teal, green, olive, sap green, pea soup).
+#' @param subtitle_h_just Numeric.  Move the subtitle/legend text left (negative numbers) or right (positive numbers).
+#' Ranges from -100 to 100.  Default: 0.
+#' @param rev_variables Logical.  Should the order of the variables be reversed?  Default: FALSE.
+#' @param rev_values Logical.  Should the order of the values for each variable be reversed?  Default: FALSE.
+#'
+#' @return Returns a ggplot graph.
+#' @examples
+#'
+#'df <- data.frame(
+#'  varlabel = c(rep("Gender", 2), rep("Age", 6), rep("Education", 4), rep("Wealth", 5)),
+#'  vallabel = c("Women", "Men", "18-25", "26-35", "36-45", "46-55", "56-65", "66+", "  None", "Primary", "Secondary", "Post-Sec.", "Low", "2", "3", "4", "High"),
+#'  prop = c(20, 22, 21, 24, 22, 21, 17, 15, 20, 18, 21, 25, 21, 21, 21, 21, 22),
+#'  proplabel = c("20%", "22%", "21%", "24%", "22%", "21%", "17%", "15%", "20%", "18%", "21%", "25%", "21%", "21%", "21%", "21%", "22%"),
+#'  lb = c(19, 21, 20, 23, 21, 20, 15, 13, 16, 17, 20, 24, 20, 20, 20, 20, 21),
+#'  ub = c(21, 23, 22, 25, 23, 22, 19, 17, 24, 19, 22, 26, 22, 22, 22, 22, 23)
+#')
+#'lapop_demog(df,
+#'            main_title = "More educated, men, and younger individuals in the LAC region are the\nmost likely to be crime victims",
+#'            subtitle = "% victim of a crime",
+#'            ymin = 0,
+#'            ymax = 40)
+#'
+#'@export
+#'@importFrom ggplot2 ggplot
+#'@importFrom plyr round_any
+#'@importFrom magick image_read
+#'@importFrom ggplotify as.ggplot
+#'@importFrom ggtext element_markdown
+#'@importFrom pracma interp1
+#'@import showtext
+#'
 
 lapop_demog <- function(data,
                         lang = "en",

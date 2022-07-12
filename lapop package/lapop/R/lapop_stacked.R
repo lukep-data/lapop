@@ -1,8 +1,64 @@
 #######################################
 
-# LAPOP Histogram #
+# LAPOP Stacked Bar Graph #
 
 #######################################
+
+#' LAPOP Bar Graphs
+#'
+#' This function shows a stacked bar graph using LAPOP formatting.
+#'
+#' @param data Data Frame. Dataset to be used for analysis.  The data frame should have columns
+#' titled varlabel (name(s)/label(s) of variable(s) of interest; character), vallabel (names/labels of values for each variable; character),
+#' prop (outcome variable value; numeric), and proplabel (text of outcome variable value; character).
+#' Default: None (must be provided).
+#' @param outcome_var,prop_labels,var_labels,value_labels Numeric, character, character, character.
+#' Each component of the data to be plotted can be manually specified in case
+#' the default columns in the data frame should not be used (if, for example, the values for a given
+#' variable were altered and stored in a new column).
+#' @param ymin,ymax Numeric.  Minimum and maximum values for y-axis. Defaults: 0, dynamic.
+#' @param main_title Character.  Title of graph.  Default: None.
+#' @param source_info Character.  Information on dataset used (country, years, version, etc.),
+#' which is added to the end of "Source: AmericasBarometer" in the bottom-left corner of the graph.
+#' Default: None (only "Source: AmericasBarometer" will be printed).
+#' @param subtitle Character.  Describes the values/data shown in the graph, e.g., "Percent who support...".
+#' Default: None.
+#' @param lang Character.  Changes default subtitle text and source info to either Spanish or English.
+#' Will not translate input text, such as main title or variable labels.  Takes either "en" (English)
+#' or "es" (Spanish).  Default: "en".
+#' @param color_scheme Character.  Color of data bars for each value.  Allows up to 6 values.
+#' Takes hex numbers, beginning with "#".
+#' Default: c("#2D708E", "#1F9689", "#00ADA9", "#21A356", "#568424", "#ACB014")
+#' (navy blue, turquoise, teal, green, sap green, pea soup).
+#' @param subtitle_h_just Numeric.  Move the subtitle/legend text left (negative numbers) or right (positive numbers).
+#' Ranges from -100 to 100.  Default: 0.
+#' @param rev_variables Logical.  Should the order of the variables be reversed?  Default: FALSE.
+#' @param rev_values Logical.  Should the order of the values for each variable be reversed?  Default: FALSE.
+#' @return Returns a ggplot graph.
+#' @examples
+#'
+#'df <- data.frame(
+#'varlabel = c(rep("Politicians can\nidentify voters", 5), rep("Wealthy can\nbuy results", 5), rep("Votes are\ncounted correctly", 5)),
+#'vallabel = rep(c("Always", "Often", "Sometimes", "Never", "Other"), 3),
+#'prop = c(36, 10, 19, 25, 10, 46, 10, 23, 11, 10, 35, 10, 32, 13, 10),
+#'proplabel = c("36%", "10%", "19%", "25%", "10%", "46%", "10%", "23%", "11%", "10%", "35%", "10%", "32%", "13%", "10%")
+#')
+#'lapop_sb(df,
+#'         main_title = "Trust in key features of the electoral process is low in Latin America",
+#'         subtitle = "% believing it happens:",
+#'         source_info = "2019"
+#')
+#'
+#'@export
+#'@importFrom ggplot2 ggplot
+#'@importFrom plyr round_any
+#'@importFrom magick image_read
+#'@importFrom ggplotify as.ggplot
+#'@importFrom ggtext element_markdown
+#'@importFrom pracma interp1
+#'@import showtext
+#'
+
 
 lapop_sb <- function(data, outcome_var = data$prop, prop_labels = data$proplabel,
                        var_labels = data$varlabel, value_labels = data$vallabel,
@@ -38,7 +94,6 @@ lapop_sb <- function(data, outcome_var = data$prop, prop_labels = data$proplabel
           plot.title = element_text(size = 17, family = "nunito", face = "bold"),
           plot.caption = element_text(size = 10.5, hjust = 0.02, vjust = 2, family = "roboto-light", color="#545454"),
           plot.subtitle = element_text(size = 14, family = "nunito-light", color="#545454"),
-          # axis.title = element_blank(),
           axis.title.y = element_blank(),
           axis.text.x = element_blank(),
           axis.ticks = element_blank(),

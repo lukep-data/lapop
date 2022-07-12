@@ -4,6 +4,66 @@
 
 #######################################
 
+#'
+#' LAPOP Dummbell Graphs
+#'
+#' This function creates "dumbbell" graphs, which show averages for a variable across countries over two time periods, using LAPOP formatting.
+#'
+#' @param data Data Frame. Dataset to be used for analysis.  The data frame should have columns
+#' titled pais (country name; character), wave1 (name of first wave/year (all rows are the same); character),
+#' prop1 (outcome variable values for the first wave; numeric), proplabel1 (text of outcome variable for first wave; character),
+#' wave2 (name of second wave/year (all rows are the same); character),
+#' prop2 (outcome variable values for the second wave; numeric), proplabel2 (text of outcome variable for second wave; character).
+#'  Default: None (must be supplied).
+#' @param ymin,ymax Numeric.  Minimum and maximum values for y-axis. Defaults: 0 and 100.
+#' @param main_title Character.  Title of graph.  Default: None.
+#' @param source_info Character.  Information on dataset used (country, years, version, etc.),
+#' which is added to the end of "Source: AmericasBarometer" in the bottom-left corner of the graph.
+#' Default: None (only "Source: AmericasBarometer" will be printed).
+#' @param subtitle Character.  Describes the values/data shown in the graph, e.g., "Percent who agree that...".
+#' Default: None.
+#' @param lang Character.  Changes default subtitle text and source info to either Spanish or English.
+#' Will not translate input text, such as main title or variable labels.  Takes either "en" (English)
+#' or "es" (Spanish).  Default: "en".
+#' @param color_scheme Character.  Color of data points.  Must supply two values.  Takes hex numbers, beginning with "#".
+#' Default: c("#3CBC70", "#482677") (green, purple).
+#' @param subtitle_h_just,subtitle_v_just Numeric.  Move the subtitle/legend text left/down (negative numbers) or right/up (positive numbers).
+#' Ranges from -100 to 100.  Defaults: 40, -18.
+#' @param sort Character.  The metric by which the data are sorted.  Options: "wave1" (outcome variable in first wave), "wave2" (outcome
+#' variable in wave 2), "diff" (difference between the two waves), "alpha" (alphabetical by country name).
+#' Default: "wave2".
+#' @param order Whether data should be sorted from low to high or high to low on the sort metric.  Options: "hi-lo" and "lo-hi".
+#' Default: "hi-lo".
+#'
+#' @return Returns a ggplot graph.
+#' @examples
+#'
+#'df <- data.frame(
+#'  pais = c("Haiti", "Peru", "Honduras", "Colombia", "Ecuador", "Panama", "Bolivia", "Argentina", "Paraguay", "Dom. Rep.", "Brazil", "Jamaica", "Nicaragua", "Guyana", "Costa Rica", "Mexico", "Guatemala", "Chile", "Uruguay", "El Salvador"),
+#'  wave1 = rep("2018/19", 20),
+#'  prop1 = c(NA, 30, 58, 40, 49, 57, 33, 68, 38, 46, 30, 31, 70, NA, 43, 25, 38, 31, 34, 41),
+#'  proplabel1 = c(NA, "30%", "58%", "40%", "49%", "57%", "33%", "68%", "38%", "46%", "30%", "31%", "70%", NA, "43%", "25%", "38%", "31%", "34%", "41%"),
+#'  wave2 = rep("2021", 20),
+#'  prop2 = c(86, 73, 69, 67, 67, 65, 65, 65, 63, 62, 62, 57, 56, 56, 55, 55, 54, 51, 46, 42),
+#'  proplabel2 = c("86%", "73%", "69%", "67%", "67%", "65%", "65%", "65%", "63%", "62%", "62%", "57%", "56%", "56%", "55%", "55%", "54%", "51%", "46%", "42%")
+#')
+#'lapop_db(df,
+#'         main_title = "Personal economic conditions worsened across the LAC region,\nwith a few exceptions",
+#'         subtitle = "% personal economic situation worsened",
+#'         source_info = ", 2018/19-2021")
+#'
+#' @export
+#'@importFrom ggplot2 ggplot
+#'@importFrom plyr round_any
+#'@importFrom magick image_read
+#'@importFrom ggplotify as.ggplot
+#'@importFrom ggtext element_markdown
+#'@importFrom pracma interp1
+#'@import showtext
+#'
+
+
+
 lapop_db <- function(data,
                       ymin = 0,
                       ymax = 100,

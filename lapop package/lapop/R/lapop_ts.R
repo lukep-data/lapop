@@ -4,6 +4,7 @@
 
 #######################################
 
+#'
 #' LAPOP Time-Series Graphs
 #'
 #' This function creates time series graphs using LAPOP formatting.  If there are waves missing at the
@@ -24,13 +25,12 @@
 #' numeric, numeric. Each component of the data to be plotted can be manually specified in case
 #' the default columns in the data frame should not be used (if, for example, the values for a given
 #' variable were altered and stored in a new column).
-#' @param ymin,ymax Numeric.  Minimum and maximum values for y-axis. Default: Nearest integer.
-#' that is divisible by 5 above the maximum and below the minimum y value.
+#' @param ymin,ymax Numeric.  Minimum and maximum values for y-axis. Default: dynamic.
 #' @param main_title Character.  Title of graph.  Default: None.
 #' @param source_info Character.  Information on dataset used (country, years, version, etc.),
 #' which is added to the end of "Source: AmericasBarometer" in the bottom-left corner of the graph.
 #' Default: None (only "Source: AmericasBarometer" will be printed).
-#' @param subtitle Character.  Describes the values/data shown in the graph, e.g., as "% of Mexicans who say...".
+#' @param subtitle Character.  Describes the values/data shown in the graph, e.g., as "Percent of Mexicans who agree...".
 #' Default: None.
 #' @param lang Character.  Changes default subtitle text and source info to either Spanish or English.
 #' Will not translate input text, such as main title or variable labels.  #' Takes either "en" (English)
@@ -53,6 +53,16 @@
 #'  ymin = 0,
 #'  ymax = 55
 #'  )
+#'
+#'@export
+#'@importFrom ggplot2 ggplot
+#'@importFrom plyr round_any
+#'@importFrom magick image_read
+#'@importFrom ggplotify as.ggplot
+#'@importFrom ggtext element_markdown
+#'@importFrom pracma interp1
+#'@import showtext
+#'
 
 
 lapop_ts <- function(data, outcome_var = data$prop, lower_bound = data$lb, upper_bound = data$ub,
