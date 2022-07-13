@@ -51,7 +51,7 @@ or "es" (Spanish).  Default: "en".}
 Default: "#3CBC70" (green).}
 }
 \value{
-A ggplot graph.
+Returns a ggplot graph.
 }
 \description{
 This function creates time series graphs using LAPOP formatting.  If there are waves missing at the

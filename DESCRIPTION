@@ -8,8 +8,10 @@ Description: This package creates visualizations that follow LAPOP's style guide
     IMPORTANT: Run lapop_fonts() before creating any graphs in order to use LAPOP-standard fonts.
 URL: https://github.com/lapop-central/lapop-viz
 Depends: 
-    R (>= 3.3.0) 
+    R (>= 3.3.0)
+Imports: ggplot2, ggplotify, ggtext, magick, plyr, pracma, showtext, sysfonts
 Encoding: UTF-8
+License: MIT + file LICENSE
 LazyData: true
 RoxygenNote: 7.2.0
 Suggests: 

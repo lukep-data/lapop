@@ -1,10 +1,10 @@
 #' AmericasBarometer Merge 2021
 #'
-#' Data from the mericasBarometer survey 2021 wave, with data merged from all countries
+#' Data from the AmericasBarometer survey 2021 wave, with data merged from all countries
 #'
 #' @docType data
 #'
-#' @usage data(ab_2021_merged)
+#' @usage data(ab_2021_merge)
 #'
 #' @format An object of class \code{"data.frame"}
 #'
@@ -17,9 +17,8 @@
 #'
 #' @examples
 #'
-#' data(ab_2021_merged)
-#' head(ab_2021_merged)
+#' data(ab_2021_merge)
+#' head(ab_2021_merge)
 #'
-#' @export
 #'
-"ab_2021_merged"
+"ab_2021_merge"
