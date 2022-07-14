@@ -4,6 +4,10 @@
 
 #######################################
 
+
+#' @include lapop_fonts.R
+NULL
+
 #'
 #' LAPOP Cross-Country Bar Graphs
 #'
@@ -86,13 +90,13 @@ lapop_coef <- function(data, coef_var = data$coef, label_var = data$proplabel,
                           "<span style='color:#545454'>interval</span>"))
 
   ggplot(data, aes(x = varlabel_var, y = coef_var)) +
-    geom_hline(yintercept = 0, color = gray(1/2), lty = 2) +
+    geom_hline(yintercept = 0, color = "#D1D3D4", lty = 2) +
     geom_errorbar(aes(x=varlabel_var, ymin = lb, ymax = ub), width = 0.3, lty = 1, color = color_scheme) +
     geom_point(aes(x = varlabel_var, y = coef_var, fill = sig), color = "black", size = 5.5, shape = 21) +
     geom_text(aes(label = label_var, vjust = -1.25), size = 5, color = color_scheme, fontface = "bold") +
     scale_fill_manual(values = color_scheme,
                       labels = paste0(" <span style='color:#545454; font-size:13pt'> ",
-                                      ifelse(lang == "es", ifelse(pred_prob == TRUE, "Probabilidades pronosticadas", "Coeficientes de regresión"),
+                                      ifelse(lang == "es", ifelse(pred_prob == TRUE, "Probabilidades pronosticadas", "Coeficientes de regresi\u00f3n"),
                                              ifelse(pred_prob == TRUE, "Predicted probabilities", "Regression coefficients")),
                                       "<span style='color:#FFFFFF00'>-----------</span>",
                                       ci_text),
@@ -103,7 +107,7 @@ lapop_coef <- function(data, coef_var = data$coef, label_var = data$proplabel,
     labs(title = main_title,
          y = " ",
          x = " ",
-         caption = paste0(ifelse(lang == "es", "Fuente: Barómetro de las Américas ", "Source: AmericasBarometer "),
+         caption = paste0(ifelse(lang == "es", "Fuente: Bar\u00f3metro de las Am\u00e9ricas ", "Source: AmericasBarometer "),
                           source_info)) +
     theme(text = element_text(size = 14, family = "roboto"),
           plot.title = element_text(size = 18, family = "nunito", face = "bold"),

@@ -27,8 +27,8 @@ titled wave (survey wave/year; character vector), prop (outcome variable; numeri
 proplabel (text of outcome variable; character); lb (lower bound of estimate; numeric),
 and ub (upper bound of estimate; numeric). Default: None (must be supplied).}
 
-\item{wave_var, outcome_var, label_var, lower_bound, upper_bound}{Character, numeric, character,
-numeric, numeric. Each component of the data to be plotted can be manually specified in case
+\item{wave_var, outcome_var, label_var, lower_bound, upper_bound, point_var}{Character, numeric, character,
+numeric, numeric,point_var. Each component of the data to be plotted can be manually specified in case
 the default columns in the data frame should not be used (if, for example, the values for a given
 variable were altered and stored in a new column).}
 

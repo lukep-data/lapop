@@ -4,6 +4,9 @@
 
 #######################################
 
+#' @include lapop_fonts.R
+NULL
+
 #' LAPOP Demographic Breakdown Graphs
 #'
 #' This function shows the values of an outcome variable for subgroups of a secondary variable, using LAPOP formatting.
@@ -35,19 +38,27 @@
 #' @return Returns a ggplot graph.
 #' @examples
 #'
-#'df <- data.frame(
-#'  varlabel = c(rep("Gender", 2), rep("Age", 6), rep("Education", 4), rep("Wealth", 5)),
-#'  vallabel = c("Women", "Men", "18-25", "26-35", "36-45", "46-55", "56-65", "66+", "  None", "Primary", "Secondary", "Post-Sec.", "Low", "2", "3", "4", "High"),
-#'  prop = c(20, 22, 21, 24, 22, 21, 17, 15, 20, 18, 21, 25, 21, 21, 21, 21, 22),
-#'  proplabel = c("20%", "22%", "21%", "24%", "22%", "21%", "17%", "15%", "20%", "18%", "21%", "25%", "21%", "21%", "21%", "21%", "22%"),
-#'  lb = c(19, 21, 20, 23, 21, 20, 15, 13, 16, 17, 20, 24, 20, 20, 20, 20, 21),
-#'  ub = c(21, 23, 22, 25, 23, 22, 19, 17, 24, 19, 22, 26, 22, 22, 22, 22, 23)
-#')
-#'lapop_demog(df,
-#'            main_title = "More educated, men, and younger individuals in the LAC region are the\nmost likely to be crime victims",
-#'            subtitle = "% victim of a crime",
-#'            ymin = 0,
-#'            ymax = 40)
+#' df <- data.frame(varlabel = c(rep("Gender", 2), rep("Age", 6),
+#'                               rep("Education", 4), rep("Wealth", 5)),
+#'                  vallabel = c("Women", "Men", "18-25", "26-35", "36-45",
+#'                               "46-55", "56-65", "66+", "  None", "Primary",
+#'                               "Secondary", "Post-Sec.", "Low", "2",
+#'                               "3", "4", "High"),
+#'                  prop = c(20, 22, 21, 24, 22, 21, 17, 15, 20, 18, 21, 25, 21,
+#'                           21, 21, 21, 22),
+#'                  proplabel = c("20%", "22%", "21%", "24%", "22%", "21%",
+#'                                "17%", "15%", "20%", "18%", "21%", "25%",
+#'                                "21%", "21%", "21%", "21%", "22%"),
+#'                  lb = c(19, 21, 20, 23, 21, 20, 15, 13, 16, 17, 20, 24, 20,
+#'                         20, 20, 20, 21),
+#'                  ub = c(21, 23, 22, 25, 23, 22, 19, 17, 24, 19, 22, 26, 22,
+#'                         22, 22, 22, 23))
+#'
+#' lapop_demog(df,
+#'             main_title = "More educated, men, and younger individuals in the LAC region are the\nmost likely to be crime victims",
+#'             subtitle = "% victim of a crime",
+#'             ymin = 0,
+#'             ymax = 40)
 #'
 #'@export
 #'@importFrom ggplot2 ggplot
@@ -61,6 +72,9 @@
 #'
 #'@author Luke Plutowski, \email{luke.plutowski@@vanderbilt.edu}
 #'
+
+
+
 
 lapop_demog <- function(data,
                         lang = "en",
@@ -102,7 +116,7 @@ lapop_demog <- function(data,
     labs(title = main_title,
          y = "",
          x = " ",
-         caption = paste0(ifelse(lang == "es", "Fuente: Barómetro de las Américas ", "Source: AmericasBarometer "),
+         caption = paste0(ifelse(lang == "es", "Fuente: Bar\u00f3metro de las Am\u00e9ricas ", "Source: AmericasBarometer "),
                           source_info)) +
     theme(text = element_text(size = 14, family = "roboto"),
           plot.title = element_text(size = 17, family = "nunito", face = "bold"),

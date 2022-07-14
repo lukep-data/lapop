@@ -11,14 +11,14 @@
 #' @param figure Ggplot object.
 #' @param filename File path + name to be saved + .filetype.
 #' @param format Character.  Options: "png", "svg". Default = "svg".
-#' @param Logo Logical.  Should logo be added to plot?  Default: FALSE.
+#' @param logo Logical.  Should logo be added to plot?  Default: FALSE.
 #' @param width_px Numeric. Width in pixels.  Default: 750.
 #' @param height_px Numeric.  Height in pixels.
 #'
 #' @return Saves a file to provided directory.
 #'
 #' @examples
-#' #'df <- data.frame(
+#' df <- data.frame(
 #'cat = c("Far Left", 1, 2, 3, 4, "Center", 6, 7, 8, 9, "Far Right"),
 #'prop = c(4, 3, 5, 12, 17, 23, 15, 11, 5, 4, 1),
 #'proplabel = c("4%", "3%", "5%", "12%", "17%", "23%", "15%", "11%", "5%", "4%", "1%")
@@ -29,8 +29,9 @@
 #'           source_info = "Peru, 2019",
 #'           ymax = 27
 #')
-#' lapop_save(myfigure, "fig1.svg", format = "svg", width_px = 800)
+#' \dontrun{lapop_save(myfigure, "fig1.svg", format = "svg", width_px = 800)}
 #'
+#'@import grDevices
 #'@export
 #'
 

@@ -4,6 +4,9 @@
 
 #######################################
 
+#' @include lapop_fonts.R
+NULL
+
 #'
 #' LAPOP Dummbell Graphs
 #'
@@ -38,19 +41,29 @@
 #' @return Returns a ggplot graph.
 #' @examples
 #'
-#'df <- data.frame(
-#'  pais = c("Haiti", "Peru", "Honduras", "Colombia", "Ecuador", "Panama", "Bolivia", "Argentina", "Paraguay", "Dom. Rep.", "Brazil", "Jamaica", "Nicaragua", "Guyana", "Costa Rica", "Mexico", "Guatemala", "Chile", "Uruguay", "El Salvador"),
-#'  wave1 = rep("2018/19", 20),
-#'  prop1 = c(NA, 30, 58, 40, 49, 57, 33, 68, 38, 46, 30, 31, 70, NA, 43, 25, 38, 31, 34, 41),
-#'  proplabel1 = c(NA, "30%", "58%", "40%", "49%", "57%", "33%", "68%", "38%", "46%", "30%", "31%", "70%", NA, "43%", "25%", "38%", "31%", "34%", "41%"),
-#'  wave2 = rep("2021", 20),
-#'  prop2 = c(86, 73, 69, 67, 67, 65, 65, 65, 63, 62, 62, 57, 56, 56, 55, 55, 54, 51, 46, 42),
-#'  proplabel2 = c("86%", "73%", "69%", "67%", "67%", "65%", "65%", "65%", "63%", "62%", "62%", "57%", "56%", "56%", "55%", "55%", "54%", "51%", "46%", "42%")
-#')
-#'lapop_db(df,
-#'         main_title = "Personal economic conditions worsened across the LAC region,\nwith a few exceptions",
-#'         subtitle = "% personal economic situation worsened",
-#'         source_info = ", 2018/19-2021")
+#' df <- data.frame(pais = c("Haiti", "Peru", "Honduras", "Colombia", "Ecuador",
+#'                           "Panama", "Bolivia", "Argentina", "Paraguay",
+#'                           "Dom. Rep.", "Brazil", "Jamaica", "Nicaragua",
+#'                           "Guyana", "Costa Rica", "Mexico", "Guatemala",
+#'                           "Chile", "Uruguay", "El Salvador"),
+#'                  wave1 = rep("2018/19", 20),
+#'                  prop1 = c(NA, 30, 58, 40, 49, 57, 33, 68, 38, 46, 30,
+#'                            31, 70, NA, 43, 25, 38, 31, 34, 41),
+#'                  proplabel1 = c(NA, "30%", "58%", "40%", "49%", "57%", "33%",
+#'                                 "68%", "38%", "46%", "30%", "31%", "70%", NA,
+#'                                 "43%", "25%", "38%", "31%", "34%", "41%"),
+#'                  wave2 = rep("2021", 20),
+#'                  prop2 = c(86, 73, 69, 67, 67, 65, 65, 65, 63, 62, 62,
+#'                            57, 56, 56, 55, 55, 54, 51, 46, 42),
+#'                  proplabel2 = c("86%", "73%", "69%", "67%", "67%", "65%", "65%",
+#'                                 "65%", "63%", "62%", "62%", "57%", "56%", "56%",
+#'                                 "55%", "55%", "54%", "51%", "46%", "42%"))
+#'
+#' lapop_db(df,
+#'          main_title = "Personal economic conditions worsened across the LAC region,\nwith a few exceptions",
+#'          subtitle = "% personal economic situation worsened",
+#'          source_info = ", 2018/19-2021")
+
 #'
 #' @export
 #'@importFrom ggplot2 ggplot
@@ -70,7 +83,6 @@ lapop_db <- function(data,
                       ymin = 0,
                       ymax = 100,
                       lang = "en",
-                      highlight = "",
                       main_title = "",
                       source_info = "",
                       subtitle = "",
@@ -118,7 +130,7 @@ lapop_db <- function(data,
       labs(title = main_title,
            y = "",
            x = " ",
-           caption = paste0(ifelse(lang == "es", "Fuente: Barómetro de las Américas", "Source: AmericasBarometer"),
+           caption = paste0(ifelse(lang == "es", "Fuente: Bar\u00f3metro de las Am\u00e9ricas ", "Source: AmericasBarometer "),
                             source_info),
            subtitle = subtitle) +
       theme(text = element_text(size = 14, family = "roboto"),

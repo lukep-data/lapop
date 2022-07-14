@@ -20,11 +20,11 @@ lapop_save(
 
 \item{format}{Character.  Options: "png", "svg". Default = "svg".}
 
+\item{logo}{Logical.  Should logo be added to plot?  Default: FALSE.}
+
 \item{width_px}{Numeric. Width in pixels.  Default: 750.}
 
 \item{height_px}{Numeric.  Height in pixels.}
-
-\item{Logo}{Logical.  Should logo be added to plot?  Default: FALSE.}
 }
 \value{
 Saves a file to provided directory.
@@ -33,7 +33,7 @@ Saves a file to provided directory.
 This function creates exports graphs created using the LAPOP templates.
 }
 \examples{
-#'df <- data.frame(
+df <- data.frame(
 cat = c("Far Left", 1, 2, 3, 4, "Center", 6, 7, 8, 9, "Far Right"),
 prop = c(4, 3, 5, 12, 17, 23, 15, 11, 5, 4, 1),
 proplabel = c("4\%", "3\%", "5\%", "12\%", "17\%", "23\%", "15\%", "11\%", "5\%", "4\%", "1\%")
@@ -44,6 +44,6 @@ myfigure <- lapop_hist(df,
           source_info = "Peru, 2019",
           ymax = 27
 )
-lapop_save(myfigure, "fig1.svg", format = "svg", width_px = 800)
+\dontrun{lapop_save(myfigure, "fig1.svg", format = "svg", width_px = 800)}
 
 }

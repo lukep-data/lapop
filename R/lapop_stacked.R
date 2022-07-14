@@ -4,6 +4,9 @@
 
 #######################################
 
+#' @include lapop_fonts.R
+NULL
+
 #' LAPOP Bar Graphs
 #'
 #' This function shows a stacked bar graph using LAPOP formatting.
@@ -16,7 +19,6 @@
 #' Each component of the data to be plotted can be manually specified in case
 #' the default columns in the data frame should not be used (if, for example, the values for a given
 #' variable were altered and stored in a new column).
-#' @param ymin,ymax Numeric.  Minimum and maximum values for y-axis. Defaults: 0, dynamic.
 #' @param main_title Character.  Title of graph.  Default: None.
 #' @param source_info Character.  Information on dataset used (country, years, version, etc.),
 #' which is added to the end of "Source: AmericasBarometer" in the bottom-left corner of the graph.
@@ -37,17 +39,21 @@
 #' @return Returns a ggplot graph.
 #' @examples
 #'
-#'df <- data.frame(
-#'varlabel = c(rep("Politicians can\nidentify voters", 5), rep("Wealthy can\nbuy results", 5), rep("Votes are\ncounted correctly", 5)),
-#'vallabel = rep(c("Always", "Often", "Sometimes", "Never", "Other"), 3),
-#'prop = c(36, 10, 19, 25, 10, 46, 10, 23, 11, 10, 35, 10, 32, 13, 10),
-#'proplabel = c("36%", "10%", "19%", "25%", "10%", "46%", "10%", "23%", "11%", "10%", "35%", "10%", "32%", "13%", "10%")
-#')
-#'lapop_sb(df,
-#'         main_title = "Trust in key features of the electoral process is low in Latin America",
-#'         subtitle = "% believing it happens:",
-#'         source_info = "2019"
-#')
+#' df <- data.frame(varlabel = c(rep("Politicians can\nidentify voters", 5),
+#'                               rep("Wealthy can\nbuy results", 5),
+#'                               rep("Votes are\ncounted correctly", 5)),
+#'                  vallabel = rep(c("Always", "Often", "Sometimes",
+#'                                   "Never", "Other"), 3),
+#'                  prop = c(36, 10, 19, 25, 10, 46, 10, 23, 11, 10, 35,
+#'                           10, 32, 13, 10),
+#'                  proplabel = c("36%", "10%", "19%", "25%", "10%", "46%",
+#'                                "10%", "23%", "11%", "10%", "35%", "10%",
+#'                                "32%", "13%", "10%"))
+#'
+#' lapop_sb(df,
+#'          main_title = "Trust in key features of the electoral process is low in Latin America",
+#'          subtitle = "% believing it happens:",
+#'          source_info = "2019")
 #'
 #'@export
 #'@importFrom ggplot2 ggplot
@@ -60,6 +66,7 @@
 #'
 #'@author Luke Plutowski, \email{luke.plutowski@@vanderbilt.edu}
 #'
+
 
 
 lapop_sb <- function(data, outcome_var = data$prop, prop_labels = data$proplabel,
@@ -89,7 +96,7 @@ lapop_sb <- function(data, outcome_var = data$prop, prop_labels = data$proplabel
     labs(title = main_title,
          y = "",
          x = " ",
-         caption = paste0(ifelse(lang == "es", "Fuente: Barómetro de las Américas ", "Source: AmericasBarometer "),
+         caption = paste0(ifelse(lang == "es", "Fuente: Bar\u00f3metro de las Am\u00e9ricas ", "Source: AmericasBarometer "),
                           source_info),
          subtitle = subtitle) +
     theme(text = element_text(size = 14, family = "roboto"),

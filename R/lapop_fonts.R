@@ -14,6 +14,9 @@
 #'@export
 #'
 #'@author Luke Plutowski, \email{luke.plutowski@@vanderbilt.edu}
+#'@examples
+#'lapop_fonts()
+#'
 
 
 lapop_fonts <- function(){

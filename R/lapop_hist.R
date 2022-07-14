@@ -4,6 +4,9 @@
 
 #######################################
 
+#' @include lapop_fonts.R
+NULL
+
 #' LAPOP Bar Graphs
 #'
 #' This function shows a bar graph for categorical variables using LAPOP formatting.
@@ -80,7 +83,7 @@ lapop_hist <- function(data, outcome_var = data$prop, label_var = data$proplabel
     labs(title=main_title,
          y = "",
          x = "",
-         caption = paste0(ifelse(lang == "es", "Fuente: Barómetro de las Américas ", "Source: AmericasBarometer "),
+         caption = paste0(ifelse(lang == "es", "Fuente: Bar\u00f3metro de las Am\u00e9ricas ", "Source: AmericasBarometer "),
                           source_info),
          subtitle = subtitle) +
     theme(text = element_text(size = 14, family = "roboto"),

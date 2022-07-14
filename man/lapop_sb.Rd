@@ -55,8 +55,6 @@ Ranges from -100 to 100.  Default: 0.}
 Takes hex numbers, beginning with "#".
 Default: c("#2D708E", "#1F9689", "#00ADA9", "#21A356", "#568424", "#ACB014")
 (navy blue, turquoise, teal, green, sap green, pea soup).}
-
-\item{ymin, ymax}{Numeric.  Minimum and maximum values for y-axis. Defaults: 0, dynamic.}
 }
 \value{
 Returns a ggplot graph.
@@ -66,17 +64,21 @@ This function shows a stacked bar graph using LAPOP formatting.
 }
 \examples{
 
-df <- data.frame(
-varlabel = c(rep("Politicians can\nidentify voters", 5), rep("Wealthy can\nbuy results", 5), rep("Votes are\ncounted correctly", 5)),
-vallabel = rep(c("Always", "Often", "Sometimes", "Never", "Other"), 3),
-prop = c(36, 10, 19, 25, 10, 46, 10, 23, 11, 10, 35, 10, 32, 13, 10),
-proplabel = c("36\%", "10\%", "19\%", "25\%", "10\%", "46\%", "10\%", "23\%", "11\%", "10\%", "35\%", "10\%", "32\%", "13\%", "10\%")
-)
+df <- data.frame(varlabel = c(rep("Politicians can\nidentify voters", 5),
+                              rep("Wealthy can\nbuy results", 5),
+                              rep("Votes are\ncounted correctly", 5)),
+                 vallabel = rep(c("Always", "Often", "Sometimes",
+                                  "Never", "Other"), 3),
+                 prop = c(36, 10, 19, 25, 10, 46, 10, 23, 11, 10, 35,
+                          10, 32, 13, 10),
+                 proplabel = c("36\%", "10\%", "19\%", "25\%", "10\%", "46\%",
+                               "10\%", "23\%", "11\%", "10\%", "35\%", "10\%",
+                               "32\%", "13\%", "10\%"))
+
 lapop_sb(df,
-        main_title = "Trust in key features of the electoral process is low in Latin America",
-        subtitle = "\% believing it happens:",
-        source_info = "2019"
-)
+         main_title = "Trust in key features of the electoral process is low in Latin America",
+         subtitle = "\% believing it happens:",
+         source_info = "2019")
 
 }
 \author{

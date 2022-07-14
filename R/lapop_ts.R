@@ -4,6 +4,10 @@
 
 #######################################
 
+
+#' @include lapop_fonts.R
+NULL
+
 #'
 #' LAPOP Time-Series Graphs
 #'
@@ -21,8 +25,8 @@
 #' titled wave (survey wave/year; character vector), prop (outcome variable; numeric),
 #' proplabel (text of outcome variable; character); lb (lower bound of estimate; numeric),
 #' and ub (upper bound of estimate; numeric). Default: None (must be supplied).
-#' @param wave_var,outcome_var,label_var,lower_bound,upper_bound Character, numeric, character,
-#' numeric, numeric. Each component of the data to be plotted can be manually specified in case
+#' @param wave_var,outcome_var,label_var,lower_bound,upper_bound,point_var Character, numeric, character,
+#' numeric, numeric,point_var. Each component of the data to be plotted can be manually specified in case
 #' the default columns in the data frame should not be used (if, for example, the values for a given
 #' variable were altered and stored in a new column).
 #' @param ymin,ymax Numeric.  Minimum and maximum values for y-axis. Default: dynamic.
@@ -113,7 +117,7 @@ lapop_ts <- function(data, outcome_var = data$prop, lower_bound = data$lb, upper
     scale_x_discrete(limits = wave_var) +
     scale_y_continuous(limits=c(ymin, ymax), breaks=seq(ymin, ymax, 10), labels = paste(seq(ymin,ymax,10), "%", sep=""), expand = c(0,0)) +
     labs(title = main_title,
-         caption = paste0(ifelse(lang == "es", "Fuente: Bar?metro de las Am?ricas ", "Source: AmericasBarometer "),
+         caption = paste0(ifelse(lang == "es", "Fuente: Bar\u00f3metro de las Am\u00e9ricas ", "Source: AmericasBarometer "),
                           source_info),
          x = " ",
          y = " ") +
