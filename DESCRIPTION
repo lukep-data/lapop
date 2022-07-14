@@ -12,7 +12,6 @@ Depends:
 Imports: ggplot2, ggplotify, ggtext, magick, plyr, pracma, showtext, sysfonts
 Encoding: UTF-8
 License: MIT + file LICENSE
-LazyData: true
 RoxygenNote: 7.2.0
 Suggests: 
     testthat (>= 3.0.0)

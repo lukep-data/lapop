@@ -82,7 +82,8 @@ df <- data.frame(pais = c("Haiti", "Peru", "Honduras", "Colombia", "Ecuador",
                                 "55\%", "55\%", "54\%", "51\%", "46\%", "42\%"))
 
 lapop_db(df,
-         main_title = "Personal economic conditions worsened across the LAC region,\nwith a few exceptions",
+         main_title = paste0("Personal economic conditions worsened across the",
+                             "LAC region,\nwith a few exceptions"),
          subtitle = "\% personal economic situation worsened",
          source_info = ", 2018/19-2021")
 

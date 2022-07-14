@@ -55,7 +55,9 @@ NULL
 #'                         22, 22, 22, 23))
 #'
 #' lapop_demog(df,
-#'             main_title = "More educated, men, and younger individuals in the LAC region are the\nmost likely to be crime victims",
+#'             main_title = paste0("More educated, men, and younger individuals",
+#'                                 " in the LAC region are the\nmost likely",
+#'                                   " to be crime victims"),
 #'             subtitle = "% victim of a crime",
 #'             ymin = 0,
 #'             ymax = 40)
