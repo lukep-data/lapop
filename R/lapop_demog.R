@@ -91,7 +91,7 @@ lapop_demog <- function(data,
                         color_scheme = c("#7030A0", "#00ADA9", "#3CBC70", "#7EA03E", "#568424", "#ACB014")){
   data$varlabel = factor(data$varlabel, levels = unique(data$varlabel))
   data$vallabel = factor(data$vallabel, levels = unique(data$vallabel))
-  mycolors = color_scheme[1:length(unique(data$varlabel))]
+  mycolors = color_scheme[seq_along(unique(data$varlabel))]
   ci_text = ifelse(lang == "es",
                    paste0(" <span style='color:#545454; font-size:18pt'> \u0131\u2014 \u0131</span> ",
                           "<span style='color:#545454; font-size:13pt'>95% intervalo de confianza </span>"),

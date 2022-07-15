@@ -80,7 +80,7 @@ lapop_sb <- function(data, outcome_var = data$prop, prop_labels = data$proplabel
                      subtitle_h_just = 0,
                      color_scheme = c("#2D708E", "#1F9689", "#00ADA9", "#21A356", "#568424", "#ACB014")){
   # color_scheme = c("#2D708E", "#1F9689", "#00ADA9", "#21A356", "#568424", "#ACB014")
-  mycolors = rev(color_scheme[1:length(unique(value_labels))])
+  mycolors = rev(color_scheme[seq_along(unique(value_labels))])
   if(rev_values == TRUE){
     value_labels = factor(value_labels, levels = unique(value_labels))
   } else{
