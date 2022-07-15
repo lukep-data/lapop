@@ -1,15 +1,15 @@
 Package: lapop
 Type: Package
 Title: Creates Visualizations Using LAPOP Styles 
-Version: 1.0.0
+Version: 1.0.1
 Authors@R: 
     person(given = "Luke",
            family = "Plutowski",
            role = c("aut", "cre"),
-           email = "luke.plutowski@vanderbilt.edu",
+           email = "Luke.Plutowski@vanderbilt.edu",
            comment = c(ORCID = "0000-0001-8240-6722"))
 Maintainer: Luke Plutowski <Luke.Plutowski@vanderbilt.edu>
-Description: This package creates visualizations that follow LAPOP's style guidelines and formatting for use in reports, presentations, and social media posts.  The visualizations are designed to be used with AmericasBarometer survey data.  You may find more information about the AmericasBarometer here: <https://www.vanderbilt.edu/lapop/about-americasbarometer.php>.  The data can be downloaded here: <https://www.vanderbilt.edu/lapop/data-access.php>. 
+Description: Creates visualizations that follow LAPOP's style guidelines and formatting for use in reports, presentations, and social media posts.  The visualizations are designed to be used with AmericasBarometer survey data.  You may find more information about the AmericasBarometer here: <https://www.vanderbilt.edu/lapop/about-americasbarometer.php>.  The data can be downloaded here: <https://www.vanderbilt.edu/lapop/data-access.php>. 
     IMPORTANT: Run lapop_fonts() before creating any graphs in order to use LAPOP-standard fonts.
 URL: <https://github.com/lapop-central/lapop-viz>
 Depends: 

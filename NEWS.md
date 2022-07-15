@@ -1,3 +1,7 @@
+# lapop 1.0.1
+
+* updated errors in description that were rejected by CRAN
+
 # lapop 1.0.0
 
 * prepared lapop package for release to CRAN
