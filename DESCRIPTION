@@ -1,7 +1,7 @@
 Package: lapop
 Type: Package
 Title: Creates Visualizations Using LAPOP Styles 
-Version: 1.0.1
+Version: 1.0.2
 Authors@R: 
     person(given = "Luke",
            family = "Plutowski",
