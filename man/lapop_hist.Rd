@@ -51,7 +51,7 @@ Default: None (only "Source: AmericasBarometer" will be printed).}
 Takes hex numbers, beginning with "#". Default: "#1F968B" (teal).}
 }
 \value{
-Returns a ggplot graph.
+Returns an object of class \code{ggplot}, a ggplot bar graph.
 }
 \description{
 This function shows a bar graph for categorical variables using LAPOP formatting.

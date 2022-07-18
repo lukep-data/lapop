@@ -41,8 +41,10 @@ NULL
 #' or "es" (Spanish).  Default: "en".
 #' @param color_scheme Character.  Color of lines and dots.  Takes hex number, beginning with "#".
 #' Default: "#3CBC70" (green).
-#' @return Returns a ggplot graph.
-#' @examples
+#' @return Returns an object of class \code{ggplot}, a ggplot line graph showing
+#' values of a variable over time.
+#'
+#' #' @examples
 #' df <- data.frame(wave = c("2008", "2010", "2016/17", "2018/19", "2021"),
 #' prop = c(23.2, 14.4, 35.8, 36.6, 40),
 #' proplabel = c("23.2%", "14.4%", "35.8%", "36.6%", "40.0%"),

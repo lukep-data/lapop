@@ -53,7 +53,9 @@ Default: c("#7030A0", "#00ADA9", "#3CBC70", "#7EA03E", "#568424", "#ACB014")
 (purple, teal, green, olive, sap green, pea soup).}
 }
 \value{
-Returns a ggplot graph.
+Returns an object of class \code{ggplot}, a ggplot figure showing
+average values of some variable broken down by one or more secondary variables
+(commonly, demographic variables).
 }
 \description{
 This function shows the values of an outcome variable for subgroups of a secondary variable, using LAPOP formatting.

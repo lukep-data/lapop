@@ -38,7 +38,9 @@ NULL
 #' Will only change text in the legend, not the data.  Default: FALSE.
 #' @param subtitle_h_just Numeric.  Move the subtitle/legend text left (negative numbers) or right (positive numbers).
 #' Ranges from -100 to 100.  Default: 0.
-#' @return Returns a ggplot graph.
+#' @return Returns an object of class \code{ggplot}, a ggplot figure showing
+#' coefficients or predicted probabilities from a multivariate regression.
+#'
 #' @examples
 #'
 #' df <- data.frame(
@@ -57,7 +59,7 @@ NULL
 #'            ymin = -0.3,
 #'            ymax = 0.2)
 #'
-#' @export
+#'@export
 #'@importFrom ggplot2 ggplot
 #'@importFrom plyr round_any
 #'@importFrom ggplotify as.ggplot

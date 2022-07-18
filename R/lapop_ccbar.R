@@ -36,7 +36,8 @@ NULL
 #' @param color_scheme Character.  Color of bars.  Takes hex number, beginning with "#".
 #' Default: "#512B71" (purple).
 #'
-#' @return Returns a ggplot graph.
+#' @return Returns an object of class \code{ggplot}, a ggplot figure showing
+#' average values of some variables across multiple countries.
 #'
 #' @examples
 #'

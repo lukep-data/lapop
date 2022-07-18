@@ -15,7 +15,7 @@
 #' @param width_px Numeric. Width in pixels.  Default: 750.
 #' @param height_px Numeric.  Height in pixels.
 #'
-#' @return Saves a file to provided directory.
+#' @return Saves a file (in either .svg or .png format) to provided directory.
 #'
 #' @examples
 #' df <- data.frame(
@@ -29,7 +29,9 @@
 #'           source_info = "Peru, 2019",
 #'           ymax = 27
 #')
-#' \dontrun{lapop_save(myfigure, "fig1.svg", format = "svg", width_px = 800)}
+#'
+#' f <- file.path(tempdir(), "fig1.svg")
+#' lapop_save(myfigure, f, format = "svg", width_px = 800)
 #'
 #'@import grDevices
 #'@export

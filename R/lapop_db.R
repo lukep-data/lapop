@@ -37,8 +37,10 @@ NULL
 #' Default: "wave2".
 #' @param order Whether data should be sorted from low to high or high to low on the sort metric.  Options: "hi-lo" and "lo-hi".
 #' Default: "hi-lo".
+#' @return Returns an object of class \code{ggplot}, a ggplot figure showing
+#' average values of some variable in two time periods across multiple countries
+#'  (a dumbbell plot).
 #'
-#' @return Returns a ggplot graph.
 #' @examples
 #'
 #' df <- data.frame(pais = c("Haiti", "Peru", "Honduras", "Colombia", "Ecuador",

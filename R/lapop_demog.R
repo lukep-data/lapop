@@ -34,8 +34,10 @@ NULL
 #' Ranges from -100 to 100.  Default: 0.
 #' @param rev_variables Logical.  Should the order of the variables be reversed?  Default: FALSE.
 #' @param rev_values Logical.  Should the order of the values for each variable be reversed?  Default: FALSE.
+#' @return Returns an object of class \code{ggplot}, a ggplot figure showing
+#' average values of some variable broken down by one or more secondary variables
+#' (commonly, demographic variables).
 #'
-#' @return Returns a ggplot graph.
 #' @examples
 #'
 #' df <- data.frame(varlabel = c(rep("Gender", 2), rep("Age", 6),

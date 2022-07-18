@@ -58,7 +58,8 @@ Default: None.}
 Default: "#512B71" (purple).}
 }
 \value{
-Returns a ggplot graph.
+Returns an object of class \code{ggplot}, a ggplot figure showing
+average values of some variables across multiple countries.
 }
 \description{
 This function creates bar graphs for comparing values across countries using LAPOP formatting.

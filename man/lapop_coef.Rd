@@ -60,7 +60,8 @@ Default: "#512B71" (purple).}
 Ranges from -100 to 100.  Default: 0.}
 }
 \value{
-Returns a ggplot graph.
+Returns an object of class \code{ggplot}, a ggplot figure showing
+coefficients or predicted probabilities from a multivariate regression.
 }
 \description{
 This function creates plots of regression coefficients and predicted probabilities using LAPOP formatting.

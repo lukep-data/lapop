@@ -56,7 +56,9 @@ Default: c("#3CBC70", "#482677") (green, purple).}
 Ranges from -100 to 100.  Defaults: 40, -18.}
 }
 \value{
-Returns a ggplot graph.
+Returns an object of class \code{ggplot}, a ggplot figure showing
+average values of some variable in two time periods across multiple countries
+ (a dumbbell plot).
 }
 \description{
 This function creates "dumbbell" graphs, which show averages for a variable across countries over two time periods, using LAPOP formatting.

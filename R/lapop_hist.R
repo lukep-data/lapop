@@ -32,7 +32,7 @@ NULL
 #' @param color_scheme Character.  Color of bars.
 #' Takes hex numbers, beginning with "#". Default: "#1F968B" (teal).
 #' @param order Logical.  Should bars be ordered from most frequent response to least?  Default: FALSE.
-#' @return Returns a ggplot graph.
+#' @return Returns an object of class \code{ggplot}, a ggplot bar graph.
 #' @examples
 #'
 #'df <- data.frame(

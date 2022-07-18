@@ -36,7 +36,8 @@ NULL
 #' Ranges from -100 to 100.  Default: 0.
 #' @param rev_variables Logical.  Should the order of the variables be reversed?  Default: FALSE.
 #' @param rev_values Logical.  Should the order of the values for each variable be reversed?  Default: FALSE.
-#' @return Returns a ggplot graph.
+#' @return Returns an object of class \code{ggplot}, a ggplot stacked bar graph
+#' showing the distributions of multiple categorical variables.
 #' @examples
 #'
 #' df <- data.frame(varlabel = c(rep("Politicians can\nidentify voters", 5),

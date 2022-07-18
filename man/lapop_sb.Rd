@@ -57,7 +57,8 @@ Default: c("#2D708E", "#1F9689", "#00ADA9", "#21A356", "#568424", "#ACB014")
 (navy blue, turquoise, teal, green, sap green, pea soup).}
 }
 \value{
-Returns a ggplot graph.
+Returns an object of class \code{ggplot}, a ggplot stacked bar graph
+showing the distributions of multiple categorical variables.
 }
 \description{
 This function shows a stacked bar graph using LAPOP formatting.

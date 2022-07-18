@@ -6,6 +6,9 @@
 \usage{
 lapop_fonts()
 }
+\value{
+No return value, called for side effects
+}
 \description{
 This function loads fonts needed for LAPOP graph formatting.
 No arguments needed; just run lapop_fonts() at the beginning of your session.

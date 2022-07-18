@@ -1,3 +1,9 @@
+# lapop 1.0.2
+
+* Explained acronyms in package description
+* Updated return values in function descriptions
+* Removed \dontrun{} from lapop_save example and changed file directory to temp
+
 # lapop 1.0.1
 
 * updated errors in description that were rejected by CRAN
