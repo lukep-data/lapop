@@ -32,4 +32,3 @@ Collate:
     'lapop_save.R'
     'lapop_stacked.R'
     'lapop_ts.R'
-    'lapop_tsmulti.R'
