@@ -73,6 +73,7 @@ NULL
 #'
 
 
+
 lapop_ts <- function(data, outcome_var = data$prop, lower_bound = data$lb,
                      upper_bound = data$ub, wave_var = as.character(data$wave),
                      label_var = data$proplabel, point_var = data$prop,
@@ -88,7 +89,7 @@ lapop_ts <- function(data, outcome_var = data$prop, lower_bound = data$lb,
   if(sum(is.na(outcome_var)) > 0) {
     outcome_var = zoo::na.approx(outcome_var)
     lower_bound = zoo::na.approx(lower_bound)
-    upper_bound = zoo::na.approx(lower_bound)
+    upper_bound = zoo::na.approx(upper_bound)
   }
   #now we stop dealing with missing data
   ci_text = ifelse(lang == "es",
