@@ -66,15 +66,16 @@ NULL
 #'@importFrom magick image_read
 #'@importFrom ggplotify as.ggplot
 #'@importFrom ggtext element_markdown
-#'@importFrom pracma interp1
+#'@importFrom zoo na.approx
 #'@import showtext
 #'
 #'@author Luke Plutowski, \email{luke.plutowski@@vanderbilt.edu}
 #'
 
 
-lapop_ts <- function(data, outcome_var = data$prop, lower_bound = data$lb, upper_bound = data$ub,
-                     wave_var = data$wave, label_var = data$proplabel, point_var = data$prop,
+lapop_ts <- function(data, outcome_var = data$prop, lower_bound = data$lb,
+                     upper_bound = data$ub, wave_var = as.character(data$wave),
+                     label_var = data$proplabel, point_var = data$prop,
                      ymin = round_any(min(outcome_var)-5, 5, f = floor),
                      ymax = round_any(max(outcome_var)+5, 5, f = ceiling),
                      main_title = "",
@@ -82,19 +83,12 @@ lapop_ts <- function(data, outcome_var = data$prop, lower_bound = data$lb, upper
                      subtitle = "",
                      lang = "en",
                      color_scheme = "#3CBC70"){
-  #the following lines detect if there's missing waves in the middle of a time series
-  #if so, we need to do some interpolation so the missing waves are still plotted on the x-axis (without data)
-  allwaves = c("2004", "2006", "2008", "2010", "2012", "2014", "2016/17", "2018/19", "2021", "2022")
-  waves_test = allwaves[which(min(data$wave) == allwaves):which(max(data$wave) == allwaves)]
-  if(length(data$wave) != length(waves_test)) {
-    data = merge(data, data.frame(waves_test), by.x="wave", by.y = "waves_test", all.x = TRUE, all.y = TRUE)
-    data$outcome_var = with(data, interp1(seq_along(wave_var), outcome_var, seq_along(wave_var), "linear"))
-    data$lower_bound = with(data, interp1(seq_along(wave_var), lower_bound, seq_along(wave_var), "linear"))
-    data$upper_bound = with(data, interp1(seq_along(wave_var), upper_bound, seq_along(wave_var), "linear"))
-    data = data[!rowSums(!is.na(data)) <= 1, ]
-    outcome_var = data$outcome_var
-    lower_bound = data$lower_bound
-    upper_bound = data$upper_bound
+
+  #interpolate data for missing waves are still plotted on the x-axis (without data)
+  if(sum(is.na(outcome_var)) > 0) {
+    outcome_var = zoo::na.approx(outcome_var)
+    lower_bound = zoo::na.approx(lower_bound)
+    upper_bound = zoo::na.approx(lower_bound)
   }
   #now we stop dealing with missing data
   ci_text = ifelse(lang == "es",
@@ -139,8 +133,4 @@ lapop_ts <- function(data, outcome_var = data$prop, lower_bound = data$lb, upper
           legend.margin = margin(t=0, b=0),
           legend.text=element_markdown(family = "nunito-light"))
 }
-
-
-
-
 
