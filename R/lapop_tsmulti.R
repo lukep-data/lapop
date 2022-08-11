@@ -73,7 +73,6 @@ NULL
 #'
 
 
-library(ggtext)
 
 df <- read.csv("C:/Users/plutowl/Box/LAPOP Shared/4_Resources/5_Code/R Visualizations/Archive/Time Series Graphs/Data Files/ts_example_data_multicountry.csv")
 names(df)[1] <- "varlabel"
@@ -100,7 +99,7 @@ lapop_tsmulti <- function(data, outcome_var = data$prop, lower_bound = data$lb, 
     geom_line(aes(color = varlabel), size = 1, alpha=0.48) +
     geom_point(aes(y = point_var, color = varlabel), size = 3.5, alpha=0.48, key_glyph = "point") +
     scale_color_manual(values = mycolors) +
-    geom_text(aes(label = end_labels, fontface= "bold"), size = 5, vjust = -1) +
+    geom_text(aes(label = end_labels, fontface= "bold"), size = 4, hjust = -0.25) +
     scale_y_continuous(limits=c(ymin, ymax), breaks=seq(ymin, ymax, 10), labels = paste(seq(ymin,ymax,10), "%", sep=""), expand = c(0,0)) +
     labs(title = main_title,
          caption = paste0(ifelse(lang == "es", "Fuente: Bar\u00f3metro de las Am\u00e9ricas ", "Source: AmericasBarometer "),
@@ -124,7 +123,8 @@ lapop_tsmulti <- function(data, outcome_var = data$prop, lower_bound = data$lb, 
           legend.text=element_markdown(family = "nunito-light"))
 }
 
-lapop_tsmulti(df, main )
+lapop_tsmulti(df,
+              main_title = "Intentions to emigrate in Guatemala, Honduras and Mexico reached their highest \nlevels in the AmericasBarometer Series")
 
 
 
