@@ -84,7 +84,7 @@ lapop_ts <- function(data, outcome_var = data$prop, lower_bound = data$lb, upper
                      color_scheme = "#3CBC70"){
   #the following lines detect if there's missing waves in the middle of a time series
   #if so, we need to do some interpolation so the missing waves are still plotted on the x-axis (without data)
-  allwaves = c("2004", "2006", "2008", "2010", "2012", "2014", "2016/17", "2018/19", "2021")
+  allwaves = c("2004", "2006", "2008", "2010", "2012", "2014", "2016/17", "2018/19", "2021", "2022")
   waves_test = allwaves[which(min(data$wave) == allwaves):which(max(data$wave) == allwaves)]
   if(length(data$wave) != length(waves_test)) {
     data = merge(data, data.frame(waves_test), by.x="wave", by.y = "waves_test", all.x = TRUE, all.y = TRUE)
