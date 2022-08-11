@@ -1,3 +1,8 @@
+# lapop 1.0.3
+
+* updated interpolation method in lapop_ts()
+* add multivariable time series lapop_tsmulti()
+
 # lapop 1.0.2
 
 * Explained acronyms in package description

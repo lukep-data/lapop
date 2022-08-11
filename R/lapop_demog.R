@@ -70,7 +70,6 @@ NULL
 #'@importFrom magick image_read
 #'@importFrom ggplotify as.ggplot
 #'@importFrom ggtext element_markdown
-#'@importFrom pracma interp1
 #'@import showtext
 #'
 #'
