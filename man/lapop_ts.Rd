@@ -9,7 +9,7 @@ lapop_ts(
   outcome_var = data$prop,
   lower_bound = data$lb,
   upper_bound = data$ub,
-  wave_var = data$wave,
+  wave_var = as.character(data$wave),
   label_var = data$proplabel,
   point_var = data$prop,
   ymin = round_any(min(outcome_var) - 5, 5, f = floor),
