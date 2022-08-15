@@ -32,6 +32,7 @@ NULL
 #' (purple, teal, green, olive, sap green, pea soup).
 #' @param subtitle_h_just Numeric.  Move the subtitle/legend text left (negative numbers) or right (positive numbers).
 #' Ranges from -100 to 100.  Default: 0.
+#' @param x_lab_angle Numeric.  Angle/orientation of the value labels.  Default: 90.
 #' @param rev_variables Logical.  Should the order of the variables be reversed?  Default: FALSE.
 #' @param rev_values Logical.  Should the order of the values for each variable be reversed?  Default: FALSE.
 #' @return Returns an object of class \code{ggplot}, a ggplot figure showing
@@ -89,14 +90,15 @@ lapop_demog <- function(data,
                         subtitle_h_just = 0,
                         ymin = 0,
                         ymax = 100,
+                        x_lab_angle = 90,
                         color_scheme = c("#7030A0", "#00ADA9", "#3CBC70", "#7EA03E", "#568424", "#ACB014")){
   data$varlabel = factor(data$varlabel, levels = unique(data$varlabel))
   data$vallabel = factor(data$vallabel, levels = unique(data$vallabel))
   mycolors = color_scheme[seq_along(unique(data$varlabel))]
   ci_text = ifelse(lang == "es",
-                   paste0(" <span style='color:#545454; font-size:18pt'> \u0131\u2014 \u0131</span> ",
+                   paste0(" <span style='color:#545454; font-size:18pt'> \u0131\u2014\u0131</span> ",
                           "<span style='color:#545454; font-size:13pt'>95% intervalo de confianza </span>"),
-                   paste0(" <span style='color:#545454; font-size:18pt'> \u0131\u2014 \u0131</span> ",
+                   paste0(" <span style='color:#545454; font-size:18pt'> \u0131\u2014\u0131</span> ",
                           "<span style='color:#545454; font-size:13pt'>95% confidence </span>",
                           "<span style='color:#545454'>interval</span>"))
   p = ggplot(data, aes(x = vallabel, y = prop, color = factor(varlabel), label = proplabel)) +
@@ -129,7 +131,7 @@ lapop_demog <- function(data,
           panel.grid.major.y = element_line(size=.25, color="#D1D3D4"),
           panel.background = element_rect(fill = "white"),
           axis.text.y = element_blank(),
-          axis.text.x = element_text(angle = 90, vjust = 0.5),
+          axis.text.x = element_text(angle = x_lab_angle, vjust = 0.5),
           axis.ticks = element_blank(),
           axis.text = element_text(size = 14, family = "roboto", color = "#545454"),
           legend.position = "top",

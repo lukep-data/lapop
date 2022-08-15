@@ -15,6 +15,7 @@ lapop_demog(
   subtitle_h_just = 0,
   ymin = 0,
   ymax = 100,
+  x_lab_angle = 90,
   color_scheme = c("#7030A0", "#00ADA9", "#3CBC70", "#7EA03E", "#568424", "#ACB014")
 )
 }
@@ -46,6 +47,8 @@ Default: None (only "Source: AmericasBarometer" will be printed).}
 Ranges from -100 to 100.  Default: 0.}
 
 \item{ymin, ymax}{Numeric.  Minimum and maximum values for y-axis. Defaults: 0 and 100.}
+
+\item{x_lab_angle}{Numeric.  Angle/orientation of the value labels.  Default: 90.}
 
 \item{color_scheme}{Character.  Color of data points and text for each secondary variable.  Allows up to 6 values.
 Takes hex numbers, beginning with "#".
