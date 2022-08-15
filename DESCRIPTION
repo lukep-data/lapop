@@ -14,7 +14,7 @@ Description: LAPOP Lab (formerly the Latin American Public Opinion Project) at V
 URL: <https://github.com/lapop-central/lapop-viz>
 Depends: 
     R (>= 3.3.0)
-Imports: ggplot2, ggplotify, ggtext, magick, plyr, zoo, showtext, sysfonts, pracma
+Imports: ggplot2, ggplotify, ggtext, magick, plyr, zoo, showtext, sysfonts
 Encoding: UTF-8
 License: MIT + file LICENSE
 RoxygenNote: 7.2.0

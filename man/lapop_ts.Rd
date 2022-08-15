@@ -40,7 +40,7 @@ variable were altered and stored in a new column).}
 which is added to the end of "Source: AmericasBarometer" in the bottom-left corner of the graph.
 Default: None (only "Source: AmericasBarometer" will be printed).}
 
-\item{subtitle}{Character.  Describes the values/data shown in the graph, e.g., as "Percent of Mexicans who agree...".
+\item{subtitle}{Character.  Describes the values/data shown in the graph, e.g., "Percent of Mexicans who agree...".
 Default: None.}
 
 \item{lang}{Character.  Changes default subtitle text and source info to either Spanish or English.
