@@ -110,8 +110,8 @@ lapop_demog <- function(data,
                                        "<span style='color:#FFFFFF00'>--</span>",
                                        ci_text),
                        guide = guide_legend(override.aes = list(shape = 16,
-                                                                color = c("black", "white", "white", "white"),
-                                                                fill = c("gray", "white", "white", "white")))) +
+                                                                color = c("black", rep("white", length(unique(data$varlabel)) -1)),
+                                                                fill = c("black", rep("white", length(unique(data$varlabel)) -1))))) +
     scale_y_continuous(limits = c(ymin, ymax),
                        breaks = seq(ymin, ymax, ifelse(ymax - ymin <= 50, 5, 10)),
                        expand = c(0,0)) +
