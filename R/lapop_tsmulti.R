@@ -43,17 +43,32 @@ NULL
 #' @param color_scheme Character.  Color of lines and dots.  Takes hex number, beginning with "#".
 #' Must specify four values, even if four are not used.
 #' Default: c("#7030A0", "#3CBC70", "#1F968B", "#95D840").
-
 #'
-
+#'@examples
+#'df <- data.frame(varlabel = c(rep("Honduras", 9), rep("El Salvador", 9),
+#'                              rep("Mexico", 9), rep("Guatemala", 9)),
+#'                 wave = rep(c("2004", "2006", "2008", "2010", "2012",
+#'                              "2014", "2016/17", "2018/19", "2021"), 4),
+#'                 prop = c(19, 24, 21, 15, 11, 32, 41, 38, 54, 29, 29, 25,
+#'                          24, 24, 28, 36, 26, 32, 14, 16, 14, 16, 9, 14,
+#'                          18, 19, 26, 21, 15, 18, 20, 14, 18, 17, 25, 36),
+#'                 proplabel = c("19%", "24%", "21%", "15%", "11%", "32%",
+#'                               "41%", "38%", "54%", "29%", "29%", "25%",
+#'                               "24%", "24%", "28%", "36%", "26%", "32%",
+#'                               "14%", "16%", "14%", "16%", "9%", "14%",
+#'                               "18%", "19%", "26%", "21%", "15%", "18%",
+#'                               "20%", "14%", "18%", "17%", "25%", "36%"))
 #'
+#'lapop_tsmulti(df,
+#'              main_title = "Intentions to emigrate in Guatemala, Honduras and Mexico reached\n their highest levels in the AmericasBarometer series",
+#'              subtitle = "% who intend to migrate in:",
+#'              source_info = "GM 2004-2021")
 #'
 #'@export
 #'@importFrom ggplot2 ggplot
 #'@importFrom plyr round_any
-#'@importFrom magick image_read
-#'@importFrom ggplotify as.ggplot
 #'@importFrom ggtext element_markdown
+#'@importFrom ggrepel geom_text_repel
 #'@importFrom zoo na.approx
 #'@import showtext
 #'
@@ -93,7 +108,7 @@ lapop_tsmulti <- function(data, varlabel = data$varlabel, wave_var = as.characte
                                       sort(unique(varlabel)),
                                       "</span>"),
                        values = mycolors) +
-    geom_text_repel(aes(label = end_labels, fontface= "bold"), color = textcolors,
+    ggrepel::geom_text_repel(aes(label = end_labels, fontface= "bold"), color = textcolors,
               size = 4.5, nudge_x = 1, direction = "y") +
     scale_y_continuous(limits=c(ymin, ymax), breaks=seq(ymin, ymax, 10), labels = paste(seq(ymin,ymax,10), "%", sep=""), expand = c(0,0)) +
     labs(title = main_title,
