@@ -34,6 +34,7 @@ NULL
 #' (navy blue, turquoise, teal, green, sap green, pea soup).
 #' @param subtitle_h_just Numeric.  Move the subtitle/legend text left (negative numbers) or right (positive numbers).
 #' Ranges from -100 to 100.  Default: 0.
+#' @param hide_small_values Logical.  Should values of less than 5% have labels hidden (to avoid clutter)?  Default: FALSE.
 #' @param rev_variables Logical.  Should the order of the variables be reversed?  Default: FALSE.
 #' @param rev_values Logical.  Should the order of the values for each variable be reversed?  Default: FALSE.
 #' @return Returns an object of class \code{ggplot}, a ggplot stacked bar graph
