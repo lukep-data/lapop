@@ -17,6 +17,7 @@ lapop_sb(
   rev_values = FALSE,
   rev_variables = FALSE,
   subtitle_h_just = 0,
+  hide_small_values = FALSE,
   color_scheme = c("#2D708E", "#1F9689", "#00ADA9", "#21A356", "#568424", "#ACB014")
 )
 }
@@ -50,6 +51,9 @@ Default: None (only "Source: AmericasBarometer" will be printed).}
 
 \item{subtitle_h_just}{Numeric.  Move the subtitle/legend text left (negative numbers) or right (positive numbers).
 Ranges from -100 to 100.  Default: 0.}
+
+\item{hide_small_values}{Logical.  If TRUE, hides labels for values totaling
+less than 5% to prevent clutter.  Default: FALSE.}
 
 \item{color_scheme}{Character.  Color of data bars for each value.  Allows up to 6 values.
 Takes hex numbers, beginning with "#".
