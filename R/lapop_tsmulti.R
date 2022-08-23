@@ -92,20 +92,33 @@ lapop_tsmulti <- function(data, varlabel = data$varlabel, wave_var = as.characte
   if(sum(is.na(outcome_var)) > 0) {
     outcome_var = zoo::na.approx(outcome_var)
   }
+  varlabel = factor(varlabel, levels = unique(varlabel))
+  # print(varlabel)
   #limit colors to number of variables in varlabels (e.g. countries)
   mycolors = color_scheme[seq_along(unique(varlabel))]
+  print(mycolors)
+  print(levels(varlabel))
+  # print(order(unique(varlabel), decreasing = TRUE))
   #specify color of text labels based on number of variables in varlabels and their order (alphabetical)
-  textcolors = mycolors[order(unique(varlabel), decreasing = TRUE)]
-  textcolors = rep(textcolors, each = length(unique(wave_var)))
+  # textcolors = mycolors[order(unique(varlabel))]
+  # print(textcolors)
+  textcolors = rep(mycolors, each = length(unique(wave_var)))
   # create variable with label for final data points in series
   end_labels = ifelse(wave_var == max(wave_var), label_var, NA)
   ggplot(data, aes(x = wave_var, y = outcome_var, group = varlabel)) +
     geom_line(aes(color = varlabel), size = 1, alpha=0.48, show.legend = FALSE) +
     geom_point(aes(y = point_var, color = varlabel), size = 3.5, alpha=0.48, key_glyph = draw_key_blank) +
-    scale_color_manual(labels = paste("<span style='color:",
+    # scale_color_manual(labels = paste("<span style='color:",
+    #                                   mycolors,
+    #                                   "'>",
+    #                                   levels(varlabel),
+    #                                   "</span>"),
+    #                    values = mycolors) +
+    scale_color_manual(breaks = levels(varlabel),
+                       labels = paste("<span style='color:",
                                       mycolors,
                                       "'>",
-                                      sort(unique(varlabel)),
+                                      levels(varlabel),
                                       "</span>"),
                        values = mycolors) +
     ggrepel::geom_text_repel(aes(label = end_labels, fontface= "bold"), color = textcolors,
@@ -135,4 +148,3 @@ lapop_tsmulti <- function(data, varlabel = data$varlabel, wave_var = as.characte
           legend.spacing.x = unit(0.2, 'cm'),
           legend.text=element_markdown(family = "nunito-light", face = "bold"))
 }
-

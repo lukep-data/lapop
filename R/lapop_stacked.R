@@ -58,8 +58,6 @@ NULL
 #'
 #'@export
 #'@importFrom ggplot2 ggplot
-#'@importFrom plyr round_any
-#'@importFrom magick image_read
 #'@importFrom ggplotify as.ggplot
 #'@importFrom ggtext element_markdown
 #'@import showtext
@@ -89,7 +87,15 @@ lapop_sb <- function(data, outcome_var = data$prop, prop_labels = data$proplabel
   positions = rev(unique(var_labels))
   ggplot(data, aes(fill = value_labels, y = outcome_var, x = var_labels, label = prop_labels)) +
     geom_bar(position = "stack", stat = "identity", width = 0.45) +
-    geom_text(position = position_stack(vjust = 0.5), color = "#FFFFFF", fontface = "bold", size = 5) +
+    # ggrepel::geom_text_repel(aes(label = end_labels, fontface= "bold"), color = "#FFFFFF",
+    #                          size = 5, nudge_x = 0, direction = "x") +
+    ggrepel::geom_text_repel(position = position_stack(vjust = 0.5),
+                             color = "#FFFFFF", bg.color = "#000000", bg.r = 0.05,
+                             fontface = "bold", size = 5,
+                             direction = "x", xlim = c(0, 100),
+                             force_pull = 1, force = 5) +
+   # geom_text(position = position_stack(vjust = 0.5), color = "#FFFFFF",
+   #                           fontface = "bold", size = 5) +
     coord_flip() +
     scale_fill_manual(values = mycolors, guide=guide_legend(reverse = TRUE)) +
     scale_x_discrete(limits = positions, expand = c(0,0)) +
@@ -99,6 +105,7 @@ lapop_sb <- function(data, outcome_var = data$prop, prop_labels = data$proplabel
          caption = paste0(ifelse(lang == "es", "Fuente: Bar\u00f3metro de las Am\u00e9ricas ", "Source: AmericasBarometer "),
                           source_info),
          subtitle = subtitle) +
+
     theme(text = element_text(size = 14, family = "roboto"),
           plot.title = element_text(size = 17, family = "nunito", face = "bold"),
           plot.caption = element_text(size = 10.5, hjust = 0.02, vjust = 2, family = "roboto-light", color="#545454"),
@@ -119,3 +126,4 @@ lapop_sb <- function(data, outcome_var = data$prop, prop_labels = data$proplabel
           legend.margin = margin(t=5,b=5, 0, subtitle_h_just))
 }
 
+lapop_sb(x)
