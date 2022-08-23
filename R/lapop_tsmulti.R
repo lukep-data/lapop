@@ -136,3 +136,4 @@ lapop_tsmulti <- function(data, varlabel = data$varlabel, wave_var = as.characte
           legend.spacing.x = unit(0.2, 'cm'),
           legend.text=element_markdown(family = "nunito-light", face = "bold"))
 }
+

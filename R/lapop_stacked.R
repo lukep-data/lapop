@@ -36,6 +36,8 @@ NULL
 #' Ranges from -100 to 100.  Default: 0.
 #' @param rev_variables Logical.  Should the order of the variables be reversed?  Default: FALSE.
 #' @param rev_values Logical.  Should the order of the values for each variable be reversed?  Default: FALSE.
+#' @param hide_small_values Logical.  If TRUE, hides labels for values totaling
+#' less than 5% to prevent clutter.  Default: FALSE.
 #' @return Returns an object of class \code{ggplot}, a ggplot stacked bar graph
 #' showing the distributions of multiple categorical variables.
 #' @examples
@@ -76,8 +78,8 @@ lapop_sb <- function(data, outcome_var = data$prop, prop_labels = data$proplabel
                      rev_values = FALSE,
                      rev_variables = FALSE,
                      subtitle_h_just = 0,
+                     hide_small_values = FALSE,
                      color_scheme = c("#2D708E", "#1F9689", "#00ADA9", "#21A356", "#568424", "#ACB014")){
-  # color_scheme = c("#2D708E", "#1F9689", "#00ADA9", "#21A356", "#568424", "#ACB014")
   mycolors = rev(color_scheme[seq_along(unique(value_labels))])
   if(rev_values == TRUE){
     value_labels = factor(value_labels, levels = unique(value_labels))
@@ -86,33 +88,35 @@ lapop_sb <- function(data, outcome_var = data$prop, prop_labels = data$proplabel
   }
   positions = rev(unique(var_labels))
   ggplot(data, aes(fill = value_labels, y = outcome_var, x = var_labels, label = prop_labels)) +
-    geom_bar(position = "stack", stat = "identity", width = 0.45) +
-    # ggrepel::geom_text_repel(aes(label = end_labels, fontface= "bold"), color = "#FFFFFF",
-    #                          size = 5, nudge_x = 0, direction = "x") +
-    ggrepel::geom_text_repel(position = position_stack(vjust = 0.5),
-                             color = "#FFFFFF", bg.color = "#000000", bg.r = 0.05,
-                             fontface = "bold", size = 5,
-                             direction = "x", xlim = c(0, 100),
-                             force_pull = 1, force = 5) +
-   # geom_text(position = position_stack(vjust = 0.5), color = "#FFFFFF",
-   #                           fontface = "bold", size = 5) +
+    geom_bar(position = "stack", stat = "identity", width = 0.6) +
+    geom_text(label = ifelse(outcome_var >= 5, prop_labels, NA),
+              position = position_stack(vjust = 0.5), color = "#FFFFFF",
+              fontface = "bold", size = 5) +
+    ggrepel::geom_text_repel(label = ifelse(outcome_var < 5 & hide_small_values == FALSE, prop_labels, NA),
+                             position = position_stack(vjust = 0.5),
+                             color = "#FFFFFF", segment.color = 'transparent',
+                             fontface = "bold", size = 4,
+                             direction = "y",
+                             force_pull = 0.2, force = 5) +
     coord_flip() +
     scale_fill_manual(values = mycolors, guide=guide_legend(reverse = TRUE)) +
-    scale_x_discrete(limits = positions, expand = c(0,0)) +
+    scale_x_discrete(limits = positions, expand = c(0, 0)) +
+    scale_y_continuous(expand = c(0.02, 0)) +
     labs(title = main_title,
          y = "",
          x = " ",
          caption = paste0(ifelse(lang == "es", "Fuente: Bar\u00f3metro de las Am\u00e9ricas ", "Source: AmericasBarometer "),
                           source_info),
          subtitle = subtitle) +
-
     theme(text = element_text(size = 14, family = "roboto"),
           plot.title = element_text(size = 17, family = "nunito", face = "bold"),
           plot.caption = element_text(size = 10.5, hjust = 0.02, vjust = 2, family = "roboto-light", color="#545454"),
           plot.subtitle = element_text(size = 14, family = "nunito-light", color="#545454"),
           axis.title.y = element_blank(),
           axis.text.x = element_blank(),
+          axis.text.y = element_text(margin=margin(r=0)),
           axis.ticks = element_blank(),
+          aspect.ratio = 0.35,
           axis.text = element_text(size = 14, family = "roboto", color = "#545454", margin=margin(r=5)),
           panel.background = element_rect(fill = "white"),
           panel.grid = element_blank(),
@@ -126,4 +130,5 @@ lapop_sb <- function(data, outcome_var = data$prop, prop_labels = data$proplabel
           legend.margin = margin(t=5,b=5, 0, subtitle_h_just))
 }
 
-lapop_sb(x)
+
+
