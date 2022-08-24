@@ -65,7 +65,7 @@ NULL
 #'          main_title = paste0("Personal economic conditions worsened across the",
 #'                              "LAC region,\nwith a few exceptions"),
 #'          subtitle = "% personal economic situation worsened",
-#'          source_info = ", 2018/19-2021")
+#'          source_info = "GM 2018/19-2021")
 #'
 #' @export
 #'@importFrom ggplot2 ggplot

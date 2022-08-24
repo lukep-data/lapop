@@ -38,8 +38,10 @@ NULL
 #' @param lang Character.  Changes default subtitle text and source info to either Spanish or English.
 #' Will not translate input text, such as main title or variable labels.  #' Takes either "en" (English)
 #' or "es" (Spanish).  Default: "en".
-#' @param subtitle_h_just,subtitle_v_just Numeric.  Changes location of legend
+#' @param legend_h_just,legend_v_just Numeric.  Changes location of legend. From 0 to 100.
 #'  (secondary variable labels).  Defaults: 40, -20.
+#' @param subtitle_h_just Numeric.  Moves subtitle left to right.  From 0 to 1.
+#'  (secondary variable labels).  Defaults: 0 (left justify).
 #' @param color_scheme Character.  Color of lines and dots.  Takes hex number, beginning with "#".
 #' Must specify four values, even if four are not used.
 #' Default: c("#7030A0", "#3CBC70", "#1F968B", "#95D840").
@@ -85,8 +87,9 @@ lapop_tsmulti <- function(data, varlabel = data$varlabel, wave_var = as.characte
                           source_info = "",
                           subtitle = "",
                           lang = "en",
-                          subtitle_h_just = 40,
-                          subtitle_v_just = -20,
+                          legend_h_just = 40,
+                          legend_v_just = -20,
+                          subtitle_h_just = 0,
                           color_scheme = c("#7030A0", "#3CBC70", "#1F968B", "#95D840")){
   #interpolate data for missing waves are still plotted on the x-axis (without data)
   if(sum(is.na(outcome_var)) > 0) {
@@ -122,7 +125,7 @@ lapop_tsmulti <- function(data, varlabel = data$varlabel, wave_var = as.characte
     theme(text = element_text(size = 14, family = "roboto"),
           plot.title = element_text(size = 18, family = "nunito", face = "bold"),
           plot.caption = element_text(size = 10.5, vjust = 2, hjust = 0.02, family = "roboto-light", color="#545454"),
-          plot.subtitle = element_text(size = 14, family = "nunito-light", color="#545454"),
+          plot.subtitle = element_text(size = 14, family = "nunito-light", color="#545454", hjust = subtitle_h_just),
           axis.title.y = element_blank(),
           axis.text = element_text(size = 14, color = "#545454"),
           panel.grid = element_line(color = "#D1D3D4"),
@@ -132,7 +135,7 @@ lapop_tsmulti <- function(data, varlabel = data$varlabel, wave_var = as.characte
           plot.caption.position = "plot",
           legend.title = element_blank(),
           legend.justification='right',
-          legend.margin = margin(t=subtitle_v_just,b=0, subtitle_h_just, 0),
+          legend.margin = margin(t=legend_v_just,b=0, legend_h_just, 0),
           legend.spacing.x = unit(0.2, 'cm'),
           legend.text=element_markdown(family = "nunito-light", face = "bold"))
 }

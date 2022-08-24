@@ -17,8 +17,9 @@ lapop_tsmulti(
   source_info = "",
   subtitle = "",
   lang = "en",
-  subtitle_h_just = 40,
-  subtitle_v_just = -20,
+  legend_h_just = 40,
+  legend_v_just = -20,
+  subtitle_h_just = 0,
   color_scheme = c("#7030A0", "#3CBC70", "#1F968B", "#95D840")
 )
 }
@@ -49,8 +50,11 @@ Default: None.}
 Will not translate input text, such as main title or variable labels.  #' Takes either "en" (English)
 or "es" (Spanish).  Default: "en".}
 
-\item{subtitle_h_just, subtitle_v_just}{Numeric.  Changes location of legend
+\item{legend_h_just, legend_v_just}{Numeric.  Changes location of legend. From 0 to 100.
 (secondary variable labels).  Defaults: 40, -20.}
+
+\item{subtitle_h_just}{Numeric.  Moves subtitle left to right.  From 0 to 1.
+(secondary variable labels).  Defaults: 0 (left justify).}
 
 \item{color_scheme}{Character.  Color of lines and dots.  Takes hex number, beginning with "#".
 Must specify four values, even if four are not used.

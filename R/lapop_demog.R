@@ -96,11 +96,10 @@ lapop_demog <- function(data,
   data$vallabel = factor(data$vallabel, levels = unique(data$vallabel))
   mycolors = color_scheme[seq_along(unique(data$varlabel))]
   ci_text = ifelse(lang == "es",
-                   paste0(" <span style='color:#545454; font-size:18pt'> \u0131\u2014\u0131</span> ",
+                   paste0(" <span style='color:#545454; font-size:18pt'>\u0131\u2014\u0131 </span>",
                           "<span style='color:#545454; font-size:13pt'>95% intervalo de confianza </span>"),
-                   paste0(" <span style='color:#545454; font-size:18pt'> \u0131\u2014\u0131</span> ",
-                          "<span style='color:#545454; font-size:13pt'>95% confidence </span>",
-                          "<span style='color:#545454'>interval</span>"))
+                   paste0(" <span style='color:#545454; font-size:18pt'> \u0131\u2014\u0131 </span> ",
+                          "<span style='color:#545454; font-size:13pt'>95% confidence interval</span>"))
   p = ggplot(data, aes(x = vallabel, y = prop, color = factor(varlabel), label = proplabel)) +
     geom_point(alpha=0.47, key_glyph = "point") +
     facet_grid(cols = vars(varlabel), scales = "free", space = "free") +
