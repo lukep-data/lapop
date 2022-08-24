@@ -52,7 +52,8 @@ Default: None (only "Source: AmericasBarometer" will be printed).}
 \item{subtitle_h_just}{Numeric.  Move the subtitle/legend text left (negative numbers) or right (positive numbers).
 Ranges from -100 to 100.  Default: 0.}
 
-\item{hide_small_values}{Logical.  Should values of less than 5% have labels hidden (to avoid clutter)?  Default: FALSE.}
+\item{hide_small_values}{Logical.  Should labels for categories with less than 5 percent be hidden?  Default: FALSE.
+showing the distributions of multiple categorical variables.}
 
 \item{color_scheme}{Character.  Color of data bars for each value.  Allows up to 6 values.
 Takes hex numbers, beginning with "#".
@@ -61,7 +62,6 @@ Default: c("#2D708E", "#1F9689", "#00ADA9", "#21A356", "#568424", "#ACB014")
 }
 \value{
 Returns an object of class \code{ggplot}, a ggplot stacked bar graph
-showing the distributions of multiple categorical variables.
 }
 \description{
 This function shows a stacked bar graph using LAPOP formatting.
