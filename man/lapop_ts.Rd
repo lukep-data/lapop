@@ -53,22 +53,6 @@ Default: "#3CBC70" (green).}
 \value{
 Returns an object of class \code{ggplot}, a ggplot line graph showing
 values of a variable over time.
-
-#' @examples
-df <- data.frame(wave = c("2008", "2010", "2016/17", "2018/19", "2021"),
-prop = c(23.2, 14.4, 35.8, 36.6, 40),
-proplabel = c("23.2%", "14.4%", "35.8%", "36.6%", "40.0%"),
-lb = c(20.2, 11.9, 33.3, 33.1, 38),
-ub = c(26.2, 16.9, 38.3, 40.1, 42)
-)
-
-lapop_ts(df,
- main_title = "Ecuadorians are becoming more interested in politics",
- subtitle = "% politically interested",
- source_info = "Ecuador 2006-2021",
- ymin = 0,
- ymax = 55
- )
 }
 \description{
 This function creates time series graphs using LAPOP formatting.  If there are waves missing at the
@@ -81,6 +65,23 @@ shown.
 The input data must have a specific format to produce a graph.  It must include columns for
 the survey wave (wave), the outcome variable (prop), the lower bound of the estimate (lb),
 the upper bound of the estimate (ub), and a string for the outcome variable label (proplabel).
+}
+\examples{
+df <- data.frame(wave = c("2008", "2010", "2016/17", "2018/19", "2021"),
+prop = c(23.2, 14.4, 35.8, 36.6, 40),
+proplabel = c("23.2\%", "14.4\%", "35.8\%", "36.6\%", "40.0\%"),
+lb = c(20.2, 11.9, 33.3, 33.1, 38),
+ub = c(26.2, 16.9, 38.3, 40.1, 42)
+)
+
+lapop_ts(df,
+ main_title = "Ecuadorians are becoming more interested in politics",
+ subtitle = "\% politically interested",
+ source_info = "Ecuador 2006-2021",
+ ymin = 0,
+ ymax = 55
+ )
+
 }
 \author{
 Luke Plutowski, \email{luke.plutowski@vanderbilt.edu}

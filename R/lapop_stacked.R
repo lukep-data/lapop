@@ -128,6 +128,3 @@ lapop_sb <- function(data, outcome_var = data$prop, prop_labels = data$proplabel
           legend.key.size = unit(1, "line"),
           legend.margin = margin(t=5,b=5, 0, subtitle_h_just))
 }
-
-
-

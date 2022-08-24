@@ -2,7 +2,7 @@
 % Please edit documentation in R/lapop_coefplot.R
 \name{lapop_coef}
 \alias{lapop_coef}
-\title{LAPOP Cross-Country Bar Graphs}
+\title{LAPOP Regression Graphs}
 \usage{
 lapop_coef(
   data,

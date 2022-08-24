@@ -9,7 +9,7 @@
 NULL
 
 #'
-#' LAPOP Cross-Country Bar Graphs
+#' LAPOP Regression Graphs
 #'
 #' This function creates plots of regression coefficients and predicted probabilities using LAPOP formatting.
 #'
