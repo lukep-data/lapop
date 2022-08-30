@@ -93,7 +93,8 @@ lapop_tsmulti <- function(data, varlabel = data$varlabel, wave_var = as.characte
                           color_scheme = c("#7030A0", "#3CBC70", "#1F968B", "#95D840")){
   #interpolate data for missing waves are still plotted on the x-axis (without data)
   if(sum(is.na(outcome_var)) > 0) {
-    outcome_var = zoo::na.approx(outcome_var)
+    # outcome_var = zoo::na.approx(outcome_var)
+    outcome_var = ifelse(is.na(outcome_var) & wave_var != max(wave_var), zoo::na.approx(outcome_var), outcome_var)
   }
   varlabel = factor(varlabel, levels = unique(varlabel))
   #limit colors to number of variables in varlabels (e.g. countries)
