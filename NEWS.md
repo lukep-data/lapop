@@ -1,3 +1,15 @@
+# lapop 1.0.4
+
+* Changed lapop_ts() to work with year instead of wave
+* Fixed bug with labels in lapop_tsmulti()
+* Reduced size of gap between bars in stacked bar
+* Added repelling of labels that overlapping in lapop_sb()
+* Made subtitle movable in lapop_tsmulti()
+* lapop_coef() description header was wrong
+* Time series help page: example at the bottom wasincorrectly formatted
+* Interpolation by group for lapop_tsmulti() now prevents interpolation of final data point
+* Made sorting possible in lapop_sb()
+
 # lapop 1.0.3
 
 * updated interpolation method in lapop_ts()
