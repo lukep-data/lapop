@@ -96,7 +96,6 @@ lapop_sb <- function(data, outcome_var = data$prop, prop_labels = data$proplabel
       geom_bar(position = "stack", stat = "identity", width = 0.6, data = data[data$var_labels == levels(data$var_labels)[1], ]) +
       geom_bar(position = "stack", stat = "identity", width = 0.6, data = data[data$var_labels == levels(data$var_labels)[2], ]) +
       geom_bar(position = "stack", stat = "identity", width = 0.6, data = data[data$var_labels == levels(data$var_labels)[3], ]) +
-      # geom_bar(position = "stack", stat = "identity", width = 0.6) +
       geom_text(data = data[data$var_labels == levels(data$var_labels)[1], ],
                 aes(label = prop_labels),
                 position = position_stack(vjust = 0.5), color = "#FFFFFF",
@@ -106,6 +105,10 @@ lapop_sb <- function(data, outcome_var = data$prop, prop_labels = data$proplabel
                 position = position_stack(vjust = 0.5), color = "#FFFFFF",
                 fontface = "bold", size = 5) +
       geom_text(data = data[data$var_labels == levels(data$var_labels)[3], ],
+                aes(label = ifelse(outcome_var >= 5, prop_labels, NA)),
+                position = position_stack(vjust = 0.5), color = "#FFFFFF",
+                fontface = "bold", size = 5) +
+      geom_text(data = data[data$var_labels == levels(data$var_labels)[4], ],
                 aes(label = ifelse(outcome_var >= 5, prop_labels, NA)),
                 position = position_stack(vjust = 0.5), color = "#FFFFFF",
                 fontface = "bold", size = 5) +
@@ -124,6 +127,13 @@ lapop_sb <- function(data, outcome_var = data$prop, prop_labels = data$proplabel
                                direction = "y",
                                force_pull = 0.2, force = 5) +
       ggrepel::geom_text_repel(data = data[data$var_labels == levels(data$var_labels)[3], ],
+                               aes(label = ifelse(outcome_var < 5 & hide_small_values == FALSE, prop_labels, NA)),
+                               position = position_stack(vjust = 0.5),
+                               color = "#FFFFFF", segment.color = 'transparent',
+                               fontface = "bold", size = 4,
+                               direction = "y",
+                               force_pull = 0.2, force = 5) +
+      ggrepel::geom_text_repel(data = data[data$var_labels == levels(data$var_labels)[4], ],
                                aes(label = ifelse(outcome_var < 5 & hide_small_values == FALSE, prop_labels, NA)),
                                position = position_stack(vjust = 0.5),
                                color = "#FFFFFF", segment.color = 'transparent',
