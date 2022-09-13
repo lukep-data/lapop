@@ -118,7 +118,7 @@ lapop_cc <- function(data, outcome_var = data$prop, lower_bound = data$lb, pais 
                           "<span style='color:#545454'> interval</span>"))
   ggplot(data=data, aes(x=factor(pais, levels = pais), y=prop, fill = hl_var)) +
     geom_bar(stat="identity", color = color_scheme, width = 0.6) +
-    geom_text(aes(label=label_var), vjust=-1.5, size=5, fontface = "bold", color = color_scheme) +
+    geom_text(aes(label=label_var, y = upper_bound), vjust= -0.5, size=5, fontface = "bold", color = color_scheme) +
     geom_errorbar(aes(ymin=lower_bound, ymax=upper_bound), width = 0.15, color = color_scheme, linetype = "solid") +
     scale_fill_manual(breaks = "other",
                       values = fill_values,
