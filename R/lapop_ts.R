@@ -112,7 +112,11 @@ lapop_ts <- function(data, outcome_var = data$prop, lower_bound = data$lb,
 
     geom_text(aes(label=label_var, fontface= "bold"), color=color_scheme,  size = 5, vjust = -2.1) +
     scale_x_discrete(limits = wave_var) +
-    scale_y_continuous(limits=c(ymin, ymax), breaks=seq(ymin, ymax, 10), labels = paste(seq(ymin,ymax,10), "%", sep=""), expand = c(0,0)) +
+    scale_y_continuous(limits=c(ymin, ymax), 
+                       breaks = seq(ymin, ymax, ifelse(ymax - ymin <= 50, 10, 20)),
+                       labels = paste(seq(ymin,ymax, ifelse(ymax - ymin <= 50, 10, 20)),
+                                      "%", sep=""),
+                       expand = c(0,0)) +
     labs(title = main_title,
          caption = paste0(ifelse(lang == "es", "Fuente: Bar\u00f3metro de las Am\u00e9ricas ", "Source: AmericasBarometer "),
                           source_info),
