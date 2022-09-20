@@ -35,6 +35,7 @@ NULL
 #' or "es" (Spanish).  Default: "en".
 #' @param color_scheme Character.  Color of bars.  Takes hex number, beginning with "#".
 #' Default: "#512B71" (purple).
+#' @param label_size Numeric.  Size of text for data labels (percentages above bars).  Default: 5.
 #'
 #' @return Returns an object of class \code{ggplot}, a ggplot figure showing
 #' average values of some variables across multiple countries.
@@ -87,7 +88,8 @@ lapop_cc <- function(data, outcome_var = data$prop, lower_bound = data$lb, pais 
                      source_info = "",
                      subtitle = "",
                      sort = "",
-                     color_scheme = "#512B71"){
+                     color_scheme = "#512B71",
+                     labels_size = 5){
   if(highlight != ""){
     data$hl_var = factor(ifelse(pais == highlight, 0, 1), labels = c("hl", "other"))
     fill_values = c(paste0(color_scheme, "47"), paste0(color_scheme, "20"))
@@ -118,7 +120,7 @@ lapop_cc <- function(data, outcome_var = data$prop, lower_bound = data$lb, pais 
                           "<span style='color:#545454'> interval</span>"))
   ggplot(data=data, aes(x=factor(pais, levels = pais), y=prop, fill = hl_var)) +
     geom_bar(stat="identity", color = color_scheme, width = 0.6) +
-    geom_text(aes(label=label_var, y = upper_bound), vjust= -0.5, size=5, fontface = "bold", color = color_scheme) +
+    geom_text(aes(label=label_var, y = upper_bound), vjust= -0.5, size=labels_size, fontface = "bold", color = color_scheme) +
     geom_errorbar(aes(ymin=lower_bound, ymax=upper_bound), width = 0.15, color = color_scheme, linetype = "solid") +
     scale_fill_manual(breaks = "other",
                       values = fill_values,

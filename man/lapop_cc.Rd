@@ -19,7 +19,8 @@ lapop_cc(
   source_info = "",
   subtitle = "",
   sort = "",
-  color_scheme = "#512B71"
+  color_scheme = "#512B71",
+  labels_size = 5
 )
 }
 \arguments{
@@ -56,6 +57,8 @@ Default: None.}
 
 \item{color_scheme}{Character.  Color of bars.  Takes hex number, beginning with "#".
 Default: "#512B71" (purple).}
+
+\item{label_size}{Numeric.  Size of text for data labels (percentages above bars).  Default: 5.}
 }
 \value{
 Returns an object of class \code{ggplot}, a ggplot figure showing
