@@ -4,6 +4,41 @@
 
 #######################################
 
+#' @rdname lapop-deprecated
+#' @section \code{lapop_tsmulti}:
+#' For \code{lapop_tsmulti}, use \code{\link{lapop_mline}}.
+#'
+#' @export
+
+lapop_tsmulti <- function(data, varlabel = data$varlabel, wave_var = as.character(data$wave),
+                          outcome_var = data$prop, label_var = data$proplabel,
+                          point_var = data$prop,
+                          ymin = plyr::round_any(min(outcome_var, na.rm = TRUE)-5, 5, f = floor),
+                          ymax = plyr::round_any(max(outcome_var, na.rm = TRUE)+5, 5, f = ceiling),
+                          main_title = "",
+                          source_info = "",
+                          subtitle = "",
+                          lang = "en",
+                          legend_h_just = 40,
+                          legend_v_just = -20,
+                          subtitle_h_just = 0,
+                          color_scheme = c("#7030A0", "#3CBC70", "#1F968B", "#95D840")){
+  .Deprecated("lapop_mline")
+  lapop_mline(data = data, varlabel = varlabel, wave_var = wave_var,
+              outcome_var = outcome_var, label_var = label_var,
+              point_var = point_var,
+              ymin = ymin,
+              ymax = ymax,
+              main_title = main_title,
+              source_info = source_info,
+              subtitle = subtitle,
+              lang = lang,
+              legend_h_just = legend_h_just,
+              legend_v_just = legend_v_just,
+              subtitle_h_just = subtitle_h_just,
+              color_scheme = color_scheme
+  )
+}
 
 #' @include lapop_fonts.R
 NULL
@@ -61,7 +96,7 @@ NULL
 #'                               "18%", "19%", "26%", "21%", "15%", "18%",
 #'                               "20%", "14%", "18%", "17%", "25%", "36%"))
 #'
-#'lapop_tsmulti(df,
+#'lapop_mline(df,
 #'              main_title = "Intentions to emigrate in Guatemala, Honduras and Mexico reached\n their highest levels in the AmericasBarometer series",
 #'              subtitle = "% who intend to migrate in:",
 #'              source_info = "GM 2004-2021")
@@ -78,7 +113,7 @@ NULL
 #'
 
 
-lapop_tsmulti <- function(data, varlabel = data$varlabel, wave_var = as.character(data$wave),
+lapop_mline <- function(data, varlabel = data$varlabel, wave_var = as.character(data$wave),
                           outcome_var = data$prop, label_var = data$proplabel,
                           point_var = data$prop,
                           ymin = plyr::round_any(min(outcome_var, na.rm = TRUE)-5, 5, f = floor),

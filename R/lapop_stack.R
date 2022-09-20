@@ -4,10 +4,44 @@
 
 #######################################
 
+#' @rdname lapop-deprecated
+#' @section \code{lapop_sb}:
+#' For \code{lapop_sb}, use \code{\link{lapop_stack}}.
+#'
+#' @export
+
+lapop_sb <- function(data, outcome_var = data$prop, prop_labels = data$proplabel,
+                        var_labels = data$varlabel, value_labels = data$vallabel,
+                        lang = "en",
+                        main_title = "",
+                        subtitle = "",
+                        source_info = "",
+                        rev_values = FALSE,
+                        rev_variables = FALSE,
+                        hide_small_values = FALSE,
+                        order_bars = FALSE,
+                        subtitle_h_just = 0,
+                        color_scheme = c("#2D708E", "#1F9689", "#00ADA9", "#21A356", "#568424", "#ACB014")){
+  .Deprecated("lapop_stack")
+  lapop_stack(data = data, outcome_var = outcome_var, prop_labels = prop_labels,
+              var_labels = var_labels, value_labels = value_labels,
+              lang = lang,
+              main_title = main_title,
+              subtitle = subtitle,
+              source_info = source_info,
+              rev_values = rev_values,
+              rev_variables = rev_variables,
+              hide_small_values = hide_small_values,
+              order_bars = order_bars,
+              subtitle_h_just = subtitle_h_just,
+              color_scheme = color_scheme)
+}
+
+
 #' @include lapop_fonts.R
 NULL
 
-#' LAPOP Bar Graphs
+#' LAPOP Stacked Bar Graphs
 #'
 #' This function shows a stacked bar graph using LAPOP formatting.
 #'
@@ -53,7 +87,7 @@ NULL
 #'                                "10%", "23%", "11%", "10%", "35%", "10%",
 #'                                "32%", "13%", "10%"))
 #'
-#' lapop_sb(df,
+#' lapop_stack(df,
 #'          main_title = "Trust in key features of the electoral process is low in Latin America",
 #'          subtitle = "% believing it happens:",
 #'          source_info = "2019")
@@ -69,7 +103,7 @@ NULL
 
 
 
-lapop_sb <- function(data, outcome_var = data$prop, prop_labels = data$proplabel,
+lapop_stack <- function(data, outcome_var = data$prop, prop_labels = data$proplabel,
                        var_labels = data$varlabel, value_labels = data$vallabel,
                        lang = "en",
                        main_title = "",

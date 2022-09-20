@@ -4,6 +4,40 @@
 
 #######################################
 
+
+#' @rdname lapop-deprecated
+#' @section \code{lapop_db}:
+#' For \code{lapop_db}, use \code{\link{lapop_dumb}}.
+#'
+#' @export
+
+lapop_db <- function(data,
+                     ymin = 0,
+                     ymax = 100,
+                     lang = "en",
+                     main_title = "",
+                     source_info = "",
+                     subtitle = "",
+                     sort = "wave2",
+                     order = "hi-lo",
+                     color_scheme = c("#3CBC70", "#482677"),
+                     subtitle_h_just = 40,
+                     subtitle_v_just = -18){
+  .Deprecated("lapop_dumb")
+  lapop_dumb(data = data,
+             ymin = ymin,
+             ymax = ymax,
+             lang = lang,
+             main_title = main_title,
+             source_info = source_info,
+             subtitle = subtitle,
+             sort = sort,
+             order = order,
+             color_scheme = color_scheme,
+             subtitle_h_just = subtitle_h_just,
+             subtitle_v_just = subtitle_v_just)
+}
+
 #' @include lapop_fonts.R
 NULL
 
@@ -61,7 +95,7 @@ NULL
 #'                                 "65%", "63%", "62%", "62%", "57%", "56%", "56%",
 #'                                 "55%", "55%", "54%", "51%", "46%", "42%"))
 #'
-#' lapop_db(df,
+#' lapop_dumb(df,
 #'          main_title = paste0("Personal economic conditions worsened across the",
 #'                              "LAC region,\nwith a few exceptions"),
 #'          subtitle = "% personal economic situation worsened",
@@ -77,9 +111,9 @@ NULL
 #'
 #'@author Luke Plutowski, \email{luke.plutowski@@vanderbilt.edu}
 #'
+#'
 
-
-lapop_db <- function(data,
+lapop_dumb <- function(data,
                       ymin = 0,
                       ymax = 100,
                       lang = "en",
@@ -153,3 +187,8 @@ lapop_db <- function(data,
             legend.key = element_blank(),
             legend.margin = margin(t=subtitle_v_just,b=0, subtitle_h_just, 0))
 }
+
+
+
+
+

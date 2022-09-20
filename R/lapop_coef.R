@@ -1,6 +1,6 @@
 #######################################
 
-# LAPOP Regression Graphs #
+# LAPOP Regression Coefficient Graphs #
 
 #######################################
 

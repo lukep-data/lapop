@@ -1,7 +1,7 @@
 Package: lapop
 Type: Package
 Title: Creates Visualizations Using LAPOP Styles 
-Version: 1.0.4
+Version: 1.1.0
 Authors@R: 
     person(given = "Luke",
            family = "Plutowski",
@@ -23,13 +23,14 @@ Suggests:
 Config/testthat/edition: 3
 Collate: 
     'globals.R'
+    'lapop-deprecated.R'
     'lapop_fonts.R'
-    'lapop_ccbar.R'
-    'lapop_coefplot.R'
-    'lapop_db.R'
-    'lapop_demog.R'
+    'lapop_cc.R'
+    'lapop_coef.R'
+    'lapop_dumb.R'
     'lapop_hist.R'
+    'lapop_mline.R'
+    'lapop_mover.R'
     'lapop_save.R'
-    'lapop_stacked.R'
+    'lapop_stack.R'
     'lapop_ts.R'
-    'lapop_tsmulti.R'

@@ -1,13 +1,50 @@
 #######################################
 
-# LAPOP Demographic Breakdown Graph #
+# LAPOP Multiple-Over/Breakdown Graph #
 
 #######################################
+
+#' @rdname lapop-deprecated
+#' @section \code{lapop_demog}:
+#' For \code{lapop_demog}, use \code{\link{lapop_mover}}.
+#'
+#' @export
+
+
+lapop_demog <- function(data,
+                        lang = "en",
+                        main_title = "",
+                        subtitle = "",
+                        source_info = "",
+                        rev_values = FALSE,
+                        rev_variables = FALSE,
+                        subtitle_h_just = 0,
+                        ymin = 0,
+                        ymax = 100,
+                        x_lab_angle = 90,
+                        color_scheme = c("#7030A0", "#00ADA9", "#3CBC70", "#7EA03E", "#568424", "#ACB014")){
+  .Deprecated("lapop_mover")
+  lapop_mover(data = data,
+  lang = lang,
+  main_title = main_title,
+  subtitle = subtitle,
+  source_info = source_info,
+  rev_values = rev_values,
+  rev_variables = rev_variables,
+  subtitle_h_just = subtitle_h_just,
+  ymin = ymin,
+  ymax = ymax,
+  x_lab_angle = x_lab_angle,
+  color_scheme = color_scheme)
+}
+
+
+
 
 #' @include lapop_fonts.R
 NULL
 
-#' LAPOP Demographic Breakdown Graphs
+#' LAPOP Multiple-Over/Breakdown Graphs
 #'
 #' This function shows the values of an outcome variable for subgroups of a secondary variable, using LAPOP formatting.
 #'
@@ -57,7 +94,7 @@ NULL
 #'                  ub = c(21, 23, 22, 25, 23, 22, 19, 17, 24, 19, 22, 26, 22,
 #'                         22, 22, 22, 23))
 #'
-#' lapop_demog(df,
+#' lapop_mover(df,
 #'             main_title = paste0("More educated, men, and younger individuals",
 #'                                 " in the LAC region are the\nmost likely",
 #'                                   " to be crime victims"),
@@ -80,7 +117,7 @@ NULL
 
 
 
-lapop_demog <- function(data,
+lapop_mover <- function(data,
                         lang = "en",
                         main_title = "",
                         subtitle = "",
