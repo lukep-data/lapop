@@ -89,7 +89,7 @@ lapop_cc <- function(data, outcome_var = data$prop, lower_bound = data$lb, pais 
                      subtitle = "",
                      sort = "",
                      color_scheme = "#512B71",
-                     labels_size = 5){
+                     label_size = 5){
   if(highlight != ""){
     data$hl_var = factor(ifelse(pais == highlight, 0, 1), labels = c("hl", "other"))
     fill_values = c(paste0(color_scheme, "47"), paste0(color_scheme, "20"))

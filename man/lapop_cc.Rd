@@ -20,7 +20,7 @@ lapop_cc(
   subtitle = "",
   sort = "",
   color_scheme = "#512B71",
-  labels_size = 5
+  label_size = 5
 )
 }
 \arguments{
