@@ -1,3 +1,7 @@
+# lapop 1.1.0
+
+* Deprecate old function names to match Stata ado file names
+
 # lapop 1.0.4
 
 * Changed lapop_ts() to work with year instead of wave
