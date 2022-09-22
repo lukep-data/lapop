@@ -8,7 +8,7 @@ lapop_cc(
   data,
   outcome_var = data$prop,
   lower_bound = data$lb,
-  pais = data$pais,
+  vallabel = data$vallabel,
   upper_bound = data$ub,
   label_var = data$proplabel,
   ymin = 0,
@@ -25,11 +25,11 @@ lapop_cc(
 }
 \arguments{
 \item{data}{Data Frame. Dataset to be used for analysis.  The data frame should have columns
-titled pais (country name/abbreviation; character vector), prop (outcome variable; numeric),
+titled vallabel (values of x-axis variable (e.g. pais); character vector), prop (outcome variable; numeric),
 proplabel (text of outcome variable; character), lb (lower bound of estimate; numeric),
 and ub (upper bound of estimate; numeric). Default: None (must be supplied).}
 
-\item{pais, outcome_var, label_var, lower_bound, upper_bound}{Character, numeric, character,
+\item{vallabel, outcome_var, label_var, lower_bound, upper_bound}{Character, numeric, character,
 numeric, numeric. Each component of the plot data can be manually specified in case
 the default columns in the data frame should not be used (if, for example, the values for a given
 variable were altered and stored in a new column).}
@@ -41,7 +41,7 @@ Will not translate input text, such as main title or variable labels.  Takes eit
 or "es" (Spanish).  Default: "en".}
 
 \item{highlight}{Character.  Country of interest.  Will highlight (make darker) that country's bar.
-Input must match entry in "pais" exactly. Default: None.}
+Input must match entry in "vallabel" exactly. Default: None.}
 
 \item{main_title}{Character.  Title of graph.  Default: None.}
 
@@ -53,7 +53,7 @@ Default: None (only "Source: AmericasBarometer" will be printed).}
 Default: None.}
 
 \item{sort}{Character. Method of sorting bars.  Options: "hi-lo" (highest to lowest y value), "lo-hi" (lowest to highest),
-"alpha" (alphabetical by pais/x-axis label). Default: Order of data frame.}
+"alpha" (alphabetical by vallabel/x-axis label). Default: Order of data frame.}
 
 \item{color_scheme}{Character.  Color of bars.  Takes hex number, beginning with "#".
 Default: "#512B71" (purple).}
@@ -71,7 +71,7 @@ This function creates bar graphs for comparing values across countries using LAP
 
 lapop_fonts()
 
-df <- data.frame(pais = c("PE", "CO", "BR", "PN", "GT", "DO", "MX", "BO", "EC",
+df <- data.frame(vallabel = c("PE", "CO", "BR", "PN", "GT", "DO", "MX", "BO", "EC",
                           "PY", "CL", "HN", "CR", "SV", "JA", "AR", "UY", "NI"),
                  prop = c(36.1, 19.3, 16.6, 13.3, 13, 11.1, 9.5, 9, 8.1, 8, 6.6,
                           5.7, 5.1, 3.4, 2.6, 1.9, 0.8, 0.2),
