@@ -12,18 +12,18 @@ NULL
 #' This function creates bar graphs for comparing values across countries using LAPOP formatting.
 #'
 #' @param data Data Frame. Dataset to be used for analysis.  The data frame should have columns
-#' titled varlabel (values of x-axis variable (e.g. pais); character vector), prop (outcome variable; numeric),
+#' titled vallabel (values of x-axis variable (e.g. pais); character vector), prop (outcome variable; numeric),
 #' proplabel (text of outcome variable; character), lb (lower bound of estimate; numeric),
 #' and ub (upper bound of estimate; numeric). Default: None (must be supplied).
-#' @param varlabel,outcome_var,label_var,lower_bound,upper_bound Character, numeric, character,
+#' @param vallabel,outcome_var,label_var,lower_bound,upper_bound Character, numeric, character,
 #' numeric, numeric. Each component of the plot data can be manually specified in case
 #' the default columns in the data frame should not be used (if, for example, the values for a given
 #' variable were altered and stored in a new column).
 #' @param ymin,ymax Numeric.  Minimum and maximum values for y-axis. Default: 0 to 100.
 #' @param highlight Character.  Country of interest.  Will highlight (make darker) that country's bar.
-#' Input must match entry in "varlabel" exactly. Default: None.
+#' Input must match entry in "vallabel" exactly. Default: None.
 #' @param sort Character. Method of sorting bars.  Options: "hi-lo" (highest to lowest y value), "lo-hi" (lowest to highest),
-#' "alpha" (alphabetical by varlabel/x-axis label). Default: Order of data frame.
+#' "alpha" (alphabetical by vallabel/x-axis label). Default: Order of data frame.
 #' @param main_title Character.  Title of graph.  Default: None.
 #' @param source_info Character.  Information on dataset used (country, years, version, etc.),
 #' which is added to the end of "Source: AmericasBarometer" in the bottom-left corner of the graph.
@@ -44,7 +44,7 @@ NULL
 #'
 #'lapop_fonts()
 #'
-#' df <- data.frame(varlabel = c("PE", "CO", "BR", "PN", "GT", "DO", "MX", "BO", "EC",
+#' df <- data.frame(vallabel = c("PE", "CO", "BR", "PN", "GT", "DO", "MX", "BO", "EC",
 #'                           "PY", "CL", "HN", "CR", "SV", "JA", "AR", "UY", "NI"),
 #'                  prop = c(36.1, 19.3, 16.6, 13.3, 13, 11.1, 9.5, 9, 8.1, 8, 6.6,
 #'                           5.7, 5.1, 3.4, 2.6, 1.9, 0.8, 0.2),
@@ -78,7 +78,7 @@ NULL
 
 
 
-lapop_cc <- function(data, outcome_var = data$prop, lower_bound = data$lb, varlabel = data$varlabel,
+lapop_cc <- function(data, outcome_var = data$prop, lower_bound = data$lb, vallabel = data$vallabel,
                      upper_bound = data$ub, label_var = data$proplabel,
                      ymin = 0,
                      ymax = 100,
@@ -91,7 +91,7 @@ lapop_cc <- function(data, outcome_var = data$prop, lower_bound = data$lb, varla
                      color_scheme = "#512B71",
                      label_size = 5){
   if(highlight != ""){
-    data$hl_var = factor(ifelse(varlabel == highlight, 0, 1), labels = c("hl", "other"))
+    data$hl_var = factor(ifelse(vallabel == highlight, 0, 1), labels = c("hl", "other"))
     fill_values = c(paste0(color_scheme, "47"), paste0(color_scheme, "20"))
   }
   else{
@@ -103,14 +103,14 @@ lapop_cc <- function(data, outcome_var = data$prop, lower_bound = data$lb, varla
   } else if(sort == "lo-hi"){
     data = data[order(data$prop),]
   } else if(sort == "alpha"){
-    data = data[order(data$varlabel),]
+    data = data[order(data$vallabel),]
   }
   if(sort == "hi-lo"){
     data = data[order(-data$prop),]
   } else if(sort == "lo-hi"){
     data = data[order(data$prop),]
   } else if(sort == "alpha"){
-    data = data[order(data$varlabel),]
+    data = data[order(data$vallabel),]
   }
   ci_text = ifelse(lang == "es",
                    paste0(" <span style='color:#512B71; font-size:18pt'> \u0131\u2014\u0131</span> ",
@@ -118,7 +118,7 @@ lapop_cc <- function(data, outcome_var = data$prop, lower_bound = data$lb, varla
                    paste0(" <span style='color:#512B71; font-size:18pt'> \u0131\u2014\u0131</span> ",
                           "<span style='color:#545454; font-size:13pt'>95% confidence </span>",
                           "<span style='color:#545454'> interval</span>"))
-  ggplot(data=data, aes(x=factor(varlabel, levels = varlabel), y=prop, fill = hl_var)) +
+  ggplot(data=data, aes(x=factor(vallabel, levels = vallabel), y=prop, fill = hl_var)) +
     geom_bar(stat="identity", color = color_scheme, width = 0.6) +
     geom_text(aes(label=label_var, y = upper_bound), vjust= -0.5, size=label_size, fontface = "bold", color = color_scheme) +
     geom_errorbar(aes(ymin=lower_bound, ymax=upper_bound), width = 0.15, color = color_scheme, linetype = "solid") +
