@@ -11,8 +11,8 @@ lapop_mline(
   outcome_var = data$prop,
   label_var = data$proplabel,
   point_var = data$prop,
-  ymin = plyr::round_any(min(outcome_var, na.rm = TRUE) - 5, 5, f = floor),
-  ymax = plyr::round_any(max(outcome_var, na.rm = TRUE) + 5, 5, f = ceiling),
+  ymin = 0,
+  ymax = 100,
   main_title = "",
   source_info = "",
   subtitle = "",
@@ -35,7 +35,7 @@ can be manually specified in case the default columns in the data frame should
 not be used (if, for example, the values for a given variable were altered
 and stored in a new column).}
 
-\item{ymin, ymax}{Numeric.  Minimum and maximum values for y-axis. Default: dynamic.}
+\item{ymin, ymax}{Numeric.  Minimum and maximum values for y-axis. Default: 0, 100.}
 
 \item{main_title}{Character.  Title of graph.  Default: None.}
 

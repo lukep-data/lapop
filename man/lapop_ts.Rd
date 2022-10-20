@@ -12,8 +12,8 @@ lapop_ts(
   wave_var = as.character(data$wave),
   label_var = data$proplabel,
   point_var = data$prop,
-  ymin = round_any(min(outcome_var) - 5, 5, f = floor),
-  ymax = round_any(max(outcome_var) + 5, 5, f = ceiling),
+  ymin = 0,
+  ymax = 100,
   main_title = "",
   source_info = "",
   subtitle = "",
@@ -32,7 +32,7 @@ numeric, numeric,point_var. Each component of the data to be plotted can be manu
 the default columns in the data frame should not be used (if, for example, the values for a given
 variable were altered and stored in a new column).}
 
-\item{ymin, ymax}{Numeric.  Minimum and maximum values for y-axis. Default: dynamic.}
+\item{ymin, ymax}{Numeric.  Minimum and maximum values for y-axis. Default: 0, 100.}
 
 \item{main_title}{Character.  Title of graph.  Default: None.}
 

@@ -6,15 +6,16 @@
 
 #' @rdname lapop-deprecated
 #' @section \code{lapop_tsmulti}:
-#' For \code{lapop_tsmulti}, use \code{\link{lapop_mline}}.
+#' For \code{lapop
+#' _tsmulti}, use \code{\link{lapop_mline}}.
 #'
 #' @export
 
 lapop_tsmulti <- function(data, varlabel = data$varlabel, wave_var = as.character(data$wave),
                           outcome_var = data$prop, label_var = data$proplabel,
                           point_var = data$prop,
-                          ymin = plyr::round_any(min(outcome_var, na.rm = TRUE)-5, 5, f = floor),
-                          ymax = plyr::round_any(max(outcome_var, na.rm = TRUE)+5, 5, f = ceiling),
+                          ymin = 0,
+                          ymax = 100,
                           main_title = "",
                           source_info = "",
                           subtitle = "",
@@ -63,7 +64,7 @@ NULL
 #' can be manually specified in case the default columns in the data frame should
 #' not be used (if, for example, the values for a given variable were altered
 #' and stored in a new column).
-#' @param ymin,ymax Numeric.  Minimum and maximum values for y-axis. Default: dynamic.
+#' @param ymin,ymax Numeric.  Minimum and maximum values for y-axis. Default: 0, 100.
 #' @param main_title Character.  Title of graph.  Default: None.
 #' @param source_info Character.  Information on dataset used (country, years, version, etc.),
 #' which is added to the end of "Source: AmericasBarometer" in the bottom-left corner of the graph.
@@ -103,7 +104,6 @@ NULL
 #'
 #'@export
 #'@importFrom ggplot2 ggplot
-#'@importFrom plyr round_any
 #'@importFrom ggtext element_markdown
 #'@importFrom ggrepel geom_text_repel
 #'@importFrom zoo na.approx
@@ -116,8 +116,8 @@ NULL
 lapop_mline <- function(data, varlabel = data$varlabel, wave_var = as.character(data$wave),
                           outcome_var = data$prop, label_var = data$proplabel,
                           point_var = data$prop,
-                          ymin = plyr::round_any(min(outcome_var, na.rm = TRUE)-5, 5, f = floor),
-                          ymax = plyr::round_any(max(outcome_var, na.rm = TRUE)+5, 5, f = ceiling),
+                          ymin = 0,
+                          ymax = 100,
                           main_title = "",
                           source_info = "",
                           subtitle = "",

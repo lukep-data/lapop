@@ -19,7 +19,7 @@ NULL
 #' Each component of the data to be plotted can be manually specified in case
 #' the default columns in the data frame should not be used (if, for example, the values for a given
 #' variable were altered and stored in a new column).
-#' @param ymin,ymax Numeric.  Minimum and maximum values for y-axis. Defaults: 0, dynamic.
+#' @param ymin,ymax Numeric.  Minimum and maximum values for y-axis. Defaults: 0, 100.
 #' @param main_title Character.  Title of graph.  Default: None.
 #' @param source_info Character.  Information on dataset used (country, years, version, etc.),
 #' which is added to the end of "Source: AmericasBarometer" in the bottom-left corner of the graph.
@@ -50,7 +50,6 @@ NULL
 #'
 #'@export
 #'@importFrom ggplot2 ggplot
-#'@importFrom plyr round_any
 #'@importFrom magick image_read
 #'@importFrom ggplotify as.ggplot
 #'@importFrom ggtext element_markdown
@@ -62,7 +61,7 @@ NULL
 lapop_hist <- function(data, outcome_var = data$prop, label_var = data$proplabel,
                        cat_var = data$cat,
                        ymin = 0,
-                       ymax = round_any(max(outcome_var)+5, 5, f = ceiling),
+                       ymax = 100,
                        lang = "en",
                        main_title = "",
                        subtitle = "",

@@ -65,7 +65,6 @@ NULL
 #'
 #'@export
 #'@import ggplot2
-#'@importFrom plyr round_any
 #'@importFrom magick image_read
 #'@importFrom ggplotify as.ggplot
 #'@importFrom ggtext element_markdown

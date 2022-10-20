@@ -10,7 +10,7 @@ lapop_hist(
   label_var = data$proplabel,
   cat_var = data$cat,
   ymin = 0,
-  ymax = round_any(max(outcome_var) + 5, 5, f = ceiling),
+  ymax = 100,
   lang = "en",
   main_title = "",
   subtitle = "",
@@ -30,7 +30,7 @@ Each component of the data to be plotted can be manually specified in case
 the default columns in the data frame should not be used (if, for example, the values for a given
 variable were altered and stored in a new column).}
 
-\item{ymin, ymax}{Numeric.  Minimum and maximum values for y-axis. Defaults: 0, dynamic.}
+\item{ymin, ymax}{Numeric.  Minimum and maximum values for y-axis. Defaults: 0, 100.}
 
 \item{lang}{Character.  Changes default subtitle text and source info to either Spanish or English.
 Will not translate input text, such as main title or variable labels.  Takes either "en" (English)

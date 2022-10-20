@@ -29,7 +29,7 @@ NULL
 #' numeric, numeric,point_var. Each component of the data to be plotted can be manually specified in case
 #' the default columns in the data frame should not be used (if, for example, the values for a given
 #' variable were altered and stored in a new column).
-#' @param ymin,ymax Numeric.  Minimum and maximum values for y-axis. Default: dynamic.
+#' @param ymin,ymax Numeric.  Minimum and maximum values for y-axis. Default: 0, 100.
 #' @param main_title Character.  Title of graph.  Default: None.
 #' @param source_info Character.  Information on dataset used (country, years, version, etc.),
 #' which is added to the end of "Source: AmericasBarometer" in the bottom-left corner of the graph.
@@ -62,7 +62,6 @@ NULL
 #'
 #'@export
 #'@importFrom ggplot2 ggplot
-#'@importFrom plyr round_any
 #'@importFrom magick image_read
 #'@importFrom ggplotify as.ggplot
 #'@importFrom ggtext element_markdown
@@ -77,8 +76,8 @@ NULL
 lapop_ts <- function(data, outcome_var = data$prop, lower_bound = data$lb,
                      upper_bound = data$ub, wave_var = as.character(data$wave),
                      label_var = data$proplabel, point_var = data$prop,
-                     ymin = round_any(min(outcome_var)-5, 5, f = floor),
-                     ymax = round_any(max(outcome_var)+5, 5, f = ceiling),
+                     ymin = 0,
+                     ymax = 100,
                      main_title = "",
                      source_info = "",
                      subtitle = "",
@@ -112,7 +111,7 @@ lapop_ts <- function(data, outcome_var = data$prop, lower_bound = data$lb,
 
     geom_text(aes(label=label_var, fontface= "bold"), color=color_scheme,  size = 5, vjust = -2.1) +
     scale_x_discrete(limits = wave_var) +
-    scale_y_continuous(limits=c(ymin, ymax), 
+    scale_y_continuous(limits=c(ymin, ymax),
                        breaks = seq(ymin, ymax, ifelse(ymax - ymin <= 50, 10, 20)),
                        labels = paste(seq(ymin,ymax, ifelse(ymax - ymin <= 50, 10, 20)),
                                       "%", sep=""),

@@ -31,8 +31,8 @@ lapop_tsmulti(
   outcome_var = data$prop,
   label_var = data$proplabel,
   point_var = data$prop,
-  ymin = plyr::round_any(min(outcome_var, na.rm = TRUE) - 5, 5, f = floor),
-  ymax = plyr::round_any(max(outcome_var, na.rm = TRUE) + 5, 5, f = ceiling),
+  ymin = 0,
+  ymax = 100,
   main_title = "",
   source_info = "",
   subtitle = "",
@@ -89,7 +89,8 @@ For \code{lapop_db}, use \code{\link{lapop_dumb}}.
 
 \section{\code{lapop_tsmulti}}{
 
-For \code{lapop_tsmulti}, use \code{\link{lapop_mline}}.
+For \code{lapop
+_tsmulti}, use \code{\link{lapop_mline}}.
 }
 
 \section{\code{lapop_demog}}{

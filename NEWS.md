@@ -1,3 +1,7 @@
+# lapop 1.1.1
+
+* Change all y-axis defaults to 0-100
+
 # lapop 1.1.0
 
 * Deprecate old function names to match Stata ado file names
