@@ -1,3 +1,7 @@
+# lapop 1.1.2
+
+* Fixed interpolation on beginning of series in lapop_mline()
+
 # lapop 1.1.1
 
 * Change all y-axis defaults to 0-100
