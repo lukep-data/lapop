@@ -1,3 +1,7 @@
+# lapop 1.2.0
+
+* Added lapop_ccm() 
+
 # lapop 1.1.2
 
 * Fixed interpolation on beginning of series in lapop_mline()

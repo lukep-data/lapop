@@ -1,7 +1,7 @@
 Package: lapop
 Type: Package
 Title: Creates Visualizations Using LAPOP Styles 
-Version: 1.1.2
+Version: 1.2.0
 Authors@R: 
     person(given = "Luke",
            family = "Plutowski",
@@ -14,10 +14,10 @@ Description: LAPOP Lab (formerly the Latin American Public Opinion Project) at V
 URL: <https://github.com/lapop-central/lapop-viz>
 Depends: 
     R (>= 3.3.0)
-Imports: ggplot2, ggplotify, ggtext, magick, zoo, showtext, sysfonts, ggrepel
+Imports: ggplot2, ggplotify, ggtext, magick, zoo, showtext, sysfonts, ggrepel, dplyr
 Encoding: UTF-8
 License: MIT + file LICENSE
-RoxygenNote: 7.2.0
+RoxygenNote: 7.2.3
 Suggests: 
     testthat (>= 3.0.0)
 Config/testthat/edition: 3
@@ -26,6 +26,7 @@ Collate:
     'lapop-deprecated.R'
     'lapop_fonts.R'
     'lapop_cc.R'
+    'lapop_ccm.R'
     'lapop_coef.R'
     'lapop_dumb.R'
     'lapop_hist.R'
