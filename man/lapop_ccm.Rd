@@ -9,7 +9,6 @@ lapop_ccm(
   pais = data$pais,
   outcome_var = data$prop,
   lower_bound = data$lb,
-  vallabel = data$vallabel,
   upper_bound = data$ub,
   label_var = data$proplabel,
   var = data$var,
