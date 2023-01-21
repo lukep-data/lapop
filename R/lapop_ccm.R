@@ -15,6 +15,7 @@ NULL
 #' proplabel (text of outcome variable; character), lb (lower bound of estimate; numeric),
 #'  ub (upper bound of estimate; numeric), and var (labels of secondary variables; character).
 #'  Default: None (must be supplied).
+#'
 #' @param pais,outcome_var,label_var,lower_bound,upper_bound,var Character, numeric, character,
 #' numeric, numeric, character. Each component of the plot data can be manually specified in case
 #' the default columns in the data frame should not be used (if, for example, the values for a given
@@ -76,9 +77,8 @@ NULL
 
 lapop_ccm <- function(data,
                       pais = data$pais, outcome_var = data$prop,
-                      lower_bound = data$lb, vallabel = data$vallabel,
-                      upper_bound = data$ub, label_var = data$proplabel,
-                      var = data$var,
+                      lower_bound = data$lb, upper_bound = data$ub,
+                      label_var = data$proplabel, var = data$var,
                       ymin = 0,
                       ymax = 100,
                       lang = "en",
