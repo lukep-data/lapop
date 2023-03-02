@@ -1,3 +1,7 @@
+# lapop 1.2.1
+
+* Automatically convert varlabel to character in mline() and stack()
+
 # lapop 1.2.0
 
 * Added lapop_ccm() 

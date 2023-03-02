@@ -126,6 +126,10 @@ lapop_mline <- function(data, varlabel = data$varlabel, wave_var = as.character(
                           legend_v_just = -20,
                           subtitle_h_just = 0,
                           color_scheme = c("#7030A0", "#3CBC70", "#1F968B", "#95D840")){
+  if(class(varlabel) != "character" & class(varlabel) != "factor"){
+    varlabel = as.character(varlabel)
+    data$varlabels = as.character(data$varlabel)
+  }
   #interpolate data for missing waves are still plotted on the x-axis (without data)
   if(sum(is.na(outcome_var)) > 0) {
     # outcome_var = zoo::na.approx(outcome_var)

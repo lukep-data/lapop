@@ -115,6 +115,14 @@ lapop_stack <- function(data, outcome_var = data$prop, prop_labels = data$propla
                      order_bars = FALSE,
                      subtitle_h_just = 0,
                      color_scheme = c("#2D708E", "#1F9689", "#00ADA9", "#21A356", "#568424", "#ACB014")){
+  if(class(var_labels) != "character" & class(var_labels) != "factor"){
+    var_labels = as.character(var_labels)
+    data$varlabels = as.character(data$varlabel)
+  }
+  if(class(value_labels) != "character" & class(value_labels) != "factor"){
+    value_labels = as.character(value_labels)
+    data$vallabel = as.character(data$vallabel)
+  }
   mycolors = rev(color_scheme[seq_along(unique(value_labels))])
   if(rev_values == TRUE){
     value_labels = factor(value_labels, levels = unique(value_labels))
