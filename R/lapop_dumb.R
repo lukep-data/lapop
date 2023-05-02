@@ -163,7 +163,7 @@ lapop_dumb <- function(data,
       labs(title = main_title,
            y = "",
            x = " ",
-           caption = paste0(ifelse(lang == "es", "Fuente: Bar\u00f3metro de las Am\u00e9ricas ", "Source: AmericasBarometer "),
+           caption = paste0(ifelse(lang == "es", "Fuente: ", "Source: "),
                             source_info),
            subtitle = subtitle) +
       theme(text = element_text(size = 14, family = "roboto"),

@@ -117,7 +117,7 @@ lapop_ts <- function(data, outcome_var = data$prop, lower_bound = data$lb,
                                       "%", sep=""),
                        expand = c(0,0)) +
     labs(title = main_title,
-         caption = paste0(ifelse(lang == "es", "Fuente: Bar\u00f3metro de las Am\u00e9ricas ", "Source: AmericasBarometer "),
+         caption = paste0(ifelse(lang == "es", "Fuente: ", "Source: "),
                           source_info),
          x = " ",
          y = " ") +

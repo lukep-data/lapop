@@ -156,7 +156,7 @@ lapop_mline <- function(data, varlabel = data$varlabel, wave_var = as.character(
               size = 4.5, nudge_x = 1, direction = "y") +
     scale_y_continuous(limits=c(ymin, ymax), breaks=seq(ymin, ymax, 10), labels = paste(seq(ymin,ymax,10), "%", sep=""), expand = c(0,0)) +
     labs(title = main_title,
-         caption = paste0(ifelse(lang == "es", "Fuente: Bar\u00f3metro de las Am\u00e9ricas ", "Source: AmericasBarometer "),
+         caption = paste0(ifelse(lang == "es", "Fuente: ", "Source: "),
                           source_info),
          x = " ",
          y = " ",

@@ -1,3 +1,7 @@
+# lapop 1.2.2
+
+* remove "AmericasBarometer" from automatically appearing in source
+
 # lapop 1.2.1
 
 * Automatically convert varlabel to character in mline() and stack()

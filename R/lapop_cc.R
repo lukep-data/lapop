@@ -132,7 +132,7 @@ lapop_cc <- function(data, outcome_var = data$prop, lower_bound = data$lb, valla
     labs(title=main_title,
          y = "",
          x = "",
-         caption = paste0(ifelse(lang == "es", "Fuente: Bar\u00f3metro de las Am\u00e9ricas ", "Source: AmericasBarometer "),
+         caption = paste0(ifelse(lang == "es", "Fuente: ", "Source: "),
                           source_info)) +
     theme(text = element_text(size = 14, family = "roboto"),
           plot.title = element_text(size = 18, family = "nunito", face = "bold"),
