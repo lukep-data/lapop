@@ -36,8 +36,8 @@ or "es" (Spanish).  Default: "en".}
 \item{main_title}{Character.  Title of graph.  Default: None.}
 
 \item{source_info}{Character.  Information on dataset used (country, years, version, etc.),
-which is added to the end of "Source: AmericasBarometer" in the bottom-left corner of the graph.
-Default: None (only "Source: AmericasBarometer" will be printed).}
+which is added to the end of "Source: " in the bottom-left corner of the graph.
+Default: None (only "Source: " will be printed).}
 
 \item{subtitle}{Character.  Describes the values/data shown in the graph, e.g., "Percent who agree that...".
 Default: None.}
