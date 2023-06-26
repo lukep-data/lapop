@@ -81,6 +81,8 @@ NULL
 #' @param color_scheme Character.  Color of lines and dots.  Takes hex number, beginning with "#".
 #' Must specify four values, even if four are not used.
 #' Default: c("#7030A0", "#3CBC70", "#1F968B", "#95D840").
+#' @param percentages Logical.  Is the outcome variable a percentage?  Set to FALSE if you are using
+#' means of the raw values, so that the y-axis adjusts accordingly. Default: TRUE.
 #'
 #'@examples
 #'df <- data.frame(varlabel = c(rep("Honduras", 9), rep("El Salvador", 9),
@@ -125,7 +127,8 @@ lapop_mline <- function(data, varlabel = data$varlabel, wave_var = as.character(
                           legend_h_just = 40,
                           legend_v_just = -20,
                           subtitle_h_just = 0,
-                          color_scheme = c("#7030A0", "#3CBC70", "#1F968B", "#95D840")){
+                          color_scheme = c("#7030A0", "#3CBC70", "#1F968B", "#95D840"),
+                          percentages = TRUE){
   if(class(varlabel) != "character" & class(varlabel) != "factor"){
     varlabel = as.character(varlabel)
     data$varlabels = as.character(data$varlabel)
@@ -154,7 +157,18 @@ lapop_mline <- function(data, varlabel = data$varlabel, wave_var = as.character(
                        values = mycolors) +
     ggrepel::geom_text_repel(aes(label = end_labels, fontface= "bold"), color = textcolors,
               size = 4.5, nudge_x = 1, direction = "y") +
-    scale_y_continuous(limits=c(ymin, ymax), breaks=seq(ymin, ymax, 10), labels = paste(seq(ymin,ymax,10), "%", sep=""), expand = c(0,0)) +
+    {
+      if (percentages) {
+        scale_y_continuous(limits=c(ymin, ymax),
+                           breaks=seq(ymin, ymax, 10),
+                           labels = paste(seq(ymin, ymax, 10), "%", sep=""),
+                           expand = c(0,0))
+      }
+      else {
+        scale_y_continuous(limits=c(ymin, ymax),
+                           expand = c(0,0))
+      }
+    } +
     labs(title = main_title,
          caption = paste0(ifelse(lang == "es", "Fuente: ", "Source: "),
                           source_info),

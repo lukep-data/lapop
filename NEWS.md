@@ -1,6 +1,11 @@
+# lapop 1.2.4
+
+Add option to remove percentages in ts and mline
+
 # lapop 1.2.3
 
 * remove "AmericasBarometer" mentions from help files
+
 # lapop 1.2.2
 
 * remove "AmericasBarometer" from automatically appearing in source

@@ -41,6 +41,8 @@ NULL
 #' or "es" (Spanish).  Default: "en".
 #' @param color_scheme Character.  Color of lines and dots.  Takes hex number, beginning with "#".
 #' Default: "#3CBC70" (green).
+#' @param percentages Logical.  Is the outcome variable a percentage?  Set to FALSE if you are using
+#' means of the raw values, so that the y-axis adjusts accordingly. Default: TRUE.
 #' @return Returns an object of class \code{ggplot}, a ggplot line graph showing
 #' values of a variable over time.
 #'
@@ -82,7 +84,8 @@ lapop_ts <- function(data, outcome_var = data$prop, lower_bound = data$lb,
                      source_info = "",
                      subtitle = "",
                      lang = "en",
-                     color_scheme = "#3CBC70"){
+                     color_scheme = "#3CBC70",
+                     percentages = TRUE){
 
   #interpolate data for missing waves are still plotted on the x-axis (without data)
   if(sum(is.na(outcome_var)) > 0) {
@@ -106,16 +109,24 @@ lapop_ts <- function(data, outcome_var = data$prop, lower_bound = data$lb,
     scale_color_manual(values = color_scheme,
                        labels = paste0("<span style='color:#545454; font-size:13pt'> ",
                                        subtitle,
-                                      "<span style='color:#FFFFFF00'>-----------</span>",
-                                      ci_text)) +
+                                       "<span style='color:#FFFFFF00'>-----------</span>",
+                                       ci_text)) +
 
     geom_text(aes(label=label_var, fontface= "bold"), color=color_scheme,  size = 5, vjust = -2.1) +
     scale_x_discrete(limits = wave_var) +
-    scale_y_continuous(limits=c(ymin, ymax),
-                       breaks = seq(ymin, ymax, ifelse(ymax - ymin <= 50, 10, 20)),
-                       labels = paste(seq(ymin,ymax, ifelse(ymax - ymin <= 50, 10, 20)),
-                                      "%", sep=""),
-                       expand = c(0,0)) +
+    {
+      if (percentages) {
+        scale_y_continuous(limits=c(ymin, ymax),
+                           breaks = seq(ymin, ymax, ifelse(ymax - ymin <= 50, 10, 20)),
+                           labels = paste(seq(ymin,ymax, ifelse(ymax - ymin <= 50, 10, 20)),
+                                          "%", sep=""),
+                           expand = c(0,0))
+      }
+      else {
+        scale_y_continuous(limits=c(ymin, ymax),
+                           expand = c(0,0))
+      }
+    } +
     labs(title = main_title,
          caption = paste0(ifelse(lang == "es", "Fuente: ", "Source: "),
                           source_info),
@@ -137,4 +148,3 @@ lapop_ts <- function(data, outcome_var = data$prop, lower_bound = data$lb,
           legend.margin = margin(t=0, b=0),
           legend.text=element_markdown(family = "nunito-light"))
 }
-
