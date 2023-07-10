@@ -19,6 +19,7 @@ lapop_ccm(
   source_info = "",
   subtitle = "",
   sort = "",
+  y_label = "",
   color_scheme = c("#00ADA9", "#512B71"),
   label_size = 4
 )
@@ -52,6 +53,8 @@ Default: None.}
 
 \item{sort}{Character. Method of sorting bars.  Options: "var1" (highest to lowest on variable 1),
 "var2" (highest to lowest on variable 2). Default: Order of data frame.}
+
+\item{y_label}{Character.  Y-axis label.}
 
 \item{color_scheme}{Character.  Color of bars.  Takes hex number, beginning with "#".
 Default: "#512B71" (purple).}

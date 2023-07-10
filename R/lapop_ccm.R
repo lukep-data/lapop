@@ -29,6 +29,7 @@ NULL
 #' Default: None (only "Source: " will be printed).
 #' @param subtitle Character.  Describes the values/data shown in the graph, e.g., "percentage of Mexicans who say...)".
 #' Default: None.
+#' @param y_label Character.  Y-axis label.
 #' @param lang Character.  Changes default subtitle text and source info to either Spanish or English.
 #' Will not translate input text, such as main title or variable labels.  Takes either "en" (English)
 #' or "es" (Spanish).  Default: "en".
@@ -71,10 +72,6 @@ NULL
 #'@author Luke Plutowski, \email{luke.plutowski@@vanderbilt.edu}
 #'
 
-
-
-
-
 lapop_ccm <- function(data,
                       pais = data$pais, outcome_var = data$prop,
                       lower_bound = data$lb, upper_bound = data$ub,
@@ -86,16 +83,17 @@ lapop_ccm <- function(data,
                       source_info = "",
                       subtitle = "",
                       sort = "",
+                      y_label = "",
                       color_scheme = c("#00ADA9", "#512B71"),
                       label_size = 4){
   fill_colors = paste0(color_scheme, "51")
   if (lang == "es"){
-    data$var = ifelse(data$var == unique(data$var)[2],
+    data$var = ifelse(data$var == unique(sort(data$var))[2],
                       paste0(data$var, " <span style='color:#545454; font-size:18pt'> \u0131\u2014\u0131</span> ",
                              "<span style='color:#545454; font-size:13pt'>95% int. de conf. </span>"),
                       data$var)
   } else{
-    data$var = ifelse(data$var == unique(data$var)[2],
+    data$var = ifelse(data$var == sort(unique(data$var))[2],
                       paste0(data$var, " <span style='color:#545454; font-size:18pt'> \u0131\u2014\u0131</span> ",
                              "<span style='color:#545454; font-size:13pt'>95% conf. int. </span>"),
                       data$var)
@@ -125,10 +123,11 @@ lapop_ccm <- function(data,
     scale_color_manual(values = color_scheme) +
     scale_y_continuous(limits = c(ymin, ymax)) +
     labs(title=main_title,
-         y = "",
+         y = y_label,
          x = "",
          caption = paste0(ifelse(lang == "es", "Fuente: ", "Source: "),
-                          source_info)) +
+                          source_info),
+         subtitle = subtitle) +
     theme(text = element_text(size = 14, family = "roboto"),
           plot.title = element_text(size = 18, family = "nunito", face = "bold"),
           plot.caption = element_text(size = 10.5, vjust = 2, hjust = 0.02, family = "roboto-light", color="#545454"),
