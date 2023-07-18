@@ -1,6 +1,11 @@
+# lapop 1.2.6
+
+Update lapop_ccm() to allow 3 bars.  Fixed spacing issue with subtitle.  
+
 # lapop 1.2.5
 
-Update lapop_ccm() with fix for subtitle issue.  Add y-axis label.  
+Update lapop_ccm() with fix for subtitle issue.  Add y-axis label. 
+ 
 # lapop 1.2.4
 
 Add option to remove percentages in ts and mline

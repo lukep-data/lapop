@@ -22,7 +22,7 @@ NULL
 #' variable were altered and stored in a new column).
 #' @param ymin,ymax Numeric.  Minimum and maximum values for y-axis. Default: 0 to 100.
 #' @param sort Character. Method of sorting bars.  Options: "var1" (highest to lowest on variable 1),
-#' "var2" (highest to lowest on variable 2). Default: Order of data frame.
+#' "alpha" (alphabetical along x-axis/pais). Default: Order of data frame.
 #' @param main_title Character.  Title of graph.  Default: None.
 #' @param source_info Character.  Information on dataset used (country, years, version, etc.),
 #' which is added to the end of "Source: " in the bottom-left corner of the graph.
@@ -84,30 +84,27 @@ lapop_ccm <- function(data,
                       subtitle = "",
                       sort = "",
                       y_label = "",
-                      color_scheme = c("#00ADA9", "#512B71"),
+                      color_scheme = c("#00ADA9", "#512B71", "#3CBC70"),
                       label_size = 4){
   fill_colors = paste0(color_scheme, "51")
   if (lang == "es"){
-    data$var = ifelse(data$var == unique(sort(data$var))[2],
+    data$var = ifelse(data$var == unique(sort(data$var))[length(unique(data$var))],
                       paste0(data$var, " <span style='color:#545454; font-size:18pt'> \u0131\u2014\u0131</span> ",
                              "<span style='color:#545454; font-size:13pt'>95% int. de conf. </span>"),
                       data$var)
   } else{
-    data$var = ifelse(data$var == sort(unique(data$var))[2],
+    data$var = ifelse(data$var == sort(unique(data$var))[length(unique(data$var))],
                       paste0(data$var, " <span style='color:#545454; font-size:18pt'> \u0131\u2014\u0131</span> ",
                              "<span style='color:#545454; font-size:13pt'>95% conf. int. </span>"),
                       data$var)
   }
   if(sort == "var1"){
-    data <- data %>%
+    data = data %>%
       group_by(var) %>%
       mutate(rank = rank(-prop)) %>%
       arrange(var, rank)
-  } else if(sort == "var2"){
-    data <- data %>%
-      group_by(var) %>%
-      mutate(rank = rank(-prop)) %>%
-      arrange(desc(var), rank)
+  } else if(sort == "alpha"){
+    data = data[order(data$pais),]
   }
   ggplot(data=data, aes(x=factor(pais, levels = unique(pais)), y=prop, fill = var, color = var)) +
     geom_bar(position = "dodge", stat="identity", width = 0.7) +
@@ -126,8 +123,8 @@ lapop_ccm <- function(data,
          y = y_label,
          x = "",
          caption = paste0(ifelse(lang == "es", "Fuente: ", "Source: "),
-                          source_info),
-         subtitle = subtitle) +
+                          source_info)) +
+    {if(subtitle != "")labs(subtitle = subtitle)}+
     theme(text = element_text(size = 14, family = "roboto"),
           plot.title = element_text(size = 18, family = "nunito", face = "bold"),
           plot.caption = element_text(size = 10.5, vjust = 2, hjust = 0.02, family = "roboto-light", color="#545454"),
@@ -144,4 +141,3 @@ lapop_ccm <- function(data,
           legend.margin = margin(t=0, b=0),
           legend.text = element_markdown(family = "nunito-light"))
 }
-
