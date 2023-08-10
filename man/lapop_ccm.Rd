@@ -20,8 +20,9 @@ lapop_ccm(
   subtitle = "",
   sort = "",
   y_label = "",
-  color_scheme = c("#00ADA9", "#512B71", "#3CBC70"),
-  label_size = 4
+  color_scheme = c("#512B71", "#00ADA9", "#3CBC70"),
+  label_size = 4,
+  text_position = 0.7
 )
 }
 \arguments{
@@ -52,6 +53,7 @@ Default: None (only "Source: " will be printed).}
 Default: None.}
 
 \item{sort}{Character. Method of sorting bars.  Options: "var1" (highest to lowest on variable 1),
+"var2" (highest to lowest on variable 2), "var3" (highest to lowest on variable 3),
 "alpha" (alphabetical along x-axis/pais). Default: Order of data frame.}
 
 \item{y_label}{Character.  Y-axis label.}
@@ -60,6 +62,8 @@ Default: None.}
 Default: "#512B71" (purple).}
 
 \item{label_size}{Numeric.  Size of text for data labels (percentages above bars).  Default: 4.}
+
+\item{text_position}{Numeric.  Amount that text above error bars should be offset (to avoid overlap).  Default: 0.7}
 }
 \value{
 Returns an object of class \code{ggplot}, a ggplot figure showing

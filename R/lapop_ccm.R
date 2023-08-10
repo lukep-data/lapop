@@ -22,6 +22,7 @@ NULL
 #' variable were altered and stored in a new column).
 #' @param ymin,ymax Numeric.  Minimum and maximum values for y-axis. Default: 0 to 100.
 #' @param sort Character. Method of sorting bars.  Options: "var1" (highest to lowest on variable 1),
+#' "var2" (highest to lowest on variable 2), "var3" (highest to lowest on variable 3),
 #' "alpha" (alphabetical along x-axis/pais). Default: Order of data frame.
 #' @param main_title Character.  Title of graph.  Default: None.
 #' @param source_info Character.  Information on dataset used (country, years, version, etc.),
@@ -36,6 +37,7 @@ NULL
 #' @param color_scheme Character.  Color of bars.  Takes hex number, beginning with "#".
 #' Default: "#512B71" (purple).
 #' @param label_size Numeric.  Size of text for data labels (percentages above bars).  Default: 4.
+#' @param text_position Numeric.  Amount that text above error bars should be offset (to avoid overlap).  Default: 0.7
 #'
 #' @return Returns an object of class \code{ggplot}, a ggplot figure showing
 #' average values of some variables across multiple countries.
@@ -84,32 +86,45 @@ lapop_ccm <- function(data,
                       subtitle = "",
                       sort = "",
                       y_label = "",
-                      color_scheme = c("#00ADA9", "#512B71", "#3CBC70"),
-                      label_size = 4){
+                      color_scheme = c("#512B71", "#00ADA9", "#3CBC70"),
+                      label_size = 4,
+                      text_position = 0.7){
   fill_colors = paste0(color_scheme, "51")
   if (lang == "es"){
-    data$var = ifelse(data$var == unique(sort(data$var))[length(unique(data$var))],
+    data$var = ifelse(data$var == unique(data$var)[length(unique(data$var))],
                       paste0(data$var, " <span style='color:#545454; font-size:18pt'> \u0131\u2014\u0131</span> ",
                              "<span style='color:#545454; font-size:13pt'>95% int. de conf. </span>"),
                       data$var)
   } else{
-    data$var = ifelse(data$var == sort(unique(data$var))[length(unique(data$var))],
+    data$var = ifelse(data$var == unique(data$var)[length(unique(data$var))],
                       paste0(data$var, " <span style='color:#545454; font-size:18pt'> \u0131\u2014\u0131</span> ",
                              "<span style='color:#545454; font-size:13pt'>95% conf. int. </span>"),
                       data$var)
+    data$var = factor(data$var, levels = unique(data$var))
   }
   if(sort == "var1"){
     data = data %>%
       group_by(var) %>%
       mutate(rank = rank(-prop)) %>%
       arrange(var, rank)
+    } else if(sort == "var2"){
+    data = data %>%
+      group_by(var) %>%
+      mutate(rank = rank(-prop)) %>%
+      arrange(match(var, unique(var)[2]), rank)
+    } else if(sort == "var3"){
+      data = data %>%
+        group_by(var) %>%
+        mutate(rank = rank(-prop)) %>%
+        arrange(match(var, unique(var)[3]), rank)
   } else if(sort == "alpha"){
     data = data[order(data$pais),]
   }
+  print(data)
   ggplot(data=data, aes(x=factor(pais, levels = unique(pais)), y=prop, fill = var, color = var)) +
     geom_bar(position = "dodge", stat="identity", width = 0.7) +
-    geom_text(aes(label=label_var, y = upper_bound),
-              position = position_dodge(width = 0.9),
+    geom_text(aes(label=label_var, y = upper_bound, group = var),
+              position = position_dodge(width = text_position),
               vjust= -0.5, size = label_size, fontface = "bold",
               show.legend = FALSE) +
     geom_errorbar(aes(ymin=lower_bound, ymax=upper_bound),

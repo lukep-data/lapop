@@ -1,14 +1,21 @@
+# lapop 1.2.7
+
+Changes to lapop_ccm including: 
+* text placed directly above error bars (no offset).  Offset customizable with text_position argument.  
+* fixed automatic alphabetical sorting of bars (now order of dataframe)
+* new sorting options (by var2 and var3 possible)
+
 # lapop 1.2.6
 
-Update lapop_ccm() to allow 3 bars.  Fixed spacing issue with subtitle.  
+* Update lapop_ccm() to allow 3 bars.  Fixed spacing issue with subtitle.  
 
 # lapop 1.2.5
 
-Update lapop_ccm() with fix for subtitle issue.  Add y-axis label. 
+* Update lapop_ccm() with fix for subtitle issue.  Add y-axis label. 
  
 # lapop 1.2.4
 
-Add option to remove percentages in ts and mline
+* Add option to remove percentages in ts and mline
 
 # lapop 1.2.3
 
