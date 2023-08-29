@@ -120,7 +120,6 @@ lapop_ccm <- function(data,
   } else if(sort == "alpha"){
     data = data[order(data$pais),]
   }
-  print(data)
   ggplot(data=data, aes(x=factor(pais, levels = unique(pais)), y=prop, fill = var, color = var)) +
     geom_bar(position = "dodge", stat="identity", width = 0.7) +
     geom_text(aes(label=label_var, y = upper_bound, group = var),
