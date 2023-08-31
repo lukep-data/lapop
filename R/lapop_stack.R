@@ -111,7 +111,7 @@ lapop_stack <- function(data, outcome_var = data$prop, prop_labels = data$propla
                        source_info = "",
                      rev_values = FALSE,
                      rev_variables = FALSE,
-                     hide_small_values = FALSE,
+                     hide_small_values = TRUE,
                      order_bars = FALSE,
                      subtitle_h_just = 0,
                      color_scheme = c("#2D708E", "#1F9689", "#00ADA9", "#21A356", "#568424", "#ACB014")){
