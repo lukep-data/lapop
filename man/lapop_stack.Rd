@@ -19,6 +19,7 @@ lapop_stack(
   hide_small_values = TRUE,
   order_bars = FALSE,
   subtitle_h_just = 0,
+  fixed_aspect_ratio = TRUE,
   color_scheme = c("#2D708E", "#1F9689", "#00ADA9", "#21A356", "#568424", "#ACB014")
 )
 }
@@ -50,13 +51,17 @@ Default: None (only "Source: " will be printed).}
 
 \item{rev_variables}{Logical.  Should the order of the variables be reversed?  Default: FALSE.}
 
-\item{hide_small_values}{Logical.  Should labels for categories with less than 5 percent be hidden?  Default: FALSE.}
+\item{hide_small_values}{Logical.  Should labels for categories with less than 5 percent be hidden?  Default: TRUE.}
 
 \item{order_bars}{Logical.  Should categories be placed in descending order for each bar?  Default: FALSE.
 showing the distributions of multiple categorical variables.}
 
 \item{subtitle_h_just}{Numeric.  Move the subtitle/legend text left (negative numbers) or right (positive numbers).
 Ranges from -100 to 100.  Default: 0.}
+
+\item{fixed_aspect_ratio}{Logical.  Should the aspect ratio be set to a specific value (0.35)?
+This prevents bars from stretching vertically to fit the plot area.  Set to false when you have
+a large number of bars (> 10).  Default: TRUE.}
 
 \item{color_scheme}{Character.  Color of data bars for each value.  Allows up to 6 values.
 Takes hex numbers, beginning with "#".

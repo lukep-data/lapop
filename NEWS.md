@@ -1,3 +1,7 @@
+# lapop 1.2.8 
+
+* add fixed_aspect_ratio = TRUE option to stack()
+
 # lapop 1.2.7
 
 Changes to lapop_ccm including: 

@@ -18,7 +18,7 @@ lapop_sb <- function(data, outcome_var = data$prop, prop_labels = data$proplabel
                         source_info = "",
                         rev_values = FALSE,
                         rev_variables = FALSE,
-                        hide_small_values = FALSE,
+                        hide_small_values = TRUE,
                         order_bars = FALSE,
                         subtitle_h_just = 0,
                         color_scheme = c("#2D708E", "#1F9689", "#00ADA9", "#21A356", "#568424", "#ACB014")){
@@ -68,10 +68,13 @@ NULL
 #' (navy blue, turquoise, teal, green, sap green, pea soup).
 #' @param subtitle_h_just Numeric.  Move the subtitle/legend text left (negative numbers) or right (positive numbers).
 #' Ranges from -100 to 100.  Default: 0.
+#' @param fixed_aspect_ratio Logical.  Should the aspect ratio be set to a specific value (0.35)?
+#' This prevents bars from stretching vertically to fit the plot area.  Set to false when you have
+#' a large number of bars (> 10).  Default: TRUE.
 #' @param rev_variables Logical.  Should the order of the variables be reversed?  Default: FALSE.
 #' @param rev_values Logical.  Should the order of the values for each variable be reversed?  Default: FALSE.
 #' @return Returns an object of class \code{ggplot}, a ggplot stacked bar graph
-#' @param hide_small_values Logical.  Should labels for categories with less than 5 percent be hidden?  Default: FALSE.
+#' @param hide_small_values Logical.  Should labels for categories with less than 5 percent be hidden?  Default: TRUE.
 #' @param order_bars Logical.  Should categories be placed in descending order for each bar?  Default: FALSE.
 #' showing the distributions of multiple categorical variables.
 #' @examples
@@ -114,6 +117,7 @@ lapop_stack <- function(data, outcome_var = data$prop, prop_labels = data$propla
                      hide_small_values = TRUE,
                      order_bars = FALSE,
                      subtitle_h_just = 0,
+                     fixed_aspect_ratio = TRUE,
                      color_scheme = c("#2D708E", "#1F9689", "#00ADA9", "#21A356", "#568424", "#ACB014")){
   if(class(var_labels) != "character" & class(var_labels) != "factor"){
     var_labels = as.character(var_labels)
@@ -200,7 +204,7 @@ lapop_stack <- function(data, outcome_var = data$prop, prop_labels = data$propla
             axis.text.x = element_blank(),
             axis.text.y = element_text(margin=margin(r=0)),
             axis.ticks = element_blank(),
-            aspect.ratio = 0.35,
+            # aspect.ratio = aspect_ratio,
             axis.text = element_text(size = 14, family = "roboto", color = "#545454", margin=margin(r=5)),
             panel.background = element_rect(fill = "white"),
             panel.grid = element_blank(),
@@ -211,7 +215,8 @@ lapop_stack <- function(data, outcome_var = data$prop, prop_labels = data$propla
             legend.title = element_blank(),
             legend.justification='left',
             legend.key.size = unit(1, "line"),
-            legend.margin = margin(t=5,b=5, 0, subtitle_h_just))
+            legend.margin = margin(t=5,b=5, 0, subtitle_h_just)) +
+      {if(fixed_aspect_ratio)theme(aspect.ratio = 0.35)}
   } else{
   ggplot(data, aes(fill = value_labels, y = outcome_var, x = var_labels, label = prop_labels)) +
     geom_bar(position = "stack", stat = "identity", width = 0.6) +
@@ -242,7 +247,7 @@ lapop_stack <- function(data, outcome_var = data$prop, prop_labels = data$propla
           axis.text.x = element_blank(),
           axis.text.y = element_text(margin=margin(r=0)),
           axis.ticks = element_blank(),
-          aspect.ratio = 0.35,
+          # aspect.ratio = aspect_ratio,
           axis.text = element_text(size = 14, family = "roboto", color = "#545454", margin=margin(r=5)),
           panel.background = element_rect(fill = "white"),
           panel.grid = element_blank(),
@@ -253,6 +258,7 @@ lapop_stack <- function(data, outcome_var = data$prop, prop_labels = data$propla
           legend.title = element_blank(),
           legend.justification='left',
           legend.key.size = unit(1, "line"),
-          legend.margin = margin(t=5,b=5, 0, subtitle_h_just))
+          legend.margin = margin(t=5,b=5, 0, subtitle_h_just)) +
+      {if(fixed_aspect_ratio)theme(aspect.ratio = 0.35)}
   }
 }
