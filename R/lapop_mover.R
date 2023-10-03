@@ -105,10 +105,9 @@ NULL
 #'@export
 #'@importFrom ggplot2 ggplot
 #'@importFrom magick image_read
-#'@importFrom ggplotify as.ggplot
+#'@importFrom ggh4x facet_grid2
 #'@importFrom ggtext element_markdown
 #'@import showtext
-#'
 #'
 #'@author Luke Plutowski, \email{luke.plutowski@@vanderbilt.edu}
 #'
@@ -117,17 +116,17 @@ NULL
 
 
 lapop_mover <- function(data,
-                        lang = "en",
-                        main_title = "",
-                        subtitle = "",
-                        source_info = "",
-                        rev_values = FALSE,
-                        rev_variables = FALSE,
-                        subtitle_h_just = 0,
-                        ymin = 0,
-                        ymax = 100,
-                        x_lab_angle = 90,
-                        color_scheme = c("#7030A0", "#00ADA9", "#3CBC70", "#7EA03E", "#568424", "#ACB014")){
+                         lang = "en",
+                         main_title = "",
+                         subtitle = "",
+                         source_info = "",
+                         rev_values = FALSE,
+                         rev_variables = FALSE,
+                         subtitle_h_just = 0,
+                         ymin = 0,
+                         ymax = 100,
+                         x_lab_angle = 90,
+                         color_scheme = c("#7030A0", "#00ADA9", "#3CBC70", "#7EA03E", "#568424", "#ACB014")){
   data$varlabel = factor(data$varlabel, levels = unique(data$varlabel))
   data$vallabel = factor(data$vallabel, levels = unique(data$vallabel))
   mycolors = color_scheme[seq_along(unique(data$varlabel))]
@@ -136,15 +135,22 @@ lapop_mover <- function(data,
                           "<span style='color:#545454; font-size:13pt'>95% intervalo de confianza </span>"),
                    paste0(" <span style='color:#545454; font-size:18pt'> \u0131\u2014\u0131 </span> ",
                           "<span style='color:#545454; font-size:13pt'>95% confidence interval</span>"))
-  p = ggplot(data, aes(x = vallabel, y = prop, color = factor(varlabel), label = proplabel)) +
+  ggplot(data, aes(x = vallabel, y = prop, color = factor(varlabel), label = proplabel)) +
     geom_point(alpha=0.47, key_glyph = "point") +
-    facet_grid(cols = vars(varlabel), scales = "free", space = "free") +
+    facet_grid2(cols = vars(varlabel), scales = "free", space = "free",
+                strip = strip_themed(
+                  text_x = list(element_text(color = mycolors[1]),
+                                element_text(color = mycolors[2]),
+                                element_text(color = mycolors[3]),
+                                element_text(color = mycolors[4]),
+                                element_text(color = mycolors[5]))
+                )) +
     geom_errorbar(aes(ymin=lb, ymax=ub), width = 0.2, show.legend = FALSE) +
     geom_text(aes(y = ub), fontface = "bold", size = 5, vjust = -0.8, show.legend = FALSE) +
     scale_color_manual(values = mycolors,
                        labels = paste0("<span style='color:#545454; font-size:13pt'> ",
                                        subtitle,
-                                       "<span style='color:#FFFFFF00'>--</span>",
+                                       "<span style='color:#FFFFFF00'>-----------</span>",
                                        ci_text),
                        guide = guide_legend(override.aes = list(shape = 16,
                                                                 color = c("black", rep("white", length(unique(data$varlabel)) -1)),
@@ -161,7 +167,7 @@ lapop_mover <- function(data,
     theme(text = element_text(size = 14, family = "roboto"),
           plot.title = element_text(size = 17, family = "nunito", face = "bold"),
           plot.caption = element_text(size = 10.5, hjust = 0.02, vjust = 2, family = "roboto-light", color="#545454"),
-          plot.subtitle = element_text(size = 14, family = "nunito-light", color="#545454"),
+          plot.subtitle = element_text(size = 14, family = "nunito", color="#545454"),
           panel.grid.major.x = element_blank(),
           panel.grid.major.y = element_line(size=.25, color="#D1D3D4"),
           panel.background = element_rect(fill = "white"),
@@ -180,12 +186,4 @@ lapop_mover <- function(data,
           strip.text = element_text(size = 14),
           strip.background = element_blank()
     )
-  #this code chunk will change the colors of the headers of the facets
-  g = ggplot_gtable(ggplot_build(p))
-  strips = which(grepl('strip-', g$layout$name))
-  for (i in seq_along(strips)) {
-    l <- which(grepl('titleGrob', g$grobs[[strips[i]]]$grobs[[1]]$childrenOrder))
-    g$grobs[[strips[i]]]$grobs[[1]]$children[[l]]$children[[1]]$gp$col <- mycolors[i]
-  }
-  as.ggplot(g)
 }

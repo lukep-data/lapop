@@ -51,7 +51,6 @@ NULL
 #'@export
 #'@importFrom ggplot2 ggplot
 #'@importFrom magick image_read
-#'@importFrom ggplotify as.ggplot
 #'@importFrom ggtext element_markdown
 #'@import showtext
 #'

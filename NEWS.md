@@ -1,3 +1,7 @@
+# lapop 1.3.0
+
+* fixing spacing issue in subtitle for lapop_mover() and lapop_ccm()
+
 # lapop 1.2.8 
 
 * add fixed_aspect_ratio = TRUE option to stack()

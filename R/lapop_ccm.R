@@ -67,7 +67,6 @@ NULL
 #'@import ggplot2
 #'@import dplyr
 #'@importFrom magick image_read
-#'@importFrom ggplotify as.ggplot
 #'@importFrom ggtext element_markdown
 #'@import showtext sysfonts
 #'
@@ -92,12 +91,16 @@ lapop_ccm <- function(data,
   fill_colors = paste0(color_scheme, "51")
   if (lang == "es"){
     data$var = ifelse(data$var == unique(data$var)[length(unique(data$var))],
-                      paste0(data$var, " <span style='color:#545454; font-size:18pt'> \u0131\u2014\u0131</span> ",
+                      paste0(data$var,
+                             "<span style='color:#FFFFFF00'>-------</span>",
+                             " <span style='color:#545454; font-size:18pt'> \u0131\u2014\u0131</span> ",
                              "<span style='color:#545454; font-size:13pt'>95% int. de conf. </span>"),
-                      data$var)
+                             data$var)
   } else{
     data$var = ifelse(data$var == unique(data$var)[length(unique(data$var))],
-                      paste0(data$var, " <span style='color:#545454; font-size:18pt'> \u0131\u2014\u0131</span> ",
+                      paste0(data$var,
+                             "<span style='color:#FFFFFF00'>-------</span>",
+                             " <span style='color:#545454; font-size:18pt'> \u0131\u2014\u0131</span> ",
                              "<span style='color:#545454; font-size:13pt'>95% conf. int. </span>"),
                       data$var)
     data$var = factor(data$var, levels = unique(data$var))
