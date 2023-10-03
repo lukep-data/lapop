@@ -103,6 +103,7 @@ NULL
 #'             ymax = 40)
 #'
 #'@export
+#'@import ggh4x
 #'@importFrom ggplot2 ggplot
 #'@importFrom magick image_read
 #'@importFrom ggh4x facet_grid2
