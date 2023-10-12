@@ -1,3 +1,7 @@
+# lapop 1.3.1 
+
+* add x-axis label to ccm()
+
 # lapop 1.3.0
 
 * fixing spacing issue in subtitle for lapop_mover() and lapop_ccm()

@@ -31,6 +31,7 @@ NULL
 #' @param subtitle Character.  Describes the values/data shown in the graph, e.g., "percentage of Mexicans who say...)".
 #' Default: None.
 #' @param y_label Character.  Y-axis label.
+#' @param x_label Character.  X-axis label.
 #' @param lang Character.  Changes default subtitle text and source info to either Spanish or English.
 #' Will not translate input text, such as main title or variable labels.  Takes either "en" (English)
 #' or "es" (Spanish).  Default: "en".
@@ -85,6 +86,7 @@ lapop_ccm <- function(data,
                       subtitle = "",
                       sort = "",
                       y_label = "",
+                      x_label = "",
                       color_scheme = c("#512B71", "#00ADA9", "#3CBC70"),
                       label_size = 4,
                       text_position = 0.7){
@@ -138,7 +140,7 @@ lapop_ccm <- function(data,
     scale_y_continuous(limits = c(ymin, ymax)) +
     labs(title=main_title,
          y = y_label,
-         x = "",
+         x = x_label,
          caption = paste0(ifelse(lang == "es", "Fuente: ", "Source: "),
                           source_info)) +
     {if(subtitle != "")labs(subtitle = subtitle)}+
