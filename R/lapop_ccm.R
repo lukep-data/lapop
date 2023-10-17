@@ -45,8 +45,6 @@ NULL
 #'
 #' @examples
 #'
-#'lapop_fonts()
-#'
 #' df <- data.frame(pais = c(rep("HT", 2), rep("PE", 2), rep("HN", 2), rep("CO", 2),
 #'              rep("UY", 2), rep("CR", 2), rep("EC", 2), rep("CL", 2),
 #'               rep("BR", 2), rep("BO", 2), rep("JA", 2), rep("PN", 2)),
