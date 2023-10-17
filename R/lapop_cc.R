@@ -42,7 +42,7 @@ NULL
 #'
 #' @examples
 #'
-#'lapop_fonts()
+#' # lapop_fonts()
 #'
 #' df <- data.frame(vallabel = c("PE", "CO", "BR", "PN", "GT", "DO", "MX", "BO", "EC",
 #'                           "PY", "CL", "HN", "CR", "SV", "JA", "AR", "UY", "NI"),
