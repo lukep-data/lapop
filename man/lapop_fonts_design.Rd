@@ -6,12 +6,14 @@
 \usage{
 lapop_fonts_design(showtext_end = FALSE)
 }
+\arguments{
+\item{showtext_end}{Logical.  Turn off show text?}
+}
 \value{
 No return value, called for side effects
 }
 \description{
 This function loads fonts needed for LAPOP graph formatting.
-#' @param showtext_end Logical.  Turn off show text?
 }
 \examples{
 \dontrun{lapop_fonts_design()}

@@ -100,7 +100,7 @@ NULL
 #'                               "20%", "14%", "18%", "17%", "25%", "36%"))
 #'
 #'lapop_mline(df,
-#'              main_title = "Intentions to emigrate in Guatemala, Honduras and Mexico reached\n their highest levels in the AmericasBarometer series",
+#'              main_title = "Intentions to emigrate in Guatemala, Honduras and Mexico reached\n their highest levels",
 #'              subtitle = "% who intend to migrate in:",
 #'              source_info = "GM 2004-2021")
 #'
