@@ -26,8 +26,6 @@ Collate:
     'globals.R'
     'lapop-deprecated.R'
     'lapop_fonts.R'
-    'lapop_cc.R'
-    'lapop_ccm.R'
     'lapop_coef.R'
     'lapop_dumb.R'
     'lapop_hist.R'
