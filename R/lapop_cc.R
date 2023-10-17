@@ -4,7 +4,8 @@
 
 #######################################
 
-
+#' @include lapop_fonts.R
+#NULL
 
 #' LAPOP Cross-Country Bar Graphs
 #'
@@ -40,7 +41,6 @@
 #' average values of some variables across multiple countries.
 #'
 #' @examples
-#'
 #' df <- data.frame(vallabel = c("PE", "CO", "BR", "PN", "GT", "DO", "MX", "BO", "EC",
 #'                           "PY", "CL", "HN", "CR", "SV", "JA", "AR", "UY", "NI"),
 #'                  prop = c(36.1, 19.3, 16.6, 13.3, 13, 11.1, 9.5, 9, 8.1, 8, 6.6,
@@ -51,7 +51,7 @@
 #'                  lb = c(34.9, 18.1, 15.4, 12.1, 11.8, 9.9, 8.3, 7.8, 6.9, 6.8,
 #'                         5.4, 4.5, 3.9, 2.2, 1.4, 0.7, -0.4, -1),
 #'                  ub = c(37.3, 20.5, 17.8, 14.5, 14.2, 12.3, 10.7, 10.2, 9.3,
-#'                         9.2, 7.8, 6.9, 6.3, 4.6, 3.8, 3.1, 2, 1.4))
+#'                         9.2, 7.8, 6.95, 6.3, 4.6, 3.8, 3.1, 2, 1.4))
 #'
 #' lapop_cc(df,
 #'          main_title = "Normalization of Initimate Partner Violence in Seven LAC Countries",
