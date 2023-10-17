@@ -25,6 +25,7 @@ lapop_fonts <- function(){
   sysfonts::font_add_google("roboto", "roboto")
   sysfonts::font_add_google("roboto", family = "roboto-light", regular.wt = 300)
   sysfonts::font_add_google("nunito", family = "nunito-light", regular.wt = 300)
+  showtext::showtext_auto()
 }
 
 
