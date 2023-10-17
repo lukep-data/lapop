@@ -102,10 +102,8 @@ NULL
 #'          source_info = "GM 2018/19-2021")
 #'
 #' @export
-#'@importFrom ggplot2 ggplot
-#'@importFrom magick image_read
+#'@import ggplot2
 #'@importFrom ggtext element_markdown
-#'@import showtext
 #'
 #'@author Luke Plutowski, \email{luke.plutowski@@vanderbilt.edu}
 #'
@@ -141,6 +139,7 @@ lapop_dumb <- function(data,
   data$max1 = data$prop2 < data$prop1
   data$max1[is.na(data$max1)] <- FALSE
   names(color_scheme) = c(unique(data$wave1), unique(data$wave2))
+  update_geom_defaults("text", list(family = "Nunito"))
     ggplot(data, aes(y=pais)) +
       geom_point(aes(x = prop1, color = names(color_scheme)[1]), size=4) +
       geom_point(aes(x = prop2, color = names(color_scheme)[2]), size=4) +
