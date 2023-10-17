@@ -145,6 +145,8 @@ lapop_mline <- function(data, varlabel = data$varlabel, wave_var = as.character(
   textcolors = rep(mycolors, each = length(unique(wave_var)))
   # create variable with label for final data points in series
   end_labels = ifelse(wave_var == max(wave_var), label_var, NA)
+  update_geom_defaults("text", list(family = "nunito"))
+  update_geom_defaults("text_repel", list(family = "nunito"))
   ggplot(data, aes(x = wave_var, y = outcome_var, group = varlabel)) +
     geom_line(aes(color = varlabel), size = 1, alpha=0.48, show.legend = FALSE) +
     geom_point(aes(y = point_var, color = varlabel), size = 3.5, alpha=0.48, key_glyph = draw_key_blank) +

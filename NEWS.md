@@ -1,3 +1,8 @@
+# lapop 1.3.2.1
+
+* add lapop_font_design()
+* specify default font as nunito in all graphs
+
 # lapop 1.3.1 
 
 * add x-axis label to ccm()

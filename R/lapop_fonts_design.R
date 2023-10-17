@@ -9,7 +9,8 @@
 #'
 #' This function loads fonts needed for LAPOP graph formatting.
 #'
-#' @param showtext_end Logical.  Turn off show text?
+#' @param showtext_end Logical.  If you were previously using lapop_fonts, turn to TRUE so
+#' it stops using the glyph rendering of fonts and starts using text.
 #'
 #'@import sysfonts
 #'@import systemfonts
@@ -27,21 +28,14 @@ lapop_fonts_design <- function(showtext_end = FALSE){
   if(showtext_end == TRUE){
     showtext_end()
   }
-  sysfonts::font_add_google("nunito", "nunito")
-  sysfonts::font_add_google("roboto", "roboto")
-  sysfonts::font_add_google("roboto", family = "roboto-light", regular.wt = 300)
-  sysfonts::font_add_google("nunito", family = "nunito-light", regular.wt = 300)
-  register_variant(
+  systemfonts::register_variant(
     name = "roboto-light",
     family = "roboto",
     weight = "light"
   )
-  register_variant(
+  systemfonts::register_variant(
     name = "nunito-light",
     family = "nunito",
     weight = "light"
   )
 }
-
-
-

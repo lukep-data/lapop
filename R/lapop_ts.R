@@ -100,6 +100,7 @@ lapop_ts <- function(data, outcome_var = data$prop, lower_bound = data$lb,
                           "<span style='color:#545454; font-size:13pt'>95% confidence </span>",
                           "<span style='color:#545454'>interval</span>"))
   #and turn to creating the graph
+  update_geom_defaults("text", list(family = "nunito"))
   ggplot(data=data, aes(x=wave_var, y=outcome_var)) +
     geom_line(aes(group = 1), color=color_scheme, size = 1, alpha=0.48) +
     geom_line(aes(group = 1, y =lower_bound), color=color_scheme, size = 1, alpha=0.48, lty="dashed") +

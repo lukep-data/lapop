@@ -7,7 +7,8 @@
 lapop_fonts_design(showtext_end = FALSE)
 }
 \arguments{
-\item{showtext_end}{Logical.  Turn off show text?}
+\item{showtext_end}{Logical.  If you were previously using lapop_fonts, turn to TRUE so
+it stops using the glyph rendering of fonts and starts using text.}
 }
 \value{
 No return value, called for side effects
