@@ -77,11 +77,13 @@ This function creates bar graphs for comparing values across countries using LAP
 }
 \examples{
 
+lapop_fonts()
+
 df <- data.frame(pais = c(rep("HT", 2), rep("PE", 2), rep("HN", 2), rep("CO", 2),
              rep("UY", 2), rep("CR", 2), rep("EC", 2), rep("CL", 2),
               rep("BR", 2), rep("BO", 2), rep("JA", 2), rep("PN", 2)),
               var = rep(c("COUNTFAIR1", "COUNTFAIR2"), 3),
-              prop = c(30.1, 38, 40, 49, 57, 33, 80, 54, 30, 43, 61, 42,
+              prop = c(30, 38, 40, 49, 57, 33, 80, 54, 30, 43, 61, 42,
                        38, 54, 74, 61, 50, 34, 48, 34, 72, 41, 58, 57),
               proplabel = c("30\%", "38\%", "40\%", "49\%", "57\%", "33\%",
                             "80\%", "54\%", "30\%", "43\%", "61\%", "42\%",
