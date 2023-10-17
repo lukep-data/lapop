@@ -14,7 +14,7 @@ This function loads fonts needed for LAPOP graph formatting.
 #' @param showtext_end Logical.  Turn off show text?
 }
 \examples{
-lapop_fonts_design()
+\dontrun{lapop_fonts_design()}
 
 }
 \author{
