@@ -5,7 +5,7 @@
 #######################################
 
 #' @include lapop_fonts.R
-#NULL
+NULL
 
 #' LAPOP Cross-Country Bar Graphs
 #'
