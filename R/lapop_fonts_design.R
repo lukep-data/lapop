@@ -31,7 +31,6 @@ lapop_fonts_design <- function(showtext_end = FALSE){
   sysfonts::font_add_google("roboto", "roboto")
   sysfonts::font_add_google("roboto", family = "roboto-light", regular.wt = 300)
   sysfonts::font_add_google("nunito", family = "nunito-light", regular.wt = 300)
-
   register_variant(
     name = "roboto-light",
     family = "roboto",
@@ -39,7 +38,7 @@ lapop_fonts_design <- function(showtext_end = FALSE){
   )
   register_variant(
     name = "nunito-light",
-    family = "Nunito",
+    family = "nunito",
     weight = "light"
   )
 }

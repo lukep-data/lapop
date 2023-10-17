@@ -139,7 +139,7 @@ lapop_dumb <- function(data,
   data$max1 = data$prop2 < data$prop1
   data$max1[is.na(data$max1)] <- FALSE
   names(color_scheme) = c(unique(data$wave1), unique(data$wave2))
-  update_geom_defaults("text", list(family = "Nunito"))
+  update_geom_defaults("text", list(family = "nunito"))
     ggplot(data, aes(y=pais)) +
       geom_point(aes(x = prop1, color = names(color_scheme)[1]), size=4) +
       geom_point(aes(x = prop2, color = names(color_scheme)[2]), size=4) +
