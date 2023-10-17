@@ -42,6 +42,8 @@ NULL
 #'
 #' @examples
 #'
+#' # lapop_fonts()
+#'
 #' df <- data.frame(vallabel = c("PE", "CO", "BR", "PN", "GT", "DO", "MX", "BO", "EC",
 #'                           "PY", "CL", "HN", "CR", "SV", "JA", "AR", "UY", "NI"),
 #'                  prop = c(36.1, 19.3, 16.6, 13.3, 13, 11.1, 9.5, 9, 8.1, 8, 6.6,
