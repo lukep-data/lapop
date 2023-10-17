@@ -134,7 +134,6 @@ lapop_stack <- function(data, outcome_var = data$prop, prop_labels = data$propla
   }
   positions = rev(unique(var_labels))
   update_geom_defaults("text", list(family = "nunito"))
-  update_geom_defaults("text_repel", list(family = "nunito"))
   if(order_bars == TRUE){
     var_labels = factor(var_labels, levels = unique(var_labels))
     data = data.frame(var_labels, value_labels, outcome_var, prop_labels)
@@ -163,28 +162,28 @@ lapop_stack <- function(data, outcome_var = data$prop, prop_labels = data$propla
                                aes(label = ifelse(outcome_var < 5 & hide_small_values == FALSE, prop_labels, NA)),
                                position = position_stack(vjust = 0.5),
                                color = "#FFFFFF", segment.color = 'transparent',
-                               fontface = "bold", size = 4,
+                               fontface = "bold", size = 4, family = "nunito",
                                direction = "y",
                                force_pull = 0.2, force = 5) +
       ggrepel::geom_text_repel(data = data[data$var_labels == levels(data$var_labels)[2], ],
                                aes(label = ifelse(outcome_var < 5 & hide_small_values == FALSE, prop_labels, NA)),
                                position = position_stack(vjust = 0.5),
                                color = "#FFFFFF", segment.color = 'transparent',
-                               fontface = "bold", size = 4,
+                               fontface = "bold", size = 4, family = "nunito",
                                direction = "y",
                                force_pull = 0.2, force = 5) +
       ggrepel::geom_text_repel(data = data[data$var_labels == levels(data$var_labels)[3], ],
                                aes(label = ifelse(outcome_var < 5 & hide_small_values == FALSE, prop_labels, NA)),
                                position = position_stack(vjust = 0.5),
                                color = "#FFFFFF", segment.color = 'transparent',
-                               fontface = "bold", size = 4,
+                               fontface = "bold", size = 4, family = "nunito",
                                direction = "y",
                                force_pull = 0.2, force = 5) +
       ggrepel::geom_text_repel(data = data[data$var_labels == levels(data$var_labels)[4], ],
                                aes(label = ifelse(outcome_var < 5 & hide_small_values == FALSE, prop_labels, NA)),
                                position = position_stack(vjust = 0.5),
                                color = "#FFFFFF", segment.color = 'transparent',
-                               fontface = "bold", size = 4,
+                               fontface = "bold", size = 4, family = "nunito",
                                direction = "y",
                                force_pull = 0.2, force = 5) +
       coord_flip() +
@@ -227,7 +226,7 @@ lapop_stack <- function(data, outcome_var = data$prop, prop_labels = data$propla
     ggrepel::geom_text_repel(label = ifelse(outcome_var < 5 & hide_small_values == FALSE, prop_labels, NA),
                              position = position_stack(vjust = 0.5),
                              color = "#FFFFFF", segment.color = 'transparent',
-                             fontface = "bold", size = 4,
+                             fontface = "bold", size = 4, family = "nunito",
                              direction = "y",
                              force_pull = 0.2, force = 5) +
     coord_flip() +
