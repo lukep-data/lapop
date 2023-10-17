@@ -1,3 +1,7 @@
+# lapop 1.3.2 
+
+* make text editable when using lapop_save()
+
 # lapop 1.3.1 
 
 * add x-axis label to ccm()
