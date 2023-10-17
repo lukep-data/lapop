@@ -60,7 +60,7 @@ NULL
 #'            ymax = 0.2)
 #'
 #'@export
-#'@import ggplot2
+#'@importFrom ggplot2 ggplot
 #'@importFrom ggtext element_markdown
 #'@import showtext
 #'
