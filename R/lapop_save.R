@@ -33,7 +33,7 @@
 #' f <- file.path(tempdir(), "fig1.svg")
 #' lapop_save(myfigure, f, format = "svg", width_px = 800)
 #'
-#'@import grDevices svglite
+#'@import grDevices
 #'@export
 #'
 
