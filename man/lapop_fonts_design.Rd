@@ -11,7 +11,7 @@ No return value, called for side effects
 }
 \description{
 This function loads fonts needed for LAPOP graph formatting.
-No arguments needed; just run lapop_fonts_design() at the beginning of your session.
+#' @param showtext_end Logical.  Turn off show text?
 }
 \examples{
 lapop_fonts_design()
