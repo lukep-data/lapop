@@ -4,8 +4,7 @@
 
 #######################################
 
-#' @include lapop_fonts.R
-NULL
+
 
 #' LAPOP Cross-Country Bar Graphs
 #'
@@ -57,15 +56,14 @@ NULL
 #' lapop_cc(df,
 #'          main_title = "Normalization of Initimate Partner Violence in Seven LAC Countries",
 #'          subtitle = "% who say domestic violence is private matter",
-#'          source_info = ", 2021",
+#'          source_info = "2021",
 #'          highlight = "BR",
 #'          ymax = 50)
 #'
 #'@export
 #'@import ggplot2
-#'@importFrom magick image_read
 #'@importFrom ggtext element_markdown
-#'@import showtext sysfonts
+#'@import showtext
 #'
 #'@author Luke Plutowski, \email{luke.plutowski@@vanderbilt.edu}
 #'
