@@ -49,7 +49,7 @@ NULL
 #'              rep("UY", 2), rep("CR", 2), rep("EC", 2), rep("CL", 2),
 #'               rep("BR", 2), rep("BO", 2), rep("JA", 2), rep("PN", 2)),
 #'               var = rep(c("COUNTFAIR1", "COUNTFAIR2"), 3),
-#'               prop = c(30.1, 38, 40, 49, 57, 33, 80, 54, 30, 43, 61, 42,
+#'               prop = c(30, 38, 40, 49, 57, 33, 80, 54, 30, 43, 61, 42,
 #'                        38, 54, 74, 61, 50, 34, 48, 34, 72, 41, 58, 57),
 #'               proplabel = c("30%", "38%", "40%", "49%", "57%", "33%",
 #'                             "80%", "54%", "30%", "43%", "61%", "42%",
@@ -65,8 +65,9 @@ NULL
 #'@export
 #'@import ggplot2
 #'@import dplyr
+#'@importFrom magick image_read
 #'@importFrom ggtext element_markdown
-#'@import showtext
+#'@import showtext sysfonts
 #'
 #'@author Luke Plutowski, \email{luke.plutowski@@vanderbilt.edu}
 #'
