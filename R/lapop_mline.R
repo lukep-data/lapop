@@ -192,6 +192,6 @@ lapop_mline <- function(data, varlabel = data$varlabel, wave_var = as.character(
           legend.justification='right',
           legend.margin = margin(t=legend_v_just,b=0, legend_h_just, 0),
           legend.spacing.x = unit(0.2, 'cm'),
-          legend.text=element_markdown(family = "nunito-light", face = "bold"))
+          legend.text=element_markdown(family = "nunito", face = "bold"))
 }
 

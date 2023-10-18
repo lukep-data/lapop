@@ -1,3 +1,8 @@
+# lapop 1.3.2.2
+
+* remove showtext from lapop_font_design()
+* change font in mline()
+
 # lapop 1.3.2.1
 
 * add lapop_font_design()

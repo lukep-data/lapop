@@ -4,17 +4,14 @@
 \alias{lapop_fonts_design}
 \title{LAPOP Fonts (design)}
 \usage{
-lapop_fonts_design(showtext_end = FALSE)
-}
-\arguments{
-\item{showtext_end}{Logical.  If you were previously using lapop_fonts, turn to TRUE so
-it stops using the glyph rendering of fonts and starts using text.}
+lapop_fonts_design()
 }
 \value{
 No return value, called for side effects
 }
 \description{
-This function loads fonts needed for LAPOP graph formatting.
+This function loads fonts needed for LAPOP graph formatting.  In contrast to lapop_fonts(),
+this renders text as text instead of polygons, which allows post-hoc editing.
 }
 \examples{
 \dontrun{lapop_fonts_design()}

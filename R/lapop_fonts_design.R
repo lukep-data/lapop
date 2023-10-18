@@ -7,10 +7,8 @@
 
 #' LAPOP Fonts (design)
 #'
-#' This function loads fonts needed for LAPOP graph formatting.
-#'
-#' @param showtext_end Logical.  If you were previously using lapop_fonts, turn to TRUE so
-#' it stops using the glyph rendering of fonts and starts using text.
+#' This function loads fonts needed for LAPOP graph formatting.  In contrast to lapop_fonts(),
+#' this renders text as text instead of polygons, which allows post-hoc editing.
 #'
 #'@import sysfonts
 #'@import systemfonts
@@ -24,10 +22,8 @@
 #'
 
 
-lapop_fonts_design <- function(showtext_end = FALSE){
-  if(showtext_end == TRUE){
-    showtext_end()
-  }
+lapop_fonts_design <- function(){
+  showtext::showtext_auto(enable = FALSE)
   systemfonts::register_variant(
     name = "roboto-light",
     family = "roboto",
