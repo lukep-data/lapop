@@ -104,8 +104,7 @@ NULL
 #'
 #'@export
 #'@import ggh4x
-#'@importFrom ggplot2 ggplot
-#'@importFrom magick image_read
+#'@import ggplot2
 #'@importFrom ggh4x facet_grid2
 #'@importFrom ggtext element_markdown
 #'@import showtext

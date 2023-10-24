@@ -65,9 +65,9 @@ NULL
 #'
 #'@export
 #'@import ggplot2
-#'@importFrom magick image_read
-#'@importFrom ggtext element_markdown
-#'@import showtext sysfonts
+#'@import ggtext
+#'@import sysfonts
+#'@import showtext
 #'
 #'@author Luke Plutowski, \email{luke.plutowski@@vanderbilt.edu}
 #'
@@ -119,7 +119,8 @@ lapop_cc <- function(data, outcome_var = data$prop, lower_bound = data$lb, valla
   update_geom_defaults("text", list(family = "nunito"))
   ggplot(data=data, aes(x=factor(vallabel, levels = vallabel), y=prop, fill = hl_var)) +
     geom_bar(stat="identity", color = color_scheme, width = 0.6) +
-    geom_text(aes(label=label_var, y = upper_bound), vjust= -0.5, size=label_size, fontface = "bold", color = color_scheme) +
+    geom_text(aes(label=label_var, y = upper_bound), vjust= -0.5,
+              size=label_size, fontface = "bold", color = color_scheme) +
     geom_errorbar(aes(ymin=lower_bound, ymax=upper_bound), width = 0.15, color = color_scheme, linetype = "solid") +
     scale_fill_manual(breaks = "other",
                       values = fill_values,

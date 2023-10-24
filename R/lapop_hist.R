@@ -49,10 +49,8 @@ NULL
 #'
 #'
 #'@export
-#'@importFrom ggplot2 ggplot
-#'@importFrom magick image_read
-#'@importFrom ggtext element_markdown
-#'@import showtext
+#'@import ggplot2
+#'@import ggtext
 #'
 #'@author Luke Plutowski, \email{luke.plutowski@@vanderbilt.edu}
 #'

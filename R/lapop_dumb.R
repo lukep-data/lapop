@@ -103,7 +103,7 @@ NULL
 #'
 #' @export
 #'@import ggplot2
-#'@importFrom ggtext element_markdown
+#'@import ggtext
 #'
 #'@author Luke Plutowski, \email{luke.plutowski@@vanderbilt.edu}
 #'
@@ -139,7 +139,7 @@ lapop_dumb <- function(data,
   data$max1 = data$prop2 < data$prop1
   data$max1[is.na(data$max1)] <- FALSE
   names(color_scheme) = c(unique(data$wave1), unique(data$wave2))
-  update_geom_defaults("text", list(family = "nunito"))
+  update_geom_defaults("text", list(family = "roboto"))
     ggplot(data, aes(y=pais)) +
       geom_point(aes(x = prop1, color = names(color_scheme)[1]), size=4) +
       geom_point(aes(x = prop2, color = names(color_scheme)[2]), size=4) +
@@ -172,7 +172,7 @@ lapop_dumb <- function(data,
             axis.title.y = element_blank(),
             axis.ticks = element_blank(),
             axis.text = element_text(size = 12, family = "roboto", color = "#545454", margin=margin(r=5)),
-            panel.grid.major.y = element_line(color = "#D1D3D480"),
+            panel.grid.major.y = element_line(color = "#585860"),
             panel.background = element_rect(fill = "white"),
             legend.position="top",
             plot.title.position = "plot",

@@ -96,8 +96,8 @@ NULL
 #'          source_info = "2019")
 #'
 #'@export
-#'@importFrom ggplot2 ggplot
-#'@importFrom ggtext element_markdown
+#'@import ggplot2
+#'@import ggtext
 #'@import showtext
 #'
 #'@author Luke Plutowski, \email{luke.plutowski@@vanderbilt.edu}

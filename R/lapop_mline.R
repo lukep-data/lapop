@@ -83,7 +83,7 @@ NULL
 #' Default: c("#7030A0", "#3CBC70", "#1F968B", "#95D840").
 #' @param percentages Logical.  Is the outcome variable a percentage?  Set to FALSE if you are using
 #' means of the raw values, so that the y-axis adjusts accordingly. Default: TRUE.
-#'
+#' @param all_labels Logical.  If TRUE, show text above all points, instead of only those in the most recent wave. Default: FALSE.
 #'@examples
 #'df <- data.frame(varlabel = c(rep("Honduras", 9), rep("El Salvador", 9),
 #'                              rep("Mexico", 9), rep("Guatemala", 9)),
@@ -105,49 +105,58 @@ NULL
 #'              source_info = "GM 2004-2021")
 #'
 #'@export
-#'@importFrom ggplot2 ggplot
+#'@import ggplot2
 #'@importFrom ggtext element_markdown
 #'@importFrom ggrepel geom_text_repel
 #'@importFrom zoo na.approx
 #'@import showtext
+#'@import dplyr
 #'
 #'@author Luke Plutowski, \email{luke.plutowski@@vanderbilt.edu}
 #'
 
 
 lapop_mline <- function(data, varlabel = data$varlabel, wave_var = as.character(data$wave),
-                          outcome_var = data$prop, label_var = data$proplabel,
-                          point_var = data$prop,
-                          ymin = 0,
-                          ymax = 100,
-                          main_title = "",
-                          source_info = "",
-                          subtitle = "",
-                          lang = "en",
-                          legend_h_just = 40,
-                          legend_v_just = -20,
-                          subtitle_h_just = 0,
-                          color_scheme = c("#7030A0", "#3CBC70", "#1F968B", "#95D840"),
-                          percentages = TRUE){
+                        outcome_var = data$prop, label_var = data$proplabel,
+                        point_var = data$prop,
+                        ymin = 0,
+                        ymax = 100,
+                        main_title = "",
+                        source_info = "",
+                        subtitle = "",
+                        lang = "en",
+                        legend_h_just = 40,
+                        legend_v_just = -20,
+                        subtitle_h_just = 0,
+                        color_scheme = c("#7030A0", "#3CBC70", "#1F968B", "#95D840"),
+                        percentages = TRUE,
+                        all_labels = TRUE){
   if(class(varlabel) != "character" & class(varlabel) != "factor"){
     varlabel = as.character(varlabel)
     data$varlabels = as.character(data$varlabel)
   }
   #interpolate data for missing waves are still plotted on the x-axis (without data)
   if(sum(is.na(outcome_var)) > 0) {
-    # outcome_var = zoo::na.approx(outcome_var)
-    outcome_var = ifelse(is.na(outcome_var) & wave_var != max(wave_var) & wave_var != min(wave_var), zoo::na.approx(outcome_var), outcome_var)
+    outcome_var = data %>%
+      group_by(varlabel) %>%
+      mutate(first = which(prop == dplyr::first(na.omit(prop))),
+             prop = ifelse(is.na(prop) & wave != max(wave) & wave != min(wave) & seq_along(wave) >= first,
+                           zoo::na.approx(prop), prop)) %>%
+      ungroup() %>%
+      pull(prop)
   }
   varlabel = factor(varlabel, levels = unique(varlabel))
-  #limit colors to number of variables in varlabels (e.g. countries)
   mycolors = color_scheme[seq_along(unique(varlabel))]
-  #specify color of text labels based on number of variables in varlabels and their order (alphabetical)
   textcolors = rep(mycolors, each = length(unique(wave_var)))
-  # create variable with label for final data points in series
-  end_labels = ifelse(wave_var == max(wave_var), label_var, NA)
+  end_labels = data %>%
+    group_by(varlabel) %>%
+    mutate(last = which(prop == dplyr::last(na.omit(prop))),
+           end_labels = ifelse(seq_along(wave) == last, proplabel, NA)) %>%
+    ungroup() %>%
+    pull(end_labels)
   update_geom_defaults("text", list(family = "nunito"))
   ggplot(data, aes(x = wave_var, y = outcome_var, group = varlabel)) +
-    geom_line(aes(color = varlabel), size = 1, alpha=0.48, show.legend = FALSE) +
+    geom_line(aes(color = varlabel), linewidth = 1, alpha=0.48, show.legend = FALSE) +
     geom_point(aes(y = point_var, color = varlabel), size = 3.5, alpha=0.48, key_glyph = draw_key_blank) +
     scale_color_manual(breaks = levels(varlabel),
                        labels = paste("<span style='color:",
@@ -156,8 +165,16 @@ lapop_mline <- function(data, varlabel = data$varlabel, wave_var = as.character(
                                       levels(varlabel),
                                       "</span>"),
                        values = mycolors) +
-    ggrepel::geom_text_repel(aes(label = end_labels, fontface= "bold"), color = textcolors, family = "nunito",
-              size = 4.5, nudge_x = 1, direction = "y") +
+    {if(all_labels){
+      geom_text(aes(label=label_var, color = varlabel),
+                family = "nunito", fontface = "bold", size = 5, vjust = -2,
+                show.legend = FALSE)
+    }
+      else{
+        ggrepel::geom_text_repel(aes(label = end_labels, fontface= "bold"), color = textcolors, family = "nunito",
+                                 size = 4.5, nudge_x = 1, direction = "y")
+      }
+    } +
     {
       if (percentages) {
         scale_y_continuous(limits=c(ymin, ymax),
@@ -194,4 +211,5 @@ lapop_mline <- function(data, varlabel = data$varlabel, wave_var = as.character(
           legend.spacing.x = unit(0.2, 'cm'),
           legend.text=element_markdown(family = "nunito", face = "bold"))
 }
+
 

@@ -67,9 +67,9 @@ NULL
 #'@export
 #'@import ggplot2
 #'@import dplyr
-#'@importFrom magick image_read
-#'@importFrom ggtext element_markdown
-#'@import showtext sysfonts
+#'@import ggtext
+#'@import sysfonts
+#'@import showtext
 #'
 #'@author Luke Plutowski, \email{luke.plutowski@@vanderbilt.edu}
 #'

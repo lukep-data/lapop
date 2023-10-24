@@ -1,3 +1,9 @@
+# lapop 1.3.2.3
+
+* remove unused dependencies
+* add all_labels argument to mline
+* fix issues with lines in mline
+
 # lapop 1.3.2.2
 
 * remove showtext from lapop_font_design()
