@@ -22,7 +22,7 @@ lapop_mline(
   subtitle_h_just = 0,
   color_scheme = c("#7030A0", "#3CBC70", "#1F968B", "#95D840"),
   percentages = TRUE,
-  all_labels = TRUE
+  all_labels = FALSE
 )
 }
 \arguments{
