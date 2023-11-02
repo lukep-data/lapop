@@ -154,7 +154,7 @@ lapop_mline <- function(data, varlabel = data$varlabel, wave_var = as.character(
            end_labels = ifelse(seq_along(wave) == last, proplabel, NA)) %>%
     ungroup() %>%
     pull(end_labels)
-  update_geom_defaults("text", list(family = "nunito"))
+  update_geom_defaults("text", list(family = "roboto"))
   ggplot(data, aes(x = wave_var, y = outcome_var, group = varlabel)) +
     geom_line(aes(color = varlabel), linewidth = 1, alpha=0.48, show.legend = FALSE) +
     geom_point(aes(y = point_var, color = varlabel), size = 3.5, alpha=0.48, key_glyph = draw_key_blank) +

@@ -1,3 +1,7 @@
+# lapop 1.3.2.4
+
+* change default text to roboto
+
 # lapop 1.3.2.3
 
 * remove unused dependencies

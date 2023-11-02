@@ -133,7 +133,7 @@ lapop_stack <- function(data, outcome_var = data$prop, prop_labels = data$propla
     value_labels = factor(value_labels, levels = rev(unique(value_labels)))
   }
   positions = rev(unique(var_labels))
-  update_geom_defaults("text", list(family = "nunito"))
+  update_geom_defaults("text", list(family = "roboto"))
   if(order_bars == TRUE){
     var_labels = factor(var_labels, levels = unique(var_labels))
     data = data.frame(var_labels, value_labels, outcome_var, prop_labels)

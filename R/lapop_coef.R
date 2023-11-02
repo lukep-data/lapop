@@ -87,7 +87,7 @@ lapop_coef <- function(data, coef_var = data$coef, label_var = data$proplabel,
                    paste0(" <span style='color:", color_scheme, "; font-size:18pt'> \u0131\u2014\u0131</span> ",
                           "<span style='color:#545454; font-size:13pt'>95% confidence </span>",
                           "<span style='color:#545454'>interval</span>"))
-  update_geom_defaults("text", list(family = "nunito"))
+  update_geom_defaults("text", list(family = "roboto"))
   ggplot(data, aes(x = varlabel_var, y = coef_var)) +
     geom_hline(yintercept = 0, color = "#D1D3D4", lty = 2) +
     geom_errorbar(aes(x=varlabel_var, ymin = lb, ymax = ub), width = 0.3, lty = 1, color = color_scheme) +

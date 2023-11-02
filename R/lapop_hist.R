@@ -71,7 +71,7 @@ lapop_hist <- function(data, outcome_var = data$prop, label_var = data$proplabel
     label_var = label_var[order(-outcome_var)]
     outcome_var = outcome_var[order(-outcome_var)]
   }
-  update_geom_defaults("text", list(family = "nunito"))
+  update_geom_defaults("text", list(family = "roboto"))
   ggplot(data, aes(x=factor(cat_var, levels = cat_var), y = outcome_var)) +
     geom_bar(stat = "identity", color = color_scheme, fill = paste0(color_scheme, "28"), width = 0.75) +
     geom_text(aes(label=label_var), vjust=-0.5, size = 5, fontface = "bold", color = color_scheme) +

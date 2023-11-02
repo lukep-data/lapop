@@ -99,7 +99,7 @@ lapop_ts <- function(data, outcome_var = data$prop, lower_bound = data$lb,
                           "<span style='color:#545454; font-size:13pt'>95% confidence </span>",
                           "<span style='color:#545454'>interval</span>"))
   #and turn to creating the graph
-  update_geom_defaults("text", list(family = "nunito"))
+  update_geom_defaults("text", list(family = "roboto"))
   ggplot(data=data, aes(x=wave_var, y=outcome_var)) +
     geom_line(aes(group = 1), color=color_scheme, size = 1, alpha=0.48) +
     geom_line(aes(group = 1, y =lower_bound), color=color_scheme, linewidth = 1, alpha=0.48, lty="dashed") +
@@ -111,7 +111,7 @@ lapop_ts <- function(data, outcome_var = data$prop, lower_bound = data$lb,
                                        "<span style='color:#FFFFFF00'>-----------</span>",
                                        ci_text)) +
 
-    geom_text(aes(label=label_var), family = "nunito", color=color_scheme, fontface = "bold", size = 5, vjust = -2.1) +
+    geom_text(aes(label=label_var), family = "roboto", color=color_scheme, fontface = "bold", size = 5, vjust = -2.1) +
     scale_x_discrete(limits = wave_var) +
     {
       if (percentages) {
