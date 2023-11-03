@@ -167,11 +167,11 @@ lapop_mline <- function(data, varlabel = data$varlabel, wave_var = as.character(
                        values = mycolors) +
     {if(all_labels){
       geom_text(aes(label=label_var, color = varlabel),
-                family = "nunito", fontface = "bold", size = 5, vjust = -2,
+                family = "roboto", fontface = "bold", size = 5, vjust = -2,
                 show.legend = FALSE)
     }
       else{
-        ggrepel::geom_text_repel(aes(label = end_labels, fontface= "bold"), color = textcolors, family = "nunito",
+        ggrepel::geom_text_repel(aes(label = end_labels, fontface= "bold"), color = textcolors, family = "roboto",
                                  size = 4.5, nudge_x = 1, direction = "y")
       }
     } +
