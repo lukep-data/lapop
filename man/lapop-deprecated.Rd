@@ -40,7 +40,7 @@ lapop_tsmulti(
   legend_h_just = 40,
   legend_v_just = -20,
   subtitle_h_just = 0,
-  color_scheme = c("#7030A0", "#3CBC70", "#1F968B", "#95D840")
+  color_scheme = c("#7030A0", "#3CBC70", "#1F968B", "#95D840", "")
 )
 
 lapop_demog(

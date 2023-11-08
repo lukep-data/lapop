@@ -80,7 +80,7 @@ NULL
 #'  (secondary variable labels).  Defaults: 0 (left justify).
 #' @param color_scheme Character.  Color of lines and dots.  Takes hex number, beginning with "#".
 #' Must specify four values, even if four are not used.
-#' Default: c("#7030A0", "#3CBC70", "#1F968B", "#95D840").
+#' Default: c("#7030A0", "#3CBC70", "#1F968B", "#95D840", "#568424", "#ACB014").
 #' @param percentages Logical.  Is the outcome variable a percentage?  Set to FALSE if you are using
 #' means of the raw values, so that the y-axis adjusts accordingly. Default: TRUE.
 #' @param all_labels Logical.  If TRUE, show text above all points, instead of only those in the most recent wave. Default: FALSE.
@@ -128,7 +128,7 @@ lapop_mline <- function(data, varlabel = data$varlabel, wave_var = as.character(
                         legend_h_just = 40,
                         legend_v_just = -20,
                         subtitle_h_just = 0,
-                        color_scheme = c("#7030A0", "#3CBC70", "#1F968B", "#95D840", "black", "orange"),
+                        color_scheme = c("#7030A0", "#3CBC70", "#1F968B", "#95D840", "#568424", "#ACB014"),
                         percentages = TRUE,
                         all_labels = FALSE){
   if(class(varlabel) != "character" & class(varlabel) != "factor"){
