@@ -23,7 +23,7 @@ lapop_tsmulti <- function(data, varlabel = data$varlabel, wave_var = as.characte
                           legend_h_just = 40,
                           legend_v_just = -20,
                           subtitle_h_just = 0,
-                          color_scheme = c("#7030A0", "#3CBC70", "#1F968B", "#95D840")){
+                          color_scheme = c("#7030A0", "#3CBC70", "#1F968B", "#95D840", "")){
   .Deprecated("lapop_mline")
   lapop_mline(data = data, varlabel = varlabel, wave_var = wave_var,
               outcome_var = outcome_var, label_var = label_var,
@@ -128,7 +128,7 @@ lapop_mline <- function(data, varlabel = data$varlabel, wave_var = as.character(
                         legend_h_just = 40,
                         legend_v_just = -20,
                         subtitle_h_just = 0,
-                        color_scheme = c("#7030A0", "#3CBC70", "#1F968B", "#95D840"),
+                        color_scheme = c("#7030A0", "#3CBC70", "#1F968B", "#95D840", "black", "orange"),
                         percentages = TRUE,
                         all_labels = FALSE){
   if(class(varlabel) != "character" & class(varlabel) != "factor"){

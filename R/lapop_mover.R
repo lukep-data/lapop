@@ -127,8 +127,10 @@ lapop_mover <- function(data,
                          ymax = 100,
                          x_lab_angle = 90,
                          color_scheme = c("#7030A0", "#00ADA9", "#3CBC70", "#7EA03E", "#568424", "#ACB014")){
-  data$varlabel = factor(data$varlabel, levels = unique(data$varlabel))
+    data$varlabel = factor(data$varlabel, levels = unique(data$varlabel))
+  if(class(data$vallabel) != "factor"){
   data$vallabel = factor(data$vallabel, levels = unique(data$vallabel))
+  }
   mycolors = color_scheme[seq_along(unique(data$varlabel))]
   ci_text = ifelse(lang == "es",
                    paste0(" <span style='color:#545454; font-size:18pt'>\u0131\u2014\u0131 </span>",
