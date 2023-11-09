@@ -20,7 +20,7 @@ lapop_stack(
   order_bars = FALSE,
   subtitle_h_just = 0,
   fixed_aspect_ratio = TRUE,
-  color_scheme = c("#2D708E", "#1F9689", "#00ADA9", "#21A356", "#568424", "#ACB014")
+  color_scheme = c("#784885", "#00adaa", "#c74e49", "#2d708e", "#a43d6a", "#202020")
 )
 }
 \arguments{
@@ -65,7 +65,7 @@ a large number of bars (> 10).  Default: TRUE.}
 
 \item{color_scheme}{Character.  Color of data bars for each value.  Allows up to 6 values.
 Takes hex numbers, beginning with "#".
-Default: c("#2D708E", "#1F9689", "#00ADA9", "#21A356", "#568424", "#ACB014")
+Default: c("#784885", "#00adaa", "#c74e49", "#2d708e", "#a43d6a","#202020")
 (navy blue, turquoise, teal, green, sap green, pea soup).}
 }
 \value{

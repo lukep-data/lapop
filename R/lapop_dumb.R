@@ -63,7 +63,7 @@ NULL
 #' Will not translate input text, such as main title or variable labels.  Takes either "en" (English)
 #' or "es" (Spanish).  Default: "en".
 #' @param color_scheme Character.  Color of data points.  Must supply two values.  Takes hex numbers, beginning with "#".
-#' Default: c("#3CBC70", "#482677") (green, purple).
+#' Default: c("#008381", "#A43D6A") (green, purple).
 #' @param subtitle_h_just,subtitle_v_just Numeric.  Move the subtitle/legend text left/down (negative numbers) or right/up (positive numbers).
 #' Ranges from -100 to 100.  Defaults: 40, -18.
 #' @param sort Character.  The metric by which the data are sorted.  Options: "wave1" (outcome variable in first wave), "wave2" (outcome
@@ -118,7 +118,7 @@ lapop_dumb <- function(data,
                       subtitle = "",
                      sort = "wave2",
                       order = "hi-lo",
-                      color_scheme = c("#3CBC70", "#482677"),
+                      color_scheme = c("#008381", "#A43D6A"),
                       subtitle_h_just = 40,
                      subtitle_v_just = -18){
   if(sort == "diff"){
@@ -155,7 +155,7 @@ lapop_dumb <- function(data,
       geom_text(data = data[data$max1 == FALSE, ],
                 aes(x = prop2, label = proplabel2),
                 nudge_x = 6, color = color_scheme[2], size = 5, fontface = "bold") +
-      geom_vline(xintercept = 0, color = "#D1D3D4") +
+      geom_vline(xintercept = 0, color = "#dddddf") +
       scale_x_continuous(limits=c(ymin, ymax), breaks=seq(ymin, ymax, 20), labels = paste(seq(ymin,ymax, 20), "%", sep=""), expand = c(0,0)) +
       scale_color_manual(values = color_scheme) +
       labs(title = main_title,
@@ -166,18 +166,18 @@ lapop_dumb <- function(data,
            subtitle = subtitle) +
       theme(text = element_text(size = 14, family = "roboto"),
             plot.title = element_text(size = 17, family = "nunito", face = "bold"),
-            plot.caption = element_text(size = 10.5, hjust = 0.02, vjust = 2, family = "roboto-light", color="#545454"),
-            plot.subtitle = element_text(size = 14, family = "nunito-light", color="#545454"),
+            plot.caption = element_text(size = 10.5, hjust = 0.02, vjust = 2, family = "nunito", color="#585860"),
+            plot.subtitle = element_text(size = 14, family = "nunito-light", color="#585860"),
             plot.margin = margin(5.5, 20, 5.5, 5.5, "points"),
             axis.title.y = element_blank(),
             axis.ticks = element_blank(),
-            axis.text = element_text(size = 12, family = "roboto", color = "#545454", margin=margin(r=5)),
-            panel.grid.major.y = element_line(color = "#D1D3D4"),
+            axis.text = element_text(size = 12, family = "roboto", color = "#585860", margin=margin(r=5)),
+            panel.grid.major.y = element_line(color = "#dddddf"),
             panel.background = element_rect(fill = "white"),
             legend.position="top",
             plot.title.position = "plot",
             plot.caption.position = "plot",
-            legend.text = element_text(family = "roboto", color = "#545454"),
+            legend.text = element_text(family = "roboto", color = "#585860"),
             legend.title = element_blank(),
             legend.justification='right',
             legend.key.size = unit(1, "line"),

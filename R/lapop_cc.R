@@ -34,7 +34,7 @@ NULL
 #' Will not translate input text, such as main title or variable labels.  Takes either "en" (English)
 #' or "es" (Spanish).  Default: "en".
 #' @param color_scheme Character.  Color of bars.  Takes hex number, beginning with "#".
-#' Default: "#512B71" (purple).
+#' Default: "#784885" (purple).
 #' @param label_size Numeric.  Size of text for data labels (percentages above bars).  Default: 5.
 #'
 #' @return Returns an object of class \code{ggplot}, a ggplot figure showing
@@ -86,7 +86,7 @@ lapop_cc <- function(data, outcome_var = data$prop, lower_bound = data$lb, valla
                      source_info = "",
                      subtitle = "",
                      sort = "",
-                     color_scheme = "#512B71",
+                     color_scheme = "#784885",
                      label_size = 5){
   if(highlight != ""){
     data$hl_var = factor(ifelse(vallabel == highlight, 0, 1), labels = c("hl", "other"))
@@ -111,11 +111,11 @@ lapop_cc <- function(data, outcome_var = data$prop, lower_bound = data$lb, valla
     data = data[order(data$vallabel),]
   }
   ci_text = ifelse(lang == "es",
-                   paste0(" <span style='color:#512B71; font-size:18pt'> \u0131\u2014\u0131</span> ",
-                          "<span style='color:#545454; font-size:13pt'>95% intervalo de confianza </span>"),
-                   paste0(" <span style='color:#512B71; font-size:18pt'> \u0131\u2014\u0131</span> ",
-                          "<span style='color:#545454; font-size:13pt'>95% confidence </span>",
-                          "<span style='color:#545454'> interval</span>"))
+                   paste0(" <span style='color:", color_scheme, "; font-size:18pt'> \u0131\u2014\u0131</span> ",
+                          "<span style='color:#585860; font-size:13pt'>95% intervalo de confianza </span>"),
+                   paste0(" <span style='color:#784885", color_scheme, "; font-size:18pt'> \u0131\u2014\u0131</span> ",
+                          "<span style='color:#585860; font-size:13pt'>95% confidence </span>",
+                          "<span style='color:#585860'>interval</span>"))
   update_geom_defaults("text", list(family = "roboto"))
   ggplot(data=data, aes(x=factor(vallabel, levels = vallabel), y=prop, fill = hl_var)) +
     geom_bar(stat="identity", color = color_scheme, width = 0.6) +
@@ -124,7 +124,7 @@ lapop_cc <- function(data, outcome_var = data$prop, lower_bound = data$lb, valla
     geom_errorbar(aes(ymin=lower_bound, ymax=upper_bound), width = 0.15, color = color_scheme, linetype = "solid") +
     scale_fill_manual(breaks = "other",
                       values = fill_values,
-                      labels = paste0(" <span style='color:#545454; font-size:13pt'> ",
+                      labels = paste0(" <span style='color:#585860; font-size:13pt'> ",
                                       subtitle,
                                       "<span style='color:#FFFFFF00'>-----------</span>",
                                       ci_text),
@@ -137,10 +137,10 @@ lapop_cc <- function(data, outcome_var = data$prop, lower_bound = data$lb, valla
                           source_info)) +
     theme(text = element_text(size = 14, family = "roboto"),
           plot.title = element_text(size = 18, family = "nunito", face = "bold"),
-          plot.caption = element_text(size = 10.5, vjust = 2, hjust = 0.02, family = "roboto-light", color="#545454"),
+          plot.caption = element_text(size = 10.5, vjust = 2, hjust = 0.02, family = "nunito", color="#585860"),
           panel.background = element_blank(),
-          panel.border = element_rect(linetype = "solid", color = "#D1D3D4", fill = NA),
-          axis.text = element_text(size = 14, color = "#545454", face = "bold"),
+          panel.border = element_rect(linetype = "solid", color = "#dddddf", fill = NA),
+          axis.text = element_text(size = 14, color = "#585860", face = "bold"),
           axis.text.y = element_blank(),
           axis.ticks = element_blank(),
           legend.position = "top",

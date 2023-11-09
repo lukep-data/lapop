@@ -21,7 +21,7 @@ lapop_ccm(
   sort = "",
   y_label = "",
   x_label = "",
-  color_scheme = c("#512B71", "#00ADA9", "#3CBC70"),
+  color_scheme = c("#784885", "#00ADAA", "#2AC69D"),
   label_size = 4,
   text_position = 0.7
 )
@@ -62,7 +62,7 @@ Default: None.}
 \item{x_label}{Character.  X-axis label.}
 
 \item{color_scheme}{Character.  Color of bars.  Takes hex number, beginning with "#".
-Default: "#512B71" (purple).}
+Default: "#784885"  (purple), "#00ADAA" (teal), "#2AC69D" (light green).}
 
 \item{label_size}{Numeric.  Size of text for data labels (percentages above bars).  Default: 4.}
 

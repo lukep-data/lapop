@@ -64,7 +64,7 @@ NULL
 #' or "es" (Spanish).  Default: "en".
 #' @param color_scheme Character.  Color of data bars for each value.  Allows up to 6 values.
 #' Takes hex numbers, beginning with "#".
-#' Default: c("#2D708E", "#1F9689", "#00ADA9", "#21A356", "#568424", "#ACB014")
+#' Default: c("#784885", "#00adaa", "#c74e49", "#2d708e", "#a43d6a","#202020")
 #' (navy blue, turquoise, teal, green, sap green, pea soup).
 #' @param subtitle_h_just Numeric.  Move the subtitle/legend text left (negative numbers) or right (positive numbers).
 #' Ranges from -100 to 100.  Default: 0.
@@ -117,7 +117,7 @@ lapop_stack <- function(data, outcome_var = data$prop, prop_labels = data$propla
                      order_bars = FALSE,
                      subtitle_h_just = 0,
                      fixed_aspect_ratio = TRUE,
-                     color_scheme = c("#2D708E", "#1F9689", "#00ADA9", "#21A356", "#568424", "#ACB014")){
+                     color_scheme = c("#784885", "#00adaa", "#c74e49", "#2d708e", "#a43d6a","#202020")){
   if(class(var_labels) != "character" & class(var_labels) != "factor"){
     var_labels = as.character(var_labels)
     data$varlabels = as.character(data$varlabel)
@@ -162,28 +162,28 @@ lapop_stack <- function(data, outcome_var = data$prop, prop_labels = data$propla
                                aes(label = ifelse(outcome_var < 5 & hide_small_values == FALSE, prop_labels, NA)),
                                position = position_stack(vjust = 0.5),
                                color = "#FFFFFF", segment.color = 'transparent',
-                               fontface = "bold", size = 4, family = "nunito",
+                               fontface = "bold", size = 4, family = "roboto",
                                direction = "y",
                                force_pull = 0.2, force = 5) +
       ggrepel::geom_text_repel(data = data[data$var_labels == levels(data$var_labels)[2], ],
                                aes(label = ifelse(outcome_var < 5 & hide_small_values == FALSE, prop_labels, NA)),
                                position = position_stack(vjust = 0.5),
                                color = "#FFFFFF", segment.color = 'transparent',
-                               fontface = "bold", size = 4, family = "nunito",
+                               fontface = "bold", size = 4, family = "roboto",
                                direction = "y",
                                force_pull = 0.2, force = 5) +
       ggrepel::geom_text_repel(data = data[data$var_labels == levels(data$var_labels)[3], ],
                                aes(label = ifelse(outcome_var < 5 & hide_small_values == FALSE, prop_labels, NA)),
                                position = position_stack(vjust = 0.5),
                                color = "#FFFFFF", segment.color = 'transparent',
-                               fontface = "bold", size = 4, family = "nunito",
+                               fontface = "bold", size = 4, family = "roboto",
                                direction = "y",
                                force_pull = 0.2, force = 5) +
       ggrepel::geom_text_repel(data = data[data$var_labels == levels(data$var_labels)[4], ],
                                aes(label = ifelse(outcome_var < 5 & hide_small_values == FALSE, prop_labels, NA)),
                                position = position_stack(vjust = 0.5),
                                color = "#FFFFFF", segment.color = 'transparent',
-                               fontface = "bold", size = 4, family = "nunito",
+                               fontface = "bold", size = 4, family = "roboto",
                                direction = "y",
                                force_pull = 0.2, force = 5) +
       coord_flip() +
@@ -198,20 +198,20 @@ lapop_stack <- function(data, outcome_var = data$prop, prop_labels = data$propla
            subtitle = subtitle) +
       theme(text = element_text(size = 14, family = "roboto"),
             plot.title = element_text(size = 17, family = "nunito", face = "bold"),
-            plot.caption = element_text(size = 10.5, hjust = 0.02, vjust = 2, family = "roboto-light", color="#545454"),
-            plot.subtitle = element_text(size = 14, family = "nunito-light", color="#545454"),
+            plot.caption = element_text(size = 10.5, hjust = 0.02, vjust = 2, family = "nunito", color="#585860"),
+            plot.subtitle = element_text(size = 14, family = "nunito-light", color="#585860"),
             axis.title.y = element_blank(),
             axis.text.x = element_blank(),
             axis.text.y = element_text(margin=margin(r=0)),
             axis.ticks = element_blank(),
             # aspect.ratio = aspect_ratio,
-            axis.text = element_text(size = 14, family = "roboto", color = "#545454", margin=margin(r=5)),
+            axis.text = element_text(size = 14, family = "roboto", color = "#585860", margin=margin(r=5)),
             panel.background = element_rect(fill = "white"),
             panel.grid = element_blank(),
             legend.position = "top",
             plot.title.position = "plot",
             plot.caption.position = "plot",
-            legend.text = element_text(family = "roboto", color = "#545454"),
+            legend.text = element_text(family = "roboto", color = "#585860"),
             legend.title = element_blank(),
             legend.justification='left',
             legend.key.size = unit(1, "line"),
@@ -241,20 +241,20 @@ lapop_stack <- function(data, outcome_var = data$prop, prop_labels = data$propla
          subtitle = subtitle) +
     theme(text = element_text(size = 14, family = "roboto"),
           plot.title = element_text(size = 17, family = "nunito", face = "bold"),
-          plot.caption = element_text(size = 10.5, hjust = 0.02, vjust = 2, family = "roboto-light", color="#545454"),
-          plot.subtitle = element_text(size = 14, family = "nunito-light", color="#545454"),
+          plot.caption = element_text(size = 10.5, hjust = 0.02, vjust = 2, family = "roboto-light", color="#585860"),
+          plot.subtitle = element_text(size = 14, family = "nunito-light", color="#585860"),
           axis.title.y = element_blank(),
           axis.text.x = element_blank(),
           axis.text.y = element_text(margin=margin(r=0)),
           axis.ticks = element_blank(),
           # aspect.ratio = aspect_ratio,
-          axis.text = element_text(size = 14, family = "roboto", color = "#545454", margin=margin(r=5)),
+          axis.text = element_text(size = 14, family = "roboto", color = "#585860", margin=margin(r=5)),
           panel.background = element_rect(fill = "white"),
           panel.grid = element_blank(),
           legend.position = "top",
           plot.title.position = "plot",
           plot.caption.position = "plot",
-          legend.text = element_text(family = "roboto", color = "#545454"),
+          legend.text = element_text(family = "roboto", color = "#585860"),
           legend.title = element_blank(),
           legend.justification='left',
           legend.key.size = unit(1, "line"),

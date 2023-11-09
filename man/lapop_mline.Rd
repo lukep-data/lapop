@@ -20,7 +20,7 @@ lapop_mline(
   legend_h_just = 40,
   legend_v_just = -20,
   subtitle_h_just = 0,
-  color_scheme = c("#7030A0", "#3CBC70", "#1F968B", "#95D840", "#568424", "#ACB014"),
+  color_scheme = c("#784885", "#00adaa", "#c74e49", "#2d708e", "#a43d6a", "#202020"),
   percentages = TRUE,
   all_labels = FALSE
 )
@@ -60,7 +60,7 @@ or "es" (Spanish).  Default: "en".}
 
 \item{color_scheme}{Character.  Color of lines and dots.  Takes hex number, beginning with "#".
 Must specify four values, even if four are not used.
-Default: c("#7030A0", "#3CBC70", "#1F968B", "#95D840", "#568424", "#ACB014").}
+Default: c("#784885", "#00adaa", "#c74e49", "#2d708e", "#a43d6a", "#202020").}
 
 \item{percentages}{Logical.  Is the outcome variable a percentage?  Set to FALSE if you are using
 means of the raw values, so that the y-axis adjusts accordingly. Default: TRUE.}

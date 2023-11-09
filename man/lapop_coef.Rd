@@ -19,7 +19,7 @@ lapop_coef(
   ymin = NULL,
   ymax = NULL,
   pred_prob = FALSE,
-  color_scheme = "#512B71",
+  color_scheme = "#784885",
   subtitle_h_just = 0
 )
 }
@@ -54,7 +54,7 @@ Default: None (only "Source: " will be printed).}
 Will only change text in the legend, not the data.  Default: FALSE.}
 
 \item{color_scheme}{Character.  Color of bars.  Takes hex number, beginning with "#".
-Default: "#512B71" (purple).}
+Default: "#784885" (purple).}
 
 \item{subtitle_h_just}{Numeric.  Move the subtitle/legend text left (negative numbers) or right (positive numbers).
 Ranges from -100 to 100.  Default: 0.}

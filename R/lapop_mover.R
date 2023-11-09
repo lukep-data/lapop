@@ -65,7 +65,7 @@ NULL
 #' or "es" (Spanish).  Default: "en".
 #' @param color_scheme Character.  Color of data points and text for each secondary variable.  Allows up to 6 values.
 #' Takes hex numbers, beginning with "#".
-#' Default: c("#7030A0", "#00ADA9", "#3CBC70", "#7EA03E", "#568424", "#ACB014")
+#' Default: c("#784885", "#00adaa", "#c74e49", "#2d708e", "#a43d6a")
 #' (purple, teal, green, olive, sap green, pea soup).
 #' @param subtitle_h_just Numeric.  Move the subtitle/legend text left (negative numbers) or right (positive numbers).
 #' Ranges from -100 to 100.  Default: 0.
@@ -126,17 +126,17 @@ lapop_mover <- function(data,
                          ymin = 0,
                          ymax = 100,
                          x_lab_angle = 90,
-                         color_scheme = c("#7030A0", "#00ADA9", "#3CBC70", "#7EA03E", "#568424", "#ACB014")){
+                         color_scheme = c("#784885", "#00adaa", "#c74e49", "#2d708e", "#a43d6a")){
     data$varlabel = factor(data$varlabel, levels = unique(data$varlabel))
   if(class(data$vallabel) != "factor"){
   data$vallabel = factor(data$vallabel, levels = unique(data$vallabel))
   }
   mycolors = color_scheme[seq_along(unique(data$varlabel))]
   ci_text = ifelse(lang == "es",
-                   paste0(" <span style='color:#545454; font-size:18pt'>\u0131\u2014\u0131 </span>",
-                          "<span style='color:#545454; font-size:13pt'>95% intervalo de confianza </span>"),
-                   paste0(" <span style='color:#545454; font-size:18pt'> \u0131\u2014\u0131 </span> ",
-                          "<span style='color:#545454; font-size:13pt'>95% confidence interval</span>"))
+                   paste0(" <span style='color:#585860; font-size:18pt'>\u0131\u2014\u0131 </span>",
+                          "<span style='color:#585860; font-size:13pt'>95% intervalo de confianza </span>"),
+                   paste0(" <span style='color:#585860; font-size:18pt'> \u0131\u2014\u0131 </span> ",
+                          "<span style='color:#585860; font-size:13pt'>95% confidence interval</span>"))
   update_geom_defaults("text", list(family = "roboto"))
   ggplot(data, aes(x = vallabel, y = prop, color = factor(varlabel), label = proplabel)) +
     geom_point(alpha=0.47, key_glyph = "point") +
@@ -151,7 +151,7 @@ lapop_mover <- function(data,
     geom_errorbar(aes(ymin=lb, ymax=ub), width = 0.2, show.legend = FALSE) +
     geom_text(aes(y = ub), fontface = "bold", size = 5, vjust = -0.8, show.legend = FALSE) +
     scale_color_manual(values = mycolors,
-                       labels = paste0("<span style='color:#545454; font-size:13pt'> ",
+                       labels = paste0("<span style='color:#585860; font-size:13pt'> ",
                                        subtitle,
                                        "<span style='color:#FFFFFF00'>-----------</span>",
                                        ci_text),
@@ -161,7 +161,7 @@ lapop_mover <- function(data,
     scale_y_continuous(limits = c(ymin, ymax),
                        breaks = seq(ymin, ymax, ifelse(ymax - ymin <= 50, 5, 10)),
                        expand = c(0,0)) +
-    geom_vline(xintercept = seq(0.5, length(data$vallabel), by = 1), color="#D1D3D4", size = 0.25) +
+    geom_vline(xintercept = seq(0.5, length(data$vallabel), by = 1), color="#dddddf", size = 0.25) +
     labs(title = main_title,
          y = "",
          x = " ",
@@ -169,15 +169,15 @@ lapop_mover <- function(data,
                           source_info)) +
     theme(text = element_text(size = 14, family = "roboto"),
           plot.title = element_text(size = 17, family = "nunito", face = "bold"),
-          plot.caption = element_text(size = 10.5, hjust = 0.02, vjust = 2, family = "roboto-light", color="#545454"),
-          plot.subtitle = element_text(size = 14, family = "nunito", color="#545454"),
+          plot.caption = element_text(size = 10.5, hjust = 0.02, vjust = 2, family = "nunito", color="#585860"),
+          plot.subtitle = element_text(size = 14, family = "nunito", color="#585860"),
           panel.grid.major.x = element_blank(),
-          panel.grid.major.y = element_line(size=.25, color="#D1D3D4"),
+          panel.grid.major.y = element_line(size=.25, color="#dddddf"),
           panel.background = element_rect(fill = "white"),
           axis.text.y = element_blank(),
           axis.text.x = element_text(angle = x_lab_angle, vjust = 0.5),
           axis.ticks = element_blank(),
-          axis.text = element_text(size = 14, family = "roboto", color = "#545454"),
+          axis.text = element_text(size = 14, family = "roboto", color = "#585860"),
           legend.position = "top",
           legend.title = element_blank(),
           legend.justification='left',

@@ -30,7 +30,7 @@ NULL
 #' Will not translate input text, such as main title or variable labels.  Takes either "en" (English)
 #' or "es" (Spanish).  Default: "en".
 #' @param color_scheme Character.  Color of bars.
-#' Takes hex numbers, beginning with "#". Default: "#1F968B" (teal).
+#' Takes hex numbers, beginning with "#". Default: "#008381" (teal).
 #' @param order Logical.  Should bars be ordered from most frequent response to least?  Default: FALSE.
 #' @return Returns an object of class \code{ggplot}, a ggplot bar graph.
 #' @examples
@@ -64,7 +64,7 @@ lapop_hist <- function(data, outcome_var = data$prop, label_var = data$proplabel
                        subtitle = "",
                        source_info = "",
                        order = FALSE,
-                       color_scheme = "#1F968B"){
+                       color_scheme = "#008381"){
   if(order == TRUE){
     data = data[order(-data$prop), ]
     cat_var = cat_var[order(-outcome_var)]
@@ -84,15 +84,14 @@ lapop_hist <- function(data, outcome_var = data$prop, label_var = data$proplabel
          subtitle = subtitle) +
     theme(text = element_text(size = 14, family = "roboto"),
           plot.title = element_text(size = 18, family = "nunito", face = "bold"),
-          plot.caption = element_text(size = 10.5, hjust = 0.02, vjust = 2, family = "roboto-light", color="#545454"),
-          plot.subtitle = element_text(size = 13, family = "nunito-light", color="#545454"),
+          plot.caption = element_text(size = 10.5, hjust = 0.02, vjust = 2, family = "nunito", color="#585860"),
+          plot.subtitle = element_text(size = 13, family = "nunito-light", color="#585860"),
           axis.title.y = element_blank(),
           plot.title.position = "plot",
           plot.caption.position = "plot",
-          # axis.text.y = element_blank(),
           axis.ticks = element_blank(),
-          axis.text = element_text(size = 14, family = "roboto-light", color = "#545454"),
-          panel.grid = element_line(color = "#D1D3D4"),
+          axis.text = element_text(size = 14, family = "roboto-light", color = "#585860"),
+          panel.grid = element_line(color = "#dddddf"),
           panel.background = element_rect(fill = "white"),
           panel.grid.major.x = element_blank())
   }

@@ -1,3 +1,7 @@
+# lapop 1.3.4
+
+* update fonts and colors (new designer)
+
 # lapop 1.3.3
 
 * allow 6 lines in mline

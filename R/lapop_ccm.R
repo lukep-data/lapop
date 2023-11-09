@@ -36,7 +36,7 @@ NULL
 #' Will not translate input text, such as main title or variable labels.  Takes either "en" (English)
 #' or "es" (Spanish).  Default: "en".
 #' @param color_scheme Character.  Color of bars.  Takes hex number, beginning with "#".
-#' Default: "#512B71" (purple).
+#' Default: "#784885"  (purple), "#00ADAA" (teal), "#2AC69D" (light green).
 #' @param label_size Numeric.  Size of text for data labels (percentages above bars).  Default: 4.
 #' @param text_position Numeric.  Amount that text above error bars should be offset (to avoid overlap).  Default: 0.7
 #'
@@ -87,7 +87,7 @@ lapop_ccm <- function(data,
                       sort = "",
                       y_label = "",
                       x_label = "",
-                      color_scheme = c("#512B71", "#00ADA9", "#3CBC70"),
+                      color_scheme = c("#784885", "#00ADAA", "#2AC69D"),
                       label_size = 4,
                       text_position = 0.7){
   fill_colors = paste0(color_scheme, "51")
@@ -95,15 +95,15 @@ lapop_ccm <- function(data,
     data$var = ifelse(data$var == unique(data$var)[length(unique(data$var))],
                       paste0(data$var,
                              "<span style='color:#FFFFFF00'>-------</span>",
-                             " <span style='color:#545454; font-size:18pt'> \u0131\u2014\u0131</span> ",
-                             "<span style='color:#545454; font-size:13pt'>95% int. de conf. </span>"),
+                             " <span style='color:#585860; font-size:18pt'> \u0131\u2014\u0131</span> ",
+                             "<span style='color:#585860; font-size:13pt'>95% int. de conf. </span>"),
                              data$var)
   } else{
     data$var = ifelse(data$var == unique(data$var)[length(unique(data$var))],
                       paste0(data$var,
                              "<span style='color:#FFFFFF00'>-------</span>",
-                             " <span style='color:#545454; font-size:18pt'> \u0131\u2014\u0131</span> ",
-                             "<span style='color:#545454; font-size:13pt'>95% conf. int. </span>"),
+                             " <span style='color:#585860; font-size:18pt'> \u0131\u2014\u0131</span> ",
+                             "<span style='color:#585860; font-size:13pt'>95% conf. int. </span>"),
                       data$var)
     data$var = factor(data$var, levels = unique(data$var))
   }
@@ -147,10 +147,10 @@ lapop_ccm <- function(data,
     {if(subtitle != "")labs(subtitle = subtitle)}+
     theme(text = element_text(size = 14, family = "roboto"),
           plot.title = element_text(size = 18, family = "nunito", face = "bold"),
-          plot.caption = element_text(size = 10.5, vjust = 2, hjust = 0.02, family = "roboto-light", color="#545454"),
+          plot.caption = element_text(size = 10.5, vjust = 2, hjust = 0.02, family = "nunito", color="#585860"),
           panel.background = element_blank(),
-          panel.border = element_rect(linetype = "solid", color = "#D1D3D4", fill = NA),
-          axis.text = element_text(size = 14, color = "#545454", face = "bold"),
+          panel.border = element_rect(linetype = "solid", color = "#dddddf", fill = NA),
+          axis.text = element_text(size = 14, color = "#585860", face = "bold"),
           axis.text.y = element_blank(),
           axis.ticks = element_blank(),
           legend.position = "top",

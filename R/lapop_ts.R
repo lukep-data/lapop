@@ -40,7 +40,7 @@ NULL
 #' Will not translate input text, such as main title or variable labels.  #' Takes either "en" (English)
 #' or "es" (Spanish).  Default: "en".
 #' @param color_scheme Character.  Color of lines and dots.  Takes hex number, beginning with "#".
-#' Default: "#3CBC70" (green).
+#' Default: "#c74e49" (red).
 #' @param percentages Logical.  Is the outcome variable a percentage?  Set to FALSE if you are using
 #' means of the raw values, so that the y-axis adjusts accordingly. Default: TRUE.
 #' @return Returns an object of class \code{ggplot}, a ggplot line graph showing
@@ -82,7 +82,7 @@ lapop_ts <- function(data, outcome_var = data$prop, lower_bound = data$lb,
                      source_info = "",
                      subtitle = "",
                      lang = "en",
-                     color_scheme = "#3CBC70",
+                     color_scheme = "#c74e49",
                      percentages = TRUE){
 
   #interpolate data for missing waves are still plotted on the x-axis (without data)
@@ -94,10 +94,10 @@ lapop_ts <- function(data, outcome_var = data$prop, lower_bound = data$lb,
   #now we stop dealing with missing data
   ci_text = ifelse(lang == "es",
                    paste0(" <span style='color:", color_scheme, "; font-size:18pt'> \u2013 \u2013 \u2013</span> ",
-                          "<span style='color:#545454; font-size:13pt'>95% intervalo de confianza </span>"),
+                          "<span style='color:#585860; font-size:13pt'>95% intervalo de confianza </span>"),
                    paste0(" <span style='color:", color_scheme, "; font-size:18pt'> \u2013 \u2013 \u2013</span> ",
-                          "<span style='color:#545454; font-size:13pt'>95% confidence </span>",
-                          "<span style='color:#545454'>interval</span>"))
+                          "<span style='color:#585860; font-size:13pt'>95% confidence </span>",
+                          "<span style='color:#585860'>interval</span>"))
   #and turn to creating the graph
   update_geom_defaults("text", list(family = "roboto"))
   ggplot(data=data, aes(x=wave_var, y=outcome_var)) +
@@ -106,7 +106,7 @@ lapop_ts <- function(data, outcome_var = data$prop, lower_bound = data$lb,
     geom_line(aes(group = 1, y= upper_bound), color=color_scheme, linewidth = 1, alpha=0.48, lty="dashed") +
     geom_point(aes(y = point_var, color = " "), size = 3.5, alpha=0.48, key_glyph = "point") +
     scale_color_manual(values = color_scheme,
-                       labels = paste0("<span style='color:#545454; font-size:13pt'> ",
+                       labels = paste0("<span style='color:#585860; font-size:13pt'> ",
                                        subtitle,
                                        "<span style='color:#FFFFFF00'>-----------</span>",
                                        ci_text)) +
@@ -134,11 +134,11 @@ lapop_ts <- function(data, outcome_var = data$prop, lower_bound = data$lb,
     theme_minimal() +
     theme(text = element_text(size = 14, family = "roboto"),
           plot.title = element_text(size = 18, family = "nunito", face = "bold"),
-          plot.caption = element_text(size = 10.5, vjust = 2, hjust = 0.02, family = "roboto-light", color="#545454"),
+          plot.caption = element_text(size = 10.5, vjust = 2, hjust = 0.02, family = "nunito", color="#585860"),
           axis.title.y = element_blank(),
-          axis.text = element_text(size = 14, color = "#545454"),
-          panel.grid = element_line(color = "#D1D3D4"),
-          panel.border = element_rect(linetype = "solid", color = "#D1D3D4", fill = NA),
+          axis.text = element_text(size = 14, color = "#585860"),
+          panel.grid = element_line(color = "#dddddf"),
+          panel.border = element_rect(linetype = "solid", color = "#dddddf", fill = NA),
           legend.position = "top",
           plot.title.position = "plot",
           plot.caption.position = "plot",

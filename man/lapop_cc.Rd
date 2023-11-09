@@ -19,7 +19,7 @@ lapop_cc(
   source_info = "",
   subtitle = "",
   sort = "",
-  color_scheme = "#512B71",
+  color_scheme = "#784885",
   label_size = 5
 )
 }
@@ -56,7 +56,7 @@ Default: None.}
 "alpha" (alphabetical by vallabel/x-axis label). Default: Order of data frame.}
 
 \item{color_scheme}{Character.  Color of bars.  Takes hex number, beginning with "#".
-Default: "#512B71" (purple).}
+Default: "#784885" (purple).}
 
 \item{label_size}{Numeric.  Size of text for data labels (percentages above bars).  Default: 5.}
 }

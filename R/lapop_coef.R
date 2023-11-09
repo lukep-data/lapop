@@ -33,7 +33,7 @@ NULL
 #' Will not translate input text, such as main title or variable labels.  Takes either "en" (English)
 #' or "es" (Spanish).  Default: "en".
 #' @param color_scheme Character.  Color of bars.  Takes hex number, beginning with "#".
-#' Default: "#512B71" (purple).
+#' Default: "#784885" (purple).
 #' @param pred_prob Logical.  Is the graph showing predicted probabilities (instead of regression coefficients)?
 #' Will only change text in the legend, not the data.  Default: FALSE.
 #' @param subtitle_h_just Numeric.  Move the subtitle/legend text left (negative numbers) or right (positive numbers).
@@ -77,24 +77,24 @@ lapop_coef <- function(data, coef_var = data$coef, label_var = data$proplabel,
                        ymin = NULL,
                        ymax = NULL,
                        pred_prob = FALSE,
-                       color_scheme = "#512B71",
+                       color_scheme = "#784885",
                        subtitle_h_just = 0){
   varlabel_var = factor(varlabel_var, levels = rev(unique(varlabel_var)))
   sig = ifelse(pval_var < 0.05, FALSE, TRUE)
   ci_text = ifelse(lang == "es",
                    paste0(" <span style='color:", color_scheme, "; font-size:18pt'> \u0131\u2014\u0131</span> ",
-                          "<span style='color:#545454; font-size:13pt'>95% intervalo de confianza </span>"),
+                          "<span style='color:#585860; font-size:13pt'>95% intervalo de confianza </span>"),
                    paste0(" <span style='color:", color_scheme, "; font-size:18pt'> \u0131\u2014\u0131</span> ",
-                          "<span style='color:#545454; font-size:13pt'>95% confidence </span>",
-                          "<span style='color:#545454'>interval</span>"))
+                          "<span style='color:#585860; font-size:13pt'>95% confidence </span>",
+                          "<span style='color:#585860'>interval</span>"))
   update_geom_defaults("text", list(family = "roboto"))
   ggplot(data, aes(x = varlabel_var, y = coef_var)) +
-    geom_hline(yintercept = 0, color = "#D1D3D4", lty = 2) +
+    geom_hline(yintercept = 0, color = "#dddddf", lty = 2) +
     geom_errorbar(aes(x=varlabel_var, ymin = lb, ymax = ub), width = 0.3, lty = 1, color = color_scheme) +
     geom_point(aes(x = varlabel_var, y = coef_var, fill = sig), color = "black", size = 5.5, shape = 21) +
     geom_text(aes(label = label_var, vjust = -1.25), size = 5, color = color_scheme, fontface = "bold") +
     scale_fill_manual(values = color_scheme,
-                      labels = paste0(" <span style='color:#545454; font-size:13pt'> ",
+                      labels = paste0(" <span style='color:#585860; font-size:13pt'> ",
                                       ifelse(lang == "es", ifelse(pred_prob == TRUE, "Probabilidades pronosticadas", "Coeficientes de regresi\u00f3n"),
                                              ifelse(pred_prob == TRUE, "Predicted probabilities", "Regression coefficients")),
                                       "<span style='color:#FFFFFF00'>-----------</span>",
@@ -110,11 +110,11 @@ lapop_coef <- function(data, coef_var = data$coef, label_var = data$proplabel,
                           source_info)) +
     theme(text = element_text(size = 14, family = "roboto"),
           plot.title = element_text(size = 18, family = "nunito", face = "bold"),
-          plot.caption = element_text(size = 10.5, hjust = 0.02, vjust = 2, family = "roboto-light", color="#545454"),
-          plot.subtitle = element_text(size = 14, family = "nunito-light", color="#545454"),
+          plot.caption = element_text(size = 10.5, hjust = 0.02, vjust = 2, family = "nunito", color="#585860"),
+          plot.subtitle = element_text(size = 14, family = "nunito-light", color="#585860"),
           axis.title.y = element_blank(),
           axis.ticks = element_blank(),
-          axis.text = element_text(size = 14, family = "roboto", color = "#545454"),
+          axis.text = element_text(size = 14, family = "roboto", color = "#585860"),
           panel.background = element_rect(fill = "white"),
           panel.grid = element_blank(),
           plot.title.position = "plot",

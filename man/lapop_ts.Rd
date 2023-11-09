@@ -18,7 +18,7 @@ lapop_ts(
   source_info = "",
   subtitle = "",
   lang = "en",
-  color_scheme = "#3CBC70",
+  color_scheme = "#c74e49",
   percentages = TRUE
 )
 }
@@ -49,7 +49,7 @@ Will not translate input text, such as main title or variable labels.  #' Takes 
 or "es" (Spanish).  Default: "en".}
 
 \item{color_scheme}{Character.  Color of lines and dots.  Takes hex number, beginning with "#".
-Default: "#3CBC70" (green).}
+Default: "#c74e49" (red).}
 
 \item{percentages}{Logical.  Is the outcome variable a percentage?  Set to FALSE if you are using
 means of the raw values, so that the y-axis adjusts accordingly. Default: TRUE.}

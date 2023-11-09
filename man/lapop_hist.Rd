@@ -16,7 +16,7 @@ lapop_hist(
   subtitle = "",
   source_info = "",
   order = FALSE,
-  color_scheme = "#1F968B"
+  color_scheme = "#008381"
 )
 }
 \arguments{
@@ -48,7 +48,7 @@ Default: None (only "Source: " will be printed).}
 \item{order}{Logical.  Should bars be ordered from most frequent response to least?  Default: FALSE.}
 
 \item{color_scheme}{Character.  Color of bars.
-Takes hex numbers, beginning with "#". Default: "#1F968B" (teal).}
+Takes hex numbers, beginning with "#". Default: "#008381" (teal).}
 }
 \value{
 Returns an object of class \code{ggplot}, a ggplot bar graph.
