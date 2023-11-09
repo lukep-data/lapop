@@ -1,3 +1,7 @@
+# lapop 1.3.5
+
+* fix issue in mline where repeated labels became disorganized
+
 # lapop 1.3.4
 
 * update fonts and colors (new designer)

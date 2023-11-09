@@ -127,10 +127,9 @@ lapop_mover <- function(data,
                          ymax = 100,
                          x_lab_angle = 90,
                          color_scheme = c("#784885", "#00adaa", "#c74e49", "#2d708e", "#a43d6a")){
-    data$varlabel = factor(data$varlabel, levels = unique(data$varlabel))
-  if(class(data$vallabel) != "factor"){
-  data$vallabel = factor(data$vallabel, levels = unique(data$vallabel))
-  }
+  data$varlabel = factor(data$varlabel, levels = unique(data$varlabel))
+  data$order = 1:nrow(data)
+  data$order = factor(data$order, levels = unique(data$order))
   mycolors = color_scheme[seq_along(unique(data$varlabel))]
   ci_text = ifelse(lang == "es",
                    paste0(" <span style='color:#585860; font-size:18pt'>\u0131\u2014\u0131 </span>",
@@ -138,7 +137,7 @@ lapop_mover <- function(data,
                    paste0(" <span style='color:#585860; font-size:18pt'> \u0131\u2014\u0131 </span> ",
                           "<span style='color:#585860; font-size:13pt'>95% confidence interval</span>"))
   update_geom_defaults("text", list(family = "roboto"))
-  ggplot(data, aes(x = vallabel, y = prop, color = factor(varlabel), label = proplabel)) +
+  ggplot(data, aes(x = order, y = prop, color = factor(varlabel), label = proplabel)) +
     geom_point(alpha=0.47, key_glyph = "point") +
     facet_grid2(cols = vars(varlabel), scales = "free", space = "free",
                 strip = strip_themed(
@@ -161,6 +160,7 @@ lapop_mover <- function(data,
     scale_y_continuous(limits = c(ymin, ymax),
                        breaks = seq(ymin, ymax, ifelse(ymax - ymin <= 50, 5, 10)),
                        expand = c(0,0)) +
+    scale_x_discrete(labels = setNames(data$vallabel, data$order)) +
     geom_vline(xintercept = seq(0.5, length(data$vallabel), by = 1), color="#dddddf", size = 0.25) +
     labs(title = main_title,
          y = "",
