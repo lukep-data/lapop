@@ -113,10 +113,10 @@ lapop_cc <- function(data, outcome_var = data$prop, lower_bound = data$lb, valla
   ci_text = ifelse(lang == "es",
                    paste0(" <span style='color:", color_scheme, "; font-size:18pt'> \u0131\u2014\u0131</span> ",
                           "<span style='color:#585860; font-size:13pt'>95% intervalo de confianza </span>"),
-                   paste0(" <span style='color:#784885", color_scheme, "; font-size:18pt'> \u0131\u2014\u0131</span> ",
+                   paste0(" <span style='color:", color_scheme, "; font-size:18pt'> \u0131\u2014\u0131</span> ",
                           "<span style='color:#585860; font-size:13pt'>95% confidence </span>",
                           "<span style='color:#585860'>interval</span>"))
-  update_geom_defaults("text", list(family = "roboto"))
+    update_geom_defaults("text", list(family = "roboto"))
   ggplot(data=data, aes(x=factor(vallabel, levels = vallabel), y=prop, fill = hl_var)) +
     geom_bar(stat="identity", color = color_scheme, width = 0.6) +
     geom_text(aes(label=label_var, y = upper_bound), vjust= -0.5,
