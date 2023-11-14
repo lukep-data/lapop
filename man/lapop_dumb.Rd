@@ -16,7 +16,8 @@ lapop_dumb(
   order = "hi-lo",
   color_scheme = c("#008381", "#A43D6A"),
   subtitle_h_just = 40,
-  subtitle_v_just = -18
+  subtitle_v_just = -18,
+  text_nudge = 6
 )
 }
 \arguments{
@@ -54,6 +55,8 @@ Default: c("#008381", "#A43D6A") (green, purple).}
 
 \item{subtitle_h_just, subtitle_v_just}{Numeric.  Move the subtitle/legend text left/down (negative numbers) or right/up (positive numbers).
 Ranges from -100 to 100.  Defaults: 40, -18.}
+
+\item{text_nudge}{Numeric.  Move text of data further or closer to data point.  Default: 6.}
 }
 \value{
 Returns an object of class \code{ggplot}, a ggplot figure showing

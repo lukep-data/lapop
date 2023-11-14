@@ -71,6 +71,7 @@ NULL
 #' Default: "wave2".
 #' @param order Whether data should be sorted from low to high or high to low on the sort metric.  Options: "hi-lo" and "lo-hi".
 #' Default: "hi-lo".
+#' @param text_nudge Numeric.  Move text of data further or closer to data point.  Default: 6.
 #' @return Returns an object of class \code{ggplot}, a ggplot figure showing
 #' average values of some variable in two time periods across multiple countries
 #'  (a dumbbell plot).
@@ -120,7 +121,8 @@ lapop_dumb <- function(data,
                       order = "hi-lo",
                       color_scheme = c("#008381", "#A43D6A"),
                       subtitle_h_just = 40,
-                     subtitle_v_just = -18){
+                     subtitle_v_just = -18,
+                     text_nudge = 6){
   if(sort == "diff"){
     data$diff = data$prop2-data$prop1
     data = data[order(-data$diff),]
@@ -145,16 +147,16 @@ lapop_dumb <- function(data,
       geom_point(aes(x = prop2, color = names(color_scheme)[2]), size=4) +
       geom_text(data = data[data$max1 == FALSE, ],
                 aes(x = prop1, label = proplabel1),
-                nudge_x = -6, color = color_scheme[1], size = 5, fontface = "bold") +
+                nudge_x = -text_nudge, color = color_scheme[1], size = 5, fontface = "bold") +
       geom_text(data = data[data$max1 == TRUE, ],
                 aes(x = prop1, label = proplabel1),
-                nudge_x = 6, color = color_scheme[1], size = 5, fontface = "bold") +
+                nudge_x = text_nudge, color = color_scheme[1], size = 5, fontface = "bold") +
       geom_text(data = data[data$max1 == TRUE, ],
                 aes(x = prop2, label = proplabel2),
-                nudge_x = -6, color = color_scheme[2], size = 5, fontface = "bold") +
+                nudge_x = -text_nudge, color = color_scheme[2], size = 5, fontface = "bold") +
       geom_text(data = data[data$max1 == FALSE, ],
                 aes(x = prop2, label = proplabel2),
-                nudge_x = 6, color = color_scheme[2], size = 5, fontface = "bold") +
+                nudge_x = text_nudge, color = color_scheme[2], size = 5, fontface = "bold") +
       geom_vline(xintercept = 0, color = "#dddddf") +
       scale_x_continuous(limits=c(ymin, ymax), breaks=seq(ymin, ymax, 20), labels = paste(seq(ymin,ymax, 20), "%", sep=""), expand = c(0,0)) +
       scale_color_manual(values = color_scheme) +
