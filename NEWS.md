@@ -1,3 +1,8 @@
+# lapop 1.3.6
+
+* fixed warnings in dependencies on documentation
+* added option for text_nudge in lapop_dumb()
+
 # lapop 1.3.5
 
 * fix issue in mline where repeated labels became disorganized

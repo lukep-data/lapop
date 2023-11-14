@@ -107,6 +107,7 @@ NULL
 #'@import ggplot2
 #'@importFrom ggh4x facet_grid2
 #'@importFrom ggtext element_markdown
+#'@importFrom stats setNames
 #'@import showtext
 #'
 #'@author Luke Plutowski, \email{luke.plutowski@@vanderbilt.edu}

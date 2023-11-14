@@ -100,7 +100,7 @@ NULL
 #'                               "20%", "14%", "18%", "17%", "25%", "36%"))
 #'
 #'lapop_mline(df,
-#'              main_title = "Intentions to emigrate in Guatemala, Honduras and Mexico reached\n their highest levels",
+#'              main_title = "Intentions to emigrate in Guatemala, Honduras and Mexico reached their highs",
 #'              subtitle = "% who intend to migrate in:",
 #'              source_info = "GM 2004-2021")
 #'
@@ -109,6 +109,7 @@ NULL
 #'@importFrom ggtext element_markdown
 #'@importFrom ggrepel geom_text_repel
 #'@importFrom zoo na.approx
+#'@importFrom dplyr na.omit
 #'@import showtext
 #'@import dplyr
 #'
@@ -131,7 +132,7 @@ lapop_mline <- function(data, varlabel = data$varlabel, wave_var = as.character(
                         color_scheme = c("#784885", "#00adaa", "#c74e49", "#2d708e", "#a43d6a", "#202020"),
                         percentages = TRUE,
                         all_labels = FALSE){
-  if(class(varlabel) != "character" & class(varlabel) != "factor"){
+  if(!inherits(varlabel, "character") & !inherits(varlabel, "factor")){
     varlabel = as.character(varlabel)
     data$varlabels = as.character(data$varlabel)
   }

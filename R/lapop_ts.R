@@ -101,7 +101,7 @@ lapop_ts <- function(data, outcome_var = data$prop, lower_bound = data$lb,
   #and turn to creating the graph
   update_geom_defaults("text", list(family = "roboto"))
   ggplot(data=data, aes(x=wave_var, y=outcome_var)) +
-    geom_line(aes(group = 1), color=color_scheme, size = 1, alpha=0.48) +
+    geom_line(aes(group = 1), color=color_scheme, linewidth = 1, alpha=0.48) +
     geom_line(aes(group = 1, y =lower_bound), color=color_scheme, linewidth = 1, alpha=0.48, lty="dashed") +
     geom_line(aes(group = 1, y= upper_bound), color=color_scheme, linewidth = 1, alpha=0.48, lty="dashed") +
     geom_point(aes(y = point_var, color = " "), size = 3.5, alpha=0.48, key_glyph = "point") +

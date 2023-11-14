@@ -99,6 +99,8 @@ NULL
 #'@import ggplot2
 #'@import ggtext
 #'@import showtext
+#'@importFrom stats reorder
+
 #'
 #'@author Luke Plutowski, \email{luke.plutowski@@vanderbilt.edu}
 #'
@@ -118,11 +120,11 @@ lapop_stack <- function(data, outcome_var = data$prop, prop_labels = data$propla
                      subtitle_h_just = 0,
                      fixed_aspect_ratio = TRUE,
                      color_scheme = c("#784885", "#00adaa", "#c74e49", "#2d708e", "#a43d6a","#202020")){
-  if(class(var_labels) != "character" & class(var_labels) != "factor"){
+  if(!inherits(var_labels, "character") & !inherits(var_labels, "factor")){
     var_labels = as.character(var_labels)
     data$varlabels = as.character(data$varlabel)
   }
-  if(class(value_labels) != "character" & class(value_labels) != "factor"){
+  if(!inherits(value_labels, "character") & !inherits(value_labels, "factor")){
     value_labels = as.character(value_labels)
     data$vallabel = as.character(data$vallabel)
   }
