@@ -109,7 +109,6 @@ NULL
 #'@importFrom ggtext element_markdown
 #'@importFrom ggrepel geom_text_repel
 #'@importFrom zoo na.approx
-#'@importFrom dplyr na.omit
 #'@import showtext
 #'@import dplyr
 #'
