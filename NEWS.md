@@ -1,3 +1,7 @@
+# lapop 1.3.7
+
+*fixed bug in ccm sorting
+
 # lapop 1.3.6
 
 * fixed warnings in dependencies on documentation

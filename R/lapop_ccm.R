@@ -98,6 +98,7 @@ lapop_ccm <- function(data,
                              " <span style='color:#585860; font-size:18pt'> \u0131\u2014\u0131</span> ",
                              "<span style='color:#585860; font-size:13pt'>95% int. de conf. </span>"),
                              data$var)
+    data$var = factor(data$var, levels = unique(data$var))
   } else{
     data$var = ifelse(data$var == unique(data$var)[length(unique(data$var))],
                       paste0(data$var,
