@@ -129,7 +129,7 @@ lapop_cc <- function(data, outcome_var = data$prop, lower_bound = data$lb, valla
                                       "<span style='color:#FFFFFF00'>-----------</span>",
                                       ci_text),
                       na.value = paste0(color_scheme, "90")) +
-    scale_y_continuous(limits = c(ymin, ymax)) +
+    scale_y_continuous(limits = c(ymin, ymax), expand = expansion(mult = 0.002)) +
     labs(title=main_title,
          y = "",
          x = "",
@@ -139,7 +139,8 @@ lapop_cc <- function(data, outcome_var = data$prop, lower_bound = data$lb, valla
           plot.title = element_text(size = 18, family = "nunito", face = "bold"),
           plot.caption = element_text(size = 10.5, vjust = 2, hjust = 0.02, family = "nunito", color="#585860"),
           panel.background = element_blank(),
-          panel.border = element_rect(linetype = "solid", color = "#dddddf", fill = NA),
+          panel.border = element_blank(),
+          axis.line.x = element_line(linewidth = 0.6, linetype = "solid", colour = "#dddddf"),
           axis.text = element_text(size = 14, color = "#585860", face = "bold"),
           axis.text.y = element_blank(),
           axis.ticks = element_blank(),

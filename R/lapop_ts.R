@@ -137,8 +137,9 @@ lapop_ts <- function(data, outcome_var = data$prop, lower_bound = data$lb,
           plot.caption = element_text(size = 10.5, vjust = 2, hjust = 0.02, family = "nunito", color="#585860"),
           axis.title.y = element_blank(),
           axis.text = element_text(size = 14, color = "#585860"),
-          panel.grid = element_line(color = "#dddddf"),
-          panel.border = element_rect(linetype = "solid", color = "#dddddf", fill = NA),
+          panel.grid.major = element_line(color = "#dddddf", linewidth = 0.5),
+          panel.grid.minor = element_line(color = "#dddddf", linewidth = 0.5),
+          panel.border = element_rect(color = "#dddddf", fill = NA, linewidth = 1.0),
           legend.position = "top",
           plot.title.position = "plot",
           plot.caption.position = "plot",
@@ -147,3 +148,6 @@ lapop_ts <- function(data, outcome_var = data$prop, lower_bound = data$lb,
           legend.margin = margin(t=0, b=0),
           legend.text=element_markdown(family = "nunito-light"))
 }
+
+
+

@@ -139,7 +139,7 @@ lapop_ccm <- function(data,
                   show.legend = FALSE) +
     scale_fill_manual(values = fill_colors) +
     scale_color_manual(values = color_scheme) +
-    scale_y_continuous(limits = c(ymin, ymax)) +
+    scale_y_continuous(limits = c(ymin, ymax), expand = expansion(mult = 0.002)) +
     labs(title=main_title,
          y = y_label,
          x = x_label,
@@ -150,7 +150,8 @@ lapop_ccm <- function(data,
           plot.title = element_text(size = 18, family = "nunito", face = "bold"),
           plot.caption = element_text(size = 10.5, vjust = 2, hjust = 0.02, family = "nunito", color="#585860"),
           panel.background = element_blank(),
-          panel.border = element_rect(linetype = "solid", color = "#dddddf", fill = NA),
+          panel.border = element_blank(),
+          axis.line.x = element_line(linewidth = 0.6, linetype = "solid", colour = "#dddddf"),
           axis.text = element_text(size = 14, color = "#585860", face = "bold"),
           axis.text.y = element_blank(),
           axis.ticks = element_blank(),

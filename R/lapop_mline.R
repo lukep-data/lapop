@@ -212,4 +212,4 @@ lapop_mline <- function(data, varlabel = data$varlabel, wave_var = as.character(
           legend.text=element_markdown(family = "nunito", face = "bold"))
 }
 
-
+?lapop_ccm

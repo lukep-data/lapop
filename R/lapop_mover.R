@@ -140,7 +140,10 @@ lapop_mover <- function(data,
   update_geom_defaults("text", list(family = "roboto"))
   ggplot(data, aes(x = order, y = prop, color = factor(varlabel), label = proplabel)) +
     geom_point(alpha=0.47, key_glyph = "point") +
-    facet_grid2(cols = vars(varlabel), scales = "free", space = "free",
+    facet_grid2(cols = vars(varlabel),
+                scales = "free",
+                space = "free",
+                axes = "all",
                 strip = strip_themed(
                   text_x = list(element_text(color = mycolors[1]),
                                 element_text(color = mycolors[2]),
@@ -161,8 +164,9 @@ lapop_mover <- function(data,
     scale_y_continuous(limits = c(ymin, ymax),
                        breaks = seq(ymin, ymax, ifelse(ymax - ymin <= 50, 5, 10)),
                        expand = c(0,0)) +
-    scale_x_discrete(labels = setNames(data$vallabel, data$order)) +
-    geom_vline(xintercept = seq(0.5, length(data$vallabel), by = 1), color="#dddddf", size = 0.25) +
+    scale_x_discrete(labels = setNames(data$vallabel, data$order),
+                     expand=expansion(add=0.5)) +
+    geom_vline(xintercept = seq(0.5, length(data$vallabel), by = 1), color="#dddddf", size = 0.5) +
     labs(title = main_title,
          y = "",
          x = " ",
@@ -173,8 +177,9 @@ lapop_mover <- function(data,
           plot.caption = element_text(size = 10.5, hjust = 0.02, vjust = 2, family = "nunito", color="#585860"),
           plot.subtitle = element_text(size = 14, family = "nunito", color="#585860"),
           panel.grid.major.x = element_blank(),
-          panel.grid.major.y = element_line(size=.25, color="#dddddf"),
+          panel.grid.major.y = element_line(size=.5, color="#dddddf"),
           panel.background = element_rect(fill = "white"),
+          panel.border = element_rect(linetype = "solid", color = "#dddddf", fill = NA, linewidth = 1),
           axis.text.y = element_blank(),
           axis.text.x = element_text(angle = x_lab_angle, vjust = 0.5),
           axis.ticks = element_blank(),
@@ -191,3 +196,4 @@ lapop_mover <- function(data,
           strip.background = element_blank()
     )
 }
+

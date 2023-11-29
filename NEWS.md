@@ -1,3 +1,7 @@
+# lapop 1.3.8
+
+* updated gridlines and borders in line with new report templates 
+
 # lapop 1.3.7
 
 *fixed bug in ccm sorting
