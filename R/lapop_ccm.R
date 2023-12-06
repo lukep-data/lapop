@@ -32,6 +32,8 @@ NULL
 #' Default: None.
 #' @param y_label Character.  Y-axis label.
 #' @param x_label Character.  X-axis label.
+#' @param highlight Character.  Country of interest.  Will highlight (make darker) that country's bar.
+#' Input must match entry in "vallabel" exactly. Default: None.
 #' @param lang Character.  Changes default subtitle text and source info to either Spanish or English.
 #' Will not translate input text, such as main title or variable labels.  Takes either "en" (English)
 #' or "es" (Spanish).  Default: "en".
@@ -87,10 +89,17 @@ lapop_ccm <- function(data,
                       sort = "",
                       y_label = "",
                       x_label = "",
-                      color_scheme = c("#784885", "#00ADAA", "#2AC69D"),
+                      highlight = "",
+                      color_scheme = c("#784885", "#008381", "#C74E49"),
                       label_size = 4,
                       text_position = 0.7){
-  fill_colors = paste0(color_scheme, "51")
+  fill_colors = paste0(color_scheme, "52")
+  if(highlight != ""){
+    data$hl_var = factor(ifelse(data$pais == highlight, 1, 0), labels = c("hl", "other"))
+  }
+  else{
+    data$hl_var = factor("other")
+  }
   if (lang == "es"){
     data$var = ifelse(data$var == unique(data$var)[length(unique(data$var))],
                       paste0(data$var,
@@ -128,7 +137,7 @@ lapop_ccm <- function(data,
   }
   update_geom_defaults("text", list(family = "roboto"))
   ggplot(data=data, aes(x=factor(pais, levels = unique(pais)), y=prop, fill = var, color = var)) +
-    geom_bar(position = "dodge", stat="identity", width = 0.7) +
+    geom_bar(aes(fill = var, color = var, alpha = hl_var), position = "dodge", stat="identity", width = 0.7) +
     geom_text(aes(label=label_var, y = upper_bound, group = var),
               position = position_dodge(width = text_position),
               vjust= -0.5, size = label_size, fontface = "bold",
@@ -139,6 +148,7 @@ lapop_ccm <- function(data,
                   show.legend = FALSE) +
     scale_fill_manual(values = fill_colors) +
     scale_color_manual(values = color_scheme) +
+    scale_alpha_discrete(range = c(0.32, 0.6), guide = 'none') +
     scale_y_continuous(limits = c(ymin, ymax), expand = expansion(mult = 0.002)) +
     labs(title=main_title,
          y = y_label,
@@ -163,3 +173,4 @@ lapop_ccm <- function(data,
           legend.margin = margin(t=0, b=0),
           legend.text = element_markdown(family = "nunito-light"))
 }
+

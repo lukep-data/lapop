@@ -21,6 +21,7 @@ lapop_ccm(
   sort = "",
   y_label = "",
   x_label = "",
+  highlight = "",
   color_scheme = c("#784885", "#00ADAA", "#2AC69D"),
   label_size = 4,
   text_position = 0.7
@@ -60,6 +61,9 @@ Default: None.}
 \item{y_label}{Character.  Y-axis label.}
 
 \item{x_label}{Character.  X-axis label.}
+
+\item{highlight}{Character.  Country of interest.  Will highlight (make darker) that country's bar.
+Input must match entry in "vallabel" exactly. Default: None.}
 
 \item{color_scheme}{Character.  Color of bars.  Takes hex number, beginning with "#".
 Default: "#784885"  (purple), "#00ADAA" (teal), "#2AC69D" (light green).}
