@@ -42,7 +42,7 @@
 lapop_save <- function(figure, filename,
                        format = "svg",
                        logo = FALSE,
-                       width_px = 750,
+                       width_px = 895,
                        height_px = 500){
   dev.new()
   if(format == "svg"){
