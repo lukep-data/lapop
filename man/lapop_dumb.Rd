@@ -51,7 +51,7 @@ Default: "wave2".}
 Default: "hi-lo".}
 
 \item{color_scheme}{Character.  Color of data points.  Must supply two values.  Takes hex numbers, beginning with "#".
-Default: c("#008381", "#A43D6A") (green, purple).}
+Default: "#482677", "#3CBC70".}
 
 \item{subtitle_h_just, subtitle_v_just}{Numeric.  Move the subtitle/legend text left/down (negative numbers) or right/up (positive numbers).
 Ranges from -100 to 100.  Defaults: 40, -18.}

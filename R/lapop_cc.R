@@ -34,7 +34,7 @@ NULL
 #' Will not translate input text, such as main title or variable labels.  Takes either "en" (English)
 #' or "es" (Spanish).  Default: "en".
 #' @param color_scheme Character.  Color of bars.  Takes hex number, beginning with "#".
-#' Default: "#784885" (purple).
+#' Default: #784885.
 #' @param label_size Numeric.  Size of text for data labels (percentages above bars).  Default: 5.
 #'
 #' @return Returns an object of class \code{ggplot}, a ggplot figure showing
@@ -144,12 +144,12 @@ lapop_cc <- function(data, outcome_var = data$prop, lower_bound = data$lb, valla
           axis.text = element_text(size = 14, color = "#585860", face = "bold"),
           axis.text.y = element_blank(),
           axis.ticks = element_blank(),
-          legend.position = "top",
           plot.title.position = "plot",
           plot.caption.position = "plot",
+          legend.position = "top",
           legend.title = element_blank(),
           legend.justification='left',
-          legend.margin = margin(t=0, b=0),
+          legend.margin = margin(l=0, r=0, t=0, b=0),
           legend.text = element_markdown(family = "nunito-light"))
 }
 

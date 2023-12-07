@@ -22,7 +22,7 @@ lapop_ccm(
   y_label = "",
   x_label = "",
   highlight = "",
-  color_scheme = c("#784885", "#00ADAA", "#2AC69D"),
+  color_scheme = c("#784885", "#008381", "#C74E49"),
   label_size = 4,
   text_position = 0.7
 )
@@ -66,7 +66,7 @@ Default: None.}
 Input must match entry in "vallabel" exactly. Default: None.}
 
 \item{color_scheme}{Character.  Color of bars.  Takes hex number, beginning with "#".
-Default: "#784885"  (purple), "#00ADAA" (teal), "#2AC69D" (light green).}
+Default: "#784885", "#008381", "#C74E49".}
 
 \item{label_size}{Numeric.  Size of text for data labels (percentages above bars).  Default: 4.}
 

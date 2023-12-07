@@ -9,7 +9,7 @@ lapop_save(
   filename,
   format = "svg",
   logo = FALSE,
-  width_px = 750,
+  width_px = 895,
   height_px = 500
 )
 }

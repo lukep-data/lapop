@@ -64,7 +64,7 @@ NULL
 #' or "es" (Spanish).  Default: "en".
 #' @param color_scheme Character.  Color of data bars for each value.  Allows up to 6 values.
 #' Takes hex numbers, beginning with "#".
-#' Default: c("#784885", "#00adaa", "#c74e49", "#2d708e", "#a43d6a","#202020")
+#' Default: c("#2D708E", "#008381", "#C74E49", "#784885", "#a43d6a","#202020")
 #' (navy blue, turquoise, teal, green, sap green, pea soup).
 #' @param subtitle_h_just Numeric.  Move the subtitle/legend text left (negative numbers) or right (positive numbers).
 #' Ranges from -100 to 100.  Default: 0.

@@ -56,7 +56,7 @@ Default: None.}
 "alpha" (alphabetical by vallabel/x-axis label). Default: Order of data frame.}
 
 \item{color_scheme}{Character.  Color of bars.  Takes hex number, beginning with "#".
-Default: "#784885" (purple).}
+Default: #784885.}
 
 \item{label_size}{Numeric.  Size of text for data labels (percentages above bars).  Default: 5.}
 }

@@ -40,7 +40,7 @@ NULL
 #' Will not translate input text, such as main title or variable labels.  #' Takes either "en" (English)
 #' or "es" (Spanish).  Default: "en".
 #' @param color_scheme Character.  Color of lines and dots.  Takes hex number, beginning with "#".
-#' Default: "#c74e49" (red).
+#' Default: "#A43D6A".
 #' @param percentages Logical.  Is the outcome variable a percentage?  Set to FALSE if you are using
 #' means of the raw values, so that the y-axis adjusts accordingly. Default: TRUE.
 #' @return Returns an object of class \code{ggplot}, a ggplot line graph showing

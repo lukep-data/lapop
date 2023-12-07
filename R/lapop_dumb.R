@@ -63,7 +63,7 @@ NULL
 #' Will not translate input text, such as main title or variable labels.  Takes either "en" (English)
 #' or "es" (Spanish).  Default: "en".
 #' @param color_scheme Character.  Color of data points.  Must supply two values.  Takes hex numbers, beginning with "#".
-#' Default: c("#008381", "#A43D6A") (green, purple).
+#' Default: "#482677", "#3CBC70".
 #' @param subtitle_h_just,subtitle_v_just Numeric.  Move the subtitle/legend text left/down (negative numbers) or right/up (positive numbers).
 #' Ranges from -100 to 100.  Defaults: 40, -18.
 #' @param sort Character.  The metric by which the data are sorted.  Options: "wave1" (outcome variable in first wave), "wave2" (outcome

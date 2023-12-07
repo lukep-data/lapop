@@ -38,7 +38,7 @@ NULL
 #' Will not translate input text, such as main title or variable labels.  Takes either "en" (English)
 #' or "es" (Spanish).  Default: "en".
 #' @param color_scheme Character.  Color of bars.  Takes hex number, beginning with "#".
-#' Default: "#784885"  (purple), "#00ADAA" (teal), "#2AC69D" (light green).
+#' Default: "#784885", "#008381", "#C74E49".
 #' @param label_size Numeric.  Size of text for data labels (percentages above bars).  Default: 4.
 #' @param text_position Numeric.  Amount that text above error bars should be offset (to avoid overlap).  Default: 0.7
 #'

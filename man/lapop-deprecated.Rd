@@ -19,7 +19,7 @@ lapop_db(
   subtitle = "",
   sort = "wave2",
   order = "hi-lo",
-  color_scheme = c("#3CBC70", "#482677"),
+  color_scheme = c("#482677", "#3CBC70"),
   subtitle_h_just = 40,
   subtitle_v_just = -18
 )
