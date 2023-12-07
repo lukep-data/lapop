@@ -119,7 +119,7 @@ lapop_stack <- function(data, outcome_var = data$prop, prop_labels = data$propla
                      order_bars = FALSE,
                      subtitle_h_just = 0,
                      fixed_aspect_ratio = TRUE,
-                     color_scheme = c("#784885", "#00adaa", "#c74e49", "#2d708e", "#a43d6a","#202020")){
+                     color_scheme = c("#2D708E", "#008381", "#C74E49", "#784885", "#a43d6a","#202020")){
   if(!inherits(var_labels, "character") & !inherits(var_labels, "factor")){
     var_labels = as.character(var_labels)
     data$varlabels = as.character(data$varlabel)
