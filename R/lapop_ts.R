@@ -82,7 +82,7 @@ lapop_ts <- function(data, outcome_var = data$prop, lower_bound = data$lb,
                      source_info = "",
                      subtitle = "",
                      lang = "en",
-                     color_scheme = "#c74e49",
+                     color_scheme = "#A43D6A",
                      percentages = TRUE){
 
   #interpolate data for missing waves are still plotted on the x-axis (without data)
