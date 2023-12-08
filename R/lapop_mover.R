@@ -65,7 +65,7 @@ NULL
 #' or "es" (Spanish).  Default: "en".
 #' @param color_scheme Character.  Color of data points and text for each secondary variable.  Allows up to 6 values.
 #' Takes hex numbers, beginning with "#".
-#' Default: c("#784885", "#00adaa", "#c74e49", "#2d708e", "#a43d6a")
+#' Default: c("#784885", "#008381", "#c74e49", "#2d708e", "#a43d6a")
 #' (purple, teal, green, olive, sap green, pea soup).
 #' @param subtitle_h_just Numeric.  Move the subtitle/legend text left (negative numbers) or right (positive numbers).
 #' Ranges from -100 to 100.  Default: 0.
@@ -127,7 +127,7 @@ lapop_mover <- function(data,
                          ymin = 0,
                          ymax = 100,
                          x_lab_angle = 90,
-                         color_scheme = c("#784885", "#00adaa", "#c74e49", "#2d708e", "#a43d6a")){
+                         color_scheme = c("#784885", "#008381", "#c74e49", "#2d708e", "#a43d6a")){
   data$varlabel = factor(data$varlabel, levels = unique(data$varlabel))
   data$order = 1:nrow(data)
   data$order = factor(data$order, levels = unique(data$order))
@@ -174,7 +174,7 @@ lapop_mover <- function(data,
                           source_info)) +
     theme(text = element_text(size = 14, family = "roboto"),
           plot.title = element_text(size = 17, family = "nunito", face = "bold"),
-          plot.caption = element_text(size = 10.5, hjust = 0.02, vjust = 2, family = "nunito", color="#585860"),
+          plot.caption = element_text(size = 10.5, hjust = 0, vjust = 2, family = "nunito", color="#585860"),
           plot.subtitle = element_text(size = 14, family = "nunito", color="#585860"),
           panel.grid.major.x = element_blank(),
           panel.grid.major.y = element_line(size=.5, color="#dddddf"),
@@ -187,11 +187,9 @@ lapop_mover <- function(data,
           legend.position = "top",
           legend.title = element_blank(),
           legend.justification='left',
-          legend.margin=margin(0, 0, -5, -20-subtitle_h_just),
+          legend.margin=margin(0, 0, -5, -10-subtitle_h_just),
           legend.text=element_markdown(family = "nunito-light"),
           legend.key=element_blank(),
-          plot.title.position = "plot",
-          plot.caption.position = "plot",
           strip.text = element_text(size = 14),
           strip.background = element_blank()
     )

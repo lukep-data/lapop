@@ -137,19 +137,17 @@ lapop_cc <- function(data, outcome_var = data$prop, lower_bound = data$lb, valla
                           source_info)) +
     theme(text = element_text(size = 14, family = "roboto"),
           plot.title = element_text(size = 18, family = "nunito", face = "bold"),
-          plot.caption = element_text(size = 10.5, vjust = 2, hjust = 0.02, family = "nunito", color="#585860"),
+          plot.caption = element_text(size = 10.5, vjust = 2, hjust = 0, family = "nunito", color="#585860"),
           panel.background = element_blank(),
           panel.border = element_blank(),
           axis.line.x = element_line(linewidth = 0.6, linetype = "solid", colour = "#dddddf"),
           axis.text = element_text(size = 14, color = "#585860", face = "bold"),
           axis.text.y = element_blank(),
           axis.ticks = element_blank(),
-          plot.title.position = "plot",
-          plot.caption.position = "plot",
           legend.position = "top",
           legend.title = element_blank(),
           legend.justification='left',
-          legend.margin = margin(l=0, r=0, t=0, b=0),
+          legend.margin = margin(t=0, b=0, l=-7, r=0),
           legend.text = element_markdown(family = "nunito-light"))
 }
 

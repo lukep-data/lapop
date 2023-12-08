@@ -80,7 +80,7 @@ NULL
 #'  (secondary variable labels).  Defaults: 0 (left justify).
 #' @param color_scheme Character.  Color of lines and dots.  Takes hex number, beginning with "#".
 #' Must specify four values, even if four are not used.
-#' Default: c("#784885", "#00adaa", "#c74e49", "#2d708e", "#a43d6a", "#202020").
+#' Default: c("#784885", "#008381", "#c74e49", "#2d708e", "#a43d6a", "#202020").
 #' @param percentages Logical.  Is the outcome variable a percentage?  Set to FALSE if you are using
 #' means of the raw values, so that the y-axis adjusts accordingly. Default: TRUE.
 #' @param all_labels Logical.  If TRUE, show text above all points, instead of only those in the most recent wave. Default: FALSE.
@@ -128,7 +128,7 @@ lapop_mline <- function(data, varlabel = data$varlabel, wave_var = as.character(
                         legend_h_just = 40,
                         legend_v_just = -20,
                         subtitle_h_just = 0,
-                        color_scheme = c("#784885", "#00adaa", "#c74e49", "#2d708e", "#a43d6a", "#202020"),
+                        color_scheme = c("#784885", "#008381", "#c74e49", "#2d708e", "#a43d6a", "#202020"),
                         percentages = TRUE,
                         all_labels = FALSE){
   if(!inherits(varlabel, "character") & !inherits(varlabel, "factor")){
@@ -196,7 +196,7 @@ lapop_mline <- function(data, varlabel = data$varlabel, wave_var = as.character(
     theme_minimal() +
     theme(text = element_text(size = 14, family = "roboto"),
           plot.title = element_text(size = 18, family = "nunito", face = "bold"),
-          plot.caption = element_text(size = 10.5, vjust = 2, hjust = 0.02, family = "nunito", color="#585860"),
+          plot.caption = element_text(size = 10.5, vjust = 2, hjust = 0, family = "nunito", color="#585860"),
           plot.subtitle = element_text(size = 14, family = "nunito-light", color="#585860", hjust = subtitle_h_just),
           axis.title.y = element_blank(),
           axis.text = element_text(size = 14, color = "#585860"),
@@ -212,4 +212,3 @@ lapop_mline <- function(data, varlabel = data$varlabel, wave_var = as.character(
           legend.text=element_markdown(family = "nunito", face = "bold"))
 }
 
-?lapop_ccm

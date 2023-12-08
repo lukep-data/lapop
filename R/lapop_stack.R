@@ -243,7 +243,7 @@ lapop_stack <- function(data, outcome_var = data$prop, prop_labels = data$propla
          subtitle = subtitle) +
     theme(text = element_text(size = 14, family = "roboto"),
           plot.title = element_text(size = 17, family = "nunito", face = "bold"),
-          plot.caption = element_text(size = 10.5, hjust = 0.02, vjust = 2, family = "roboto-light", color="#585860"),
+          plot.caption = element_text(size = 10.5, hjust = 0, vjust = 2, family = "roboto-light", color="#585860"),
           plot.subtitle = element_text(size = 14, family = "nunito-light", color="#585860"),
           axis.title.y = element_blank(),
           axis.text.x = element_blank(),

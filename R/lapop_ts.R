@@ -40,7 +40,7 @@ NULL
 #' Will not translate input text, such as main title or variable labels.  #' Takes either "en" (English)
 #' or "es" (Spanish).  Default: "en".
 #' @param color_scheme Character.  Color of lines and dots.  Takes hex number, beginning with "#".
-#' Default: "#A43D6A".
+#' Default: "#A43D6A" (red).
 #' @param percentages Logical.  Is the outcome variable a percentage?  Set to FALSE if you are using
 #' means of the raw values, so that the y-axis adjusts accordingly. Default: TRUE.
 #' @return Returns an object of class \code{ggplot}, a ggplot line graph showing
@@ -134,7 +134,7 @@ lapop_ts <- function(data, outcome_var = data$prop, lower_bound = data$lb,
     theme_minimal() +
     theme(text = element_text(size = 14, family = "roboto"),
           plot.title = element_text(size = 18, family = "nunito", face = "bold"),
-          plot.caption = element_text(size = 10.5, vjust = 2, hjust = 0.02, family = "nunito", color="#585860"),
+          plot.caption = element_text(size = 10.5, vjust = 2, hjust = 0, family = "nunito", color="#585860"),
           axis.title.y = element_blank(),
           axis.text = element_text(size = 14, color = "#585860"),
           panel.grid.major = element_line(color = "#dddddf", linewidth = 0.5),
@@ -145,7 +145,7 @@ lapop_ts <- function(data, outcome_var = data$prop, lower_bound = data$lb,
           plot.caption.position = "plot",
           legend.title = element_blank(),
           legend.justification='left',
-          legend.margin = margin(t=0, b=0),
+          legend.margin = margin(t=0, b=0, l=-40, r=0),
           legend.text=element_markdown(family = "nunito-light"))
 }
 

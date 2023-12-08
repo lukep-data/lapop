@@ -158,7 +158,7 @@ lapop_ccm <- function(data,
     {if(subtitle != "")labs(subtitle = subtitle)}+
     theme(text = element_text(size = 14, family = "roboto"),
           plot.title = element_text(size = 18, family = "nunito", face = "bold"),
-          plot.caption = element_text(size = 10.5, vjust = 2, hjust = 0.02, family = "nunito", color="#585860"),
+          plot.caption = element_text(size = 10.5, vjust = 2, hjust = 0, family = "nunito", color="#585860"),
           panel.background = element_blank(),
           panel.border = element_blank(),
           axis.line.x = element_line(linewidth = 0.6, linetype = "solid", colour = "#dddddf"),
@@ -166,11 +166,9 @@ lapop_ccm <- function(data,
           axis.text.y = element_blank(),
           axis.ticks = element_blank(),
           legend.position = "top",
-          plot.title.position = "plot",
-          plot.caption.position = "plot",
           legend.title = element_blank(),
           legend.justification='left',
-          legend.margin = margin(t=0, b=0),
+          legend.margin = margin(t=0, b=0, l=-7),
           legend.text = element_markdown(family = "nunito-light"))
 }
 

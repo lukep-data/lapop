@@ -16,7 +16,7 @@ lapop_mover(
   ymin = 0,
   ymax = 100,
   x_lab_angle = 90,
-  color_scheme = c("#784885", "#00adaa", "#c74e49", "#2d708e", "#a43d6a")
+  color_scheme = c("#784885", "#008381", "#c74e49", "#2d708e", "#a43d6a")
 )
 }
 \arguments{
@@ -52,7 +52,7 @@ Ranges from -100 to 100.  Default: 0.}
 
 \item{color_scheme}{Character.  Color of data points and text for each secondary variable.  Allows up to 6 values.
 Takes hex numbers, beginning with "#".
-Default: c("#784885", "#00adaa", "#c74e49", "#2d708e", "#a43d6a")
+Default: c("#784885", "#008381", "#c74e49", "#2d708e", "#a43d6a")
 (purple, teal, green, olive, sap green, pea soup).}
 }
 \value{
