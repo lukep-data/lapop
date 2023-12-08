@@ -1,3 +1,11 @@
+# lapop 1.3.9
+
+* change default colors
+* titles, subtitles, and source info aligned with plot
+*add country highlight option for ccm
+* line space before and after x axis label
+
+
 # lapop 1.3.8
 
 * updated gridlines and borders in line with new report templates 

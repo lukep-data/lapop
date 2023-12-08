@@ -156,6 +156,7 @@ lapop_ccm <- function(data,
          caption = paste0(ifelse(lang == "es", "Fuente: ", "Source: "),
                           source_info)) +
     {if(subtitle != "")labs(subtitle = subtitle)}+
+    {if(x_label != "")theme(axis.title.x = element_text(margin = margin(b = 10, t = 10)))} +
     theme(text = element_text(size = 14, family = "roboto"),
           plot.title = element_text(size = 18, family = "nunito", face = "bold"),
           plot.caption = element_text(size = 10.5, vjust = 2, hjust = 0, family = "nunito", color="#585860"),
@@ -170,5 +171,6 @@ lapop_ccm <- function(data,
           legend.justification='left',
           legend.margin = margin(t=0, b=0, l=-7),
           legend.text = element_markdown(family = "nunito-light"))
+
 }
 
