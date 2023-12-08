@@ -141,7 +141,7 @@ lapop_mline <- function(data, varlabel = data$varlabel, wave_var = as.character(
       group_by(varlabel) %>%
       mutate(first = which(prop == dplyr::first(na.omit(prop))),
              prop = ifelse(is.na(prop) & wave != max(wave) & wave != min(wave) & seq_along(wave) >= first,
-                           zoo::na.approx(prop), prop)) %>%
+                           zoo::na.approx(prop, na.rm = FALSE), prop)) %>%
       ungroup() %>%
       pull(prop)
   }
