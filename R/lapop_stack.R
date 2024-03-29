@@ -232,7 +232,7 @@ lapop_stack <- function(data, outcome_var = data$prop, prop_labels = data$propla
                              direction = "y",
                              force_pull = 0.2, force = 5) +
     coord_flip() +
-    scale_fill_manual(values = mycolors, guide=guide_legend(reverse = TRUE)) +
+    scale_fill_manual(values = mycolors, guide=guide_legend(reverse = TRUE, nrow = 1)) +
     scale_x_discrete(limits = positions, expand = c(0, 0)) +
     scale_y_continuous(expand = c(0.02, 0)) +
     labs(title = main_title,

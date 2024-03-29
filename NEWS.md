@@ -1,3 +1,7 @@
+# lapop 1.3.10
+
+* stack() subtitle fixed to one line
+
 # lapop 1.3.9
 
 * change default colors
