@@ -103,14 +103,11 @@ NULL
 #'             ymax = 40)
 #'
 #'@export
-#'@import ggh4x
-#'@importFrom ggh4x guide_axis_logticks
+#'@import ggplot2
 #'@importFrom ggh4x facet_grid2
 #'@importFrom ggtext element_markdown
 #'@importFrom stats setNames
 #'@import showtext
-#'@import ggplot2
-
 #'
 #'@author Luke Plutowski, \email{luke.plutowski@@vanderbilt.edu}
 #'
@@ -142,7 +139,7 @@ lapop_mover <- function(data,
   update_geom_defaults("text", list(family = "roboto"))
   ggplot(data, aes(x = order, y = prop, color = factor(varlabel), label = proplabel)) +
     geom_point(alpha=0.47, key_glyph = "point") +
-    facet_grid2(cols = vars(varlabel),
+    ggh4x::facet_grid2(cols = vars(varlabel),
                 scales = "free",
                 space = "free",
                 axes = "all",
