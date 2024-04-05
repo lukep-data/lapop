@@ -22,7 +22,8 @@ lapop_mline(
   subtitle_h_just = 0,
   color_scheme = c("#784885", "#008381", "#c74e49", "#2d708e", "#a43d6a", "#202020"),
   percentages = TRUE,
-  all_labels = FALSE
+  all_labels = FALSE,
+  legendnrow = 1
 )
 }
 \arguments{
@@ -66,6 +67,8 @@ Default: c("#784885", "#008381", "#c74e49", "#2d708e", "#a43d6a", "#202020").}
 means of the raw values, so that the y-axis adjusts accordingly. Default: TRUE.}
 
 \item{all_labels}{Logical.  If TRUE, show text above all points, instead of only those in the most recent wave. Default: FALSE.}
+
+\item{legendnrow}{Numeric.  How many rows for legend labels. Default: 1.}
 }
 \description{
 This function creates a time series graph utilizing multiple lines representing values of

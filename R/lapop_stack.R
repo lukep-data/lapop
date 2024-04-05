@@ -77,6 +77,7 @@ NULL
 #' @param hide_small_values Logical.  Should labels for categories with less than 5 percent be hidden?  Default: TRUE.
 #' @param order_bars Logical.  Should categories be placed in descending order for each bar?  Default: FALSE.
 #' showing the distributions of multiple categorical variables.
+#' @param legendnrow Numeric.  How many rows for legend labels. Default: 1.
 #' @examples
 #'
 #' df <- data.frame(varlabel = c(rep("Politicians can\nidentify voters", 5),
@@ -119,6 +120,7 @@ lapop_stack <- function(data, outcome_var = data$prop, prop_labels = data$propla
                      order_bars = FALSE,
                      subtitle_h_just = 0,
                      fixed_aspect_ratio = TRUE,
+                     legendnrow = 1,
                      color_scheme = c("#2D708E", "#008381", "#C74E49", "#784885", "#a43d6a","#202020")){
   if(!inherits(var_labels, "character") & !inherits(var_labels, "factor")){
     var_labels = as.character(var_labels)
@@ -189,7 +191,7 @@ lapop_stack <- function(data, outcome_var = data$prop, prop_labels = data$propla
                                direction = "y",
                                force_pull = 0.2, force = 5) +
       coord_flip() +
-      scale_fill_manual(values = mycolors, guide=guide_legend(reverse = TRUE)) +
+      scale_fill_manual(values = mycolors, guide=guide_legend(reverse = TRUE, nrow = legendnrow)) +
       scale_x_discrete(limits = positions, expand = c(0, 0)) +
       scale_y_continuous(expand = c(0.02, 0)) +
       labs(title = main_title,

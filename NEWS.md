@@ -1,3 +1,7 @@
+# lapop 1.3.10
+
+* add option legendnrow to stack() and mline()
+
 # lapop 1.3.9
 
 * change default colors

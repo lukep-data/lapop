@@ -20,6 +20,7 @@ lapop_stack(
   order_bars = FALSE,
   subtitle_h_just = 0,
   fixed_aspect_ratio = TRUE,
+  legendnrow = 1,
   color_scheme = c("#2D708E", "#008381", "#C74E49", "#784885", "#a43d6a", "#202020")
 )
 }
@@ -62,6 +63,8 @@ Ranges from -100 to 100.  Default: 0.}
 \item{fixed_aspect_ratio}{Logical.  Should the aspect ratio be set to a specific value (0.35)?
 This prevents bars from stretching vertically to fit the plot area.  Set to false when you have
 a large number of bars (> 10).  Default: TRUE.}
+
+\item{legendnrow}{Numeric.  How many rows for legend labels. Default: 1.}
 
 \item{color_scheme}{Character.  Color of data bars for each value.  Allows up to 6 values.
 Takes hex numbers, beginning with "#".

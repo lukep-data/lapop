@@ -84,6 +84,7 @@ NULL
 #' @param percentages Logical.  Is the outcome variable a percentage?  Set to FALSE if you are using
 #' means of the raw values, so that the y-axis adjusts accordingly. Default: TRUE.
 #' @param all_labels Logical.  If TRUE, show text above all points, instead of only those in the most recent wave. Default: FALSE.
+#' @param legendnrow Numeric.  How many rows for legend labels. Default: 1.
 #'@examples
 #'df <- data.frame(varlabel = c(rep("Honduras", 9), rep("El Salvador", 9),
 #'                              rep("Mexico", 9), rep("Guatemala", 9)),
@@ -131,7 +132,8 @@ lapop_mline <- function(data, varlabel = data$varlabel, wave_var = as.character(
                         subtitle_h_just = 0,
                         color_scheme = c("#784885", "#008381", "#c74e49", "#2d708e", "#a43d6a", "#202020"),
                         percentages = TRUE,
-                        all_labels = FALSE){
+                        all_labels = FALSE,
+                        legendnrow = 1){
   if(!inherits(varlabel, "character") & !inherits(varlabel, "factor")){
     varlabel = as.character(varlabel)
     data$varlabels = as.character(data$varlabel)
@@ -165,7 +167,8 @@ lapop_mline <- function(data, varlabel = data$varlabel, wave_var = as.character(
                                       "'>",
                                       levels(varlabel),
                                       "</span>"),
-                       values = mycolors) +
+                       values = mycolors,
+                       guide=guide_legend(nrow = legendnrow)) +
     {if(all_labels){
       geom_text(aes(label=label_var, color = varlabel),
                 family = "roboto", fontface = "bold", size = 5, vjust = -2,
