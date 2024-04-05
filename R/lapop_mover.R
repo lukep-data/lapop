@@ -104,12 +104,13 @@ NULL
 #'
 #'@export
 #'@import ggh4x
-#'@import ggplot2
-#'@importFrom ggh4x facet_grid2
 #'@importFrom ggh4x guide_axis_logticks
+#'@importFrom ggh4x facet_grid2
 #'@importFrom ggtext element_markdown
 #'@importFrom stats setNames
 #'@import showtext
+#'@import ggplot2
+
 #'
 #'@author Luke Plutowski, \email{luke.plutowski@@vanderbilt.edu}
 #'
