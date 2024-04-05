@@ -106,6 +106,7 @@ NULL
 #'@import ggh4x
 #'@import ggplot2
 #'@importFrom ggh4x facet_grid2
+#'@importFrom ggh4x guide_axis_logticks
 #'@importFrom ggtext element_markdown
 #'@importFrom stats setNames
 #'@import showtext
