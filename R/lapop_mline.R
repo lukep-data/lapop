@@ -153,7 +153,7 @@ lapop_mline <- function(data, varlabel = data$varlabel, wave_var = as.character(
   textcolors = rep(mycolors, each = length(unique(wave_var)))
   end_labels = data %>%
     group_by(varlabel) %>%
-    mutate(last = which(prop == dplyr::last(na.omit(prop))),
+    mutate(last = max(which(prop == dplyr::last(na.omit(prop)))),
            end_labels = ifelse(seq_along(wave) == last, proplabel, NA)) %>%
     ungroup() %>%
     pull(end_labels)

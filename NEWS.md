@@ -1,3 +1,7 @@
+# lapop 1.3.11
+
+* fix glitch with mline() end label
+
 # lapop 1.3.10
 
 * add option legendnrow to stack() and mline()
