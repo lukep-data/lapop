@@ -147,7 +147,7 @@ lapop_cc <- function(data, outcome_var = data$prop, lower_bound = data$lb, valla
           legend.position = "top",
           legend.title = element_blank(),
           legend.justification='left',
-          legend.margin = margin(t=0, b=0, l=-7, r=0),
+          legend.margin = margin(t=0, b=0, l=0, r=0),
           legend.text = element_markdown(family = "nunito-light"))
 }
 

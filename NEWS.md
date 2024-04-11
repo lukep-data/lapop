@@ -1,7 +1,8 @@
 # lapop 1.3.11
 
 * fix glitch with mline() end label
-
+* change default horizontal alignment of subtitles back to zero
+ 
 # lapop 1.3.10
 
 * add option legendnrow to stack() and mline()
