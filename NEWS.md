@@ -1,3 +1,7 @@
+# lapop 1.3.12
+
+* add ability for multiple highlights in cc
+
 # lapop 1.3.11
 
 * fix glitch with mline() end label
