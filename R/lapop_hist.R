@@ -75,11 +75,12 @@ lapop_hist <- function(data, outcome_var = data$prop, label_var = data$proplabel
   ggplot(data, aes(x=factor(cat_var, levels = cat_var), y = outcome_var)) +
     geom_bar(stat = "identity", color = color_scheme, fill = paste0(color_scheme, "28"), width = 0.75) +
     geom_text(aes(label=label_var), vjust=-0.5, size = 5, fontface = "bold", color = color_scheme) +
+    scale_x_discrete(labels = function(x) str_wrap(x, width = 10)) +
     scale_y_continuous(limits = c(ymin, ymax), expand = c(0, 0.3), labels = function(x) paste0(x, "%")) +
     labs(title=main_title,
          y = "",
          x = "",
-         caption = paste0(ifelse(lang == "es", "Fuente: ", "Source: "),
+         caption = paste0(ifelse(lang == "es", "Fuente: LAPOP Lab", "Source: LAPOP Lab"),
                           source_info),
          subtitle = subtitle) +
     theme(text = element_text(size = 14, family = "roboto"),

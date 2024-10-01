@@ -105,15 +105,24 @@ lapop_ccm <- function(data,
                       paste0(data$var,
                              "<span style='color:#FFFFFF00'>-------</span>",
                              " <span style='color:#585860; font-size:18pt'> \u0131\u2014\u0131</span> ",
-                             "<span style='color:#585860; font-size:13pt'>95% int. de conf. </span>"),
+                             "<span style='color:#585860; font-size:13pt'>95% intervalo de confianza </span>"),
                              data$var)
     data$var = factor(data$var, levels = unique(data$var))
-  } else{
+  } else if (lang == "fr"){
     data$var = ifelse(data$var == unique(data$var)[length(unique(data$var))],
                       paste0(data$var,
                              "<span style='color:#FFFFFF00'>-------</span>",
                              " <span style='color:#585860; font-size:18pt'> \u0131\u2014\u0131</span> ",
-                             "<span style='color:#585860; font-size:13pt'>95% conf. int. </span>"),
+                             "<span style='color:#585860; font-size:13pt'>Intervalle de confiance de 95% </span>"),
+                      data$var)
+    data$var = factor(data$var, levels = unique(data$var))
+  }
+  else{
+    data$var = ifelse(data$var == unique(data$var)[length(unique(data$var))],
+                      paste0(data$var,
+                             "<span style='color:#FFFFFF00'>-------</span>",
+                             " <span style='color:#585860; font-size:18pt'> \u0131\u2014\u0131</span> ",
+                             "<span style='color:#585860; font-size:13pt'>95% confidence interval </span>"),
                       data$var)
     data$var = factor(data$var, levels = unique(data$var))
   }
@@ -153,7 +162,7 @@ lapop_ccm <- function(data,
     labs(title=main_title,
          y = y_label,
          x = x_label,
-         caption = paste0(ifelse(lang == "es", "Fuente: ", "Source: "),
+         caption = paste0(ifelse(lang == "es", "Fuente: LAPOP Lab", "Source: LAPOP Lab"),
                           source_info)) +
     {if(subtitle != "")labs(subtitle = subtitle)}+
     {if(x_label != "")theme(axis.title.x = element_text(margin = margin(b = 10, t = 10)))} +

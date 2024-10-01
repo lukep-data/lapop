@@ -135,8 +135,11 @@ lapop_mover <- function(data,
   ci_text = ifelse(lang == "es",
                    paste0(" <span style='color:#585860; font-size:18pt'>\u0131\u2014\u0131 </span>",
                           "<span style='color:#585860; font-size:13pt'>95% intervalo de confianza </span>"),
-                   paste0(" <span style='color:#585860; font-size:18pt'> \u0131\u2014\u0131 </span> ",
-                          "<span style='color:#585860; font-size:13pt'>95% confidence interval</span>"))
+                   ifelse(lang == "fr",
+                          paste0(" <span style='color:#585860; font-size:18pt'>\u0131\u2014\u0131 </span>",
+                                 "<span style='color:#585860; font-size:13pt'>Intervalle de confiance de 95% </span>"),
+                          paste0(" <span style='color:#585860; font-size:18pt'> \u0131\u2014\u0131 </span> ",
+                                 "<span style='color:#585860; font-size:13pt'>95% confidence interval</span>")))
   update_geom_defaults("text", list(family = "roboto"))
   ggplot(data, aes(x = order, y = prop, color = factor(varlabel), label = proplabel)) +
     geom_point(alpha=0.47, key_glyph = "point") +
@@ -170,7 +173,7 @@ lapop_mover <- function(data,
     labs(title = main_title,
          y = "",
          x = " ",
-         caption = paste0(ifelse(lang == "es", "Fuente: ", "Source: "),
+         caption = paste0(ifelse(lang == "es", "Fuente: LAPOP Lab", "Source: LAPOP Lab"),
                           source_info)) +
     theme(text = element_text(size = 14, family = "roboto"),
           plot.title = element_text(size = 17, family = "nunito", face = "bold"),
@@ -194,4 +197,3 @@ lapop_mover <- function(data,
           strip.background = element_blank()
     )
 }
-

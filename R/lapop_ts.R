@@ -95,9 +95,12 @@ lapop_ts <- function(data, outcome_var = data$prop, lower_bound = data$lb,
   ci_text = ifelse(lang == "es",
                    paste0(" <span style='color:", color_scheme, "; font-size:18pt'> \u2013 \u2013 \u2013</span> ",
                           "<span style='color:#585860; font-size:13pt'>95% intervalo de confianza </span>"),
-                   paste0(" <span style='color:", color_scheme, "; font-size:18pt'> \u2013 \u2013 \u2013</span> ",
-                          "<span style='color:#585860; font-size:13pt'>95% confidence </span>",
-                          "<span style='color:#585860'>interval</span>"))
+                   ifelse(lang == "fr",
+                          paste0(" <span style='color:", color_scheme, "; font-size:18pt'> \u2013 \u2013 \u2013</span> ",
+                                 "<span style='color:#585860; font-size:13pt'>Intervalle de confiance de 95% </span>"),
+                          paste0(" <span style='color:", color_scheme, "; font-size:18pt'> \u2013 \u2013 \u2013</span> ",
+                                 "<span style='color:#585860; font-size:13pt'>95% confidence </span>",
+                                 "<span style='color:#585860'>interval</span>")))
   #and turn to creating the graph
   update_geom_defaults("text", list(family = "roboto"))
   ggplot(data=data, aes(x=wave_var, y=outcome_var)) +
@@ -127,7 +130,7 @@ lapop_ts <- function(data, outcome_var = data$prop, lower_bound = data$lb,
       }
     } +
     labs(title = main_title,
-         caption = paste0(ifelse(lang == "es", "Fuente: ", "Source: "),
+         caption = paste0(ifelse(lang == "es", "Fuente: LAPOP Lab", "Source: LAPOP Lab"),
                           source_info),
          x = " ",
          y = " ") +

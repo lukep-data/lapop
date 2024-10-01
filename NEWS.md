@@ -1,3 +1,7 @@
+# lapop 1.3.13
+
+* add french labels
+
 # lapop 1.3.12
 
 * add ability for multiple highlights in cc

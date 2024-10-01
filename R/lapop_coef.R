@@ -106,7 +106,7 @@ lapop_coef <- function(data, coef_var = data$coef, label_var = data$proplabel,
     labs(title = main_title,
          y = " ",
          x = " ",
-         caption = paste0(ifelse(lang == "es", "Fuente: ", "Source: "),
+         caption = paste0(ifelse(lang == "es", "Fuente: LAPOP Lab", "Source: LAPOP Lab"),
                           source_info)) +
     theme(text = element_text(size = 14, family = "roboto"),
           plot.title = element_text(size = 18, family = "nunito", face = "bold"),

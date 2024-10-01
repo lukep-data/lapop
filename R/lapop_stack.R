@@ -240,7 +240,7 @@ lapop_stack <- function(data, outcome_var = data$prop, prop_labels = data$propla
     labs(title = main_title,
          y = "",
          x = " ",
-         caption = paste0(ifelse(lang == "es", "Fuente: ", "Source: "),
+         caption = paste0(ifelse(lang == "es", "Fuente: LAPOP Lab", "Source: LAPOP Lab"),
                           source_info),
          subtitle = subtitle) +
     theme(text = element_text(size = 14, family = "roboto"),

@@ -192,7 +192,7 @@ lapop_mline <- function(data, varlabel = data$varlabel, wave_var = as.character(
       }
     } +
     labs(title = main_title,
-         caption = paste0(ifelse(lang == "es", "Fuente: ", "Source: "),
+         caption = paste0(ifelse(lang == "es", "Fuente: LAPOP Lab", "Source: LAPOP Lab"),
                           source_info),
          x = " ",
          y = " ",

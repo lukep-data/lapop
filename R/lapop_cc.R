@@ -113,9 +113,12 @@ lapop_cc <- function(data, outcome_var = data$prop, lower_bound = data$lb, valla
   ci_text = ifelse(lang == "es",
                    paste0(" <span style='color:", color_scheme, "; font-size:18pt'> \u0131\u2014\u0131</span> ",
                           "<span style='color:#585860; font-size:13pt'>95% intervalo de confianza </span>"),
-                   paste0(" <span style='color:", color_scheme, "; font-size:18pt'> \u0131\u2014\u0131</span> ",
-                          "<span style='color:#585860; font-size:13pt'>95% confidence </span>",
-                          "<span style='color:#585860'>interval</span>"))
+                   ifelse(lang == "fr",
+                          paste0(" <span style='color:", color_scheme, "; font-size:18pt'> \u0131\u2014\u0131</span> ",
+                                 "<span style='color:#585860; font-size:13pt'>Intervalle de confiance de 95% </span>"),
+                          paste0(" <span style='color:", color_scheme, "; font-size:18pt'> \u0131\u2014\u0131</span> ",
+                                  "<span style='color:#585860; font-size:13pt'>95% confidence </span>",
+                                  "<span style='color:#585860'>interval</span>")))
     update_geom_defaults("text", list(family = "roboto"))
   ggplot(data=data, aes(x=factor(vallabel, levels = vallabel), y=prop, fill = hl_var)) +
     geom_bar(stat="identity", color = color_scheme, width = 0.6) +
@@ -133,7 +136,7 @@ lapop_cc <- function(data, outcome_var = data$prop, lower_bound = data$lb, valla
     labs(title=main_title,
          y = "",
          x = "",
-         caption = paste0(ifelse(lang == "es", "Fuente: ", "Source: "),
+         caption = paste0(ifelse(lang == "es", "Fuente: LAPOP Lab", "Source: LAPOP Lab"),
                           source_info)) +
     theme(text = element_text(size = 14, family = "roboto"),
           plot.title = element_text(size = 18, family = "nunito", face = "bold"),
