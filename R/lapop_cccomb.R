@@ -28,7 +28,6 @@ NULL
 #' @param width_px,height_px Numeric.  Width and height of saved graph in pixels. Default: 895, 600.
 #' @return Returns an object of class \code{ggplot}, a ggplot bar graph.
 #' @examples
-#'
 #'df1 <- data.frame(vallabel = c("Crime victim", "Non-victim"),
 #'prop = c(36.1, 19.3),
 #'proplabel = c("36%" ,"19%"),
@@ -47,7 +46,7 @@ NULL
 #'lapop_cccomb(ccx, ccy,
 #'subtitle1 = "% who support democracy",
 #'subtitle2 = "% who are satisfied with democracy",
-#'title = "Crime victims are thinking this and that and AmericasBarometer results indicate",
+#'title = "Crime victims are more supportive of and satisfied with democracy",
 #'source_info = ", AmericasBarometer 2023")
 #'
 #'
@@ -58,7 +57,6 @@ NULL
 #'@import gridExtra
 #'
 #'@author Luke Plutowski, \email{luke.plutowski@@vanderbilt.edu}
-
 
 
 lapop_cccomb <- function(cc1, cc2,
