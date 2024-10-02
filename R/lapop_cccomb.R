@@ -46,7 +46,7 @@ NULL
 #'lapop_cccomb(ccx, ccy,
 #'subtitle1 = "% who support democracy",
 #'subtitle2 = "% who are satisfied with democracy",
-#'title = "Crime victims are more supportive of and satisfied with democracy",
+#'main_title = "Crime victims are more supportive of and satisfied with democracy",
 #'source_info = ", AmericasBarometer 2023")
 #'
 #'
