@@ -23,7 +23,7 @@ lapop_mline(
   color_scheme = c("#784885", "#008381", "#c74e49", "#2d708e", "#a43d6a", "#202020"),
   percentages = TRUE,
   all_labels = FALSE,
-  ci = TRUE,
+  ci = FALSE,
   legendnrow = 1
 )
 }

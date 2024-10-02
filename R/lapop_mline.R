@@ -134,7 +134,7 @@ lapop_mline <- function(data, varlabel = data$varlabel, wave_var = as.character(
                         color_scheme = c("#784885", "#008381", "#c74e49", "#2d708e", "#a43d6a", "#202020"),
                         percentages = TRUE,
                         all_labels = FALSE,
-                        ci = TRUE,
+                        ci = FALSE,
                         legendnrow = 1){
   if(!inherits(varlabel, "character") & !inherits(varlabel, "factor")){
     varlabel = as.character(varlabel)
