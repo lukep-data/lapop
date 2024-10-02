@@ -52,7 +52,7 @@ NULL
 #'@import ggplot2
 #'@import grid
 #'@import gridtext
-#'@import gridExtra
+#'@importFrom gridExtra grid.arrange
 #'
 #'@author Luke Plutowski, \email{luke.plutowski@@vanderbilt.edu}
 
@@ -95,13 +95,13 @@ lapop_cccomb <- function(cc1, cc2,
   top=textGrob(main_title,
                gp = gpar(fontfamily = "nunito", fontsize = 18, fontface = 'bold'),
                 just = "left", x = 0)
-  sub = richtext_grob(ci_text, x = 0, hjust = -.05)
+  sub = gridtext::richtext_grob(ci_text, x = 0, hjust = -.05)
   bottom = textGrob(paste0("Source: LAPOP Lab", source_info),
                     gp = gpar(fontsize = 10.5, vjust = 2, hjust = 0.02, fontfamily = "nunito", color="#585860"),
                     just = "left", x = 0)
   g = c(list(top), list(sub), list(cc1f), list(cc2f), list(bottom))
   matlayout = rbind((1:1), (2:2), (3:4), (5:5))
-  tab = grid.arrange(grobs=g,layout_matrix=matlayout,heights=c(1.4, 0.5, 10, 1.15))
+  tab = gridExtra::grid.arrange(grobs=g,layout_matrix=matlayout,heights=c(1.4, 0.5, 10, 1.15))
   if(file_name != "") {
     ggsave(file_name, plot = tab, width = width_px/96, height = height_px/96)
   }
