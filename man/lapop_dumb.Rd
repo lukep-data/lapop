@@ -17,7 +17,8 @@ lapop_dumb(
   color_scheme = c("#008381", "#A43D6A"),
   subtitle_h_just = 40,
   subtitle_v_just = -18,
-  text_nudge = 6
+  text_nudge = 6,
+  drop_singles = FALSE
 )
 }
 \arguments{
@@ -57,6 +58,8 @@ Default: "#482677", "#3CBC70".}
 Ranges from -100 to 100.  Defaults: 40, -18.}
 
 \item{text_nudge}{Numeric.  Move text of data further or closer to data point.  Default: 6.}
+
+\item{drop_singles}{Logical.  Should rows with only one dot be removed?  Default: FALSE.}
 }
 \value{
 Returns an object of class \code{ggplot}, a ggplot figure showing
