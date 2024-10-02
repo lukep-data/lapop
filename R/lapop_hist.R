@@ -86,7 +86,7 @@ lapop_hist <- function(data, outcome_var = data$prop, label_var = data$proplabel
     theme(text = element_text(size = 14, family = "roboto"),
           plot.title = element_text(size = 18, family = "nunito", face = "bold"),
           plot.caption = element_text(size = 10.5, hjust = 0, vjust = 2, family = "nunito", color="#585860"),
-          plot.subtitle = element_text(size = 13, family = "nunito-light", color="#585860"),
+          plot.subtitle = element_text(size = 13, family = "nunito-light", color="#585860", margin=margin(b = 10)),
           axis.title.y = element_blank(),
           axis.ticks = element_blank(),
           plot.title.position = "plot",
@@ -96,3 +96,4 @@ lapop_hist <- function(data, outcome_var = data$prop, label_var = data$proplabel
           panel.background = element_rect(fill = "white"),
           panel.grid.major.x = element_blank())
   }
+

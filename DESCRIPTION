@@ -1,7 +1,7 @@
 Package: lapop
 Type: Package
 Title: Creates Visualizations Using LAPOP Styles 
-Version: 1.3.13
+Version: 1.3.14
 Authors@R: 
     person(given = "Luke",
            family = "Plutowski",
@@ -27,6 +27,7 @@ Collate:
     'lapop-deprecated.R'
     'lapop_fonts.R'
     'lapop_cc.R'
+    'lapop_cccomb.R'
     'lapop_ccm.R'
     'lapop_coef.R'
     'lapop_dumb.R'

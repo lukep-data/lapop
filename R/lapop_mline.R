@@ -84,6 +84,7 @@ NULL
 #' @param percentages Logical.  Is the outcome variable a percentage?  Set to FALSE if you are using
 #' means of the raw values, so that the y-axis adjusts accordingly. Default: TRUE.
 #' @param all_labels Logical.  If TRUE, show text above all points, instead of only those in the most recent wave. Default: FALSE.
+#' @param ci Logical.  Add "tie fighter" confidence intervals.  Only recommended when each line represents a different variable.
 #' @param legendnrow Numeric.  How many rows for legend labels. Default: 1.
 #'@examples
 #'df <- data.frame(varlabel = c(rep("Honduras", 9), rep("El Salvador", 9),
@@ -133,6 +134,7 @@ lapop_mline <- function(data, varlabel = data$varlabel, wave_var = as.character(
                         color_scheme = c("#784885", "#008381", "#c74e49", "#2d708e", "#a43d6a", "#202020"),
                         percentages = TRUE,
                         all_labels = FALSE,
+                        ci = TRUE,
                         legendnrow = 1){
   if(!inherits(varlabel, "character") & !inherits(varlabel, "factor")){
     varlabel = as.character(varlabel)
@@ -158,8 +160,12 @@ lapop_mline <- function(data, varlabel = data$varlabel, wave_var = as.character(
     ungroup() %>%
     pull(end_labels)
   update_geom_defaults("text", list(family = "roboto"))
-  ggplot(data, aes(x = wave_var, y = outcome_var, group = varlabel)) +
+  ggplot(data, aes(x = wave_var, y = outcome_var, group = varlabel, color = varlabel)) +
     geom_line(aes(color = varlabel), linewidth = 1, alpha=0.48, show.legend = FALSE) +
+    {if(ci == TRUE){
+      geom_errorbar(aes(ymin=lb, ymax=ub), width = 0.2, show.legend = FALSE)
+      }
+    } +
     geom_point(aes(y = point_var, color = varlabel), size = 3.5, alpha=0.48, key_glyph = draw_key_blank) +
     scale_color_manual(breaks = levels(varlabel),
                        labels = paste("<span style='color:",

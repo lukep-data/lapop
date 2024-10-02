@@ -23,6 +23,7 @@ lapop_mline(
   color_scheme = c("#784885", "#008381", "#c74e49", "#2d708e", "#a43d6a", "#202020"),
   percentages = TRUE,
   all_labels = FALSE,
+  ci = TRUE,
   legendnrow = 1
 )
 }
@@ -67,6 +68,8 @@ Default: c("#784885", "#008381", "#c74e49", "#2d708e", "#a43d6a", "#202020").}
 means of the raw values, so that the y-axis adjusts accordingly. Default: TRUE.}
 
 \item{all_labels}{Logical.  If TRUE, show text above all points, instead of only those in the most recent wave. Default: FALSE.}
+
+\item{ci}{Logical.  Add "tie fighter" confidence intervals.  Only recommended when each line represents a different variable.}
 
 \item{legendnrow}{Numeric.  How many rows for legend labels. Default: 1.}
 }

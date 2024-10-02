@@ -1,3 +1,9 @@
+# lapop 1.3.14
+
+* Create function lapop_cccomb()
+* add drop_singles to dumb
+* allow CIs for mline graphs
+
 # lapop 1.3.13
 
 * add french labels

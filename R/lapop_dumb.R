@@ -72,6 +72,7 @@ NULL
 #' @param order Whether data should be sorted from low to high or high to low on the sort metric.  Options: "hi-lo" and "lo-hi".
 #' Default: "hi-lo".
 #' @param text_nudge Numeric.  Move text of data further or closer to data point.  Default: 6.
+#' @param drop_singles Logical.  Should rows with only one dot be removed?  Default: FALSE.
 #' @return Returns an object of class \code{ggplot}, a ggplot figure showing
 #' average values of some variable in two time periods across multiple countries
 #'  (a dumbbell plot).
@@ -122,7 +123,11 @@ lapop_dumb <- function(data,
                       color_scheme = c("#008381", "#A43D6A"),
                       subtitle_h_just = 40,
                      subtitle_v_just = -18,
-                     text_nudge = 6){
+                     text_nudge = 6,
+                     drop_singles = FALSE){
+  if(drop_singles == TRUE) {
+    data = complete.cases(data)
+  }
   if(sort == "diff"){
     data$diff = data$prop2-data$prop1
     data = data[order(-data$diff),]
