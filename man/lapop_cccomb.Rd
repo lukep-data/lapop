@@ -40,9 +40,6 @@ Takes hex numbers, beginning with "#". Default: "#008381".}
 \item{file_name}{Character.  If desired, supply file path + name to save graph.}
 
 \item{width_px, height_px}{Numeric.  Width and height of saved graph in pixels. Default: 895, 600.}
-
-\item{subtitle}{Character.  Describes the values/data shown in the graph, e.g., "Percent who agree that...".
-Default: None.}
 }
 \value{
 Returns an object of class \code{ggplot}, a ggplot bar graph.
