@@ -142,6 +142,7 @@ lpr_cc = function(data,
     for(i in 1:(nrow(cc) - 1)) {
       for(j in (i + 1):nrow(cc)) {
         # Extract values for the two rows being compared
+        # adding a comment
         prop1 <- cc$prop[i]
         se1 <- cc$se[i]
         prop2 <- cc$prop[j]
