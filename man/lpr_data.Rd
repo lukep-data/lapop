@@ -4,7 +4,7 @@
 \alias{lpr_data}
 \title{LAPOP Data Processing}
 \usage{
-lpr_data(data)
+lpr_data(data_path)
 }
 \arguments{
 \item{data}{A dataframe of LAPOP survey data.}

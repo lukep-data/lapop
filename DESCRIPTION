@@ -39,5 +39,5 @@ Collate:
     'lapop_stack.R'
     'lapop_ts.R'
     'lpr_cc.R'
-    'lpr_mline.R'
     'lpr_data.R'
+    'lpr_mline.R'
