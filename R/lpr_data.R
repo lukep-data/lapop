@@ -23,11 +23,14 @@
 #'
 #'@export
 #'@import srvyr
+#'@import haven
 #'@import dplyr
 #'
 #'@author Luke Plutowski, \email{luke.plutowski@@vanderbilt.edu}
 
-lpr_data = function(data) {
+lpr_data = function(data_path) {
+
+  data <- haven::read_dta(data_path)
 
   country_codes <- c(
     "1" = "MX", "2" = "GT", "3" = "SV", "4" = "HN", "5" = "NI",

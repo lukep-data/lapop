@@ -18,7 +18,7 @@ NULL
 #' @param vallabel,outcome_var,label_var,lower_bound,upper_bound Character, numeric, character,
 #' numeric, numeric. Each component of the plot data can be manually specified in case
 #' the default columns in the data frame should not be used (if, for example, the values for a given
-#' variable were altered and stored in a new column).
+#' variable were altered and stored in a new column). x
 #' @param ymin,ymax Numeric.  Minimum and maximum values for y-axis. Default: 0 to 100.
 #' @param highlight Character.  Country of interest.  Will highlight (make darker) that country's bar.
 #' Input must match entry in "vallabel" exactly. Default: None.
