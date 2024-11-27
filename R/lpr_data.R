@@ -9,7 +9,8 @@
 #' This function takes LAPOP datasets and adds survey features, outputting a
 #' svy_tbl object that can then be analyzed using lpr_ commands.
 #'
-#' @param data A dataframe of LAPOP survey data.
+#' @param data_path A dataframe of LAPOP survey data.
+#' @param wt Logical.  If TRUE, use wt instead of weight1500.  Default: FALSE.
 #'
 #' @return Returns a svy_tbl object
 #'
@@ -28,7 +29,8 @@
 #'
 #'@author Luke Plutowski, \email{luke.plutowski@@vanderbilt.edu}
 
-lpr_data = function(data_path) {
+lpr_data = function(data_path,
+                    wt = FALSE) {
 
   data <- haven::read_dta(data_path)
 
@@ -45,8 +47,13 @@ lpr_data = function(data_path) {
 
   data <- data[!is.na(data$upm), ]
 
-  datas <- data %>%
-    as_survey(ids = upm, strata = strata, weights = weight1500, nest = TRUE)
+  if (wt == TRUE) {
+    datas <- data %>%
+      as_survey(ids = upm, strata = strata, weights = wt, nest = TRUE)
+  } else {
+    datas <- data %>%
+      as_survey(ids = upm, strata = strata, weights = weight1500, nest = TRUE)
+  }
 
   return(datas)
 }

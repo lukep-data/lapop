@@ -4,10 +4,12 @@
 \alias{lpr_data}
 \title{LAPOP Data Processing}
 \usage{
-lpr_data(data_path)
+lpr_data(data_path, wt = FALSE)
 }
 \arguments{
-\item{data}{A dataframe of LAPOP survey data.}
+\item{data_path}{A dataframe of LAPOP survey data.}
+
+\item{wt}{Logical.  If TRUE, use wt instead of weight1500.  Default: FALSE.}
 }
 \value{
 Returns a svy_tbl object
