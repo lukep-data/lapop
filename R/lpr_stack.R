@@ -6,11 +6,11 @@
 
 #' LAPOP Stacked Bar Graph Pre-Processing
 #'
-#' This function creates dataframes which can then be input in lapop_stack for
-#' comparing values across countries with a stacked bar graph using LAPOP formatting.
+#' This function creates dataframes which can then be input in lapop_stack() for
+#' plotting variables categories with a stacked bar graph using LAPOP formatting.
 #'
-#' @param data  The data that should be analyzed. It requires a survey object from lpr_data function.
-#' @param outcome List of variables be plotted.
+#' @param data  The data that should be analyzed. It requires a survey object from lpr_data() function.
+#' @param outcome Vector of variables be plotted.
 #' @param filesave Character. Path and file name to save the dataframe as csv.
 #' @param sort Character. On what value the bars are sorted: the x or the y.
 #' Options are "y" (default; for the value of the outcome variable), "xv" (for
@@ -27,11 +27,12 @@
 #'
 #' @examples
 #'
-#' \dontrun{lapop_stack(data = gms, outcome = ing4, num = c(5, 7))}
+#' \dontrun{lapop_stack(data = gms, outcome = c(countfair1, countfair3))}
 #'
 #'@export
 #'@import dplyr
 #'@import srvyr
+#'@import purrr
 #'
 #'@author Robert Vidigal, \email{robert.vidigal@@vanderbilt.edu}
 
@@ -44,9 +45,6 @@ lpr_stack <- function(data,
                       order = "hi-lo",
                       filesave = "",
                       keep_nr = FALSE) {
-  library(srvyr)
-  library(dplyr)
-  library(purrr) # For iterating over variables
   
   # Helper function to handle a single variable
   process_outcome <- function(data, outcome_var) {
@@ -68,11 +66,10 @@ lpr_stack <- function(data,
       ) %>%
       mutate(
         varlabel = attributes(data$variables[[outcome_var]])$label,
-        variable = outcome_var, # Add a column to identify the variable
         prop = prop * 100, # Convert to percentage
         proplabel = sprintf("%.0f%%", prop)
       ) %>%
-      select(variable, varlabel, vallabel, prop, proplabel) %>%
+      select(varlabel, vallabel, prop, proplabel) %>%
       ungroup()
     
     # Sorting logic
