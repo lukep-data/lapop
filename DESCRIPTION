@@ -14,7 +14,7 @@ Description: LAPOP Lab (formerly the Latin American Public Opinion Project) at V
 URL: <https://github.com/lapop-central/lapop-viz>
 Depends: 
     R (>= 3.3.0)
-Imports: ggplot2, ggtext, zoo, showtext, sysfonts, ggrepel, dplyr, ggh4x, haven, systemfonts, svglite, stats, grid, gridtext, gridExtra, srvyr
+Imports: ggplot2, ggtext, zoo, showtext, sysfonts, ggrepel, dplyr, ggh4x, haven, systemfonts, svglite, stats, grid, gridtext, gridExtra, srvyr, purrr
 Remotes: teunbrand/ggh4x
 Encoding: UTF-8
 License: MIT + file LICENSE
@@ -41,3 +41,4 @@ Collate:
     'lpr_cc.R'
     'lpr_data.R'
     'lpr_mline.R'
+    'lpr_stack.R'

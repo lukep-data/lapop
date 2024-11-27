@@ -11,13 +11,13 @@
 #'
 #' @param data  The data that should be analyzed. It requires a survey object from lpr_data() function.
 #' @param outcome Vector of variables be plotted.
+#' @param sort Character. On what value the bars are sorted. Options are "xv"
+#' (default; sort on the underlying values of the value labels), "xl" (on the value
+#' labels themselves, i.e. alphabetically), or "y" (on the proportions of the
+#' outcome variable(s)).
+#' @param order Character. How the bars should be sorted. Options are "lo-hi"
+#' (default) or "hi-lo".
 #' @param filesave Character. Path and file name to save the dataframe as csv.
-#' @param sort Character. On what value the bars are sorted: the x or the y.
-#' Options are "y" (default; for the value of the outcome variable), "xv" (for
-#' the underlying values of the x variable), "xl" (for the labels of the x variable,
-#' i.e., alphabetical).
-#' @param order Character. How the bars should be sorted. Options are "hi-lo"
-#' (default) or "lo-hi".
 #' @param keep_nr Logical. If TRUE, will convert "don't know" (missing code .a)
 #' and "no response" (missing code .b) into valid data (value = 99) and use them
 #' in the denominator when calculating percentages.  The default is to examine
@@ -27,7 +27,7 @@
 #'
 #' @examples
 #'
-#' \dontrun{lapop_stack(data = gms, outcome = c(countfair1, countfair3))}
+#' \dontrun{lapop_stack(data = gm, outcome = c("countfair1", "countfair3"))}
 #'
 #'@export
 #'@import dplyr
@@ -39,13 +39,13 @@
 # # -----------------------------------------------------------------------
 # LPR_STACK
 # # -----------------------------------------------------------------------
-lpr_stack <- function(data, 
-                      outcome, 
-                      sort = "y",
-                      order = "hi-lo",
+lpr_stack <- function(data,
+                      outcome,
+                      sort = "xv",
+                      order = "lo-hi",
                       filesave = "",
                       keep_nr = FALSE) {
-  
+
   # Helper function to handle a single variable
   process_outcome <- function(data, outcome_var) {
     # Handle `keep_nr` logic
@@ -56,7 +56,7 @@ lpr_stack <- function(data,
           TRUE ~ as.numeric(!!sym(outcome_var))       # Keep other values unchanged
         ))
     }
-    
+
     # Perform proportion calculations
     stack <- data %>%
       drop_na(!!sym(outcome_var)) %>%
@@ -71,7 +71,7 @@ lpr_stack <- function(data,
       ) %>%
       select(varlabel, vallabel, prop, proplabel) %>%
       ungroup()
-    
+
     # Sorting logic
     stack <- stack %>%
       {
@@ -103,17 +103,17 @@ lpr_stack <- function(data,
           .
         }
       }
-    
+
     return(stack)
   }
-  
+
   # Apply the purrr helper function to all outcomes and combine the results
   results <- map_dfr(outcome, ~ process_outcome(data, .x))
-  
+
   # Save to file if required
   if (filesave != "") {
     write.csv(results, filesave, row.names = FALSE)
   }
-  
+
   return(results)
 }
