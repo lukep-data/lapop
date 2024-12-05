@@ -10,7 +10,8 @@
 #' comparing values across countries with a bar graph using LAPOP formatting.
 #'
 #' @param data A survey object.  The data that should be analyzed.
-#' @param outcome Outcome variable of interest to be plotted across countries.
+#' @param outcome Character string.  Outcome variable of interest to be plotted
+#' across countries.
 #' @param xvar Default: pais_lab.
 #' @param rec Numeric. The minimum and maximum values of the outcome variable that
 #' should be included in the numerator of the percentage.  For example, if the variable
@@ -52,7 +53,7 @@
 
 lpr_cc = function(data,
                   outcome,
-                  xvar = pais_lab,
+                  xvar = "pais_lab",
                   rec = c(1, 1),
                   ci_level = 0.95,
                   mean = FALSE,
@@ -66,62 +67,60 @@ lpr_cc = function(data,
   # If keep_nr is TRUE, convert don't knows (NA(a)) and no answers (NA(b)) to
   # non-NA data (a value of 99).
   if (keep_nr) {
-    outcome <- enquo(outcome)
-    data = data %>%
-    mutate(!!outcome := case_when(
-      na_tag(!!outcome) == "a" | na_tag(!!outcome) == "b"  ~ 99,
-      TRUE ~ as.numeric(!!outcome)       # Keep other values unchanged
-    ))
+    data <- data %>%
+      mutate(!!sym(outcome) := case_when(
+        na_tag(!!sym(outcome)) %in% c("a", "b") ~ 99,
+        TRUE ~ as.numeric(!!sym(outcome))
+      ))
   }
 
-  cc = data %>%
-    drop_na({{xvar}}) %>%
-    group_by(vallabel = as_factor({{xvar}})) %>%
+  cc <- data %>%
+    drop_na(!!sym(xvar)) %>%  # Dynamically refer to xvar column
+    group_by(vallabel = as_factor(!!sym(xvar))) %>%
     {
       if (mean) {
-        summarize(., prop = survey_mean({{outcome}},
-                                        na.rm = TRUE,
-                                        vartype = "ci",
-                                        level = ci_level)) %>%
+        summarize(.,
+                  prop = survey_mean(!!sym(outcome),
+                                     na.rm = TRUE,
+                                     vartype = "ci",
+                                     level = ci_level)) %>%
           mutate(proplabel = case_when(cfmt != "" ~ sprintf("%.1f", prop),
                                        TRUE ~ sprintf("%.1f", prop)))
-
       } else {
-        summarize(., prop = survey_mean(between({{outcome}}, rec[1], rec[2]),
-                                        na.rm = TRUE,
-                                        vartype = "ci",
-                                        level = ci_level) * 100) %>%
+        summarize(.,
+                  prop = survey_mean(between(!!sym(outcome), rec[1], rec[2]),
+                                     na.rm = TRUE,
+                                     vartype = "ci",
+                                     level = ci_level) * 100) %>%
           mutate(proplabel = case_when(cfmt != "" ~ sprintf("%.0f%%", round(prop)),
                                        TRUE ~ sprintf("%.0f%%", round(prop))))
       }
     } %>%
     filter(prop != 0) %>%
-    rename(., lb = prop_low, ub = prop_upp) %>%
+    rename(lb = prop_low, ub = prop_upp) %>%
     ungroup() %>%  # Ungroup to avoid issues with arrange
     {
       if (sort == "y") {
         if (order == "hi-lo") {
-          arrange(., desc(prop))  # Use . to refer to the data in the previous context
+          arrange(., desc(prop))
         } else if (order == "lo-hi") {
           arrange(., prop)
         }
       } else if (sort == "xv") {
         if (order == "hi-lo") {
           arrange(., desc(vallabel))
-        }
-        else if (order == "lo-hi") {
+        } else if (order == "lo-hi") {
           arrange(., vallabel)
         }
       } else if (sort == "xl") {
         if (order == "hi-lo") {
           arrange(., desc(as.character(vallabel)))
-        }
-        else if (order == "lo-hi") {
+        } else if (order == "lo-hi") {
           arrange(., as.character(vallabel))
         } else {
-        .  # Return unchanged if no valid sorting option is selected
+          .  # Return unchanged if no valid sorting option is selected
+        }
       }
-    }
     }
 
   # Perform pairwise t-tests if requested
