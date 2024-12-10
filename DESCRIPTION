@@ -40,6 +40,7 @@ Collate:
     'lapop_ts.R'
     'lpr_cc.R'
     'lpr_data.R'
+    'lpr_dumb.R'
     'lpr_mline.R'
     'lpr_mover.R'
     'lpr_stack.R'
