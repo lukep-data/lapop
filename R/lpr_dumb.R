@@ -100,7 +100,7 @@ lpr_dumb = function(data,
                                      na.rm = TRUE,
                                      vartype = "ci",
                                      level = ci_level)) %>%
-          mutate(proplabel1 = case_when(cfmt != "" ~ sprintf("%.1f", prop1),
+          mutate(proplabel1 = case_when(cfmt != "" ~ sprintf(cfmt, prop1),
                                        TRUE ~ sprintf("%.1f", prop1)))
       } else {
         summarize(.,
@@ -108,7 +108,7 @@ lpr_dumb = function(data,
                                      na.rm = TRUE,
                                      vartype = "ci",
                                      level = ci_level) * 100) %>%
-          mutate(proplabel1 = case_when(cfmt != "" ~ sprintf("%.0f%%", round(prop1)),
+          mutate(proplabel1 = case_when(cfmt != "" ~ sprintf(cfmt, round(prop1)),
                                        TRUE ~ sprintf("%.0f%%", round(prop1))))
       }
     } %>%
@@ -128,7 +128,7 @@ lpr_dumb = function(data,
                                      na.rm = TRUE,
                                      vartype = "ci",
                                      level = ci_level)) %>%
-          mutate(proplabel2 = case_when(cfmt != "" ~ sprintf("%.1f", prop2),
+          mutate(proplabel2 = case_when(cfmt != "" ~ sprintf(cfmt, prop2),
                                         TRUE ~ sprintf("%.1f", prop2)))
       } else {
         summarize(.,
@@ -136,7 +136,7 @@ lpr_dumb = function(data,
                                       na.rm = TRUE,
                                       vartype = "ci",
                                       level = ci_level) * 100) %>%
-          mutate(proplabel2 = case_when(cfmt != "" ~ sprintf("%.0f%%", round(prop2)),
+          mutate(proplabel2 = case_when(cfmt != "" ~ sprintf(cfmt, round(prop2)),
                                         TRUE ~ sprintf("%.0f%%", round(prop2))))
       }
     } %>%
