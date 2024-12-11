@@ -37,10 +37,6 @@ or "lo-hi" (default).}
 \item{keep_nr}{Logical.  If TRUE, will convert "don't know" (missing code .a)
 and "no response" (missing code .b) into valid data (value = 99).
 The default is to examine valid responses only.  Default: FALSE.}
-
-\item{ttest}{Logical.  If TRUE, will conduct pairwise t-tests for difference
-of means between all individual year-xvar levels and save them in attr(x,
-"t_test_results"). Default: FALSE.}
 }
 \value{
 Returns a data frame, with data formatted for visualization by lapop_hist

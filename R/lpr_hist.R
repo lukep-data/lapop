@@ -4,7 +4,7 @@
 
 ######################################################
 
-#' LAPOP Bar Graphs
+#' LAPOP Bar/Histogram Graphs
 #'
 #' This function creates dataframes which can then be input in lapop_hist for
 #' showing a bar graph using LAPOP formatting.
@@ -21,9 +21,6 @@
 #' i.e., alphabetical).
 #' @param order Character.  How the bars should be sorted.  Options are "hi-lo"
 #' or "lo-hi" (default).
-#' @param ttest Logical.  If TRUE, will conduct pairwise t-tests for difference
-#' of means between all individual year-xvar levels and save them in attr(x,
-#' "t_test_results"). Default: FALSE.
 #' @param keep_nr Logical.  If TRUE, will convert "don't know" (missing code .a)
 #' and "no response" (missing code .b) into valid data (value = 99).
 #' The default is to examine valid responses only.  Default: FALSE.
@@ -104,6 +101,3 @@ lpr_hist <- function(data,
   # Return the data frame
   return(hist_df)
 }
-
-
-
