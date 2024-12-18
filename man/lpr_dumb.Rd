@@ -45,7 +45,7 @@ recoding to percentage.  Default: FALSE.}
 
 \item{filesave}{Character.  Path and file name to save the dataframe as csv.}
 
-\item{cfmt}{Changes the format of the numbers displayed above the bars.
+\item{cfmt}{Character. Changes the format of the numbers displayed above the bars.
 Uses sprintf string formatting syntax. Default is whole numbers for percentages
 and tenths place for means.}
 

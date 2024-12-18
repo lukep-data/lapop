@@ -12,9 +12,8 @@
 #' @param outcome Outcome variable of interest to be plotted across countries
 #' and waves, supplied as a character string.
 #' @param filesave Character.  Path and file name to save the dataframe as csv.
-#' @param cfmt Changes the format of the numbers displayed above the bars.
-#' Uses sprintf string formatting syntax. Default is whole numbers for percentages
-#' and tenths place for means.
+#' @param cfmt Character. Changes the format of the numbers displayed above the bars.
+#' Uses sprintf string formatting syntax. Default is whole numbers.
 #' @param sort Character. On what value the bars are sorted.
 #' Options are "y" (for the value of the outcome variable), "xv" (default; for
 #' the underlying values of the x variable), "xl" (for the labels of the x variable,

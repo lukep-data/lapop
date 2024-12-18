@@ -25,7 +25,7 @@
 #' @param mean Logical.  If TRUE, will produce the mean of the variable rather than
 #' recoding to percentage.  Default: FALSE.
 #' @param filesave Character.  Path and file name to save the dataframe as csv.
-#' @param cfmt Changes the format of the numbers displayed above the bars.
+#' @param cfmt Character. Changes the format of the numbers displayed above the bars.
 #' Uses sprintf string formatting syntax. Default is whole numbers for percentages
 #' and tenths place for means.
 #' @param sort Character. On what value the bars are sorted.

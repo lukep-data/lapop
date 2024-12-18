@@ -21,9 +21,9 @@ lpr_mline(
 \arguments{
 \item{data}{A survey object.  The data that should be analyzed.}
 
-\item{outcome}{Outcome variable of interest to be plotted across countries.}
+\item{outcome}{Character. Outcome variable of interest to be plotted across time.}
 
-\item{xvar}{Variable on which to separate out the outcome variable.  In other words,
+\item{xvar}{Character. Variable on which to break down the outcome variable.  In other words,
 the line graph will produce multiple lines for each value of xvar (technically, it is
 the z-variable, not the x variable, which is year/wave).}
 
@@ -42,7 +42,7 @@ recoding to percentage.  Default: FALSE.}
 
 \item{filesave}{Character.  Path and file name to save the dataframe as csv.}
 
-\item{cfmt}{changes the format of the numbers displayed above the bars.
+\item{cfmt}{Character. Changes the format of the numbers displayed above the bars.
 Uses sprintf string formatting syntax. Default is whole numbers for percentages
 and tenths place for means.}
 
@@ -56,15 +56,18 @@ in the denominator when calculating percentages.  The default is to examine
 valid responses only.  Default: FALSE.}
 }
 \value{
-Returns a data frame, with data formatted for visualization by lapop_cc
+Returns a data frame, with data formatted for visualization by lapop_mline
 }
 \description{
 This function creates dataframes which can then be input in lapop_mline for
-comparing values across countries with a bar graph using LAPOP formatting.
+comparing multiple values across time with a line graph using LAPOP formatting.
 }
 \examples{
 
-\dontrun{lpr_cc(data = gms, outcome = ing4, num = c(5, 7))}
+\dontrun{lpr_mline(data = per_ts,
+outcome = "ing4",
+xvar = "vic1ext",
+num = c(5, 7))}
 
 }
 \author{

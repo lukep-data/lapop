@@ -25,7 +25,8 @@ lpr_cc(
 \item{outcome}{Character string.  Outcome variable of interest to be plotted
 across countries.}
 
-\item{xvar}{Default: pais_lab.}
+\item{xvar}{Character. Outcome variable will be broken down by this variable.
+Default: pais_lab.}
 
 \item{rec}{Numeric. The minimum and maximum values of the outcome variable that
 should be included in the numerator of the percentage.  For example, if the variable
@@ -39,7 +40,7 @@ rescaling to percentage.  Default: FALSE.}
 
 \item{filesave}{Character.  Path and file name to save the dataframe as csv.}
 
-\item{cfmt}{changes the format of the numbers displayed above the bars.
+\item{cfmt}{Character. changes the format of the numbers displayed above the bars.
 Uses sprintf string formatting syntax. Default is whole numbers for percentages
 and tenths place for means.}
 
@@ -69,7 +70,7 @@ comparing values across countries with a bar graph using LAPOP formatting.
 }
 \examples{
 
-\dontrun{lpr_cc(data = gms, outcome = ing4, num = c(5, 7))}
+\dontrun{lpr_cc(data = gms, outcome = "ing4", num = c(5, 7))}
 
 }
 \author{

@@ -7,11 +7,11 @@
 #' LAPOP Multi-Line Time Series Graphs
 #'
 #' This function creates dataframes which can then be input in lapop_mline for
-#' comparing values across countries with a bar graph using LAPOP formatting.
+#' comparing multiple values across time with a line graph using LAPOP formatting.
 #'
 #' @param data A survey object.  The data that should be analyzed.
-#' @param outcome Outcome variable of interest to be plotted across countries.
-#' @param xvar Variable on which to separate out the outcome variable.  In other words,
+#' @param outcome Character. Outcome variable of interest to be plotted across time.
+#' @param xvar Character. Variable on which to break down the outcome variable.  In other words,
 #' the line graph will produce multiple lines for each value of xvar (technically, it is
 #' the z-variable, not the x variable, which is year/wave).
 #' @param rec Numeric. The minimum and maximum values of the outcome variable that
@@ -24,7 +24,7 @@
 #' @param mean Logical.  If TRUE, will produce the mean of the variable rather than
 #' recoding to percentage.  Default: FALSE.
 #' @param filesave Character.  Path and file name to save the dataframe as csv.
-#' @param cfmt changes the format of the numbers displayed above the bars.
+#' @param cfmt Character. Changes the format of the numbers displayed above the bars.
 #' Uses sprintf string formatting syntax. Default is whole numbers for percentages
 #' and tenths place for means.
 #' @param ttest Logical.  If TRUE, will conduct pairwise t-tests for difference
@@ -36,11 +36,14 @@
 #' valid responses only.  Default: FALSE.
 #'
 #'
-#' @return Returns a data frame, with data formatted for visualization by lapop_cc
+#' @return Returns a data frame, with data formatted for visualization by lapop_mline
 #'
 #' @examples
 #'
-#' \dontrun{lpr_cc(data = gms, outcome = ing4, num = c(5, 7))}
+#' \dontrun{lpr_mline(data = per_ts,
+#' outcome = "ing4",
+#' xvar = "vic1ext",
+#' num = c(5, 7))}
 #'
 #'@export
 #'@import dplyr
@@ -63,7 +66,6 @@ lpr_mline = function(data,
   # If keep_nr is TRUE, convert don't knows (NA(a)) and no answers (NA(b)) to
   # non-NA data (a value of 99).
   if (keep_nr) {
-    outcome <- enquo(outcome)
     data = data %>%
       mutate(!!outcome := case_when(
         na_tag(!!outcome) == "a" | na_tag(!!outcome) == "b"  ~ 99,
@@ -72,26 +74,31 @@ lpr_mline = function(data,
   }
 
   mline = data %>%
-    drop_na({{xvar}}) %>%
-    group_by(varlabel = as_factor({{xvar}}),
+    drop_na(!!sym(xvar)) %>%
+    group_by(varlabel = as_factor(!!sym(xvar)),
              wave = if (use_wave) as.character(as_factor(wave)) else year) %>%
     {
       if (mean) {
-        summarize(., prop = survey_mean({{outcome}},
+        summarize(., prop = survey_mean(!!sym(outcome),
                                         na.rm = TRUE,
                                         vartype = "ci",
                                         level = ci_level)) %>%
-          mutate(proplabel = case_when(cfmt != "" ~ sprintf("%.1f", prop),
-                                       TRUE ~ sprintf("%.1f", prop)))
-
+          mutate(proplabel = if (cfmt != "") {
+            sprintf(cfmt, prop)
+          } else {
+            sprintf("%.1f", prop)
+          })
       } else {
-        summarize(., prop = survey_mean(between({{outcome}}, rec[1], rec[2]),
+        summarize(., prop = survey_mean(between(!!sym(outcome), rec[1], rec[2]),
                                         na.rm = TRUE,
                                         vartype = "ci",
                                         level = ci_level) * 100) %>%
-          mutate(proplabel = case_when(cfmt != "" ~ sprintf("%.0f%%", round(prop)),
-                                       TRUE ~ sprintf("%.0f%%", round(prop))))
-      }
+          mutate(proplabel = if (cfmt != "") {
+            sprintf(cfmt, round(prop))
+          } else {
+            sprintf("%.0f%%", round(prop))
+          })
+        }
     } %>%
     filter(prop != 0) %>%
     rename(., lb = prop_low, ub = prop_upp)
@@ -156,8 +163,3 @@ lpr_mline = function(data,
 
   return(mline)
 }
-
-
-
-
-

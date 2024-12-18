@@ -12,7 +12,8 @@
 #' @param data A survey object.  The data that should be analyzed.
 #' @param outcome Character string.  Outcome variable of interest to be plotted
 #' across countries.
-#' @param xvar Default: pais_lab.
+#' @param xvar Character. Outcome variable will be broken down by this variable.
+#' Default: pais_lab.
 #' @param rec Numeric. The minimum and maximum values of the outcome variable that
 #' should be included in the numerator of the percentage.  For example, if the variable
 #' is on a 1-7 scale and rec is c(5, 7), the function will show the percentage who chose
@@ -21,7 +22,7 @@
 #' @param mean Logical.  If TRUE, will produce the mean of the variable rather than
 #' rescaling to percentage.  Default: FALSE.
 #' @param filesave Character.  Path and file name to save the dataframe as csv.
-#' @param cfmt changes the format of the numbers displayed above the bars.
+#' @param cfmt Character. changes the format of the numbers displayed above the bars.
 #' Uses sprintf string formatting syntax. Default is whole numbers for percentages
 #' and tenths place for means.
 #' @param sort Character. On what value the bars are sorted: the x or the y.
@@ -43,7 +44,7 @@
 #'
 #' @examples
 #'
-#' \dontrun{lpr_cc(data = gms, outcome = ing4, num = c(5, 7))}
+#' \dontrun{lpr_cc(data = gms, outcome = "ing4", num = c(5, 7))}
 #'
 #'@export
 #'@import dplyr
@@ -84,18 +85,23 @@ lpr_cc = function(data,
                                      na.rm = TRUE,
                                      vartype = "ci",
                                      level = ci_level)) %>%
-          mutate(proplabel = case_when(cfmt != "" ~ sprintf("%.1f", prop),
-                                       TRUE ~ sprintf("%.1f", prop)))
+          mutate(proplabel = if (cfmt != "") {
+            sprintf(cfmt, prop)
+          } else {
+            sprintf("%.1f", prop)
+          })
       } else {
         summarize(.,
                   prop = survey_mean(between(!!sym(outcome), rec[1], rec[2]),
                                      na.rm = TRUE,
                                      vartype = "ci",
                                      level = ci_level) * 100) %>%
-          mutate(proplabel = case_when(cfmt != "" ~ sprintf("%.0f%%", round(prop)),
-                                       TRUE ~ sprintf("%.0f%%", round(prop))))
-      }
-    } %>%
+          mutate(proplabel = if (cfmt != "") {
+            sprintf(cfmt, round(prop))
+          } else {
+            sprintf("%.0f%%", round(prop))
+          })}
+      } %>%
     filter(prop != 0) %>%
     rename(lb = prop_low, ub = prop_upp) %>%
     ungroup() %>%  # Ungroup to avoid issues with arrange
