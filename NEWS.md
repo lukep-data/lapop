@@ -1,3 +1,7 @@
+# lapop 2.0.0
+
+* add lpr_ data processing functionality for all graph types
+
 # lapop 1.3.14
 
 * Create function lapop_cccomb()

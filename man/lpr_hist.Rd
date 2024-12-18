@@ -2,7 +2,7 @@
 % Please edit documentation in R/lpr_hist.R
 \name{lpr_hist}
 \alias{lpr_hist}
-\title{LAPOP Bar Graphs}
+\title{LAPOP Bar/Histogram Graphs}
 \usage{
 lpr_hist(
   data,

@@ -1,37 +1,39 @@
 #######################################
 
-# LAPOP Cross-Country Bar Graph Pre-Processing #
+# LAPOP Multiple Cross-Country Bar Graph Pre-Processing #
 
 #######################################
 
-#' LAPOP Cross-Country Bar Graph Pre-Processing
+#' LAPOP Grouped Bar Graph Pre-Processing
 #'
-#' This function creates dataframes which can then be input in lapop_cc for
-#' comparing values across countries with a bar graph using LAPOP formatting.
+#' This function creates dataframes which can then be input in lapop_ccm for
+#' comparing values for multiple variables across countries with a bar graph
+#' using LAPOP formatting.
 #'
 #' @param data A survey object.  The data that should be analyzed.
-#' @param outcome Character string.  Outcome variable of interest to be plotted
-#' across countries.
-#' @param xvar Default: pais_lab.
-#' @param rec Numeric. The minimum and maximum values of the outcome variable that
-#' should be included in the numerator of the percentage.  For example, if the variable
-#' is on a 1-7 scale and rec is c(5, 7), the function will show the percentage who chose
-#' an answer of 5, 6, 7 out of all valid answers.  Default: c(1, 1).
+#' @param outcome_vars Character vector.  Outcome variable(s) of interest to be plotted
+#' across country (or other x variable). Max of 3 variables.
+#' @param xvar Character string. Outcome variables are broken down by this variable.
+#' Default: pais_lab.
+#' @param rec1,rec2,rec3 Numeric vector. The minimum and maximum values of the outcome
+#' variable(s) that should be included in the numerator of the percentage.  For example,
+#' if the variable is on a 1-7 scale and rec is c(5, 7), the function will show the
+#' percentage who chose an answer of 5, 6, 7 out of all valid answers.  Default: c(1, 1).
 #' @param ci_level Numeric. Confidence interval level for estimates.  Default: 0.95
 #' @param mean Logical.  If TRUE, will produce the mean of the variable rather than
 #' rescaling to percentage.  Default: FALSE.
 #' @param filesave Character.  Path and file name to save the dataframe as csv.
-#' @param cfmt changes the format of the numbers displayed above the bars.
+#' @param cfmt Character. Changes the format of the numbers displayed above the bars.
 #' Uses sprintf string formatting syntax. Default is whole numbers for percentages
 #' and tenths place for means.
-#' @param sort Character. On what value the bars are sorted: the x or the y.
-#' Options are "y" (default; for the value of the outcome variable), "xv" (for
+#' @param sort Character. On what value the bars are sorted.
+#' Options are "y" (default; for the value of the first outcome variable), "xv" (for
 #' the underlying values of the x variable), "xl" (for the labels of the x variable,
 #' i.e., alphabetical).
 #' @param order Character.  How the bars should be sorted.  Options are "hi-lo"
 #' (default) or "lo-hi".
 #' @param ttest Logical.  If TRUE, will conduct pairwise t-tests for difference
-#' of means between all individual x levels and save them in attr(x,
+#' of means between all outcomes vs. all x-vars and save them in attr(x,
 #' "t_test_results"). Default: FALSE.
 #' @param keep_nr Logical.  If TRUE, will convert "don't know" (missing code .a)
 #' and "no response" (missing code .b) into valid data (value = 99) and use them
@@ -39,20 +41,21 @@
 #' valid responses only.  Default: FALSE.
 #'
 #'
-#' @return Returns a data frame, with data formatted for visualization by lapop_cc
+#' @return Returns a data frame, with data formatted for visualization by lapop_ccm
 #'
 #' @examples
 #'
-#' \dontrun{lpr_cc(data = gms, outcome = ing4, num = c(5, 7))}
+#' \dontrun{lpr_ccm(gm23,
+#' outcome_vars = c("vic1ext", "aoj11"),
+#' rec1 = c(1, 1),
+#' rec2 = c(3, 4),
+#' ttest = TRUE)}
 #'
 #'@export
 #'@import dplyr
 #'@import srvyr
 #'
 #'@author Luke Plutowski, \email{luke.plutowski@@vanderbilt.edu}
-
-
-
 
 
 lpr_ccm <- function(data,
@@ -98,16 +101,22 @@ lpr_ccm <- function(data,
                                        na.rm = TRUE,
                                        vartype = "ci",
                                        level = ci_level)) %>%
-            mutate(proplabel = case_when(cfmt != "" ~ sprintf("%.1f", prop),
-                                         TRUE ~ sprintf("%.1f", prop)))
+            mutate(proplabel = if (cfmt != "") {
+              sprintf(cfmt, prop)
+            } else {
+              sprintf("%.1f", prop)
+            })
         } else {
           summarize(. ,
                     prop = survey_mean(between(!!sym(outcome), rec[1], rec[2]),
                                        na.rm = TRUE,
                                        vartype = "ci",
                                        level = ci_level) * 100) %>%
-            mutate(proplabel = case_when(cfmt != "" ~ sprintf("%.0f%%", round(prop)),
-                                         TRUE ~ sprintf("%.0f%%", round(prop))))
+            mutate(proplabel = if (cfmt != "") {
+              sprintf(cfmt, round(prop))
+            } else {
+              sprintf("%.0f%%", round(prop))
+            })
         }
       } %>%
       filter(prop != 0) %>%
@@ -121,7 +130,10 @@ lpr_ccm <- function(data,
   ccm = ccm %>%
     {
       if (sort == "y") {
-          arrange(., if (order == "hi-lo") desc(prop) else prop)
+        group_by(., var) %>%
+          mutate(rank = rank(-prop)) %>%
+          arrange(match(var, unique(var)[1]), rank) %>%
+          select(-rank)
       } else if (sort == "xl") {
           arrange(., if (order == "hi-lo") desc(as.character(pais)) else as.character(pais))
       } else if (sort == "xv") {
@@ -131,6 +143,50 @@ lpr_ccm <- function(data,
       }
     }
 
+  # Perform pairwise t-tests if requested
+  if (ttest) {
+    # Estimate standard error for each row using the confidence intervals
+    ccm <- ccm %>%
+      mutate(se = (ub - lb) / (2 * 1.96))
+
+    # Initialize an empty data frame to store t-test results
+    t_test_results <- data.frame(test = character(),
+                                 diff = numeric(),
+                                 ttest = numeric(),
+                                 pval = numeric(),
+                                 stringsAsFactors = FALSE)
+
+    # Perform pairwise t-tests for each combination of rows
+    for(i in 1:(nrow(ccm) - 1)) {
+      for(j in (i + 1):nrow(ccm)) {
+        # Extract values for the two rows being compared
+        # adding a comment
+        prop1 <- ccm$prop[i]
+        se1 <- ccm$se[i]
+        prop2 <- ccm$prop[j]
+        se2 <- ccm$se[j]
+
+        # Calculate difference, t-statistic, and degrees of freedom
+        diff <- prop1 - prop2
+        t_stat <- diff / sqrt(se1^2 + se2^2)
+        df <- (se1^2 + se2^2)^2 / ((se1^2)^2 / (nrow(data) - 1) + (se2^2)^2 / (nrow(data) - 1))
+
+        # Calculate p-value
+        p_value <- 2 * pt(-abs(t_stat), df)
+
+        # Store results in a data frame
+        t_test_results <- rbind(t_test_results,
+                                data.frame(test = paste(ccm$pais[i], ccm$var[i], "vs",
+                                                        ccm$pais[j], ccm$var[j]),
+                                           diff = diff,
+                                           ttest = t_stat,
+                                           pval = p_value))
+        attr(ccm, "t_test_results") <- t_test_results
+      }
+    }
+  }
+
+
   # Save the results to a file if specified
   if (filesave != "") {
     write.csv(ccm, filesave, row.names = FALSE)
@@ -139,13 +195,3 @@ lpr_ccm <- function(data,
   return(ccm)
 }
 
-x = lpr_ccm(gm23,
-        outcome_vars = c("aoj11", "vic1ext", "pn4"),
-        rec1 = c(1, 2),
-        rec2 = c(1, 1),
-        rec3 = c(1, 2),
-        sort = "y")
-
-x
-
-lapop_ccm(x)
