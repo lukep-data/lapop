@@ -76,7 +76,7 @@ lpr_cc = function(data,
   }
 
   cc <- data %>%
-    drop_na(!!sym(xvar)) %>%  # Dynamically refer to xvar column
+    drop_na(!!sym(xvar)) %>%
     group_by(vallabel = as_factor(!!sym(xvar))) %>%
     {
       if (mean) {

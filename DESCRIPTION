@@ -46,3 +46,4 @@ Collate:
     'lpr_mline.R'
     'lpr_mover.R'
     'lpr_stack.R'
+    'lpr_ts.R'
