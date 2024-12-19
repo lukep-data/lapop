@@ -17,8 +17,7 @@ lpr_hist(
 \arguments{
 \item{data}{A survey object.  The data that should be analyzed.}
 
-\item{outcome}{Outcome variable of interest to be plotted across countries
-and waves, supplied as a character string.}
+\item{outcome}{Character. Outcome variable of interest.}
 
 \item{filesave}{Character.  Path and file name to save the dataframe as csv.}
 

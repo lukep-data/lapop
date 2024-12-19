@@ -8,9 +8,9 @@
 #'
 #' This function creates dataframes which can then be input in lapop_hist for
 #' showing a bar graph using LAPOP formatting.
+#'
 #' @param data A survey object.  The data that should be analyzed.
-#' @param outcome Outcome variable of interest to be plotted across countries
-#' and waves, supplied as a character string.
+#' @param outcome Character. Outcome variable of interest.
 #' @param filesave Character.  Path and file name to save the dataframe as csv.
 #' @param cfmt Character. Changes the format of the numbers displayed above the bars.
 #' Uses sprintf string formatting syntax. Default is whole numbers.

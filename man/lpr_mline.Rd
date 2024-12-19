@@ -23,9 +23,9 @@ lpr_mline(
 
 \item{outcome}{Character. Outcome variable of interest to be plotted across time.}
 
-\item{xvar}{Character. Variable on which to break down the outcome variable.  In other words,
-the line graph will produce multiple lines for each value of xvar (technically, it is
-the z-variable, not the x variable, which is year/wave).}
+\item{xvar}{Character. Variable on which to break down the outcome variable.
+In other words, the line graph will produce multiple lines for each value of
+xvar (technically, it is the z-variable, not the x variable, which is year/wave).}
 
 \item{rec}{Numeric. The minimum and maximum values of the outcome variable that
 should be included in the numerator of the percentage.  For example, if the variable

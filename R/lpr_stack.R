@@ -9,8 +9,9 @@
 #' This function creates dataframes which can then be input in lapop_stack() for
 #' plotting variables categories with a stacked bar graph using LAPOP formatting.
 #'
-#' @param data  The data that should be analyzed. It requires a survey object from lpr_data() function.
-#' @param outcome Vector of variables be plotted.
+#' @param data  The data that should be analyzed. It requires a survey object
+#' from lpr_data() function.
+#' @param outcome Character vector. Vector of variables be plotted.
 #' @param sort Character. On what value the bars are sorted. Options are "xv"
 #' (default; sort on the underlying values of the value labels), "xl" (on the value
 #' labels themselves, i.e. alphabetically), or "y" (on the proportions of the

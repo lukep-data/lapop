@@ -14,9 +14,10 @@ lpr_stack(
 )
 }
 \arguments{
-\item{data}{The data that should be analyzed. It requires a survey object from lpr_data() function.}
+\item{data}{The data that should be analyzed. It requires a survey object
+from lpr_data() function.}
 
-\item{outcome}{Vector of variables be plotted.}
+\item{outcome}{Character vector. Vector of variables be plotted.}
 
 \item{sort}{Character. On what value the bars are sorted. Options are "xv"
 (default; sort on the underlying values of the value labels), "xl" (on the value

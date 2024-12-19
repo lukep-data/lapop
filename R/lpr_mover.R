@@ -7,11 +7,11 @@
 #' LAPOP "Multiple-Over" Breakdown Graphs
 #'
 #' This function creates dataframes which can then be input in lapop_mover for
-#' comparing means across values of (a) secondary variable(s) using LAPOP formatting.
+#' comparing means across values of secondary variable(s) using LAPOP formatting.
 #'
 #' @param data A survey object.  The data that should be analyzed.
-#' @param outcome Outcome variable of interest to be plotted across countries,
-#' supplied as a character string.
+#' @param outcome Character. Outcome variable of interest to be plotted across secondary
+#' variable(s).
 #' @param grouping_vars A character vector specifying one or more grouping variables.
 #' For each variable, the function calculates the average of the outcome variable,
 #' broken down by the distinct values within the grouping variable(s).

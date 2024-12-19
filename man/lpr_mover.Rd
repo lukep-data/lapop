@@ -20,8 +20,8 @@ lpr_mover(
 \arguments{
 \item{data}{A survey object.  The data that should be analyzed.}
 
-\item{outcome}{Outcome variable of interest to be plotted across countries,
-supplied as a character string.}
+\item{outcome}{Character. Outcome variable of interest to be plotted across secondary
+variable(s).}
 
 \item{grouping_vars}{A character vector specifying one or more grouping variables.
 For each variable, the function calculates the average of the outcome variable,
@@ -57,7 +57,7 @@ Returns a data frame, with data formatted for visualization by lapop_mover
 }
 \description{
 This function creates dataframes which can then be input in lapop_mover for
-comparing means across values of (a) secondary variable(s) using LAPOP formatting.
+comparing means across values of secondary variable(s) using LAPOP formatting.
 }
 \examples{
 

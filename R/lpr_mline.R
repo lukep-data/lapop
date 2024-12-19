@@ -11,9 +11,9 @@
 #'
 #' @param data A survey object.  The data that should be analyzed.
 #' @param outcome Character. Outcome variable of interest to be plotted across time.
-#' @param xvar Character. Variable on which to break down the outcome variable.  In other words,
-#' the line graph will produce multiple lines for each value of xvar (technically, it is
-#' the z-variable, not the x variable, which is year/wave).
+#' @param xvar Character. Variable on which to break down the outcome variable.
+#' In other words, the line graph will produce multiple lines for each value of
+#' xvar (technically, it is the z-variable, not the x variable, which is year/wave).
 #' @param rec Numeric. The minimum and maximum values of the outcome variable that
 #' should be included in the numerator of the percentage.  For example, if the variable
 #' is on a 1-7 scale and rec is c(5, 7), the function will show the percentage who chose
