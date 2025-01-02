@@ -1,3 +1,7 @@
+# lapop 2.0.1
+
+* add lpr_coef()
+
 # lapop 2.0.0
 
 * add lpr_ data processing functionality for all graph types
