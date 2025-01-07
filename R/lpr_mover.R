@@ -104,7 +104,11 @@ lpr_mover <- function(data,
         }
       } %>%
       mutate(
-        varlabel = attributes(data$variables[[grouping_var]])$label,
+        varlabel = if (!is.null(attributes(data$variables[[grouping_var]])$label)) {
+          attributes(data$variables[[grouping_var]])$label
+        } else {
+          grouping_var # Use the variable name as a fallback
+        },
         vallabel = as.character(vallabel)
       ) %>%
       rename(lb = prop_low, ub = prop_upp) %>%

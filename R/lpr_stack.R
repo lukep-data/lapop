@@ -66,7 +66,12 @@ lpr_stack <- function(data,
         prop = survey_mean(proportion = TRUE, na.rm = TRUE)
       ) %>%
       mutate(
-        varlabel = attributes(data$variables[[outcome_var]])$label,
+        # varlabel = attributes(data$variables[[outcome_var]])$label,
+        varlabel = if (!is.null(attributes(data$variables[[outcome_var]])$label)) {
+          attributes(data$variables[[outcome_var]])$label
+        } else {
+          outcome_var
+        },
         prop = prop * 100, # Convert to percentage
         proplabel = sprintf("%.0f%%", prop)
       ) %>%

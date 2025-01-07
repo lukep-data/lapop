@@ -1,3 +1,7 @@
+# lapop 2.0.2
+
+* update labels system for stack and mover
+
 # lapop 2.0.1
 
 * add lpr_coef()
