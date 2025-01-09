@@ -135,6 +135,11 @@ lpr_coef <- function(
       proplabel = round(Estimate, digits=3)
     )
 
+  if (!is.null(omit)) {
+    coef_data <- coef_data %>%
+      filter(!Term %in% omit)
+  }
+
     # Return the processed coefficient data as a tibble
     coef_data<-coef_data %>% rename(varlabel=Term, coef=Estimate) %>%
     select(varlabel, coef, lb, ub, pvalue, proplabel)
