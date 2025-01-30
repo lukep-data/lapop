@@ -30,10 +30,12 @@ across country (or other x variable). Max of 3 variables.}
 \item{xvar}{Character string. Outcome variables are broken down by this variable.
 Default: pais_lab.}
 
-\item{rec1, rec2, rec3}{Numeric vector. The minimum and maximum values of the outcome
-variable(s) that should be included in the numerator of the percentage.  For example,
-if the variable is on a 1-7 scale and rec is c(5, 7), the function will show the
-percentage who chose an answer of 5, 6, 7 out of all valid answers.  Default: c(1, 1).}
+\item{rec1, rec2, rec3}{Numeric. The minimum and maximum values of the outcome variable that
+should be included in the numerator of the percentage.  For example, if the variable
+is on a 1-7 scale and rec1 is c(5, 7), the function will show the percentage who chose
+an answer of 5, 6, 7 out of all valid answers.  Can also supply one value only,
+to produce the percentage that chose that value out of all other values.
+Default: c(1, 1).}
 
 \item{ci_level}{Numeric. Confidence interval level for estimates.  Default: 0.95}
 

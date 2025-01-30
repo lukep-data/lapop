@@ -30,7 +30,9 @@ xvar (technically, it is the z-variable, not the x variable, which is year/wave)
 \item{rec}{Numeric. The minimum and maximum values of the outcome variable that
 should be included in the numerator of the percentage.  For example, if the variable
 is on a 1-7 scale and rec is c(5, 7), the function will show the percentage who chose
-an answer of 5, 6, 7 out of all valid answers.  Default: c(1, 1).}
+an answer of 5, 6, 7 out of all valid answers.  Can also supply one value only,
+to produce the percentage that chose that value out of all other values.
+Default: c(1, 1).}
 
 \item{use_wave}{Logical.  If TRUE, will use "wave" for the x-axis; otherwise,
 will use "year".  Default: FALSE.}
@@ -61,6 +63,11 @@ Returns a data frame, with data formatted for visualization by lapop_mline
 \description{
 This function creates dataframes which can then be input in lapop_mline for
 comparing multiple values across time with a line graph using LAPOP formatting.
+This function shows the values of a single outcome variable, broken down by a
+secondary variable, across time (e.g., how men's and women's view of democracy
+change over time).  To simply show multiple variables over time in one plot (
+e.g., how support for democracy and crime victimization change over time),
+use lpr_mline_mv ("multiple line, multiple variable").
 }
 \examples{
 
