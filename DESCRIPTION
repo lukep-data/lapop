@@ -45,6 +45,7 @@ Collate:
     'lpr_dumb.R'
     'lpr_hist.R'
     'lpr_mline.R'
+    'lpr_mline_mv.R'
     'lpr_mover.R'
     'lpr_stack.R'
     'lpr_ts.R'

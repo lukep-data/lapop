@@ -76,13 +76,13 @@ lpr_ccm <- function(data,
                     keep_nr = FALSE) {
 
   if (length(rec1) == 1) {
-    rec = c(rec1, rec1)
+    rec1 = c(rec1, rec1)
   }
   if (length(rec2) == 1) {
-    rec = c(rec2, rec2)
+    rec2 = c(rec2, rec2)
   }
   if (length(rec3) == 1) {
-    rec = c(rec2, rec2)
+    rec3 = c(rec3, rec3)
   }
 
   # Map rec arguments to outcome variables

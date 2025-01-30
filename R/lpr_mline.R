@@ -8,6 +8,11 @@
 #'
 #' This function creates dataframes which can then be input in lapop_mline for
 #' comparing multiple values across time with a line graph using LAPOP formatting.
+#' This function shows the values of a single outcome variable, broken down by a
+#' secondary variable, across time (e.g., how men's and women's view of democracy
+#' change over time).  To simply show multiple variables over time in one plot (
+#' e.g., how support for democracy and crime victimization change over time),
+#' use lpr_mline_mv ("multiple line, multiple variable").
 #'
 #' @param data A survey object.  The data that should be analyzed.
 #' @param outcome Character. Outcome variable of interest to be plotted across time.
