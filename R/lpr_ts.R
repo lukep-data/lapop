@@ -15,7 +15,9 @@
 #' @param rec Numeric. The minimum and maximum values of the outcome variable that
 #' should be included in the numerator of the percentage.  For example, if the variable
 #' is on a 1-7 scale and rec is c(5, 7), the function will show the percentage who chose
-#' an answer of 5, 6, 7 out of all valid answers.  Default: c(1, 1).
+#' an answer of 5, 6, 7 out of all valid answers.  Can also supply one value only,
+#' to produce the percentage that chose that value out of all other values.
+#' Default: c(1, 1).
 #' @param use_wave Logical.  If TRUE, will use "wave" for the x-axis; otherwise,
 #' will use "year".  Default: FALSE.
 #' @param ci_level Numeric. Confidence interval level for estimates.  Default: 0.95
@@ -70,6 +72,10 @@ lpr_ts <- function(data,
         na_tag(!!sym(outcome)) %in% c("a", "b") ~ 99,
         TRUE ~ as.numeric(!!sym(outcome))
       ))
+  }
+
+  if (length(rec) == 1) {
+    rec = c(rec, rec)
   }
 
 
