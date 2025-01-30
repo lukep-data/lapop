@@ -50,8 +50,6 @@
 #'@author Berta Diaz, \email{berta.diaz.martinez@@vanderbilt.edu} &
 #' Luke Plutowski, \email{luke.plutowski@@vanderbilt.edu}
 
-
-
 lpr_ts <- function(data,
                    outcome,
                    rec = c(1, 1),
@@ -76,7 +74,7 @@ lpr_ts <- function(data,
 
 
   ts_df <- data %>%
-    group_by(wave = if (use_wave) as.character(as_factor(wave)) else year) %>%
+    group_by(wave = if (use_wave) as.character(as_factor(wave)) else as.character(year)) %>%
     {
       if (mean) {
         summarize(.,
@@ -103,6 +101,53 @@ lpr_ts <- function(data,
     } %>%
     filter(prop != 0) %>%
     rename(lb = prop_low, ub = prop_upp)
+
+  # Below chunks add missing values for wave to the time series
+  all_waves <- data.frame(
+    wave = if (use_wave) {
+      c("2004", "2006", "2008", "2010", "2012",
+        "2014", "2016/17", "2018/19", "2021", "2023")
+    } else {
+      c("2004", "2006", "2008", "2010", "2012",
+        "2014", "2016", "2017", "2016/17", "2018",
+        "2019", "2018/19", "2021", "2023")
+    }
+  )
+
+  ts_df = merge(ts_df, all_waves,
+                by = "wave",
+                all.x = TRUE,
+                all.y = TRUE)
+
+  # If missing prop at either end of the series, delete
+  na_rows = apply(ts_df, 1, function(row) any(is.na(row)))
+  first_non_na = which(!na_rows)[1]
+  last_non_na = which(!na_rows)[length(which(!na_rows))]
+  ts_df = ts_df[first_non_na:last_non_na, ]
+
+  #Ugly code to handle 2016/17 and 2018/19 when using "year"
+  # if using year (use_wave = FALSE), and 2016/17 wave is missing,
+  # the graph should display "2016/17" (not "2016" and "2017") with no data
+  # same for 2018/19
+  if (!use_wave) {
+    if (is.na(ts_df$prop[ts_df$wave == "2016"]) &
+        is.na(ts_df$prop[ts_df$wave == "2017"])) {
+      ts_df = ts_df[-(which(ts_df$wave %in% c("2016", "2017"))),]
+    } else if (!is.na(ts_df$prop[ts_df$wave == "2016"])) {
+      ts_df = ts_df[-(which(ts_df$wave %in% c("2017", "2016/17"))),]
+    } else if (!is.na(ts_df$prop[ts_df$wave == "2017"])) {
+      ts_df = ts_df[-(which(ts_df$wave %in% c("2016", "2016/17"))),]
+    }
+
+    if (is.na(ts_df$prop[ts_df$wave == "2018"]) &
+        is.na(ts_df$prop[ts_df$wave == "2019"])) {
+      ts_df = ts_df[-(which(ts_df$wave %in% c("2018", "2019"))),]
+    } else if (!is.na(ts_df$prop[ts_df$wave == "2018"])) {
+      ts_df = ts_df[-(which(ts_df$wave %in% c("2019", "2018/19"))),]
+    } else if (!is.na(ts_df$prop[ts_df$wave == "2019"])) {
+      ts_df = ts_df[-(which(ts_df$wave %in% c("2018", "2018/19"))),]
+    }
+  }
 
 
   if (ttest) {

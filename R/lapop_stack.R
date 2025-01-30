@@ -146,6 +146,9 @@ lapop_stack <- function(data, outcome_var = data$prop, prop_labels = data$propla
       geom_bar(position = "stack", stat = "identity", width = 0.6, data = data[data$var_labels == levels(data$var_labels)[1], ]) +
       geom_bar(position = "stack", stat = "identity", width = 0.6, data = data[data$var_labels == levels(data$var_labels)[2], ]) +
       geom_bar(position = "stack", stat = "identity", width = 0.6, data = data[data$var_labels == levels(data$var_labels)[3], ]) +
+      geom_bar(position = "stack", stat = "identity", width = 0.6, data = data[data$var_labels == levels(data$var_labels)[4], ]) +
+      geom_bar(position = "stack", stat = "identity", width = 0.6, data = data[data$var_labels == levels(data$var_labels)[5], ]) +
+      geom_bar(position = "stack", stat = "identity", width = 0.6, data = data[data$var_labels == levels(data$var_labels)[6], ]) +
       geom_text(data = data[data$var_labels == levels(data$var_labels)[1], ],
                 aes(label = prop_labels),
                 position = position_stack(vjust = 0.5), color = "#FFFFFF",
@@ -162,6 +165,14 @@ lapop_stack <- function(data, outcome_var = data$prop, prop_labels = data$propla
                 aes(label = ifelse(outcome_var >= 5, prop_labels, NA)),
                 position = position_stack(vjust = 0.5), color = "#FFFFFF",
                 fontface = "bold", size = 5) +
+      geom_text(data = data[data$var_labels == levels(data$var_labels)[5], ],
+                aes(label = ifelse(outcome_var >= 5, prop_labels, NA)),
+                position = position_stack(vjust = 0.5), color = "#FFFFFF",
+                fontface = "bold", size = 5) +
+      geom_text(data = data[data$var_labels == levels(data$var_labels)[6], ],
+                aes(label = ifelse(outcome_var >= 5, prop_labels, NA)),
+                position = position_stack(vjust = 0.5), color = "#FFFFFF",
+                fontface = "bold", size = 6) +
       ggrepel::geom_text_repel(data = data[data$var_labels == levels(data$var_labels)[1], ],
                                aes(label = ifelse(outcome_var < 5 & hide_small_values == FALSE, prop_labels, NA)),
                                position = position_stack(vjust = 0.5),
@@ -190,8 +201,22 @@ lapop_stack <- function(data, outcome_var = data$prop, prop_labels = data$propla
                                fontface = "bold", size = 4, family = "roboto",
                                direction = "y",
                                force_pull = 0.2, force = 5) +
+      ggrepel::geom_text_repel(data = data[data$var_labels == levels(data$var_labels)[5], ],
+                               aes(label = ifelse(outcome_var < 5 & hide_small_values == FALSE, prop_labels, NA)),
+                               position = position_stack(vjust = 0.5),
+                               color = "#FFFFFF", segment.color = 'transparent',
+                               fontface = "bold", size = 4, family = "roboto",
+                               direction = "y",
+                               force_pull = 0.2, force = 5) +
+      ggrepel::geom_text_repel(data = data[data$var_labels == levels(data$var_labels)[6], ],
+                               aes(label = ifelse(outcome_var < 5 & hide_small_values == FALSE, prop_labels, NA)),
+                               position = position_stack(vjust = 0.5),
+                               color = "#FFFFFF", segment.color = 'transparent',
+                               fontface = "bold", size = 4, family = "roboto",
+                               direction = "y",
+                               force_pull = 0.2, force = 5) +
       coord_flip() +
-      scale_fill_manual(values = mycolors, guide=guide_legend(reverse = TRUE, nrow = legendnrow)) +
+      scale_fill_manual(values = mycolors, guide = guide_legend(reverse = TRUE, nrow = legendnrow), na.translate = FALSE) +
       scale_x_discrete(limits = positions, expand = c(0, 0)) +
       scale_y_continuous(expand = c(0.02, 0)) +
       labs(title = main_title,
@@ -251,7 +276,6 @@ lapop_stack <- function(data, outcome_var = data$prop, prop_labels = data$propla
           axis.text.x = element_blank(),
           axis.text.y = element_text(margin=margin(r=0)),
           axis.ticks = element_blank(),
-          # aspect.ratio = aspect_ratio,
           axis.text = element_text(size = 14, family = "roboto", color = "#585860", margin=margin(r=5)),
           panel.background = element_rect(fill = "white"),
           panel.grid = element_blank(),
