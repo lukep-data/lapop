@@ -39,7 +39,7 @@
 #' @param order Character.  How the bars should be sorted.  Options are "hi-lo"
 #' (default) or "lo-hi".
 #' @param ttest Logical.  If TRUE, will conduct pairwise t-tests for difference
-#' of means between all individual year-xvar levels and save them in attr(x,
+#' of means between all pais-wave combinations and save them in attr(x,
 #' "t_test_results"). Default: FALSE.
 #' @param keep_nr Logical.  If TRUE, will convert "don't know" (missing code .a)
 #' and "no response" (missing code .b) into valid data (value = 99) and use them
@@ -192,20 +192,74 @@ lpr_dumb = function(data,
 
 
   if (ttest) {
-    dumb = dumb %>%
+    # Compute standard errors
+    t_test_results <- dumb %>%
       mutate(se1 = (ub1 - lb1) / (2 * 1.96),
              se2 = (ub2 - lb2) / (2 * 1.96))
 
-    dumb = dumb %>%
-      rowwise() %>%
-      mutate(diff = prop1 - prop2,
-             ttest = diff / sqrt(se1^2 + se2^2),
-             df = (se1^2 + se2^2)^2 /
-               ((se1^2)^2 / (nrow(data) - 1) + (se2^2)^2 / (nrow(data) - 1)),
-             pval = 2 * pt(-abs(ttest), df)) %>%
-      ungroup() %>%
-      select(-se1, -se2, -df)
+    # Initialize an empty dataframe for storing test results
+    t_test_results_df <- data.frame(test = character(),
+                                    diff = numeric(),
+                                    ttest = numeric(),
+                                    pval = numeric(),
+                                    stringsAsFactors = FALSE)
+
+    # Within-country t-tests: Compare prop1 vs. prop2 for each country
+    for (i in 1:nrow(t_test_results)) {
+      diff <- round(t_test_results$prop1[i] - t_test_results$prop2[i], 3)
+      t_stat <- round(diff / sqrt(t_test_results$se1[i]^2 + t_test_results$se2[i]^2), 3)
+      df <- (t_test_results$se1[i]^2 + t_test_results$se2[i]^2)^2 /
+        ((t_test_results$se1[i]^4 / (nrow(data) - 1)) + (t_test_results$se2[i]^4 / (nrow(data) - 1)))
+      p_value <- round(2 * pt(-abs(t_stat), df), 3)
+
+      t_test_results_df <- rbind(t_test_results_df,
+                                 data.frame(test = paste(t_test_results$pais[i], t_test_results$wave1[i], "vs",
+                                                         t_test_results$pais[i], t_test_results$wave2[i]),
+                                            diff = diff,
+                                            ttest = t_stat,
+                                            pval = p_value))
+    }
+
+    # Pairwise comparisons across all rows for prop1
+    for (i in 1:(nrow(t_test_results) - 1)) {
+      for (j in (i + 1):nrow(t_test_results)) {
+        diff <- round(t_test_results$prop1[i] - t_test_results$prop1[j], 3)
+        t_stat <- round(diff / sqrt(t_test_results$se1[i]^2 + t_test_results$se1[j]^2), 3)
+        df <- (t_test_results$se1[i]^2 + t_test_results$se1[j]^2)^2 /
+          ((t_test_results$se1[i]^4 / (nrow(data) - 1)) + (t_test_results$se1[j]^4 / (nrow(data) - 1)))
+        p_value <- round(2 * pt(-abs(t_stat), df), 3)
+
+        t_test_results_df <- rbind(t_test_results_df,
+                                   data.frame(test = paste(t_test_results$pais[i], t_test_results$wave1[i], "vs",
+                                                           t_test_results$pais[j], t_test_results$wave1[j]),
+                                              diff = diff,
+                                              ttest = t_stat,
+                                              pval = p_value))
+      }
+    }
+
+    # Pairwise comparisons across all rows for prop2
+    for (i in 1:(nrow(t_test_results) - 1)) {
+      for (j in (i + 1):nrow(t_test_results)) {
+        diff <- round(t_test_results$prop2[i] - t_test_results$prop2[j], 3)
+        t_stat <- round(diff / sqrt(t_test_results$se2[i]^2 + t_test_results$se2[j]^2), 3)
+        df <- (t_test_results$se2[i]^2 + t_test_results$se2[j]^2)^2 /
+          ((t_test_results$se2[i]^4 / (nrow(data) - 1)) + (t_test_results$se2[j]^4 / (nrow(data) - 1)))
+        p_value <- round(2 * pt(-abs(t_stat), df), 3)
+
+        t_test_results_df <- rbind(t_test_results_df,
+                                   data.frame(test = paste(t_test_results$pais[i], t_test_results$wave2[i], "vs",
+                                                           t_test_results$pais[j], t_test_results$wave2[j]),
+                                              diff = diff,
+                                              ttest = t_stat,
+                                              pval = p_value))
+      }
+    }
+
+    # Store the results as an attribute
+    attr(dumb, "t_test_results") <- t_test_results_df
   }
+
 
   if (filesave != "") {
     write.csv(dumb, filesave)

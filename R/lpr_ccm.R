@@ -144,7 +144,8 @@ lpr_ccm <- function(data,
       if (sort == "y") {
         group_by(., var) %>%
           mutate(rank = rank(-prop)) %>%
-          arrange(match(var, unique(var)[1]), rank) %>%
+          arrange(match(var, unique(var)[1]),
+                  if (order == "hi-lo") rank else desc(rank)) %>%
           select(-rank)
       } else if (sort == "xl") {
           arrange(., if (order == "hi-lo") desc(as.character(pais)) else as.character(pais))
