@@ -18,7 +18,7 @@ Imports: ggplot2, ggtext, zoo, showtext, sysfonts, ggrepel, dplyr, ggh4x, haven,
 Remotes: teunbrand/ggh4x
 Encoding: UTF-8
 License: MIT + file LICENSE
-RoxygenNote: 7.2.3
+RoxygenNote: 7.3.2
 Suggests: 
     testthat (>= 3.0.0)
 Config/testthat/edition: 3
@@ -48,4 +48,5 @@ Collate:
     'lpr_mline_mv.R'
     'lpr_mover.R'
     'lpr_stack.R'
+    'lpr_stack_over.R'
     'lpr_ts.R'

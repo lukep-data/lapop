@@ -62,7 +62,7 @@ the two waves).}
 (default) or "lo-hi".}
 
 \item{ttest}{Logical.  If TRUE, will conduct pairwise t-tests for difference
-of means between all individual year-xvar levels and save them in attr(x,
+of means between all pais-wave combinations and save them in attr(x,
 "t_test_results"). Default: FALSE.}
 
 \item{keep_nr}{Logical.  If TRUE, will convert "don't know" (missing code .a)
