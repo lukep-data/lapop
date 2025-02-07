@@ -2,13 +2,16 @@
 % Please edit documentation in R/lpr_mline.R
 \name{lpr_mline}
 \alias{lpr_mline}
-\title{LAPOP Multi-Line Time Series Graphs}
+\title{LAPOP Multi-Line Time Series Graph Pre-Processing}
 \usage{
 lpr_mline(
   data,
   outcome,
-  xvar,
   rec = c(1, 1),
+  rec2 = c(1, 1),
+  rec3 = c(1, 1),
+  rec4 = c(1, 1),
+  xvar,
   use_wave = FALSE,
   ci_level = 0.95,
   mean = FALSE,
@@ -21,18 +24,23 @@ lpr_mline(
 \arguments{
 \item{data}{A survey object.  The data that should be analyzed.}
 
-\item{outcome}{Character. Outcome variable of interest to be plotted across time.}
+\item{outcome}{Character vector.  Outcome variable(s) of interest to be plotted
+across time.  If only one value is provided, the graph will show the outcome
+variable, over time, broken down by a secondary variable (x-var).
+If more than one value is supplied, the graph will show each outcome variable
+across time (no secondary variable).}
+
+\item{rec, rec2, rec3, rec4}{Numeric. The minimum and maximum values of the outcome
+variable that should be included in the numerator of the percentage.
+For example, if the variable is on a 1-7 scale and rec is c(5, 7), the
+function will show the percentage who chose an answer of 5, 6, 7 out of
+all valid answers.  Can also supply one value only, to produce the percentage
+that chose that value out of all other values. Default: c(1, 1).}
 
 \item{xvar}{Character. Variable on which to break down the outcome variable.
 In other words, the line graph will produce multiple lines for each value of
-xvar (technically, it is the z-variable, not the x variable, which is year/wave).}
-
-\item{rec}{Numeric. The minimum and maximum values of the outcome variable that
-should be included in the numerator of the percentage.  For example, if the variable
-is on a 1-7 scale and rec is c(5, 7), the function will show the percentage who chose
-an answer of 5, 6, 7 out of all valid answers.  Can also supply one value only,
-to produce the percentage that chose that value out of all other values.
-Default: c(1, 1).}
+xvar (technically, it is the z-variable, not the x variable, which is year/wave).
+Ignored if multiple outcome variables are supplied.}
 
 \item{use_wave}{Logical.  If TRUE, will use "wave" for the x-axis; otherwise,
 will use "year".  Default: FALSE.}
@@ -40,16 +48,16 @@ will use "year".  Default: FALSE.}
 \item{ci_level}{Numeric. Confidence interval level for estimates.  Default: 0.95}
 
 \item{mean}{Logical.  If TRUE, will produce the mean of the variable rather than
-recoding to percentage.  Default: FALSE.}
+rescaling to percentage.  Default: FALSE.}
 
 \item{filesave}{Character.  Path and file name to save the dataframe as csv.}
 
-\item{cfmt}{Character. Changes the format of the numbers displayed above the bars.
+\item{cfmt}{Character. changes the format of the numbers displayed above the bars.
 Uses sprintf string formatting syntax. Default is whole numbers for percentages
 and tenths place for means.}
 
 \item{ttest}{Logical.  If TRUE, will conduct pairwise t-tests for difference
-of means between all individual year-xvar levels and save them in attr(x,
+of means between all individual x levels and save them in attr(x,
 "t_test_results"). Default: FALSE.}
 
 \item{keep_nr}{Logical.  If TRUE, will convert "don't know" (missing code .a)
@@ -61,20 +69,22 @@ valid responses only.  Default: FALSE.}
 Returns a data frame, with data formatted for visualization by lapop_mline
 }
 \description{
-This function creates dataframes which can then be input in lapop_mline for
-comparing multiple values across time with a line graph using LAPOP formatting.
-This function shows the values of a single outcome variable, broken down by a
-secondary variable, across time (e.g., how men's and women's view of democracy
-change over time).  To simply show multiple variables over time in one plot (
-e.g., how support for democracy and crime victimization change over time),
-use lpr_mline_mv ("multiple line, multiple variable").
+This function creates a dataframe which can then be input in lapop_mline for
+to show a time series plot with multiple lines.  If one "outcome" variable and an
+"xvar" variable is supplied, the function produces the values of a single outcome
+variable, broken down by a secondary variable, across time.  If multiple outcome
+variables (up to four) are supplied, it will show means/percentages of those
+variables across time (essentially, it allows you to do lpr_ts for multiple variables).
 }
 \examples{
 
-\dontrun{lpr_mline(data = per_ts,
-outcome = "ing4",
-xvar = "vic1ext",
-num = c(5, 7))}
+\dontrun{lpr_mline_mv(ttots,
+outcome = c("ing4", "pn4", "b2", "vic1ext"),
+rec = c(5, 7),
+rec2 = c(1, 2),
+rec3 = c(5, 7),
+rec4 = c(1, 1),
+use_wave = TRUE)}
 
 }
 \author{
