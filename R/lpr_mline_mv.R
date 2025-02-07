@@ -96,7 +96,7 @@ lpr_mline_mv <- function(data,
                    mean = mean,
                    cfmt = cfmt,
                    keep_nr = keep_nr)
-    temp$varlabel <- var
+    temp$varlabel <- attributes(data$variables[[var]])$label
     result_list[[var]] <- temp
   }
 
