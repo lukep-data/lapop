@@ -7,6 +7,7 @@
 lpr_stack(
   data,
   outcome,
+  by = NULL,
   sort = "xv",
   order = "lo-hi",
   filesave = "",
@@ -17,7 +18,11 @@ lpr_stack(
 \item{data}{The data that should be analyzed. It requires a survey object
 from lpr_data() function.}
 
-\item{outcome}{Character vector. Vector of variables be plotted.}
+\item{outcome}{Character vector. Vector of variable(s) be plotted.}
+
+\item{by}{Character. Grouping variable.  If by is provided, function will break
+down the outcome variable by distinct values of the "by" variable (instead of
+showing distribution of multiple outcome variables).}
 
 \item{sort}{Character. On what value the bars are sorted. Options are "xv"
 (default; sort on the underlying values of the value labels), "xl" (on the value
@@ -40,6 +45,9 @@ Returns a data frame, with data formatted for visualization by lapop_stack
 \description{
 This function creates dataframes which can then be input in lapop_stack() for
 plotting variables categories with a stacked bar graph using LAPOP formatting.
+If "by" is specified, the function shows the distribution of the outcome variable
+by distinct values of a secondary variable.  If "by" is not provided, it will show
+the distribution of all specified outcome variables.
 }
 \examples{
 

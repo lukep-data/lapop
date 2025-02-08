@@ -8,10 +8,16 @@
 #'
 #' This function creates dataframes which can then be input in lapop_stack() for
 #' plotting variables categories with a stacked bar graph using LAPOP formatting.
+#' If "by" is specified, the function shows the distribution of the outcome variable
+#' by distinct values of a secondary variable.  If "by" is not provided, it will show
+#' the distribution of all specified outcome variables.
 #'
 #' @param data  The data that should be analyzed. It requires a survey object
 #' from lpr_data() function.
-#' @param outcome Character vector. Vector of variables be plotted.
+#' @param outcome Character vector. Vector of variable(s) be plotted.
+#' @param by Character. Grouping variable.  If by is provided, function will break
+#' down the outcome variable by distinct values of the "by" variable (instead of
+#' showing distribution of multiple outcome variables).
 #' @param sort Character. On what value the bars are sorted. Options are "xv"
 #' (default; sort on the underlying values of the value labels), "xl" (on the value
 #' labels themselves, i.e. alphabetically), or "y" (on the proportions of the
@@ -41,11 +47,43 @@
 # LPR_STACK
 # # -----------------------------------------------------------------------
 lpr_stack <- function(data,
-                      outcome,
-                      sort = "xv",
-                      order = "lo-hi",
-                      filesave = "",
-                      keep_nr = FALSE) {
+                       outcome,
+                       by = NULL,
+                       sort = "xv",
+                       order = "lo-hi",
+                       filesave = "",
+                       keep_nr = FALSE) {
+
+  if (!is.null(by)) {
+    # Exclude NA values from 'by' before looping
+    valid_values <- sort(unique(data$variables[[by]][!is.na(data$variables[[by]])]))
+
+    # Loop over all values of "by" variable - create a separate column for each value
+    for (value in valid_values) {
+      if (any(!is.na(data$variables[[outcome]][data$variables[[by]] == value]))) {
+
+        column_name <- paste0("x_by_", value)
+
+        data$variables[[column_name]] <- replace(
+          data$variables[[outcome]],
+          data$variables[[by]] != value,
+          NA
+        )
+
+        # Extract value label and assign it to newly created variables
+        label_value <- names(which(attributes(data$variables[[by]])$labels == value))
+
+        if (length(label_value) == 0) {
+          label_value <- as.character(value)  # Fallback if no label is found
+        }
+
+        attributes(data$variables[[column_name]])$label <- label_value
+      }
+    }
+
+    # Update outcome list to include the newly created "x_by_*" variables
+    outcome <- grep("x_by", names(data$variables), value = TRUE)
+  }
 
   # Helper function to handle a single variable
   process_outcome <- function(data, outcome_var) {
@@ -63,10 +101,9 @@ lpr_stack <- function(data,
       drop_na(!!sym(outcome_var)) %>%
       group_by(vallabel = as_factor(!!sym(outcome_var))) %>%
       summarise(
-        prop = survey_mean(proportion = TRUE, na.rm = TRUE)
+        prop = survey_mean(proportion = TRUE)
       ) %>%
       mutate(
-        # varlabel = attributes(data$variables[[outcome_var]])$label,
         varlabel = if (!is.null(attributes(data$variables[[outcome_var]])$label)) {
           attributes(data$variables[[outcome_var]])$label
         } else {
