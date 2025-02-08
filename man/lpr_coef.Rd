@@ -5,38 +5,38 @@
 \title{LAPOP Regression Coefficients Graph Pre-Processing}
 \usage{
 lpr_coef(
-  svyglm_object,
+  outcome = NULL,
+  xvar = NULL,
+  model = "gaussian",
+  lprdata = NULL,
   estimate = c("coef"),
   vlabs = NULL,
   omit = NULL,
   filesave = NULL,
   replace = FALSE,
-  level = 95
+  level = 0.95
 )
 }
 \arguments{
-\item{svyglm_object}{Survey-weighted generalised linear models. A generalised
-linear model object from a complex survey design, with inverse-probability
-weighting and design-based standard errors (i.e., `survey::svyglm()` object).
-The svyglm function always returns 'model-robust' standard errors; the
-Horvitz-Thompson-type standard errors used everywhere in the survey package
-are a generalisation of the model-robust 'sandwich' estimators.}
+\item{outcome}{Dependent variable for the svyglm regression model. (e.g., "outcome_name"). Only one variable allowed.}
 
-\item{estimate}{Character. Graph either the coefficients (i.e., `coef`) or
-the change in probabilities (i.e., `contrast`)}
+\item{xvar}{Vector of independent variables for the svyglm regression model (e.g., "xvar1+xvar2+xvar3" and so on). Multiple variables are allowed.}
 
-\item{vlabs}{Character. Variable labels to be displayed in the graph produced
-by lapop_coef().}
+\item{model}{Model family object for glm. Default is linear regression (i.e., "gaussian"). For a logit model, use model="binomial"}
 
-\item{omit}{Character. Do not display coefficients for these independent variables.}
+\item{lprdata}{Survey design data from lpr_data() output.}
 
-\item{filesave}{Character. Path and file name with csv extension to save
-the dataframe output.}
+\item{estimate}{Character. Graph either the coefficients (i.e., `coef`) or the change in probabilities (i.e., `contrast`). Default is "coef."}
 
-\item{replace}{Logical. Replace the dataset output if it already exists.
-Default is FALSE.}
+\item{vlabs}{Character. Rename variable labels to be displayed in the graph produced by lapop_coef(). For instance, vlabs=c("old_varname" = "new_varname").}
 
-\item{level}{Numeric. Set confidence level; default is 95 percent.}
+\item{omit}{Character. Do not display coefficients for these independent variables. Default is to display all variables included in the model. To omit any variables you need to include the raw "varname" in the omit argument.}
+
+\item{filesave}{Character. Path and file name with csv extension to save the dataframe output.}
+
+\item{replace}{Logical. Replace the dataset output if it already exists. Default is FALSE.}
+
+\item{level}{Numeric. Set confidence level in numeric values; default is 95 percent.}
 }
 \value{
 Returns a data frame, with data formatted for visualization by lapop_coef
@@ -47,10 +47,12 @@ plotting regression coefficients graph using LAPOP formatting.
 }
 \examples{
 
-\dontrun{dataYM<-lpr_data(dataset)}
-\dontrun{svyglm_object<-survey::svyglm(formula, design, family="binomial")}
-\dontrun{lapop_coef(svyglm_object, est="coef")}
-\dontrun{lapop_coef(svyglm_object, est="contrast")}
+\dontrun{dataLAPOP<-lpr_data(dataset)}
+\dontrun{svyglm_object<-survey::svyglm(formula, desig, family)}
+\dontrun{Example 1: svyglm_linear<-survey::svyglm(fs2~it1+idio2+edad, data=dataLAPOP, family="gaussian")}
+\dontrun{lpr_coef(outcome="fs2", xvar="it1+idio2+edad", lprdata=dataLAPOP, est="coef")}
+\dontrun{Example 2: svyglm_logit<-survey::svyglm(fs2~it1+idio2+edad, data=dataLAPOP, family="binomial")}
+\dontrun{lpr_coef(outcome="fs2", xvar="it1+idio2+edad", lprdata=dataLAPOP, model="binomial", est="contrast")}
 
 }
 \author{

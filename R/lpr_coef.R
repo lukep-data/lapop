@@ -9,31 +9,27 @@
 #' This function creates a data frame which can then be input in lapop_coef() for
 #' plotting regression coefficients graph using LAPOP formatting.
 #'
-#' @param svyglm_object Survey-weighted generalised linear models. A generalised
-#' linear model object from a complex survey design, with inverse-probability
-#' weighting and design-based standard errors (i.e., `survey::svyglm()` object).
-#' The svyglm function always returns 'model-robust' standard errors; the
-#' Horvitz-Thompson-type standard errors used everywhere in the survey package
-#' are a generalisation of the model-robust 'sandwich' estimators.
-#' @param estimate Character. Graph either the coefficients (i.e., `coef`) or
-#' the change in probabilities (i.e., `contrast`)
-#' @param vlabs Character. Variable labels to be displayed in the graph produced
-#'  by lapop_coef().
-#' @param omit Character. Do not display coefficients for these independent variables.
-#' @param filesave Character. Path and file name with csv extension to save
-#' the dataframe output.
-#' @param replace Logical. Replace the dataset output if it already exists.
-#' Default is FALSE.
-#' @param level Numeric. Set confidence level; default is 95 percent.
+#' @param outcome Dependent variable for the svyglm regression model. (e.g., "outcome_name"). Only one variable allowed.
+#' @param xvar Vector of independent variables for the svyglm regression model (e.g., "xvar1+xvar2+xvar3" and so on). Multiple variables are allowed.
+#' @param model Model family object for glm. Default is linear regression (i.e., "gaussian"). For a logit model, use model="binomial"
+#' @param lprdata Survey design data from lpr_data() output.
+#' @param estimate Character. Graph either the coefficients (i.e., `coef`) or the change in probabilities (i.e., `contrast`). Default is "coef."
+#' @param vlabs Character. Rename variable labels to be displayed in the graph produced by lapop_coef(). For instance, vlabs=c("old_varname" = "new_varname").
+#' @param omit Character. Do not display coefficients for these independent variables. Default is to display all variables included in the model. To omit any variables you need to include the raw "varname" in the omit argument.
+#' @param filesave Character. Path and file name with csv extension to save the dataframe output.
+#' @param replace Logical. Replace the dataset output if it already exists. Default is FALSE.
+#' @param level Numeric. Set confidence level in numeric values; default is 95 percent.
 #'
 #' @return Returns a data frame, with data formatted for visualization by lapop_coef
 #'
 #' @examples
 #'
-#' \dontrun{dataYM<-lpr_data(dataset)}
-#' \dontrun{svyglm_object<-survey::svyglm(formula, design, family="binomial")}
-#' \dontrun{lapop_coef(svyglm_object, est="coef")}
-#' \dontrun{lapop_coef(svyglm_object, est="contrast")}
+#' \dontrun{dataLAPOP<-lpr_data(dataset)}
+#' \dontrun{svyglm_object<-survey::svyglm(formula, desig, family)}
+#' \dontrun{Example 1: svyglm_linear<-survey::svyglm(fs2~it1+idio2+edad, data=dataLAPOP, family="gaussian")}
+#' \dontrun{lpr_coef(outcome="fs2", xvar="it1+idio2+edad", lprdata=dataLAPOP, est="coef")}
+#' \dontrun{Example 2: svyglm_logit<-survey::svyglm(fs2~it1+idio2+edad, data=dataLAPOP, family="binomial")}
+#' \dontrun{lpr_coef(outcome="fs2", xvar="it1+idio2+edad", lprdata=dataLAPOP, model="binomial", est="contrast")}
 #'
 #'@export
 #'@import dplyr
@@ -43,21 +39,32 @@
 #'@author Robert Vidigal, \email{robert.vidigal@@vanderbilt.edu}
 
 lpr_coef <- function(
-  svyglm_object,
-  estimate = c("coef"),
-  vlabs = NULL,
-  omit = NULL,
-  filesave = NULL,
-  replace = FALSE,
-  level = 95
+    outcome = NULL,
+    xvar = NULL,
+    model = "gaussian",
+    lprdata = NULL,
+    estimate = c("coef"),
+    vlabs = NULL,
+    omit = NULL,
+    filesave = NULL,
+    replace = FALSE,
+    level = 0.95
 ) {
 
   # Initialize an empty data.frame for output
   coef_data <- data.frame()
 
-  # Ensure the input is a survey::svyglm() object
-  if (!inherits(svyglm_object, "svyglm")) {
-    stop("The input model must be a svyglm object.")
+  # Check if any of the required inputs are NULL
+  if (is.null(outcome) || is.null(xvar) || is.null(model) || is.null(data)) {
+    stop("Error: One or more required inputs (outcome, xvar, model) are NULL.")
+  } else {
+    # Run svyglm regression from INPUTS
+    formula <- as.formula(paste(paste(outcome, "~"), xvar))
+    svyglm_object<-survey::svyglm(formula, design=data, family=model)
+  }
+
+  if (estimate == "") {
+    stop("You need to define the type of estimate: `coef` or `contrast`")
   }
 
   if (estimate == "contrast") {
@@ -120,29 +127,28 @@ lpr_coef <- function(
     coef_data <- coef_data %>% select(varlabel, coef, lb, ub, pvalue, proplabel)
   } else {
 
-  # Extract coefficients and confidence intervals (i.e., estimate="coef")
-  level <- level / 100
+    # Extract coefficients and confidence intervals (i.e., estimate="coef")
 
-  coef_data <- summary(svyglm_object)$coefficients %>%
-    as.data.frame() %>%
-    mutate(Term = rownames(.)) %>%
-    select(Term, everything()) %>%  # Move Term to the first column
-    mutate(
-      lb = as.numeric(Estimate - qt(1 - (1 - level) / 2, df = svyglm_object$df.residual) * `Std. Error`),
-      ub = as.numeric(Estimate + qt(1 - (1 - level) / 2, df = svyglm_object$df.residual) * `Std. Error`),
-      `Pr(>|t|)` = as.numeric(format(`Pr(>|t|)`, scientific = FALSE, digits=3)),
-      pvalue = round(`Pr(>|t|)`, 3),
-      proplabel = round(Estimate, digits=3)
-    )
+    coef_data <- summary(svyglm_object)$coefficients %>%
+      as.data.frame() %>%
+      mutate(Term = rownames(.)) %>%
+      select(Term, everything()) %>%  # Move Term to the first column
+      mutate(
+        lb = as.numeric(Estimate - qt(1 - (1 - level) / 2, df = svyglm_object$df.residual) * `Std. Error`),
+        ub = as.numeric(Estimate + qt(1 - (1 - level) / 2, df = svyglm_object$df.residual) * `Std. Error`),
+        `Pr(>|t|)` = as.numeric(format(`Pr(>|t|)`, scientific = FALSE, digits=3)),
+        pvalue = round(`Pr(>|t|)`, 3),
+        proplabel = round(Estimate, digits=3)
+      )
 
-  if (!is.null(omit)) {
-    coef_data <- coef_data %>%
-      filter(!Term %in% omit)
-  }
+    if (!is.null(omit)) {
+      coef_data <- coef_data %>%
+        filter(!Term %in% omit)
+    }
 
     # Return the processed coefficient data as a tibble
     coef_data<-coef_data %>% rename(varlabel=Term, coef=Estimate) %>%
-    select(varlabel, coef, lb, ub, pvalue, proplabel)
+      select(varlabel, coef, lb, ub, pvalue, proplabel)
   }
 
   # Save the output to a CSV file if filesave is provided
