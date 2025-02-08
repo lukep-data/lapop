@@ -34,6 +34,7 @@
 #'@export
 #'@import dplyr
 #'@import srvyr
+#'@import survey
 #'@import marginaleffects
 #'
 #'@author Robert Vidigal, \email{robert.vidigal@@vanderbilt.edu}
