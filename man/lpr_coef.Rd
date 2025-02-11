@@ -8,7 +8,7 @@ lpr_coef(
   outcome = NULL,
   xvar = NULL,
   model = "gaussian",
-  lprdata = NULL,
+  data = NULL,
   estimate = c("coef"),
   vlabs = NULL,
   omit = NULL,
@@ -24,7 +24,7 @@ lpr_coef(
 
 \item{model}{Model family object for glm. Default is linear regression (i.e., "gaussian"). For a logit model, use model="binomial"}
 
-\item{lprdata}{Survey design data from lpr_data() output.}
+\item{data}{Survey design data from lpr_data() output.}
 
 \item{estimate}{Character. Graph either the coefficients (i.e., `coef`) or the change in probabilities (i.e., `contrast`). Default is "coef."}
 
@@ -50,9 +50,9 @@ plotting regression coefficients graph using LAPOP formatting.
 \dontrun{dataLAPOP<-lpr_data(dataset)}
 \dontrun{svyglm_object<-survey::svyglm(formula, desig, family)}
 \dontrun{Example 1: svyglm_linear<-survey::svyglm(fs2~it1+idio2+edad, data=dataLAPOP, family="gaussian")}
-\dontrun{lpr_coef(outcome="fs2", xvar="it1+idio2+edad", lprdata=dataLAPOP, est="coef")}
+\dontrun{lpr_coef(outcome="fs2", xvar="it1+idio2+edad", data=dataLAPOP, est="coef")}
 \dontrun{Example 2: svyglm_logit<-survey::svyglm(fs2~it1+idio2+edad, data=dataLAPOP, family="binomial")}
-\dontrun{lpr_coef(outcome="fs2", xvar="it1+idio2+edad", lprdata=dataLAPOP, model="binomial", est="contrast")}
+\dontrun{lpr_coef(outcome="fs2", xvar="it1+idio2+edad", data=dataLAPOP, model="binomial", est="contrast")}
 
 }
 \author{

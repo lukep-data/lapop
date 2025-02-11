@@ -12,7 +12,7 @@
 #' @param outcome Dependent variable for the svyglm regression model. (e.g., "outcome_name"). Only one variable allowed.
 #' @param xvar Vector of independent variables for the svyglm regression model (e.g., "xvar1+xvar2+xvar3" and so on). Multiple variables are allowed.
 #' @param model Model family object for glm. Default is linear regression (i.e., "gaussian"). For a logit model, use model="binomial"
-#' @param lprdata Survey design data from lpr_data() output.
+#' @param data Survey design data from lpr_data() output.
 #' @param estimate Character. Graph either the coefficients (i.e., `coef`) or the change in probabilities (i.e., `contrast`). Default is "coef."
 #' @param vlabs Character. Rename variable labels to be displayed in the graph produced by lapop_coef(). For instance, vlabs=c("old_varname" = "new_varname").
 #' @param omit Character. Do not display coefficients for these independent variables. Default is to display all variables included in the model. To omit any variables you need to include the raw "varname" in the omit argument.
@@ -27,9 +27,9 @@
 #' \dontrun{dataLAPOP<-lpr_data(dataset)}
 #' \dontrun{svyglm_object<-survey::svyglm(formula, desig, family)}
 #' \dontrun{Example 1: svyglm_linear<-survey::svyglm(fs2~it1+idio2+edad, data=dataLAPOP, family="gaussian")}
-#' \dontrun{lpr_coef(outcome="fs2", xvar="it1+idio2+edad", lprdata=dataLAPOP, est="coef")}
+#' \dontrun{lpr_coef(outcome="fs2", xvar="it1+idio2+edad", data=dataLAPOP, est="coef")}
 #' \dontrun{Example 2: svyglm_logit<-survey::svyglm(fs2~it1+idio2+edad, data=dataLAPOP, family="binomial")}
-#' \dontrun{lpr_coef(outcome="fs2", xvar="it1+idio2+edad", lprdata=dataLAPOP, model="binomial", est="contrast")}
+#' \dontrun{lpr_coef(outcome="fs2", xvar="it1+idio2+edad", data=dataLAPOP, model="binomial", est="contrast")}
 #'
 #'@export
 #'@import dplyr
@@ -43,7 +43,7 @@ lpr_coef <- function(
     outcome = NULL,
     xvar = NULL,
     model = "gaussian",
-    lprdata = NULL,
+    data = NULL,
     estimate = c("coef"),
     vlabs = NULL,
     omit = NULL,
