@@ -64,7 +64,7 @@
 #'
 #'@author Luke Plutowski, \email{luke.plutowski@@vanderbilt.edu}
 
-lpr_mline2 <- function(data,
+lpr_mline <- function(data,
                    outcome,
                    rec = c(1, 1),
                    rec2 = c(1, 1),
