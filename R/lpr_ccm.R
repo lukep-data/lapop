@@ -191,9 +191,9 @@ lpr_ccm <- function(data,
         t_test_results <- rbind(t_test_results,
                                 data.frame(test = paste(ccm$pais[i], ccm$var[i], "vs",
                                                         ccm$pais[j], ccm$var[j]),
-                                           diff = diff,
-                                           ttest = t_stat,
-                                           pval = p_value))
+                                           diff = round(diff, 3),
+                                           ttest = round(t_stat, 3),
+                                           pval = round(p_value, 3)))
         attr(ccm, "t_test_results") <- t_test_results
       }
     }

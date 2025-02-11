@@ -186,9 +186,9 @@ lpr_ts <- function(data,
           t_test_results,
           data.frame(
             test = paste0("Wave ", ts_df$wave[i], " vs Wave ", ts_df$wave[j]),
-            diff = diff,
-            t_stat = t_stat,
-            p_value = p_value
+            diff = round(diff, 3),
+            t_stat = round(t_stat, 3),
+            p_value = round(p_value, 3)
           )
         )
       }

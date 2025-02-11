@@ -169,9 +169,9 @@ lpr_cc = function(data,
         # Store results in a data frame
         t_test_results <- rbind(t_test_results,
                                 data.frame(test = paste(cc$vallabel[i], "vs", cc$vallabel[j]),
-                                           diff = diff,
-                                           ttest = t_stat,
-                                           pval = p_value))
+                                           diff = round(diff, 3),
+                                           ttest = round(t_stat, 3),
+                                           pval = round(p_value, 3)))
         attr(cc, "t_test_results") <- t_test_results
       }
     }

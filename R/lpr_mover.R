@@ -161,9 +161,9 @@ lpr_mover <- function(data,
           t_test_results <- rbind(t_test_results,
                                   data.frame(varlabel = vl,
                                              test = paste(mover_subset$vallabel[i], "vs", mover_subset$vallabel[j]),
-                                             diff = diff,
-                                             ttest = t_stat,
-                                             pval = p_value))
+                                             diff = round(diff, 3),
+                                             ttest = round(t_stat, 3),
+                                             pval = round(p_value, 3)))
         }
       }
     }

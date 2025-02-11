@@ -64,7 +64,7 @@
 #'
 #'@author Luke Plutowski, \email{luke.plutowski@@vanderbilt.edu}
 
-lpr_mline <- function(data,
+lpr_mline2 <- function(data,
                    outcome,
                    rec = c(1, 1),
                    rec2 = c(1, 1),
@@ -124,6 +124,17 @@ lpr_mline <- function(data,
       arrange(varlabel, wave)
 
     row.names(mline) <- NULL
+
+    if ("2016" %in% mline$wave | "2017" %in% mline$wave) {
+      mline = mline %>%
+        filter(wave != "2016/17")
+    }
+
+    if ("2018" %in% mline$wave | "2019" %in% mline$wave) {
+      mline = mline %>%
+        filter(wave != "2018/19")
+    }
+
 
   } else {
 
@@ -212,9 +223,9 @@ lpr_mline <- function(data,
               " vs ",
               mline$varlabel[j], mline$wave[j]
             ),
-            diff = diff,
-            t_stat = t_stat,
-            p_value = p_value
+            diff = round(diff, 3),
+            t_stat = round(t_stat, 3),
+            p_value = round(p_value, 3)
           )
         )
       }

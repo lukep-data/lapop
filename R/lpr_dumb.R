@@ -250,9 +250,9 @@ lpr_dumb = function(data,
         t_test_results_df <- rbind(t_test_results_df,
                                    data.frame(test = paste(t_test_results$pais[i], t_test_results$wave2[i], "vs",
                                                            t_test_results$pais[j], t_test_results$wave2[j]),
-                                              diff = diff,
-                                              ttest = t_stat,
-                                              pval = p_value))
+                                              diff = round(diff, 3),
+                                              ttest = round(t_stat, 3),
+                                              pval = round(p_value, 3)))
       }
     }
 
