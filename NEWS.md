@@ -1,7 +1,11 @@
+# lapop 2.0.3
+
+* add lpr_resc()
+
 # lapop 2.0.2
 
 * update labels system for stack and mover
-* add "hacks": lpr_stack_over() and lpr_mline_mv()
+* add "hacks": "by" and "over" options in lpr_stack() and lpr_mline()
 
 # lapop 2.0.1
 
