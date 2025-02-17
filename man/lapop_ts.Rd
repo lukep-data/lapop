@@ -19,7 +19,8 @@ lapop_ts(
   subtitle = "",
   lang = "en",
   color_scheme = "#A43D6A",
-  percentages = TRUE
+  percentages = TRUE,
+  label_vjust = -2.1
 )
 }
 \arguments{
@@ -53,6 +54,8 @@ Default: "#A43D6A" (red).}
 
 \item{percentages}{Logical.  Is the outcome variable a percentage?  Set to FALSE if you are using
 means of the raw values, so that the y-axis adjusts accordingly. Default: TRUE.}
+
+\item{label_vjust}{Numeric. Customize vertical space between points and their labels.}
 }
 \value{
 Returns an object of class \code{ggplot}, a ggplot line graph showing
