@@ -43,6 +43,8 @@ NULL
 #' Default: "#A43D6A" (red).
 #' @param percentages Logical.  Is the outcome variable a percentage?  Set to FALSE if you are using
 #' means of the raw values, so that the y-axis adjusts accordingly. Default: TRUE.
+#' @param label_vjust Numeric. Customize vertical space between points and their labels.
+
 #' @return Returns an object of class \code{ggplot}, a ggplot line graph showing
 #' values of a variable over time.
 #'
@@ -83,7 +85,8 @@ lapop_ts <- function(data, outcome_var = data$prop, lower_bound = data$lb,
                      subtitle = "",
                      lang = "en",
                      color_scheme = "#A43D6A",
-                     percentages = TRUE){
+                     percentages = TRUE,
+                     label_vjust = -2.1){
 
   #interpolate data for missing waves are still plotted on the x-axis (without data)
   if(sum(is.na(outcome_var)) > 0) {
@@ -114,7 +117,8 @@ lapop_ts <- function(data, outcome_var = data$prop, lower_bound = data$lb,
                                        "<span style='color:#FFFFFF00'>-----------</span>",
                                        ci_text)) +
 
-    geom_text(aes(label=label_var), family = "roboto", color=color_scheme, fontface = "bold", size = 5, vjust = -2.1) +
+    geom_text(aes(label=label_var), family = "roboto", color=color_scheme,
+              fontface = "bold", size = 5, vjust = label_vjust) +
     scale_x_discrete(limits = wave_var) +
     {
       if (percentages) {
