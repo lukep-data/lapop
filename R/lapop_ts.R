@@ -26,7 +26,7 @@ NULL
 #' proplabel (text of outcome variable; character); lb (lower bound of estimate; numeric),
 #' and ub (upper bound of estimate; numeric). Default: None (must be supplied).
 #' @param wave_var,outcome_var,label_var,lower_bound,upper_bound,point_var Character, numeric, character,
-#' numeric, numeric,point_var. Each component of the data to be plotted can be manually specified in case
+#' numeric, numeric, character. Each component of the data to be plotted can be manually specified in case
 #' the default columns in the data frame should not be used (if, for example, the values for a given
 #' variable were altered and stored in a new column).
 #' @param ymin,ymax Numeric.  Minimum and maximum values for y-axis. Default: 0, 100.
@@ -44,6 +44,7 @@ NULL
 #' @param percentages Logical.  Is the outcome variable a percentage?  Set to FALSE if you are using
 #' means of the raw values, so that the y-axis adjusts accordingly. Default: TRUE.
 #' @param label_vjust Numeric. Customize vertical space between points and their labels.
+#' Default: -2.1.
 
 #' @return Returns an object of class \code{ggplot}, a ggplot line graph showing
 #' values of a variable over time.

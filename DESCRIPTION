@@ -23,7 +23,6 @@ Suggests:
     testthat (>= 3.0.0)
 Config/testthat/edition: 3
 Collate: 
-    'globals.R'
     'lapop-deprecated.R'
     'lapop_fonts.R'
     'lapop_cc.R'
