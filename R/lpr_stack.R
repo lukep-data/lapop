@@ -8,23 +8,17 @@
 #'
 #' This function creates dataframes which can then be input in lapop_stack() for
 #' plotting variables categories with a stacked bar graph using LAPOP formatting.
-#' If "by" is specified, the function shows the distribution of the outcome variable
-#' by distinct values of a secondary variable.  If "by" is not provided, it will show
-#' the distribution of all specified outcome variables.
 #'
-#' @param data  The data that should be analyzed. It requires a survey object
-#' from lpr_data() function.
-#' @param outcome Character vector. Vector of variable(s) be plotted.
-#' @param by Character. Grouping variable.  If by is provided, function will break
-#' down the outcome variable by distinct values of the "by" variable (instead of
-#' showing distribution of multiple outcome variables).
-#' @param sort Character. On what value the bars are sorted. Options are "xv"
-#' (default; sort on the underlying values of the value labels), "xl" (on the value
-#' labels themselves, i.e. alphabetically), or "y" (on the proportions of the
-#' outcome variable(s)).
-#' @param order Character. How the bars should be sorted. Options are "lo-hi"
-#' (default) or "hi-lo".
+#' @param data  The data that should be analyzed. It requires a survey object from lpr_data() function.
+#' @param outcome Vector of variables be plotted.
+#' @param xvar Character. Outcome variable will be broken down by this variable. Default is NULL
 #' @param filesave Character. Path and file name to save the dataframe as csv.
+#' @param sort Character. On what value the bars are sorted: the x or the y.
+#' Options are "y" (default; for the value of the outcome variable), "xv" (for
+#' the underlying values of the x variable), "xl" (for the labels of the x variable,
+#' i.e., alphabetical).
+#' @param order Character. How the bars should be sorted. Options are "hi-lo"
+#' (default) or "lo-hi".
 #' @param keep_nr Logical. If TRUE, will convert "don't know" (missing code .a)
 #' and "no response" (missing code .b) into valid data (value = 99) and use them
 #' in the denominator when calculating percentages.  The default is to examine
@@ -34,7 +28,8 @@
 #'
 #' @examples
 #'
-#' \dontrun{lapop_stack(data = gm, outcome = c("countfair1", "countfair3"))}
+#' \dontrun{lpr_stack(data = gm, outcome = c("countfair1", "countfair3"))}
+#' \dontrun{lpr_stack(data = gm, outcome = "pese1", xvar="year")}
 #'
 #'@export
 #'@import dplyr
@@ -47,103 +42,86 @@
 # LPR_STACK
 # # -----------------------------------------------------------------------
 lpr_stack <- function(data,
-                       outcome,
-                       by = NULL,
-                       sort = "xv",
-                       order = "lo-hi",
-                       filesave = "",
-                       keep_nr = FALSE) {
-
-  if (!is.null(by)) {
-    # Exclude NA values from 'by' before looping
-    valid_values <- sort(unique(data$variables[[by]][!is.na(data$variables[[by]])]))
-
-    # Loop over all values of "by" variable - create a separate column for each value
-    for (value in valid_values) {
-      if (any(!is.na(data$variables[[outcome]][data$variables[[by]] == value]))) {
-
-        column_name <- paste0("x_by_", value)
-
-        data$variables[[column_name]] <- replace(
-          data$variables[[outcome]],
-          data$variables[[by]] != value,
-          NA
-        )
-
-        # Extract value label and assign it to newly created variables
-        label_value <- names(which(attributes(data$variables[[by]])$labels == value))
-
-        if (length(label_value) == 0) {
-          label_value <- as.character(value)  # Fallback if no label is found
-        }
-
-        attributes(data$variables[[column_name]])$label <- label_value
-      }
-    }
-
-    # Update outcome list to include the newly created "x_by_*" variables
-    outcome <- grep("x_by", names(data$variables), value = TRUE)
-  }
+                      outcome,
+                      xvar = NULL,
+                      sort = "y",
+                      order = "hi-lo",
+                      filesave = "",
+                      keep_nr = FALSE) {
 
   # Helper function to handle a single variable
   process_outcome <- function(data, outcome_var) {
+    outcome_sym <- sym(outcome_var)
+
     # Handle `keep_nr` logic
     if (keep_nr) {
       data <- data %>%
-        mutate(!!sym(outcome_var) := case_when(
-          na_tag(!!sym(outcome_var)) %in% c("a", "b") ~ 99, # Replace "NA(a)" and "NA(b)" with 99
-          TRUE ~ as.numeric(!!sym(outcome_var))       # Keep other values unchanged
+        mutate(!!outcome_sym := case_when(
+          na_tag(!!outcome_sym) %in% c("a", "b") ~ 99,
+          TRUE ~ as.numeric(!!outcome_sym)
         ))
     }
 
     # Perform proportion calculations
     stack <- data %>%
-      drop_na(!!sym(outcome_var)) %>%
-      group_by(vallabel = as_factor(!!sym(outcome_var))) %>%
+      drop_na(!!outcome_sym) %>%
+      {
+        if (!is.null(xvar)) {
+          group_by(., xvar_label = as_factor(!!sym(xvar)), vallabel = as_factor(!!outcome_sym))
+        } else {
+          group_by(., vallabel = as_factor(!!outcome_sym))
+        }
+      } %>%
       summarise(
-        prop = survey_mean(proportion = TRUE)
+        prop = survey_mean(proportion = TRUE, na.rm = TRUE),
+        .groups = "drop"
       ) %>%
       mutate(
-        varlabel = if (!is.null(attributes(data$variables[[outcome_var]])$label)) {
-          attributes(data$variables[[outcome_var]])$label
-        } else {
-          outcome_var
-        },
-        prop = prop * 100, # Convert to percentage
+        varlabel = attributes(data$variables[[outcome_var]])$label,
+        prop = prop * 100,
         proplabel = sprintf("%.0f%%", prop)
       ) %>%
-      select(varlabel, vallabel, prop, proplabel) %>%
-      ungroup()
+      {
+        if (!is.null(xvar)) {
+          select(., varlabel, vallabel, xvar_label, prop, proplabel)
+        } else {
+          select(., varlabel, vallabel, prop, proplabel)
+        }
+      }
 
-    # Sorting logic
+    # Sorting logic: prioritize sorting by `xvar_label` if provided
     stack <- stack %>%
       {
-        if (sort == "y") {
-          if (order == "hi-lo") {
-            arrange(., desc(prop))
-          } else if (order == "lo-hi") {
-            arrange(., prop)
-          } else {
-            .
-          }
-        } else if (sort == "xv") {
-          if (order == "hi-lo") {
-            arrange(., desc(vallabel))
-          } else if (order == "lo-hi") {
-            arrange(., vallabel)
-          } else {
-            .
-          }
-        } else if (sort == "xl") {
-          if (order == "hi-lo") {
-            arrange(., desc(as.character(vallabel)))
-          } else if (order == "lo-hi") {
-            arrange(., as.character(vallabel))
-          } else {
-            .
-          }
+        if (!is.null(xvar)) {
+          arrange(., xvar_label, desc(prop)) # First sort by xvar_label, then by prop
         } else {
-          .
+          if (sort == "y") {
+            if (order == "hi-lo") {
+              arrange(., desc(prop))
+            } else if (order == "lo-hi") {
+              arrange(., prop)
+            } else {
+              .
+            }
+          } else if (sort == "xv") {
+            if (order == "hi-lo") {
+              arrange(., desc(vallabel))
+            } else if (order == "lo-hi") {
+              arrange(., vallabel)
+            } else {
+              .
+            }
+          } else if (sort == "xl") {
+            if (order == "hi-lo") {
+              arrange(., desc(as.character(vallabel)))
+            } else if (order == "lo-hi") {
+              arrange(., as.character(vallabel))
+            } else {
+              .
+            }
+          } else {
+            .
+          }
         }
       }
 
