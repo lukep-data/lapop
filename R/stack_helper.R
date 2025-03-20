@@ -111,7 +111,8 @@ stack_helper <- function(data,
         },
         prop = n/sum(n),
         prop = prop * 100, # Convert to percentage
-        proplabel = sprintf("%.0f%%", prop)
+        proplabel = sprintf("%.0f%%", prop),
+        vallabel = as.character(haven::as_factor(vallabel))
       ) %>%
       ungroup() %>%
       dplyr::select(varlabel, vallabel, prop, proplabel)
