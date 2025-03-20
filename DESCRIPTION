@@ -1,7 +1,7 @@
 Package: lapop
 Type: Package
 Title: Creates Visualizations Using LAPOP Styles 
-Version: 2.0.3
+Version: 2.0.4
 Authors@R: 
     person(given = "Luke",
            family = "Plutowski",
@@ -23,6 +23,7 @@ Suggests:
     testthat (>= 3.0.0)
 Config/testthat/edition: 3
 Collate: 
+    'hist_helper.R'
     'lapop-deprecated.R'
     'lapop_fonts.R'
     'lapop_cc.R'
@@ -48,3 +49,4 @@ Collate:
     'lpr_resc.R'
     'lpr_stack.R'
     'lpr_ts.R'
+    'stack_helper.R'
