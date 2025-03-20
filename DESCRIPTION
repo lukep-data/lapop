@@ -50,3 +50,4 @@ Collate:
     'lpr_stack.R'
     'lpr_ts.R'
     'stack_helper.R'
+    'svy_stack.R'
