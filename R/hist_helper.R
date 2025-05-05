@@ -29,8 +29,8 @@
 #'
 #' @examples
 #'
-#' \dontrun{hist_helper(jam23,
-#' outcome = "aoj11",
+#' \dontrun{hist_helper(data,
+#' outcome = "health2",
 #' sort = "xv",
 #' order = "hi-lo")}
 #'
@@ -38,7 +38,6 @@
 #'@import dplyr
 #'@import srvyr
 #'
-#'@author Shashwat Dhar \email{shashwat.dhar@@vanderbilt.edu},
 #'Luke Plutowski, \email{luke.plutowski@@vanderbilt.edu}
 
 
@@ -74,8 +73,7 @@ hist_helper <- function(data,
         sprintf("%.0f%%", round(prop))
       },
       cat = (haven::as_factor(cat))
-    ) %>%
-    select(-n)
+    )
 
   # Apply sorting
   if (sort == "y") {
