@@ -49,8 +49,7 @@
 #'@import ggplot2
 #'@import ggtext
 #'
-#'@author Luke Plutowski, \email{luke.plutowski@@vanderbilt.edu}
-#'
+#'@author Luke Plutowski, \email{luke.plutowski@@hdrinc.com}
 
 
 

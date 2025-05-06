@@ -38,7 +38,7 @@
 #'@import dplyr
 #'@import srvyr
 #'
-#'Luke Plutowski, \email{luke.plutowski@@vanderbilt.edu}
+#'@author Luke Plutowski, \email{luke.plutowski@@hdrinc.com}
 
 
 hist_helper <- function(data,

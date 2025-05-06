@@ -1,7 +1,7 @@
 Package: lapop
 Type: Package
 Title: Creates Visualizations Using LAPOP Styles 
-Version: 2.0.4
+Version: 2.0.5
 Authors@R: 
     person(given = "Luke",
            family = "Plutowski",
@@ -50,4 +50,5 @@ Collate:
     'lpr_stack.R'
     'lpr_ts.R'
     'stack_helper.R'
+    'svy_hist.R'
     'svy_stack.R'

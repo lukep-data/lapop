@@ -45,13 +45,12 @@ creating a histogram/bar plot.
 }
 \examples{
 
-\dontrun{hist_helper(jam23,
-outcome = "aoj11",
+\dontrun{hist_helper(data,
+outcome = "health2",
 sort = "xv",
 order = "hi-lo")}
 
 }
 \author{
-Shashwat Dhar \email{shashwat.dhar@vanderbilt.edu},
-Luke Plutowski, \email{luke.plutowski@vanderbilt.edu}
+Luke Plutowski, \email{luke.plutowski@hdrinc.com}
 }
