@@ -28,7 +28,7 @@
 #' or "es" (Spanish).  Default: "en".
 #' @param color_scheme Character.  Color of bars.
 #' Takes hex numbers, beginning with "#". Default: "#008381".
-#' @param order Logical.  Should bars be ordered from most frequent response to least?  Default: FALSE.
+#' @param order Logical. Should bars be ordered from most frequent response to least?  Default: FALSE.
 #' @return Returns an object of class \code{ggplot}, a ggplot bar graph.
 #' @examples
 #'
@@ -75,7 +75,8 @@ svy_hist <- function(data,
             size = 5) +
   ylab("Total Responses") +
   {if(!is.null(yminmax)) ylim(yminmax)}+
-  labs(title = main_title) +
+  labs(title = main_title,
+       subtitle = subtitle) +
   coord_flip() +
   theme(legend.position = "bottom",
         panel.background = element_blank(),

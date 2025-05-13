@@ -42,7 +42,7 @@ Default: None.}
 which is added to the end of "Source: " in the bottom-left corner of the graph.
 Default: None (only "Source: " will be printed).}
 
-\item{order}{Logical.  Should bars be ordered from most frequent response to least?  Default: FALSE.}
+\item{order}{Logical. Should bars be ordered from most frequent response to least?  Default: FALSE.}
 
 \item{color_scheme}{Character.  Color of bars.
 Takes hex numbers, beginning with "#". Default: "#008381".}
