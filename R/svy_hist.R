@@ -72,7 +72,7 @@ svy_hist <- function(data,
   geom_text(aes(label=label_var),
             position = position_stack(vjust = 0.5), color = "#FFFFFF",
             fontface = "bold",
-            size = 5) +
+            size = 4) +
   ylab("Total Responses") +
   {if(!is.null(yminmax)) ylim(yminmax)}+
   labs(title = main_title,
