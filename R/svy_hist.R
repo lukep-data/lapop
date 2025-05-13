@@ -65,17 +65,14 @@ svy_hist <- function(data,
                      order = FALSE,
                      color_scheme = "#377F99"){
 
-  if(order == TRUE){
-    data = data[order(-data$prop), ]
-    cat_var = cat_var[order(-outcome_var)]
-    label_var = label_var[order(-outcome_var)]
-    outcome_var = outcome_var[order(-outcome_var)]
-  }
-
-  ggplot(data = data) +
-  geom_bar(mapping = aes(x = reorder(cat, n),
-                         y = n),
-           stat = "identity", width = 0.4, fill = color_scheme) +
+  ggplot(data = data,
+         mapping = aes(x = if(order) reorder(cat_var, n) else factor(cat_var, levels = rev(unique(cat_var))),
+                                    y = n)) +
+  geom_bar(stat = "identity", width = 0.4, fill = color_scheme) +
+  geom_text(aes(label=label_var),
+            position = position_stack(vjust = 0.5), color = "#FFFFFF",
+            fontface = "bold",
+            size = 5) +
   ylab("Total Responses") +
   {if(!is.null(yminmax)) ylim(yminmax)}+
   labs(title = main_title) +
