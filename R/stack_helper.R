@@ -95,6 +95,10 @@ stack_helper <- function(data,
         ))
     }
 
+    # Retrieve original factor levels from haven::as_factor
+    factor_variable <- haven::as_factor(data[[outcome]])
+    factor_levels <- levels(factor_variable)
+
     # Perform proportion calculations
     stack <- data %>%
       drop_na(outcome) %>%
@@ -112,7 +116,7 @@ stack_helper <- function(data,
         prop = n/sum(n),
         prop = prop * 100, # Convert to percentage
         proplabel = sprintf("%.0f%%", prop),
-        vallabel = as.character(haven::as_factor(vallabel))
+        vallabel = as.character(haven::as_factor(vallabel, levels = factor_levels))
       ) %>%
       ungroup() %>%
       dplyr::select(varlabel, vallabel, prop, proplabel)

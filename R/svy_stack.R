@@ -89,9 +89,9 @@ svy_stack <- function(data, outcome_var = data$prop, prop_labels = data$proplabe
     var_labels = as_factor(var_labels)
     data$varlabels = as_factor(data$varlabel)
   }
-  if(!inherits(value_labels, "character") & !inherits(value_labels, "factor")){
-    value_labels = as.character(value_labels)
-    data$vallabel = as.character(data$vallabel)
+  if (!inherits(value_labels, "factor")) {
+    value_labels <- factor(value_labels, levels = unique(value_labels))
+    data$vallabel <- factor(data$vallabel, levels = unique(data$vallabel))
   }
   mycolors = rev(color_scheme[seq_along(unique(value_labels))])
 
