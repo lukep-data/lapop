@@ -113,7 +113,7 @@ stack_helper <- function(data,
         } else {
           outcome
         },
-        prop = n / sum(n) * 100, # Convert to percentage
+        prop = n / sum(n) * 100,
         proplabel = sprintf("%.0f%%", prop),
         vallabel = factor(haven::as_factor(vallabel), levels = factor_levels)
       ) %>%
