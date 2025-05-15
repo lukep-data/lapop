@@ -94,11 +94,17 @@ svy_stack <- function(data, outcome_var = data$prop, prop_labels = data$proplabe
     data$vallabel = as.character(data$vallabel)
   }
   mycolors = rev(color_scheme[seq_along(unique(value_labels))])
-  if(rev_values == TRUE){
-    value_labels = factor(value_labels, levels = unique(value_labels))
-  } else{
-    value_labels = factor(value_labels, levels = rev(unique(value_labels)))
+
+  original_levels <- levels(data$vallabel)
+
+  if (rev_values == TRUE) {
+    value_labels <- factor(value_labels, levels = original_levels)
+  } else {
+    value_labels <- factor(value_labels, levels = rev(original_levels))
   }
+
+  data$vallabel <- value_labels
+
   positions = rev(unique(var_labels))
 
   ggplot(data = data, aes(x = var_labels,
@@ -139,121 +145,121 @@ svy_stack <- function(data, outcome_var = data$prop, prop_labels = data$proplabe
 
 
 
-
-stack_helper <- function(data,
-                         outcome,
-                         by = NULL,
-                         sort = "xv",
-                         order = "lo-hi",
-                         filesave = "",
-                         keep_nr = FALSE) {
-
-  if (!is.null(by)) {
-    # Exclude NA values from 'by' before looping
-    valid_values <- sort(unique(data[[by]][!is.na(data[[by]])]))
-
-    # Loop over all values of "by" variable - create a separate column for each value
-    for (value in valid_values) {
-      if (any(!is.na(data[[outcome]][data[[by]] == value]))) {
-
-        column_name <- paste0("x_by_", value)
-
-        data[[column_name]] <- replace(
-          data[[outcome]],
-          data[[by]] != value,
-          NA
-        )
-
-        # Extract value label and assign it to newly created variables
-        label_value <- names(which(attributes(data[[by]])$labels == value))
-
-        if (length(label_value) == 0) {
-          label_value <- as.character(value)  # Fallback if no label is found
-        }
-
-        attributes(data[[column_name]])$label <- label_value
-      }
-    }
-
-    # Update outcome list to include the newly created "x_by_*" variables
-    outcome <- grep("x_by", names(data), value = TRUE)
-  }
-
-  # Helper function to handle a single variable
-  process_outcome <- function(data, outcome) {
-    # Handle `keep_nr` logic
-    if (keep_nr) {
-      data <- data %>%
-        mutate(!!sym(outcome) := case_when(
-          na_tag(!!sym(outcome)) %in% c("a", "b") ~ 99, # Replace "NA(a)" and "NA(b)" with 99
-          TRUE ~ as.numeric(!!sym(outcome))       # Keep other values unchanged
-        ))
-    }
-
-    # Perform proportion calculations
-    stack <- data %>%
-      drop_na(outcome) %>%
-      group_by(across(as_factor(outcome))) %>%
-      summarise(
-        n = n()
-      ) %>%
-      rename(vallabel = 1) %>%
-      mutate(
-        varlabel = if (!is.null(attributes(data[[outcome]])$label)) {
-          attributes(data[[outcome]])$label
-        } else {
-          outcome
-        },
-        prop = n/sum(n),
-        prop = prop * 100, # Convert to percentage
-        proplabel = sprintf("%.0f%%", prop),
-        vallabel = haven::as_factor(vallabel)
-      ) %>%
-      ungroup() %>%
-      dplyr::select(varlabel, vallabel, prop, proplabel)
-
-    # Sorting logic
-    stack <- stack %>%
-      {
-        if (sort == "y") {
-          if (order == "hi-lo") {
-            arrange(., desc(prop))
-          } else if (order == "lo-hi") {
-            arrange(., prop)
-          } else {
-            .
-          }
-        } else if (sort == "xv") {
-          if (order == "hi-lo") {
-            arrange(., desc(vallabel))
-          } else if (order == "lo-hi") {
-            arrange(., vallabel)
-          } else {
-            .
-          }
-        } else if (sort == "xl") {
-          if (order == "hi-lo") {
-            arrange(., desc(as.character(vallabel)))
-          } else if (order == "lo-hi") {
-            arrange(., as.character(vallabel))
-          } else {
-            .
-          }
-        } else {
-          .
-        }
-      }
-
-    return(stack)
-  }
-
-  # Apply the purrr helper function to all outcomes and combine the results
-  results <- map_dfr(outcome, ~ process_outcome(data, .x))
-
-  # Save to file if required
-  if (filesave != "") {
-    write.csv(results, filesave, row.names = FALSE)
-  }
-
-  return(results)
-}
+#
+# stack_helper <- function(data,
+#                          outcome,
+#                          by = NULL,
+#                          sort = "xv",
+#                          order = "lo-hi",
+#                          filesave = "",
+#                          keep_nr = FALSE) {
+#
+#   if (!is.null(by)) {
+#     # Exclude NA values from 'by' before looping
+#     valid_values <- sort(unique(data[[by]][!is.na(data[[by]])]))
+#
+#     # Loop over all values of "by" variable - create a separate column for each value
+#     for (value in valid_values) {
+#       if (any(!is.na(data[[outcome]][data[[by]] == value]))) {
+#
+#         column_name <- paste0("x_by_", value)
+#
+#         data[[column_name]] <- replace(
+#           data[[outcome]],
+#           data[[by]] != value,
+#           NA
+#         )
+#
+#         # Extract value label and assign it to newly created variables
+#         label_value <- names(which(attributes(data[[by]])$labels == value))
+#
+#         if (length(label_value) == 0) {
+#           label_value <- as.character(value)  # Fallback if no label is found
+#         }
+#
+#         attributes(data[[column_name]])$label <- label_value
+#       }
+#     }
+#
+#     # Update outcome list to include the newly created "x_by_*" variables
+#     outcome <- grep("x_by", names(data), value = TRUE)
+#   }
+#
+#   # Helper function to handle a single variable
+#   process_outcome <- function(data, outcome) {
+#     # Handle `keep_nr` logic
+#     if (keep_nr) {
+#       data <- data %>%
+#         mutate(!!sym(outcome) := case_when(
+#           na_tag(!!sym(outcome)) %in% c("a", "b") ~ 99, # Replace "NA(a)" and "NA(b)" with 99
+#           TRUE ~ as.numeric(!!sym(outcome))       # Keep other values unchanged
+#         ))
+#     }
+#
+#     # Perform proportion calculations
+#     stack <- data %>%
+#       drop_na(outcome) %>%
+#       group_by(across(as_factor(outcome))) %>%
+#       summarise(
+#         n = n()
+#       ) %>%
+#       rename(vallabel = 1) %>%
+#       mutate(
+#         varlabel = if (!is.null(attributes(data[[outcome]])$label)) {
+#           attributes(data[[outcome]])$label
+#         } else {
+#           outcome
+#         },
+#         prop = n/sum(n),
+#         prop = prop * 100, # Convert to percentage
+#         proplabel = sprintf("%.0f%%", prop),
+#         vallabel = haven::as_factor(vallabel)
+#       ) %>%
+#       ungroup() %>%
+#       dplyr::select(varlabel, vallabel, prop, proplabel)
+#
+#     # Sorting logic
+#     stack <- stack %>%
+#       {
+#         if (sort == "y") {
+#           if (order == "hi-lo") {
+#             arrange(., desc(prop))
+#           } else if (order == "lo-hi") {
+#             arrange(., prop)
+#           } else {
+#             .
+#           }
+#         } else if (sort == "xv") {
+#           if (order == "hi-lo") {
+#             arrange(., desc(vallabel))
+#           } else if (order == "lo-hi") {
+#             arrange(., vallabel)
+#           } else {
+#             .
+#           }
+#         } else if (sort == "xl") {
+#           if (order == "hi-lo") {
+#             arrange(., desc(as.character(vallabel)))
+#           } else if (order == "lo-hi") {
+#             arrange(., as.character(vallabel))
+#           } else {
+#             .
+#           }
+#         } else {
+#           .
+#         }
+#       }
+#
+#     return(stack)
+#   }
+#
+#   # Apply the purrr helper function to all outcomes and combine the results
+#   results <- map_dfr(outcome, ~ process_outcome(data, .x))
+#
+#   # Save to file if required
+#   if (filesave != "") {
+#     write.csv(results, filesave, row.names = FALSE)
+#   }
+#
+#   return(results)
+# }

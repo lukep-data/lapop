@@ -72,7 +72,7 @@ svy_hist <- function(data,
   geom_text(aes(label=label_var),
             position = position_stack(vjust = 0.5), color = "#FFFFFF",
             fontface = "bold",
-            size = 4) +
+            size = ifelse(length(unique(cat_var)) > 7, 3.5, 4)) +
   ylab("Total Responses") +
   {if(!is.null(yminmax)) ylim(yminmax)}+
   labs(title = main_title,
@@ -85,6 +85,9 @@ svy_hist <- function(data,
         axis.title.y = element_blank(),
         axis.title.x = element_text(size = 10),
         axis.text = element_text(size = 10),
+        plot.subtitle = element_text(size = 10, face = "italic"),
+        plot.margin = unit(c(t = 0, r = 0.25, b = 0, l = 0.25), "in"),
+        plot.title.position = "plot",
         title = element_text(size = 12))
 
 }
