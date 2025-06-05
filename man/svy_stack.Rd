@@ -14,6 +14,8 @@ svy_stack(
   main_title = "",
   subtitle = "",
   source_info = "",
+  ylab_text = "",
+  text_size = 4,
   rev_values = FALSE,
   rev_variables = FALSE,
   hide_small_values = TRUE,

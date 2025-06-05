@@ -57,6 +57,7 @@ svy_hist <- function(data,
                      outcome_var = data$prop,
                      label_var = data$proplabel,
                      cat_var = data$cat,
+                     text_size = 4,
                      yminmax = NULL,
                      lang = "en",
                      main_title = "",
@@ -72,7 +73,7 @@ svy_hist <- function(data,
   geom_text(aes(label=label_var),
             position = position_stack(vjust = 0.5), color = "#FFFFFF",
             fontface = "bold",
-            size = ifelse(length(unique(cat_var)) > 7, 3.5, 4)) +
+            size = text_size) +
   ylab("Total Responses") +
   {if(!is.null(yminmax)) ylim(yminmax)}+
   labs(title = main_title,

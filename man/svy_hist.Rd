@@ -9,6 +9,7 @@ svy_hist(
   outcome_var = data$prop,
   label_var = data$proplabel,
   cat_var = data$cat,
+  text_size = 4,
   yminmax = NULL,
   lang = "en",
   main_title = "",
