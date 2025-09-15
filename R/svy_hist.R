@@ -66,15 +66,34 @@ svy_hist <- function(data,
                      order = FALSE,
                      color_scheme = "#377F99"){
 
+  data_in  <- data %>% filter({{outcome_var}} >= 5)
+  data_out <- data %>% filter({{outcome_var}} <  5)
+  offset <- if (nrow(data) > 0) max(data$n, na.rm = TRUE) * 0.02 else 0
+
   ggplot(data = data,
          mapping = aes(x = if(order) reorder(cat_var, n) else factor(cat_var, levels = rev(unique(cat_var))),
                                     y = n)) +
-  geom_bar(stat = "identity", width = 0.4, fill = color_scheme) +
-  geom_text(aes(label=label_var),
-            position = position_stack(vjust = 0.5), color = "#FFFFFF",
-            fontface = "bold",
-            size = text_size) +
-  ylab("Total Responses") +
+    geom_bar(stat = "identity", width = 0.4, fill = color_scheme) +
+    geom_text(
+      data = data_in,
+      inherit.aes = FALSE,
+      aes(x = cat, y = n/2, label = proplabel),
+      color = "#FFFFFF",
+      fontface = "bold",
+      size = text_size
+    ) +
+    geom_text(
+      data = data_out,
+      inherit.aes = FALSE,
+      aes(x = cat, y = n, label = proplabel),
+      nudge_y = offset,
+      hjust = 0,
+      vjust = 0.5,
+      color = "#000000",
+      fontface = "bold",
+      size = text_size
+    ) +
+    ylab("Total Responses") +
   {if(!is.null(yminmax)) ylim(yminmax)}+
   labs(title = main_title,
        subtitle = subtitle) +

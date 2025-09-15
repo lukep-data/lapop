@@ -18,7 +18,7 @@ svy_stack(
   text_size = 4,
   rev_values = FALSE,
   rev_variables = FALSE,
-  hide_small_values = TRUE,
+  small_values = "hide",
   order_bars = FALSE,
   subtitle_h_just = -40,
   fixed_aspect_ratio = TRUE,
@@ -54,7 +54,9 @@ Default: None (only "Source: " will be printed).}
 
 \item{rev_variables}{Logical.  Should the order of the variables be reversed?  Default: FALSE.}
 
-\item{hide_small_values}{Logical.  Should labels for categories with less than 5 percent be hidden?  Default: TRUE.}
+\item{small_values}{Character  Should labels for categories with less than 5 percent be hidden ('hide'),
+nudged to the right ('nudge'), or "repelled" from other text ('repel')?  Default: 'hide'.
+?  Default: TRUE.}
 
 \item{order_bars}{Logical.  Should categories be placed in descending order for each bar?  Default: FALSE.
 showing the distributions of multiple categorical variables.}

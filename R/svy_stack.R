@@ -37,7 +37,9 @@
 #' @param rev_variables Logical.  Should the order of the variables be reversed?  Default: FALSE.
 #' @param rev_values Logical.  Should the order of the values for each variable be reversed?  Default: FALSE.
 #' @return Returns an object of class \code{ggplot}, a ggplot stacked bar graph
-#' @param hide_small_values Logical.  Should labels for categories with less than 5 percent be hidden?  Default: TRUE.
+#' @param small_values Character  Should labels for categories with less than 5 percent be hidden ('hide'),
+#' nudged to the right ('nudge'), or "repelled" from other text ('repel')?  Default: 'hide'.
+#' ?  Default: TRUE.
 #' @param order_bars Logical.  Should categories be placed in descending order for each bar?  Default: FALSE.
 #' showing the distributions of multiple categorical variables.
 #' @param legendnrow Numeric.  How many rows for legend labels. Default: 1.
@@ -72,21 +74,21 @@
 
 
 svy_stack <- function(data, outcome_var = data$prop, prop_labels = data$proplabel,
-                      var_labels = data$varlabel, value_labels = data$vallabel,
-                      lang = "en",
-                      main_title = "",
-                      subtitle = "",
-                      source_info = "",
-                      ylab_text = "",
-                      text_size = 4,
-                      rev_values = FALSE,
-                      rev_variables = FALSE,
-                      hide_small_values = TRUE,
-                      order_bars = FALSE,
-                      subtitle_h_just = -40,
-                      fixed_aspect_ratio = TRUE,
-                      legendnrow = 1,
-                      color_scheme = c("#2e697d", "#4298b5", "#A8A99E", "#C8102E", "#810a1e")){
+                       var_labels = data$varlabel, value_labels = data$vallabel,
+                       lang = "en",
+                       main_title = "",
+                       subtitle = "",
+                       source_info = "",
+                       ylab_text = "",
+                       text_size = 4,
+                       rev_values = FALSE,
+                       rev_variables = FALSE,
+                       small_values = 'hide',
+                       order_bars = FALSE,
+                       subtitle_h_just = -40,
+                       fixed_aspect_ratio = TRUE,
+                       legendnrow = 1,
+                       color_scheme = c("#2e697d", "#4298b5", "#A8A99E", "#C8102E", "#810a1e")){
   if(!inherits(var_labels, "character") & !inherits(var_labels, "factor")){
     var_labels = as_factor(var_labels)
     data$varlabels = as_factor(data$varlabel)
@@ -109,12 +111,35 @@ svy_stack <- function(data, outcome_var = data$prop, prop_labels = data$proplabe
 
   positions = rev(unique(var_labels))
 
+  offset <- if (nrow(data) > 0) max(data$prop, na.rm = TRUE) * 0.01 else 0
+
   ggplot(data = data, aes(x = var_labels,
                           y = prop, fill = value_labels)) +
     geom_bar(stat = "identity", width = 0.5) +
     geom_text(label = ifelse(outcome_var >= 5, prop_labels, NA),
               position = position_stack(vjust = 0.5), color = "#FFFFFF",
               fontface = "bold", size = text_size) +
+    {if (small_values == 'nudge') {
+      geom_text(label = ifelse(outcome_var < 5, prop_labels, NA),
+                nudge_y = offset,
+                hjust = 0,
+                vjust = 0.5,
+                color = "#000000",
+                fontface = "bold", size = text_size)
+    }
+    } +
+    {if (small_values == 'repel') {
+      ggrepel::geom_text_repel(label = ifelse(outcome_var < 5, prop_labels, NA),
+                               position = position_stack(vjust = 0.5),
+                               # hjust = 0,
+                               # vjust = 0.5,
+                               color = "#FFFFFF",
+                               fontface = "bold", size = text_size / 1.3,
+                               direction = "y",
+                               force_pull = 0.2,
+                               force = 5)
+    }
+    } +
     coord_flip() +
     labs(title = main_title,
          subtitle = subtitle) +

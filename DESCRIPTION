@@ -23,6 +23,7 @@ Suggests:
     testthat (>= 3.0.0)
 Config/testthat/edition: 3
 Collate: 
+    'hist_dumb_2.R'
     'hist_helper.R'
     'lapop-deprecated.R'
     'lapop_fonts.R'
