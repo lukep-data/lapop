@@ -79,14 +79,12 @@ lpr_dumb = function(data,
                   ttest = FALSE,
                   keep_nr = FALSE) {
 
+  z <- qnorm(1 - (1 - ci_level) / 2)   # added z-value for CIs
+
   # If keep_nr is TRUE, convert don't knows (NA(a)) and no answers (NA(b)) to
   # non-NA data (a value of 99).
   if (keep_nr) {
-    data <- data %>%
-      mutate(!!sym(outcome) := case_when(
-        na_tag(!!sym(outcome)) %in% c("a", "b") ~ 99,
-        TRUE ~ as.numeric(!!sym(outcome))
-      ))
+    data[[outcome]][is.na(data[[outcome]])] <- 99   # plain replacement
   }
 
   if (length(rec) == 1) {

@@ -1,0 +1,164 @@
+#######################################
+
+# Dumbbell Graphs #
+
+#######################################
+#'
+#' Dummbell Graphs
+#'
+#' This function creates "dumbbell" graphs, which show averages for a variable across values of x over two time periods.
+#'
+#' @param data Data Frame. Dataset to be used for analysis.  The data frame should have columns
+#' titled pais (country name; character), wave1 (name of first wave/year (all rows are the same); character),
+#' prop1 (outcome variable values for the first wave; numeric), proplabel1 (text of outcome variable for first wave; character),
+#' wave2 (name of second wave/year (all rows are the same); character),
+#' prop2 (outcome variable values for the second wave; numeric), proplabel2 (text of outcome variable for second wave; character).
+#'  Default: None (must be supplied).
+#' @param ymin,ymax Numeric.  Minimum and maximum values for y-axis. Defaults: 0 and 100.
+#' @param main_title Character.  Title of graph.  Default: None.
+#' @param source_info Character.  Information on dataset used,
+#' which is added to the end of "Source: " in the bottom-left corner of the graph.
+#' Default: None (only "Source: " will be printed).
+#' @param subtitle Character.  Describes the values/data shown in the graph, e.g., "Percent who agree that...".
+#' Default: None.
+#' @param lang Character.  Changes default subtitle text and source info to either Spanish or English.
+#' Will not translate input text, such as main title or variable labels.  Takes either "en" (English)
+#' or "es" (Spanish).  Default: "en".
+#' @param color_scheme Character.  Color of data points.  Must supply two values.  Takes hex numbers, beginning with "#".
+#' Default: "#008381", "#A43D6A".
+#' @param subtitle_h_just,subtitle_v_just Numeric.  Move the subtitle/legend text left/down (negative numbers) or right/up (positive numbers).
+#' Ranges from -100 to 100.  Defaults: 40, -18.
+#' @param sort Character.  The metric by which the data are sorted.  Options: "wave1" (outcome variable in first wave), "wave2" (outcome
+#' variable in wave 2), "diff" (difference between the two waves), "alpha" (alphabetical by country name).
+#' Default: "wave2".
+#' @param order Whether data should be sorted from low to high or high to low on the sort metric.  Options: "hi-lo" and "lo-hi".
+#' Default: "hi-lo".
+#' @param mean Logical.  Are means being displayed (instead of percentages)?  Default: FALSE.
+#' @param text_nudge Numeric.  Move text of data further or closer to data point.  Default: 6.
+#' @param drop_singles Logical.  Should rows with only one dot be removed?  Default: FALSE.
+#' @return Returns an object of class \code{ggplot}, a ggplot figure showing
+#' average values of some variable in two time periods across multiple values of x
+#'  (a dumbbell plot).
+#'
+#' @examples
+#'
+#' df <- data.frame(pais = c("Haiti", "Peru", "Honduras", "Colombia", "Ecuador",
+#'                           "Panama", "Bolivia", "Argentina", "Paraguay",
+#'                           "Dom. Rep.", "Brazil", "Jamaica", "Nicaragua",
+#'                           "Guyana", "Costa Rica", "Mexico", "Guatemala",
+#'                           "Chile", "Uruguay", "El Salvador"),
+#'                  wave1 = rep("2018/19", 20),
+#'                  prop1 = c(NA, 30, 58, 40, 49, 57, 33, 68, 38, 46, 30,
+#'                            31, 70, NA, 43, 25, 38, 31, 34, 41),
+#'                  proplabel1 = c(NA, "30%", "58%", "40%", "49%", "57%", "33%",
+#'                                 "68%", "38%", "46%", "30%", "31%", "70%", NA,
+#'                                 "43%", "25%", "38%", "31%", "34%", "41%"),
+#'                  wave2 = rep("2021", 20),
+#'                  prop2 = c(86, 73, 69, 67, 67, 65, 65, 65, 63, 62, 62,
+#'                            57, 56, 56, 55, 55, 54, 51, 46, 42),
+#'                  proplabel2 = c("86%", "73%", "69%", "67%", "67%", "65%", "65%",
+#'                                 "65%", "63%", "62%", "62%", "57%", "56%", "56%",
+#'                                 "55%", "55%", "54%", "51%", "46%", "42%"))
+#'
+#' svy_dumb(df,
+#'          main_title = paste0("Personal economic conditions worsened across the",
+#'                              "LAC region,\nwith a few exceptions"),
+#'          subtitle = "% personal economic situation worsened",
+#'          source_info = "GM 2018/19-2021")
+#'
+#' @export
+#'@import ggplot2
+#'@import ggtext
+#'
+#'@author Luke Plutowski, \email{luke.plutowski@@hdrinc.com}
+#'
+#'
+
+svy_dumb <- function(data,
+                     ymin = 0,
+                     ymax = 100,
+                     lang = "en",
+                     main_title = "",
+                     source_info = "",
+                     subtitle = "",
+                     sort = "wave2",
+                     order = "hi-lo",
+                     color_scheme = c("#008381", "#A43D6A"),
+                     subtitle_h_just = 40,
+                     subtitle_v_just = -18,
+                     text_nudge = 6,
+                     mean = FALSE,
+                     drop_singles = FALSE){
+  if(drop_singles == TRUE) {
+    data = complete.cases(data)
+  }
+  if(sort == "diff"){
+    data$diff = data$prop2-data$prop1
+    data = data[order(-data$diff),]
+  } else if(sort == "wave2"){
+    data = data[order(-data$prop2),]
+  } else if(sort == "wave1"){
+    data = data[order(-data$prop1),]
+  } else if(sort == "alpha"){
+    data = data[order(data$pais),]
+  }
+  if(order == "hi-lo"){
+    data$pais = factor(data$pais, levels = rev(unique(data$pais)))
+  } else if(order == "lo-hi") {
+    data$pais = factor(data$pais, levels = unique(data$pais))
+  }
+  data$max1 = data$prop2 < data$prop1
+  data$max1[is.na(data$max1)] <- FALSE
+  names(color_scheme) = c(unique(data$wave1), unique(data$wave2))
+  ggplot(data, aes(y=pais)) +
+    geom_point(aes(x = prop1, color = names(color_scheme)[1]), size=4) +
+    geom_point(aes(x = prop2, color = names(color_scheme)[2]), size=4) +
+    geom_text(data = data[data$max1 == FALSE, ],
+              aes(x = prop1, label = proplabel1),
+              nudge_x = -text_nudge, color = color_scheme[1], size = 4, fontface = "bold") +
+    geom_text(data = data[data$max1 == TRUE, ],
+              aes(x = prop1, label = proplabel1),
+              nudge_x = text_nudge, color = color_scheme[1], size = 4, fontface = "bold") +
+    geom_text(data = data[data$max1 == TRUE, ],
+              aes(x = prop2, label = proplabel2),
+              nudge_x = -text_nudge, color = color_scheme[2], size = 4, fontface = "bold") +
+    geom_text(data = data[data$max1 == FALSE, ],
+              aes(x = prop2, label = proplabel2),
+              nudge_x = text_nudge, color = color_scheme[2], size = 4, fontface = "bold") +
+    geom_vline(xintercept = 0, color = "#dddddf") +
+    {if (mean) {
+      scale_x_continuous(limits=c(ymin, ymax), breaks=seq(ymin, ymax, 1),
+                         labels = paste(seq(ymin,ymax, 1), "", sep=""),
+                         expand = c(0,0))
+    } else {
+      scale_x_continuous(limits=c(ymin, ymax), breaks=seq(ymin, ymax, 20),
+                         labels = paste(seq(ymin,ymax, 20), "%", sep=""),
+                         expand = c(0,0))
+    }} +
+    scale_color_manual(
+      values = color_scheme,
+      breaks = c(unique(data$wave2), unique(data$wave1))) +
+    labs(title = main_title,
+         y = "",
+         x = " ",
+         subtitle = subtitle) +
+    theme(text = element_text(size = 12),
+          plot.title = element_text(size = 17, face = "bold"),
+          plot.subtitle = element_text(size = 10, face = "italic"),
+          plot.margin = margin(5.5, 20, 5.5, 5.5, "points"),
+          axis.title.y = element_blank(),
+          axis.ticks = element_blank(),
+          plot.title.position = "plot",
+          axis.text = element_text(size = 10, color = "#585860", margin=margin(r=5)),
+          panel.grid.major.y = element_line(color = "#dddddf"),
+          panel.background = element_rect(fill = "white"),
+          legend.position="top",
+          legend.text = element_text( color = "#585860"),
+          legend.title = element_blank(),
+          legend.justification='right',
+          legend.key.size = unit(1, "line"),
+          legend.key = element_blank(),
+          legend.margin = margin(t=subtitle_v_just,b=0, subtitle_h_just, 0))
+}
+
+
